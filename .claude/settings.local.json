@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cat:*)",
+      "Bash(nul)",
+      "Bash(npx create-next-app:*)",
+      "Bash(npx shadcn@latest init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx shadcn@latest add button)",
+      "Bash(npm run dev:*)",
+      "Bash(npx storybook@latest init:*)",
+      "Bash(npm run storybook:*)",
+      "Bash(npm uninstall:*)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(curl:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

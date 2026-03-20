@@ -1,0 +1,14 @@
+{
+  "terminal.integrated.cwd": "I:\\알바\\zipfeel",
+  "terminal.integrated.defaultProfile.windows": "Git Bash",
+  "terminal.integrated.profiles.windows": {
+    "Git Bash": {
+      "path": "C:\\Program Files\\Git\\bin\\bash.exe",
+      "args": [],
+      "env": {
+        "CHERE_INVOKING": "1",
+        "MSYSTEM": "MINGW64"
+      }
+    }
+  }
+}
