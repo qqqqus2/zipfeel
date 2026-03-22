@@ -1,67 +1,88 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 0 0% 9%;
-    --primary-foreground: 0 0% 98%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 0 0% 3.9%;
-    --radius: 0.5rem;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-  }
+@theme {
+    /* Color palette for Tailwind utilities */
+    --color-background: rgb(var(--background));
+    --color-foreground: rgb(var(--foreground));
+    --color-card: rgb(var(--card));
+    --color-card-foreground: rgb(var(--card-foreground));
+    --color-popover: rgb(var(--popover));
+    --color-popover-foreground: rgb(var(--popover-foreground));
+    --color-primary: rgb(var(--primary));
+    --color-primary-foreground: rgb(var(--primary-foreground));
+    --color-secondary: rgb(var(--secondary));
+    --color-secondary-foreground: rgb(var(--secondary-foreground));
+    --color-muted: rgb(var(--muted));
+    --color-muted-foreground: rgb(var(--muted-foreground));
+    --color-accent: rgb(var(--accent));
+    --color-accent-foreground: rgb(var(--accent-foreground));
+    --color-destructive: rgb(var(--destructive));
+    --color-destructive-foreground: rgb(var(--destructive-foreground));
+    --color-border: rgb(var(--border));
+    --color-input: rgb(var(--input));
+    --color-ring: rgb(var(--ring));
 
-  .dark {
-    --background: 0 0% 3.9%;
-    --foreground: 0 0% 98%;
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
-    --primary: 0 0% 98%;
-    --primary-foreground: 0 0% 9%;
-    --secondary: 0 0% 14.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
+    /* Point colors */
+    --color-point-1: rgb(var(--point-color-1));
+    --color-point-2: rgb(var(--point-color-2));
+    --color-point-3: rgb(var(--point-color-3));
+
+    /* Sub colors */
+    --color-sub-1: rgb(var(--sub-color1));
+    --color-sub-2: rgb(var(--sub-color2));
+    --color-sub-3: rgb(var(--sub-color3));
+    --color-sub-4: rgb(var(--sub-color4));
+    --color-sub-5: rgb(var(--sub-color5));
+    --color-sub-6: rgb(var(--sub-color6));
+    --color-sub-7: rgb(var(--sub-color7));
+    --color-sub-8: rgb(var(--sub-color8));
+
+    /* Gray scale */
+    --color-gray-1: rgb(var(--gray-scale-1));
+    --color-gray-2: rgb(var(--gray-scale-2));
+    --color-gray-3: rgb(var(--gray-scale-3));
+    --color-gray-4: rgb(var(--gray-scale-4));
+    --color-gray-5: rgb(var(--gray-scale-5));
+    --color-gray-6: rgb(var(--gray-scale-6));
+    --color-black: rgb(var(--blk));
+
+    /* Chart colors */
+    --color-chart-1: rgb(var(--chart-1));
+    --color-chart-2: rgb(var(--chart-2));
+    --color-chart-3: rgb(var(--chart-3));
+    --color-chart-4: rgb(var(--chart-4));
+    --color-chart-5: rgb(var(--chart-5));
+
+    /* Border radius */
+    --radius: 0.5rem;
 }
 
 @layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+    :root {
+        --point-color-1: 79 55 138;
+        --point-color-2: 133 87 255;
+        --point-color-3: 172 167 203;
+
+        --sub-color1: 153 0 0;
+        --sub-color2: 195 0 0;
+        --sub-color3: 190 148 255;
+        --sub-color4: 233 198 255;
+        --sub-color5: 119 74 65;
+        --sub-color6: 190 166 161;
+        --sub-color7: 223 215 213;
+        --sub-color8: 255 186 65;
+
+        --gray-scale-1: 245 245 245;
+        --gray-scale-2: 217 217 217;
+        --gray-scale-3: 199 199 199;
+        --gray-scale-4: 204 204 204;
+        --gray-scale-5: 148 148 148;
+        --gray-scale-6: 71 69 84;
+        --blk: 0 0 0;
+    }
+
+    body {
+        background-color: var(--color-background);
+        color: var(--color-foreground);
+    }
 }
