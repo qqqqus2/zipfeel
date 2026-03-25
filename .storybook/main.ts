@@ -1,4 +1,5 @@
-import type { StorybookConfig } from "@storybook/react-webpack5";
+import type { StorybookConfig } from "@storybook/react-vite";
+import { mergeConfig, type UserConfig } from "vite";
 import path from "path";
 
 const config: StorybookConfig = {
@@ -8,40 +9,22 @@ const config: StorybookConfig = {
     "@storybook/addon-interactions",
   ],
   framework: {
-    name: "@storybook/react-webpack5",
+    name: "@storybook/react-vite",
     options: {},
   },
   staticDirs: ["../public"],
   docs: {},
   typescript: {
     check: false,
-    reactDocgen: "react-docgen-typescript",
-    reactDocgenTypescriptOptions: {
-      shouldExtractLiteralValuesFromEnum: true,
-      propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
-    },
   },
-  babel: async (options) => ({
-    ...options,
-    presets: [
-      ...(options.presets || []),
-      [
-        "@babel/preset-typescript",
-        {
-          isTSX: true,
-          allExtensions: true,
+  async viteFinal(config: UserConfig) {
+    return mergeConfig(config, {
+      resolve: {
+        alias: {
+          "@": path.resolve(__dirname, "../src"),
         },
-      ],
-    ],
-  }),
-  webpackFinal: async (config) => {
-    if (config.resolve) {
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        "@": path.resolve(__dirname, "../src"),
-      };
-    }
-    return config;
+      },
+    });
   },
 };
 
