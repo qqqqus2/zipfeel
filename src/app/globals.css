@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Tailwind v4 source scanning (Storybook 포함) */
+@source "../**/*.{js,jsx,ts,tsx,md,mdx}";
+
 @theme {
   /* Color palette for Tailwind utilities */
   --color-background: rgb(var(--background));
