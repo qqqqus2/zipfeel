@@ -1,114 +1,142 @@
 @import "tailwindcss";
 
 @theme {
-    /* Color palette for Tailwind utilities */
-    --color-background: rgb(var(--background));
-    --color-foreground: rgb(var(--foreground));
-    --color-card: rgb(var(--card));
-    --color-card-foreground: rgb(var(--card-foreground));
-    --color-popover: rgb(var(--popover));
-    --color-popover-foreground: rgb(var(--popover-foreground));
-    --color-primary: rgb(var(--primary));
-    --color-primary-foreground: rgb(var(--primary-foreground));
-    --color-secondary: rgb(var(--secondary));
-    --color-secondary-foreground: rgb(var(--secondary-foreground));
-    --color-muted: rgb(var(--muted));
-    --color-muted-foreground: rgb(var(--muted-foreground));
-    --color-accent: rgb(var(--accent));
-    --color-accent-foreground: rgb(var(--accent-foreground));
-    --color-destructive: rgb(var(--destructive));
-    --color-destructive-foreground: rgb(var(--destructive-foreground));
-    --color-border: rgb(var(--border));
-    --color-input: rgb(var(--input));
-    --color-ring: rgb(var(--ring));
+  /* Color palette for Tailwind utilities */
+  --color-background: rgb(var(--background));
+  --color-foreground: rgb(var(--foreground));
+  --color-card: rgb(var(--card));
+  --color-card-foreground: rgb(var(--card-foreground));
+  --color-popover: rgb(var(--popover));
+  --color-popover-foreground: rgb(var(--popover-foreground));
+  --color-primary: rgb(var(--primary));
+  --color-primary-foreground: rgb(var(--primary-foreground));
+  --color-secondary: rgb(var(--secondary));
+  --color-secondary-foreground: rgb(var(--secondary-foreground));
+  --color-muted: rgb(var(--muted));
+  --color-muted-foreground: rgb(var(--muted-foreground));
+  --color-accent: rgb(var(--accent));
+  --color-accent-foreground: rgb(var(--accent-foreground));
+  --color-destructive: rgb(var(--destructive));
+  --color-destructive-foreground: rgb(var(--destructive-foreground));
+  --color-border: rgb(var(--border));
+  --color-input: rgb(var(--input));
+  --color-ring: rgb(var(--ring));
 
-    /* Point colors */
-    --color-point-1: rgb(var(--point-color-1));
-    --color-point-2: rgb(var(--point-color-2));
-    --color-point-3: rgb(var(--point-color-3));
+  /* Typography tokens (Tailwind: text-*) */
+  --text-biggest: var(--fs-biggest);
+  --text-page-title: var(--fs-page-title);
+  --text-con-name: var(--fs-con-name);
+  --text-con-title: var(--fs-con-title);
+  --text-con-medium: var(--fs-con-medium);
+  --text-con-small: var(--fs-con-small);
 
-    /* Sub colors */
-    --color-sub-1: rgb(var(--sub-color1));
-    --color-sub-2: rgb(var(--sub-color2));
-    --color-sub-3: rgb(var(--sub-color3));
-    --color-sub-4: rgb(var(--sub-color4));
-    --color-sub-5: rgb(var(--sub-color5));
-    --color-sub-6: rgb(var(--sub-color6));
-    --color-sub-7: rgb(var(--sub-color7));
-    --color-sub-8: rgb(var(--sub-color8));
+  /* Point colors */
+  --color-point-1: rgb(var(--point-color-1));
+  --color-point-2: rgb(var(--point-color-2));
+  --color-point-3: rgb(var(--point-color-3));
 
-    /* Gray scale */
-    --color-gray-1: rgb(var(--gray-scale-1));
-    --color-gray-2: rgb(var(--gray-scale-2));
-    --color-gray-3: rgb(var(--gray-scale-3));
-    --color-gray-4: rgb(var(--gray-scale-4));
-    --color-gray-5: rgb(var(--gray-scale-5));
-    --color-gray-6: rgb(var(--gray-scale-6));
-    --color-black: rgb(var(--blk));
+  /* Sub colors */
+  --color-sub-1: rgb(var(--sub-color1));
+  --color-sub-2: rgb(var(--sub-color2));
+  --color-sub-3: rgb(var(--sub-color3));
+  --color-sub-4: rgb(var(--sub-color4));
+  --color-sub-5: rgb(var(--sub-color5));
+  --color-sub-6: rgb(var(--sub-color6));
+  --color-sub-7: rgb(var(--sub-color7));
+  --color-sub-8: rgb(var(--sub-color8));
 
-    /* Chart colors */
-    --color-chart-1: rgb(var(--chart-1));
-    --color-chart-2: rgb(var(--chart-2));
-    --color-chart-3: rgb(var(--chart-3));
-    --color-chart-4: rgb(var(--chart-4));
-    --color-chart-5: rgb(var(--chart-5));
+  /* Gray scale */
+  --color-gray-1: rgb(var(--gray-scale-1));
+  --color-gray-2: rgb(var(--gray-scale-2));
+  --color-gray-3: rgb(var(--gray-scale-3));
+  --color-gray-4: rgb(var(--gray-scale-4));
+  --color-gray-5: rgb(var(--gray-scale-5));
+  --color-gray-6: rgb(var(--gray-scale-6));
+  --color-black: rgb(var(--blk));
 
-    /* Border radius */
-    --radius: 0.5rem;
+  /* Chart colors */
+  --color-chart-1: rgb(var(--chart-1));
+  --color-chart-2: rgb(var(--chart-2));
+  --color-chart-3: rgb(var(--chart-3));
+  --color-chart-4: rgb(var(--chart-4));
+  --color-chart-5: rgb(var(--chart-5));
+
+  /* Border radius */
+  --radius: 0.5rem;
 }
 
 @layer base {
+  :root {
+    /* shadcn 시맨틱 (bg-background 등) — R G B 공백 구분, 우측 #hex 는 미리보기용 */
+    --background: 255 255 255; /* #ffffff */
+    --foreground: 9 9 11; /* #09090b */
+    --card: 255 255 255; /* #ffffff */
+    --card-foreground: 9 9 11; /* #09090b */
+    --popover: 255 255 255; /* #ffffff */
+    --popover-foreground: 9 9 11; /* #09090b */
+    --primary: 24 24 27; /* #18181b */
+    --primary-foreground: 250 250 250; /* #fafafa */
+    --secondary: 244 244 245; /* #f4f4f5 */
+    --secondary-foreground: 24 24 27; /* #18181b */
+    --muted: 244 244 245; /* #f4f4f5 */
+    --muted-foreground: 113 113 122; /* #71717a */
+    --accent: 244 244 245; /* #f4f4f5 */
+    --accent-foreground: 24 24 27; /* #18181b */
+    --destructive: 239 68 68; /* #ef4444 */
+    --destructive-foreground: 250 250 250; /* #fafafa */
+    --border: 228 228 231; /* #e4e4e7 */
+    --input: 228 228 231; /* #e4e4e7 */
+    --ring: 161 161 170; /* #a1a1aa */
+    --chart-1: 59 130 246; /* #3b82f6 */
+    --chart-2: 34 197 94; /* #22c55e */
+    --chart-3: 234 179 8; /* #eab308 */
+    --chart-4: 239 68 68; /* #ef4444 */
+    --chart-5: 168 85 247; /* #a855f7 */
+
+    --point-color-1: 79 55 138; /* #4f378a */
+    --point-color-2: 133 87 255; /* #8557ff */
+    --point-color-3: 172 167 203; /* #aca7cb */
+
+    --sub-color1: 153 0 0; /* #990000 */
+    --sub-color2: 195 0 0; /* #c30000 */
+    --sub-color3: 190 148 255; /* #be94ff */
+    --sub-color4: 233 198 255; /* #e9c6ff */
+    --sub-color5: 119 74 65; /* #774a41 */
+    --sub-color6: 190 166 161; /* #bea6a1 */
+    --sub-color7: 223 215 213; /* #dfd7d5 */
+    --sub-color8: 255 186 65; /* #ffba41 */
+
+    --gray-scale-1: 245 245 245; /* #f5f5f5 */
+    --gray-scale-2: 217 217 217; /* #d9d9d9 */
+    --gray-scale-3: 199 199 199; /* #c7c7c7 */
+    --gray-scale-4: 204 204 204; /* #cccccc */
+    --gray-scale-5: 148 148 148; /* #949494 */
+    --gray-scale-6: 71 69 84; /* #474554 */
+    --blk: 0 0 0; /* #000000 */
+
+    /* Font sizes (mobile defaults) */
+    --fs-biggest: 20px;
+    --fs-page-title: 16px;
+    --fs-con-name: 14px;
+    --fs-con-title: 16px;
+    --fs-con-medium: 14px;
+    --fs-con-small: 12px;
+  }
+
+  @media (min-width: 768px) {
     :root {
-        /* shadcn 시맨틱 (bg-background 등) — R G B 공백 구분 */
-        --background: 255 255 255;
-        --foreground: 9 9 11;
-        --card: 255 255 255;
-        --card-foreground: 9 9 11;
-        --popover: 255 255 255;
-        --popover-foreground: 9 9 11;
-        --primary: 24 24 27;
-        --primary-foreground: 250 250 250;
-        --secondary: 244 244 245;
-        --secondary-foreground: 24 24 27;
-        --muted: 244 244 245;
-        --muted-foreground: 113 113 122;
-        --accent: 244 244 245;
-        --accent-foreground: 24 24 27;
-        --destructive: 239 68 68;
-        --destructive-foreground: 250 250 250;
-        --border: 228 228 231;
-        --input: 228 228 231;
-        --ring: 161 161 170;
-        --chart-1: 59 130 246;
-        --chart-2: 34 197 94;
-        --chart-3: 234 179 8;
-        --chart-4: 239 68 68;
-        --chart-5: 168 85 247;
-
-        --point-color-1: 79 55 138;
-        --point-color-2: 133 87 255;
-        --point-color-3: 172 167 203;
-
-        --sub-color1: 153 0 0;
-        --sub-color2: 195 0 0;
-        --sub-color3: 190 148 255;
-        --sub-color4: 233 198 255;
-        --sub-color5: 119 74 65;
-        --sub-color6: 190 166 161;
-        --sub-color7: 223 215 213;
-        --sub-color8: 255 186 65;
-
-        --gray-scale-1: 245 245 245;
-        --gray-scale-2: 217 217 217;
-        --gray-scale-3: 199 199 199;
-        --gray-scale-4: 204 204 204;
-        --gray-scale-5: 148 148 148;
-        --gray-scale-6: 71 69 84;
-        --blk: 0 0 0;
+      /* Font sizes (pc) */
+      --fs-biggest: 24px;
+      --fs-page-title: 18px;
+      --fs-con-name: 16px;
+      --fs-con-title: 16px;
+      --fs-con-medium: 14px;
+      --fs-con-small: 12px;
     }
+  }
 
-    body {
-        background-color: var(--color-background);
-        color: var(--color-foreground);
-    }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+  }
 }

@@ -40,6 +40,33 @@ export const Default: Story = {
   ),
 };
 
+export const VerticalTabs: Story = {
+  render: () => (
+    <Tabs defaultValue="account" orientation="vertical">
+      <TabsList>
+        <TabsTrigger value="account">Account</TabsTrigger>
+        <TabsTrigger value="password">Password</TabsTrigger>
+      </TabsList>
+      <TabsContent value="account">
+        <div className="p-4 border rounded-md">
+          <h3 className="font-semibold mb-2">Account Settings</h3>
+          <p className="text-sm text-muted-foreground">
+            Make changes to your account here. Click save when you're done.
+          </p>
+        </div>
+      </TabsContent>
+      <TabsContent value="password">
+        <div className="p-4 border rounded-md">
+          <h3 className="font-semibold mb-2">Password Settings</h3>
+          <p className="text-sm text-muted-foreground">
+            Change your password here. After saving, you'll be logged out.
+          </p>
+        </div>
+      </TabsContent>
+    </Tabs>
+  ),
+};
+
 export const ThreeTabs: Story = {
   render: () => (
     <Tabs defaultValue="overview" className="w-[500px]">
@@ -120,19 +147,25 @@ export const FullWidth: Story = {
       <TabsContent value="home">
         <div className="p-4 border rounded-md">
           <h3 className="font-semibold mb-2">Home</h3>
-          <p className="text-sm text-muted-foreground">Welcome to your home page.</p>
+          <p className="text-sm text-muted-foreground">
+            Welcome to your home page.
+          </p>
         </div>
       </TabsContent>
       <TabsContent value="profile">
         <div className="p-4 border rounded-md">
           <h3 className="font-semibold mb-2">Profile</h3>
-          <p className="text-sm text-muted-foreground">Manage your profile information.</p>
+          <p className="text-sm text-muted-foreground">
+            Manage your profile information.
+          </p>
         </div>
       </TabsContent>
       <TabsContent value="settings">
         <div className="p-4 border rounded-md">
           <h3 className="font-semibold mb-2">Settings</h3>
-          <p className="text-sm text-muted-foreground">Configure your preferences.</p>
+          <p className="text-sm text-muted-foreground">
+            Configure your preferences.
+          </p>
         </div>
       </TabsContent>
       <TabsContent value="help">
