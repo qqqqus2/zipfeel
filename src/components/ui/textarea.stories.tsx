@@ -75,8 +75,6 @@ export const SizingExamples: Story = {
 };
 
 function CharacterLimitDemo() {
-  const [text, setText] = React.useState("");
-
   return (
     <div className="w-[min(100%,520px)] space-y-2">
       <TextareaBox placeholder="입력하세요" max={5000} label="항목명" />
@@ -93,17 +91,4 @@ function CharacterLimitDemo() {
 export const CharacterLimit: Story = {
   name: "글자수 제한",
   render: () => <CharacterLimitDemo />,
-};
-
-function LabeledBoxWithCounterDemo() {
-  return (
-    <div className="w-[min(100%,520px)] space-y-4">
-      <TextareaBox placeholder="입력하세요" max={5000} label="항목명" />
-    </div>
-  );
-}
-
-export const LabeledBoxWithCounter: Story = {
-  name: "라벨 + 카운터 (박스형)",
-  render: () => <LabeledBoxWithCounterDemo />,
 };
