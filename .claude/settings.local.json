@@ -18,7 +18,8 @@
       "Bash(timeout /t 10)",
       "Bash(npx storybook:*)",
       "Bash(npx storybook@latest upgrade)",
-      "Bash(npx storybook@8 init:*)"
+      "Bash(npx storybook@8 init:*)",
+      "Bash(del nul)"
     ],
     "deny": [],
     "ask": []
