@@ -14,115 +14,48 @@ export default meta;
 
 export const Default = {
   render: () => (
-    <Tabs defaultValue="account" className="w-[400px]">
-      <TabsList>
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
-        <div className="p-4 border rounded-md">
-          <h3 className="font-semibold mb-2">Account Settings</h3>
-          <p className="text-sm text-muted-foreground">
-            Make changes to your account here. Click save when you're done.
-          </p>
-        </div>
-      </TabsContent>
-      <TabsContent value="password">
-        <div className="p-4 border rounded-md">
-          <h3 className="font-semibold mb-2">Password Settings</h3>
-          <p className="text-sm text-muted-foreground">
-            Change your password here. After saving, you'll be logged out.
-          </p>
-        </div>
-      </TabsContent>
-    </Tabs>
-  ),
-};
+    <div className="grid grid-cols-1 gap-4">
+      <Tabs defaultValue="tab1" className="w-[400px]">
+        <TabsList>
+          <TabsTrigger value="tab1">Enabled</TabsTrigger>
+          <TabsTrigger value="tab2" disabled>
+            Disabled
+          </TabsTrigger>
+          <TabsTrigger value="tab3">Enabled</TabsTrigger>
+        </TabsList>
+        <TabsContent value="tab1">
+          <div className="p-4 border rounded-md">
+            <p className="text-sm">This tab is enabled.</p>
+          </div>
+        </TabsContent>
+        <TabsContent value="tab3">
+          <div className="p-4 border rounded-md">
+            <p className="text-sm">This tab is also enabled.</p>
+          </div>
+        </TabsContent>
+      </Tabs>
 
-export const VerticalTabs = {
-  render: () => (
-    <Tabs defaultValue="account" orientation="vertical">
-      <TabsList>
-        <TabsTrigger value="account">Account</TabsTrigger>
-        <TabsTrigger value="password">Password</TabsTrigger>
-      </TabsList>
-      <TabsContent value="account">
-        <div className="p-4 border rounded-md">
-          <h3 className="font-semibold mb-2">Account Settings</h3>
-          <p className="text-sm text-muted-foreground">
-            Make changes to your account here. Click save when you're done.
-          </p>
-        </div>
-      </TabsContent>
-      <TabsContent value="password">
-        <div className="p-4 border rounded-md">
-          <h3 className="font-semibold mb-2">Password Settings</h3>
-          <p className="text-sm text-muted-foreground">
-            Change your password here. After saving, you'll be logged out.
-          </p>
-        </div>
-      </TabsContent>
-    </Tabs>
-  ),
-};
-
-export const ThreeTabs = {
-  render: () => (
-    <Tabs defaultValue="overview" className="w-[500px]">
-      <TabsList className="grid w-full grid-cols-3">
-        <TabsTrigger value="overview">Overview</TabsTrigger>
-        <TabsTrigger value="analytics">Analytics</TabsTrigger>
-        <TabsTrigger value="reports">Reports</TabsTrigger>
-      </TabsList>
-      <TabsContent value="overview">
-        <div className="p-4 border rounded-md">
-          <h3 className="font-semibold mb-2">Overview</h3>
-          <p className="text-sm text-muted-foreground">
-            View your account overview and recent activity.
-          </p>
-        </div>
-      </TabsContent>
-      <TabsContent value="analytics">
-        <div className="p-4 border rounded-md">
-          <h3 className="font-semibold mb-2">Analytics</h3>
-          <p className="text-sm text-muted-foreground">
-            View detailed analytics about your account.
-          </p>
-        </div>
-      </TabsContent>
-      <TabsContent value="reports">
-        <div className="p-4 border rounded-md">
-          <h3 className="font-semibold mb-2">Reports</h3>
-          <p className="text-sm text-muted-foreground">
-            Generate and view reports.
-          </p>
-        </div>
-      </TabsContent>
-    </Tabs>
-  ),
-};
-
-export const Disabled = {
-  render: () => (
-    <Tabs defaultValue="tab1" className="w-[400px]">
-      <TabsList>
-        <TabsTrigger value="tab1">Enabled</TabsTrigger>
-        <TabsTrigger value="tab2" disabled>
-          Disabled
-        </TabsTrigger>
-        <TabsTrigger value="tab3">Enabled</TabsTrigger>
-      </TabsList>
-      <TabsContent value="tab1">
-        <div className="p-4 border rounded-md">
-          <p className="text-sm">This tab is enabled.</p>
-        </div>
-      </TabsContent>
-      <TabsContent value="tab3">
-        <div className="p-4 border rounded-md">
-          <p className="text-sm">This tab is also enabled.</p>
-        </div>
-      </TabsContent>
-    </Tabs>
+      {/* 세로 */}
+      {/* <Tabs defaultValue="account" orientation="vertical">
+        <TabsList>
+          <TabsTrigger value="tab1">Enabled</TabsTrigger>
+          <TabsTrigger value="tab2" disabled>
+            Disabled
+          </TabsTrigger>
+          <TabsTrigger value="tab3">Enabled</TabsTrigger>
+        </TabsList>
+        <TabsContent value="tab1">
+          <div className="p-4 border rounded-md">
+            <p className="text-sm">This tab is enabled.</p>
+          </div>
+        </TabsContent>
+        <TabsContent value="tab3">
+          <div className="p-4 border rounded-md">
+            <p className="text-sm">This tab is also enabled.</p>
+          </div>
+        </TabsContent>
+      </Tabs> */}
+    </div>
   ),
 };
 
@@ -174,5 +107,133 @@ export const FullWidth = {
         </div>
       </TabsContent>
     </Tabs>
+  ),
+};
+
+export const VariantsGallery = {
+  name: "유형 갤러리 (5종 + 컬러)",
+  render: () => (
+    <div className="w-[min(100%,1100px)] space-y-10">
+      <div className="space-y-3">
+        <p className="text-sm font-medium">Underline (기본) + Content</p>
+        <Tabs
+          defaultValue="one"
+          variant="underline"
+          accentColor="#A78BFA"
+          className="w-full"
+        >
+          <TabsList className="w-full justify-start">
+            <TabsTrigger value="one">Tab Name</TabsTrigger>
+            <TabsTrigger value="two">Tab Name</TabsTrigger>
+            <TabsTrigger value="three" disabled>
+              Tab Name
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="one">
+            <div className="rounded-md border p-4 text-sm text-muted-foreground">
+              Content 영역 예시
+            </div>
+          </TabsContent>
+          <TabsContent value="two">
+            <div className="rounded-md border p-4 text-sm text-muted-foreground">
+              Content 영역 예시
+            </div>
+          </TabsContent>
+        </Tabs>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-sm font-medium">Slash (page tab)</p>
+        <Tabs
+          defaultValue="a"
+          variant="slash"
+          accentColor="#4F378A"
+          className="w-full"
+        >
+          <TabsList className="w-full justify-start">
+            <TabsTrigger value="a">캐릭터 설정</TabsTrigger>
+            <TabsTrigger value="b">캐릭터 비교</TabsTrigger>
+            <TabsTrigger value="c">공통 설정 관리</TabsTrigger>
+          </TabsList>
+        </Tabs>
+      </div>
+
+      <div className="grid gap-8 md:grid-cols-1">
+        <div className="space-y-3">
+          <p className="text-sm font-medium">Solid (dark)</p>
+          <Tabs
+            defaultValue="t1"
+            variant="solid"
+            accentColor="#A78BFA"
+            className="w-full"
+          >
+            <TabsList className="w-full justify-start">
+              <TabsTrigger value="t1">Tab Name</TabsTrigger>
+              <TabsTrigger value="t2">Tab Name</TabsTrigger>
+              <TabsTrigger value="t3" disabled>
+                Tab Name
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-sm font-medium">Solid Rounded (dark pill)</p>
+          <Tabs
+            defaultValue="t1"
+            variant="solidRounded"
+            accentColor="#A78BFA"
+            className="w-full"
+          >
+            <TabsList className="w-full justify-start gap-3">
+              <TabsTrigger value="t1">Tab Name</TabsTrigger>
+              <TabsTrigger value="t2">Tab Name</TabsTrigger>
+              <TabsTrigger value="t3" disabled>
+                Tab Name
+              </TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-sm font-medium">페이지별 컬러 예시</p>
+        <div className="space-y-4">
+          <Tabs
+            defaultValue="a"
+            variant="underline"
+            accentColor="#22C55E"
+            className="w-full"
+          >
+            <TabsList className="w-full justify-start">
+              <TabsTrigger value="a">Green</TabsTrigger>
+              <TabsTrigger value="b">Tab</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <Tabs
+            defaultValue="a"
+            variant="underline"
+            accentColor="#EF4444"
+            className="w-full"
+          >
+            <TabsList className="w-full justify-start">
+              <TabsTrigger value="a">Red</TabsTrigger>
+              <TabsTrigger value="b">Tab</TabsTrigger>
+            </TabsList>
+          </Tabs>
+          <Tabs
+            defaultValue="a"
+            variant="underline"
+            accentColor="#3B82F6"
+            className="w-full"
+          >
+            <TabsList className="w-full justify-start">
+              <TabsTrigger value="a">Blue</TabsTrigger>
+              <TabsTrigger value="b">Tab</TabsTrigger>
+            </TabsList>
+          </Tabs>
+        </div>
+      </div>
+    </div>
   ),
 };

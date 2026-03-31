@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "./button";
-
+import { Icon } from "./icon";
 const meta = {
   title: "UI/Button",
   component: Button,
@@ -50,143 +50,22 @@ export const Default = {
   },
 };
 
-export const Destructive = {
-  args: {
-    children: "Delete",
-    variant: "destructive",
-  },
-};
-
-export const Outline = {
-  args: {
-    children: "Outline",
-    variant: "outline",
-  },
-};
-
-export const Secondary = {
-  args: {
-    children: "Secondary",
-    variant: "secondary",
-  },
-};
-
-export const Ghost = {
-  args: {
-    children: "Ghost",
-    variant: "ghost",
-  },
-};
-
-export const Link = {
-  args: {
-    children: "Link",
-    variant: "link",
-  },
-};
-
-export const Small = {
-  args: {
-    children: "Small Button",
-    size: "sm",
-  },
-};
-
-export const Large = {
-  args: {
-    children: "Large Button",
-    size: "lg",
-  },
-};
-
-export const Icon = {
-  args: {
-    children: "⚙",
-    size: "icon",
-  },
-};
-
-// Figma Design Token Buttons
-export const Point1 = {
-  args: {
-    children: "Point 1",
-    variant: "point1",
-  },
-};
-
-export const Point2 = {
-  args: {
-    children: "Point 2",
-    variant: "point2",
-  },
-};
-
-export const Point3 = {
-  args: {
-    children: "Point 3",
-    variant: "point3",
-  },
-};
-
-export const Sub1 = {
-  args: {
-    children: "Sub 1",
-    variant: "sub1",
-  },
-};
-
-export const Sub2 = {
-  args: {
-    children: "Sub 2",
-    variant: "sub2",
-  },
-};
-
-export const Sub3 = {
-  args: {
-    children: "Sub 3",
-    variant: "sub3",
-  },
-};
-
-export const Sub4 = {
-  args: {
-    children: "Sub 4",
-    variant: "sub4",
-  },
-};
-
-export const Sub8 = {
-  args: {
-    children: "Sub 8",
-    variant: "sub8",
-  },
-};
-
-export const AllVariants = {
-  render: () => (
-    <div className="flex flex-col gap-4">
-      <div className="flex gap-4 flex-wrap">
-        <Button variant="default">Default</Button>
-        <Button variant="destructive">Destructive</Button>
-        <Button variant="outline">Outline</Button>
-        <Button variant="secondary">Secondary</Button>
-        <Button variant="ghost">Ghost</Button>
-        <Button variant="link">Link</Button>
-      </div>
-      <div className="flex gap-4 flex-wrap">
-        <Button size="sm">Small</Button>
-        <Button size="default">Default</Button>
-        <Button size="lg">Large</Button>
-        <Button size="icon">⚙</Button>
-      </div>
-    </div>
-  ),
-};
-
 export const FigmaTokens = {
   render: () => (
     <div className="flex flex-col gap-6 p-8 bg-gray-1">
+      <div>
+        <h3 className="text-lg font-semibold mb-3 text-gray-6">
+          Default Colors
+        </h3>
+        <div className="flex gap-4 flex-wrap">
+          <Button variant="default">Default</Button>
+          <Button variant="destructive">Destructive</Button>
+          <Button variant="outline">Outline</Button>
+          <Button variant="secondary">Secondary</Button>
+          <Button variant="ghost">Ghost</Button>
+          <Button variant="link">Link</Button>
+        </div>
+      </div>
       <div>
         <h3 className="text-lg font-semibold mb-3 text-gray-6">Point Colors</h3>
         <div className="flex gap-4 flex-wrap">
@@ -206,11 +85,60 @@ export const FigmaTokens = {
         </div>
       </div>
       <div>
-        <h3 className="text-lg font-semibold mb-3 text-gray-6">Sizes with Point 2</h3>
+        <h3 className="text-lg font-semibold mb-3 text-gray-6">Sizes</h3>
         <div className="flex gap-4 flex-wrap items-center">
-          <Button variant="point2" size="sm">Small</Button>
-          <Button variant="point2" size="default">Default</Button>
-          <Button variant="point2" size="lg">Large</Button>
+          <Button variant="point2" size="sm">
+            Small
+          </Button>
+          <Button variant="point2" size="default">
+            Default
+          </Button>
+          <Button variant="point2" size="lg">
+            Large
+          </Button>
+        </div>
+      </div>
+      <div>
+        <h3 className="text-lg font-semibold mb-3 text-gray-6">Icon</h3>
+        <div className="flex gap-4 flex-wrap items-center">
+          <Button size="icon" aria-label="설정">
+            <Icon name="more_vert" className="text-gray-6" />
+          </Button>
+
+          <Button variant="ghost" size="sm" className="group">
+            <Icon
+              name="diamond"
+              className="text-gray-6 group-hover:text-point-2"
+            />
+            수정
+          </Button>
+        </div>
+      </div>
+
+      <div>
+        <h3 className="text-lg font-semibold mb-3 text-gray-6">
+          Icon + Text (Sprite)
+        </h3>
+        <div className="flex gap-4 flex-wrap items-center">
+          <Button variant="point2">
+            <Icon name="login" className="text-white" />
+            로그인
+          </Button>
+          <Button variant="ghost">
+            <Icon name="login" className="text-white" />
+            로그인
+          </Button>
+          <Button variant="outline" className="group">
+            <Icon
+              name="logout"
+              className="text-gray-6 group-hover:text-point-2"
+            />
+            로그아웃
+          </Button>
+          <Button variant="sub4" disabled>
+            <Icon name="book_ribbon" className="text-gray-6" />
+            Disabled
+          </Button>
         </div>
       </div>
     </div>

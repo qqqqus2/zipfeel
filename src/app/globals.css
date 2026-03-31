@@ -55,7 +55,9 @@
   --color-gray-4: rgb(var(--gray-scale-4));
   --color-gray-5: rgb(var(--gray-scale-5));
   --color-gray-6: rgb(var(--gray-scale-6));
+  --color-gray-7: rgb(var(--gray-scale-7));
   --color-black: rgb(var(--blk));
+  --color-white: rgb(var(--white));
 
   /* Chart colors */
   --color-chart-1: rgb(var(--chart-1));
@@ -115,7 +117,9 @@
     --gray-scale-4: 204 204 204; /* #cccccc */
     --gray-scale-5: 148 148 148; /* #949494 */
     --gray-scale-6: 71 69 84; /* #474554 */
+    --gray-scale-7: 235 235 235; /* #ebebeb */
     --blk: 0 0 0; /* #000000 */
+    --white: 255 255 255; /* #ffffff */
 
     /* Font sizes (mobile defaults) */
     --fs-biggest: 20px;
