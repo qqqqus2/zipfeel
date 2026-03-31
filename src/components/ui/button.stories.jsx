@@ -139,6 +139,13 @@ export const FigmaTokens = {
             <Icon name="book_ribbon" className="text-gray-6" />
             Disabled
           </Button>
+          <Button variant="point2" className="group">
+            <Icon
+              name="search_activity"
+              className="text-white group-hover:text-point-2"
+            />
+            내역 추가
+          </Button>
         </div>
       </div>
     </div>
