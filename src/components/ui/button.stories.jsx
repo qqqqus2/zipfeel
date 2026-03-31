@@ -101,16 +101,30 @@ export const FigmaTokens = {
       <div>
         <h3 className="text-lg font-semibold mb-3 text-gray-6">Icon</h3>
         <div className="flex gap-4 flex-wrap items-center">
+          <Button size="sm" aria-label="설정">
+            <Icon name="more_vert" size={16} className="text-gray-6" />
+          </Button>
           <Button size="icon" aria-label="설정">
             <Icon name="more_vert" className="text-gray-6" />
           </Button>
 
-          <Button variant="ghost" size="sm" className="group">
+          <Button
+            variant="ghost"
+            size="sm"
+            className="group hover:text-point-2 "
+          >
             <Icon
               name="diamond"
               className="text-gray-6 group-hover:text-point-2"
             />
             수정
+          </Button>
+          <Button variant="ghost" size="sm" className="group">
+            수정
+            <Icon
+              name="diamond"
+              className="text-gray-6 group-hover:text-point-2"
+            />
           </Button>
         </div>
       </div>
@@ -119,33 +133,219 @@ export const FigmaTokens = {
         <h3 className="text-lg font-semibold mb-3 text-gray-6">
           Icon + Text (Sprite)
         </h3>
-        <div className="flex gap-4 flex-wrap items-center">
-          <Button variant="point2">
-            <Icon name="login" className="text-white" />
-            로그인
-          </Button>
-          <Button variant="ghost">
-            <Icon name="login" className="text-white" />
-            로그인
-          </Button>
-          <Button variant="outline" className="group">
-            <Icon
-              name="logout"
-              className="text-gray-6 group-hover:text-point-2"
-            />
-            로그아웃
-          </Button>
-          <Button variant="sub4" disabled>
-            <Icon name="book_ribbon" className="text-gray-6" />
-            Disabled
-          </Button>
-          <Button variant="point2" className="group">
-            <Icon
-              name="search_activity"
-              className="text-white group-hover:text-point-2"
-            />
-            내역 추가
-          </Button>
+        <div className="flex flex-wrap gap-4">
+          <div className="flex gap-4 flex-wrap items-center">
+            <Button
+              variant="ghost"
+              size="sm"
+              className="group text-sm font-bold hover:text-point-2 active:text-point-1"
+            >
+              <Icon
+                name="diamond"
+                className="group-hover:text-point-2 group-active:text-point-1 group-disabled:gray-2"
+              />
+              수정
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="group text-sm font-bold hover:text-point-2 active:text-point-1 disabled:text-gray-2"
+              disabled
+            >
+              <Icon
+                name="diamond"
+                className="group-hover:text-point-2 group-active:text-point-1 group-disabled:text-gray-2"
+              />
+              수정
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="group text-sm font-bold hover:text-point-2 active:text-point-1"
+            >
+              <Icon
+                name="ink_eraser"
+                className="group-hover:text-point-2 group-active:text-point-1 group-disabled:text-point-3"
+              />
+              삭제
+            </Button>
+            <Button
+              variant="ghost"
+              size="sm"
+              className="group text-sm font-bold hover:text-point-2 active:text-point-1 disabled:text-gray-2"
+              disabled
+            >
+              <Icon
+                name="ink_eraser"
+                className="text-point-1 group-hover:text-white group-disabled:text-gray-2"
+              />
+              삭제
+            </Button>
+          </div>
+          <div className="flex gap-4 flex-wrap items-center">
+            <Button variant="oulinePoint1" className="group text-sm font-bold">
+              <Icon
+                name="login"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              로그인
+            </Button>
+            <Button
+              variant="oulinePoint1"
+              className="group text-sm font-bold"
+              disabled
+            >
+              <Icon
+                name="login"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              로그인
+            </Button>
+            <Button variant="oulinePoint1" className="group text-sm font-bold">
+              <Icon
+                name="logout"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              로그아웃
+            </Button>
+            <Button
+              variant="oulinePoint1"
+              className="group text-sm font-bold"
+              disabled
+            >
+              <Icon
+                name="logout"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              로그아웃
+            </Button>
+          </div>
+          <div className="flex gap-4 flex-wrap items-center">
+            <Button variant="oulinePoint1" className="group text-sm font-bold">
+              <Icon
+                name="login"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              회원가입
+            </Button>
+            <Button
+              variant="oulinePoint1"
+              className="group text-sm font-bold"
+              disabled
+            >
+              <Icon
+                name="login"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              회원가입
+            </Button>
+            <Button variant="oulinePoint1" className="group text-sm font-bold">
+              <Icon
+                name="logout"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              내정보관리
+            </Button>
+            <Button
+              variant="oulinePoint1"
+              className="group text-sm font-bold"
+              disabled
+            >
+              <Icon
+                name="logout"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              내정보관리
+            </Button>
+          </div>
+          <div className="flex gap-4 flex-wrap items-center">
+            <Button
+              variant="oulinePoint1"
+              className="group rounded-full text-sm font-bold"
+            >
+              <Icon
+                name="search_activity"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              작품 생성
+            </Button>
+            <Button
+              variant="oulinePoint1"
+              className="group rounded-full text-sm font-bold"
+              disabled
+            >
+              <Icon
+                name="search_activity"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              작품 생성
+            </Button>
+            <Button
+              variant="oulinePoint1"
+              className="group rounded-full text-sm font-bold"
+            >
+              <Icon
+                name="search_activity"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              작품 목록
+            </Button>
+            <Button
+              variant="oulinePoint1"
+              className="group rounded-full text-sm font-bold"
+              disabled
+            >
+              <Icon
+                name="search_activity"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              작품 목록
+            </Button>
+          </div>
+          <div className="flex gap-4 flex-wrap items-center">
+            <Button
+              variant="oulinePoint1"
+              className="group rounded-full text-sm font-bold"
+            >
+              <Icon
+                name="search_activity"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              내역 추가
+            </Button>
+            <Button
+              variant="oulinePoint1"
+              className="group rounded-full text-sm font-bold"
+              disabled
+            >
+              <Icon
+                name="search_activity"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              내역 추가
+            </Button>
+            <Button
+              variant="oulinePoint1"
+              className="group rounded-full text-sm font-bold"
+            >
+              <Icon
+                name="search_activity"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              내역 추가
+            </Button>
+            <Button
+              variant="oulinePoint1"
+              className="group rounded-full text-sm font-bold"
+              disabled
+            >
+              <Icon
+                name="search_activity"
+                className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+              />
+              내역 추가
+            </Button>
+          </div>
         </div>
       </div>
     </div>
