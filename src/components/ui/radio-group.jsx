@@ -23,6 +23,7 @@ const RadioGroupItem = React.forwardRef(({ className, ...props }, ref) => {
         "group relative h-[24px] w-[24px] shrink-0 rounded-full border border-[#4D4637] ring-offset-background",
         // Keep RadioGroup item style aligned with Checkbox
         "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+        "aria-invalid:border-destructive aria-invalid:ring-destructive/40",
         "hover:border-[color:var(--color-point-2)] hover:border-[4px] hover:shadow-[-2px_-2px_4px_0_rgba(151,71,255,0.2),2px_2px_6px_0_rgba(151,71,255,0.4)]",
         "disabled:cursor-not-allowed disabled:opacity-50 disabled:border-[#DFE0DF]",
         "data-[state=checked]:border-point-1 data-[state=checked]:bg-point-1 data-[state=checked]:text-primary-foreground",

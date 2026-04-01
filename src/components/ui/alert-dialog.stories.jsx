@@ -32,6 +32,7 @@ const meta = {
 
 export default meta;
 
+/** 취소: outline(point1 테두리) · 확인: fill(point1) */
 export const ConfirmDefault = {
   render: () => (
     <AlertDialog>
@@ -55,6 +56,7 @@ export const ConfirmDefault = {
   ),
 };
 
+/** 취소: outline(point1) · 위험 액션: 빨간 outline */
 export const DestructiveConfirm = {
   render: () => (
     <AlertDialog>
@@ -70,7 +72,7 @@ export const DestructiveConfirm = {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+          <AlertDialogAction variant="destructiveOutline">
             Delete
           </AlertDialogAction>
         </AlertDialogFooter>
@@ -79,6 +81,7 @@ export const DestructiveConfirm = {
   ),
 };
 
+/** 단일 버튼: outline(point1)만 */
 export const AcknowledgeOnly = {
   render: () => (
     <AlertDialog>
@@ -93,7 +96,7 @@ export const AcknowledgeOnly = {
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction className="sm:ml-auto">Got it</AlertDialogAction>
+          <AlertDialogAction variant="outline">Got it</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -115,7 +118,7 @@ function AlertDialogWithPasswordExample() {
             This action requires verification. Type your password to continue.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <div className="grid gap-2 py-1">
+        <div className="mt-4 grid gap-2">
           <Label htmlFor="alert-dialog-password">Password</Label>
           <Input
             id="alert-dialog-password"
@@ -153,7 +156,7 @@ function AlertDialogWithSelectExample() {
             Select a reason. We will review your report.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <div className="grid gap-2 py-1">
+        <div className="mt-4 grid gap-2">
           <Label htmlFor="alert-dialog-reason">Reason</Label>
           <Select defaultValue="spam">
             <SelectTrigger id="alert-dialog-reason" className="w-full">
@@ -177,4 +180,27 @@ function AlertDialogWithSelectExample() {
 
 export const WithSelect = {
   render: () => <AlertDialogWithSelectExample />,
+};
+
+/** shadcn 기본 버튼 스타일(회색 outline + primary) */
+export const LegacyPlain = {
+  render: () => (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">Plain dialog</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Plain title</AlertDialogTitle>
+          <AlertDialogDescription>
+            <code>variant=&quot;default&quot;</code> on cancel / action.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel variant="default">Cancel</AlertDialogCancel>
+          <AlertDialogAction variant="default">Continue</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  ),
 };

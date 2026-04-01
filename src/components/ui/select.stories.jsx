@@ -37,6 +37,22 @@ export const Default = {
   ),
 };
 
+export const Required = {
+  name: "필수(required)",
+  render: () => (
+    <Select required name="fruit">
+      <SelectTrigger className="w-[180px]" aria-label="과일 선택">
+        <SelectValue placeholder="과일을 선택하세요" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="apple">Apple</SelectItem>
+        <SelectItem value="banana">Banana</SelectItem>
+        <SelectItem value="orange">Orange</SelectItem>
+      </SelectContent>
+    </Select>
+  ),
+};
+
 export const WithGroups = {
   render: () => (
     <Select>

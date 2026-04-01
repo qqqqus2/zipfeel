@@ -59,6 +59,10 @@
   --color-black: rgb(var(--blk));
   --color-white: rgb(var(--white));
 
+  /* Tabs solid variants — 알파 없이 고정색(Figma 토큰에 맞게 :root에서 조정) */
+  --color-tabs-surface: rgb(var(--tabs-surface));
+  --color-tabs-label-muted: rgb(var(--tabs-label-muted));
+
   /* Chart colors */
   --color-chart-1: rgb(var(--chart-1));
   --color-chart-2: rgb(var(--chart-2));
@@ -120,6 +124,10 @@
     --gray-scale-7: 235 235 235; /* #ebebeb */
     --blk: 0 0 0; /* #000000 */
     --white: 255 255 255; /* #ffffff */
+
+    /* solid / solidRounded 탭 바·트리거 배경 & 비활성 라벨 (black/80·white/70 대체) */
+    --tabs-surface: 38 38 38; /* ~neutral-800, 배경과 섞이지 않음 */
+    --tabs-label-muted: 199 199 199; /* gray-scale-3, 어두운 바 위 비활성 글자 */
 
     /* Font sizes (mobile defaults) */
     --fs-biggest: 20px;

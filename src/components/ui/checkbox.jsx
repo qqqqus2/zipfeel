@@ -13,6 +13,7 @@ const Checkbox = React.forwardRef(({ className, ...props }, ref) => (
       // "border-[color:rgba(240,240,243,1)] bg-[rgba(240,240,243,1)]",
       // "shadow-[inset_1px_1px_1px_0_rgba(174,174,192,0.15),inset_-1px_-1px_1px_0_rgba(255,255,255,0.7),1.5px_1.5px_3px_0_rgba(174,174,192,0.4),-1px_-1px_3px_0_rgba(255,255,255,1)]",
       "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "aria-invalid:border-destructive aria-invalid:ring-destructive/40",
       "hover:border-[color:var(--color-point-2)] hover:border-[4px] hover:shadow-[-2px_-2px_4px_0_rgba(151,71,255,0.2),2px_2px_6px_0_rgba(151,71,255,0.4)]",
       "disabled:text-[#DFE0DF] disabled:border-[#DFE0DF] disabled:bg-transparent data-[state=checked]:disabled:bg-[#fff] data-[state=checked]:disabled:border-[#DFE0DF]",
       "data-[state=checked]:text-point-1 data-[state=checked]:shadow-none data-[state=checked]:border-point-1 data-[state=checked]:bg-point-1 data-[state=checked]:text-primary-foreground",

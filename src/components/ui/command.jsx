@@ -18,9 +18,11 @@ const Command = React.forwardRef(
 Command.displayName = CommandPrimitive.displayName;
 
 const CommandInput = React.forwardRef(
-  ({ className, ...props }, ref) => (
+  ({ className, hideIcon = false, ...props }, ref) => (
   <div className="flex items-center border-b px-3" cmdk-input-wrapper="">
-    <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+    {!hideIcon ? (
+      <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+    ) : null}
     <CommandPrimitive.Input
       ref={ref}
       className={cn(

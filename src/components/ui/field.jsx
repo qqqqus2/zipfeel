@@ -1,6 +1,6 @@
 "use client"
 
-import { useMemo } from "react"
+import * as React from "react"
 import { cva } from "class-variance-authority"
 
 import { cn } from "@/lib/utils"
@@ -55,7 +55,7 @@ function FieldGroup({ className, ...props }) {
 }
 
 const fieldVariants = cva(
-  "group/field data-[invalid=true]:text-destructive flex w-full gap-3",
+  "group/field data-[invalid=true]:text-destructive flex w-full min-w-0 gap-3",
   {
     variants: {
       orientation: {
@@ -81,15 +81,27 @@ const fieldVariants = cva(
 function Field({
   className,
   orientation = "vertical",
+  invalid,
   ...props
 }) {
+  const {
+    "data-invalid": dataInvalidProp,
+    className: propsClassName,
+    ...rest
+  } = props
+  const isInvalid =
+    invalid === true ||
+    (invalid !== false &&
+      (dataInvalidProp === true || dataInvalidProp === ""))
+
   return (
     <div
       role="group"
       data-slot="field"
       data-orientation={orientation}
-      className={cn(fieldVariants({ orientation }), className)}
-      {...props}
+      data-invalid={isInvalid ? "true" : undefined}
+      className={cn(fieldVariants({ orientation }), className, propsClassName)}
+      {...rest}
     />
   )
 }
@@ -109,32 +121,50 @@ function FieldContent({ className, ...props }) {
 
 function FieldLabel({
   className,
+  required,
+  children,
   ...props
 }) {
   return (
     <Label
       data-slot="field-label"
+      data-required={required ? "" : undefined}
       className={cn(
-        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50",
+        "group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 group-data-[invalid=true]/field:text-destructive",
         "has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col has-[>[data-slot=field]]:rounded-md has-[>[data-slot=field]]:border [&>[data-slot=field]]:p-4",
         "has-data-[state=checked]:bg-primary/5 has-data-[state=checked]:border-primary dark:has-data-[state=checked]:bg-primary/10",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+      {required ? (
+        <span className="text-destructive" aria-hidden="true">
+          *
+        </span>
+      ) : null}
+    </Label>
   )
 }
 
-function FieldTitle({ className, ...props }) {
+function FieldTitle({ className, required, children, ...props }) {
   return (
     <div
       data-slot="field-label"
+      data-required={required ? "" : undefined}
       className={cn(
-        "flex w-fit items-center gap-2 text-sm font-medium leading-snug group-data-[disabled=true]/field:opacity-50",
+        "flex w-fit items-center gap-2 text-sm font-medium leading-snug group-data-[disabled=true]/field:opacity-50 group-data-[invalid=true]/field:text-destructive",
         className
       )}
       {...props}
-    />
+    >
+      {children}
+      {required ? (
+        <span className="text-destructive" aria-hidden="true">
+          *
+        </span>
+      ) : null}
+    </div>
   )
 }
 
@@ -187,7 +217,7 @@ function FieldError({
   errors,
   ...props
 }) {
-  const content = useMemo(() => {
+  const content = React.useMemo(() => {
     if (children) {
       return children
     }

@@ -14,7 +14,7 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
         outline:
-          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground",
+          "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground aria-invalid:border-destructive aria-invalid:ring-1 aria-invalid:ring-destructive/40",
         oulinePoint1:
           "border border-point-1 text-point-1 bg-transparent hover:text-white hover:bg-point-2 hover:border-point-2 active:text-white active:bg-point-1 active:border-point-1 disabled:bg-transparent disabeld:text-point-3",
         secondary:
@@ -35,6 +35,7 @@ const buttonVariants = cva(
         default: "h-10 px-4 text-base",
         sm: "h-8 px-3 text-sm [&_svg]:size-4",
         lg: "h-12 px-6 text-lg [&_svg]:size-7",
+        full: "w-full h-12 px-6 text-lg [&_svg]:size-7",
         icon: "h-10 w-10 [&_svg]:size-6",
         iconSm: "h-8 w-8 [&_svg]:size-4",
       },

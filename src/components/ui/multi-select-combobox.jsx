@@ -26,7 +26,12 @@ export function MultiSelectCombobox({
   searchPlaceholder = "검색…",
   className,
   disabled,
+  required = false,
+  invalid = false,
+  "aria-invalid": ariaInvalidProp,
 }) {
+  const ariaInvalid =
+    ariaInvalidProp === true || invalid === true ? true : undefined;
   const [open, setOpen] = React.useState(false);
   const selectedCount = value.length;
 
@@ -46,6 +51,8 @@ export function MultiSelectCombobox({
           type="button"
           role="combobox"
           aria-expanded={open}
+          aria-required={required}
+          aria-invalid={ariaInvalid}
           disabled={disabled}
           className={cn(
             "h-11 w-full justify-between gap-3 rounded-md border border-input px-4",

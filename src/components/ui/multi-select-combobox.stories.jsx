@@ -46,6 +46,26 @@ export const Default = {
   },
 };
 
+export const Required = {
+  name: "필수(required)",
+  render: () => {
+    const [value, setValue] = React.useState([]);
+
+    return (
+      <div className="w-[340px]">
+        <MultiSelectCombobox
+          label="항목명"
+          options={options}
+          value={value}
+          onValueChange={setValue}
+          placeholder="선택하세요"
+          required
+        />
+      </div>
+    );
+  },
+};
+
 export const Preselected = {
   name: "Selected(Multi) 예시",
   args: {

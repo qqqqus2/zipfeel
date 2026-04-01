@@ -1,4 +1,3 @@
-import React from "react";
 import { Input } from "./input";
 
 const meta = {
@@ -70,6 +69,37 @@ export const AllTypes = {
       <Input type="tel" placeholder="Phone number" />
       <Input type="url" placeholder="https://example.com" />
       <Input placeholder="Disabled" disabled />
+    </div>
+  ),
+};
+
+export const WithPrefixLabel = {
+  name: "접두 텍스트(prefixLabel)",
+  render: () => (
+    <div className="w-80">
+      <Input prefixLabel="항목명" placeholder="입력하세요" />
+    </div>
+  ),
+};
+
+export const WithSuffixLabel = {
+  name: "접미 텍스트(suffixLabel)",
+  render: () => (
+    <div className="w-80">
+      <Input suffixLabel="항목명" placeholder="입력하세요" />
+    </div>
+  ),
+};
+
+export const WithPrefixAndSuffix = {
+  name: "접두·접미 텍스트",
+  render: () => (
+    <div className="w-80">
+      <Input
+        prefixLabel="항목명"
+        suffixLabel="항목명"
+        placeholder="입력하세요"
+      />
     </div>
   ),
 };
