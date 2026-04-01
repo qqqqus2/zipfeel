@@ -1,3 +1,4 @@
+import * as React from "react";
 import { ThemeProvider } from "next-themes";
 import { toast } from "sonner";
 import { Button } from "./button";
@@ -27,6 +28,36 @@ const meta = {
 };
 
 export default meta;
+
+// function AutoShowToast({ variant = "default" }) {
+//   React.useEffect(() => {
+//     if (variant === "success") {
+//       toast.success("저장되었습니다.", { duration: Infinity, closeButton: true });
+//       return;
+//     }
+//     if (variant === "error") {
+//       toast.error("문제가 발생했습니다.", { duration: Infinity, closeButton: true });
+//       return;
+//     }
+
+//     toast("기본 토스트", {
+//       description: "스토리 로드시 자동으로 뜨는 테스트 토스트입니다.",
+//       duration: Infinity,
+//       closeButton: true,
+//     });
+//   }, [variant]);
+
+//   return (
+//     <div className="text-sm text-muted-foreground">
+//       이 스토리는 로드 시 토스트가 자동으로 뜹니다. (닫기 버튼으로 종료)
+//     </div>
+//   );
+// }
+
+// /** 테스트용: 클릭 없이 항상 표시 (duration: Infinity) */
+// export const AutoShow = {
+//   render: () => <AutoShowToast variant="default" />,
+// };
 
 export const Default = {
   render: () => (

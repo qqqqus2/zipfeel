@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
+  AlertDialogBody,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -32,14 +33,36 @@ const meta = {
 
 export default meta;
 
-/** 취소: outline(point1 테두리) · 확인: fill(point1) */
-export const ConfirmDefault = {
+/** 기본 알림: 확인 outline 버튼 하나 (+ 닫기 X) */
+export const Default = {
+  render: () => (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">Open alert</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogHeader>
+          <AlertDialogTitle>Something went wrong</AlertDialogTitle>
+          <AlertDialogDescription>
+            Please try again. If the problem continues, contact support.
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogAction variant="outline">OK</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  ),
+};
+
+/** 취소 outline · 확인 fill — 코너 `check_circle.svg` (기본) */
+export const WithCancel = {
   render: () => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="outline">Change language</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent cornerArtVariant="confirm">
         <AlertDialogHeader>
           <AlertDialogTitle>Change the language?</AlertDialogTitle>
           <AlertDialogDescription>
@@ -50,6 +73,33 @@ export const ConfirmDefault = {
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction>OK</AlertDialogAction>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
+  ),
+};
+
+/** 확인 다이얼로그 + `contact_support.svg` 코너 */
+export const WithCancelContactSupport = {
+  render: () => (
+    <AlertDialog>
+      <AlertDialogTrigger asChild>
+        <Button variant="outline">Contact support</Button>
+      </AlertDialogTrigger>
+      <AlertDialogContent
+        cornerArtVariant="confirm"
+        confirmCornerGraphic="contactSupport"
+      >
+        <AlertDialogHeader>
+          <AlertDialogTitle>Need help?</AlertDialogTitle>
+          <AlertDialogDescription>
+            You can reach our support team from the app settings. Continue to
+            open the help center?
+          </AlertDialogDescription>
+        </AlertDialogHeader>
+        <AlertDialogFooter>
+          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogAction>Open</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -81,22 +131,26 @@ export const DestructiveConfirm = {
   ),
 };
 
-/** 단일 버튼: outline(point1)만 */
-export const AcknowledgeOnly = {
+/** 한글 단일 확인 (필수 입력 안내) */
+export const RequiredFieldsKo = {
   render: () => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button variant="outline">Show alert</Button>
+        <Button variant="outline">필수 입력 알림</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Fill in all required fields</AlertDialogTitle>
-          <AlertDialogDescription>
-            Some information is missing. Please complete the form and try again.
+          <AlertDialogTitle className="text-left font-bold text-foreground">
+            필수 입력 값을
+            <br />
+            모두 입력해 주세요.
+          </AlertDialogTitle>
+          <AlertDialogDescription className="sr-only">
+            필수 입력 항목을 모두 채운 뒤 다시 시도해 주세요.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction variant="outline">Got it</AlertDialogAction>
+          <AlertDialogAction variant="outline">확인</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
@@ -118,7 +172,7 @@ function AlertDialogWithPasswordExample() {
             This action requires verification. Type your password to continue.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <div className="mt-4 grid gap-2">
+        <AlertDialogBody className="mt-4 grid gap-2">
           <Label htmlFor="alert-dialog-password">Password</Label>
           <Input
             id="alert-dialog-password"
@@ -127,7 +181,7 @@ function AlertDialogWithPasswordExample() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </div>
+        </AlertDialogBody>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction disabled={!password.trim()}>
@@ -149,14 +203,14 @@ function AlertDialogWithSelectExample() {
       <AlertDialogTrigger asChild>
         <Button variant="outline">Choose reason</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent cornerArtVariant="confirm">
         <AlertDialogHeader>
           <AlertDialogTitle>Report this content</AlertDialogTitle>
           <AlertDialogDescription>
             Select a reason. We will review your report.
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <div className="mt-4 grid gap-2">
+        <AlertDialogBody className="mt-4 grid gap-2">
           <Label htmlFor="alert-dialog-reason">Reason</Label>
           <Select defaultValue="spam">
             <SelectTrigger id="alert-dialog-reason" className="w-full">
@@ -168,7 +222,7 @@ function AlertDialogWithSelectExample() {
               <SelectItem value="other">Other</SelectItem>
             </SelectContent>
           </Select>
-        </div>
+        </AlertDialogBody>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction>Submit</AlertDialogAction>
@@ -182,18 +236,18 @@ export const WithSelect = {
   render: () => <AlertDialogWithSelectExample />,
 };
 
-/** shadcn 기본 버튼 스타일(회색 outline + primary) */
+/** shadcn 기본 버튼 + 코너 SVG 없음 */
 export const LegacyPlain = {
   render: () => (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button variant="outline">Plain dialog</Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent showCornerArt={false}>
         <AlertDialogHeader>
           <AlertDialogTitle>Plain title</AlertDialogTitle>
           <AlertDialogDescription>
-            <code>variant=&quot;default&quot;</code> on cancel / action.
+            <code>{'showCornerArt={false}'}</code> · 회색 버튼 variant.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
