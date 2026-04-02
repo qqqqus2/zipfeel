@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Info, Pencil } from "lucide-react";
 import { Button } from "./button";
 import {

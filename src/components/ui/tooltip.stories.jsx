@@ -32,7 +32,10 @@ export const Default = {
         <Button variant="outline">Hover me</Button>
       </TooltipTrigger>
       <TooltipContent>
-        <p>Tooltip text</p>
+        <p>
+          Tooltip textTooltip textTooltip textTooltip textTooltip textTooltip
+          textTooltip textTooltip textTooltip textTooltip text
+        </p>
       </TooltipContent>
     </Tooltip>
   ),

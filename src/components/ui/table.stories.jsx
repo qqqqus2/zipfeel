@@ -1,3 +1,4 @@
+import * as React from "react";
 import { useState } from "react";
 import {
   flexRender,
@@ -5,7 +6,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown } from "lucide-react";
+import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
 import { Button } from "./button";
 import {
   Table,
@@ -29,10 +30,16 @@ const meta = {
 
 export default meta;
 
+function SortIcon({ direction }) {
+  if (direction === "asc") return <ArrowUp className="ml-2 size-4" />;
+  if (direction === "desc") return <ArrowDown className="ml-2 size-4" />;
+  return <ChevronsUpDown className="ml-2 size-4 opacity-70" />;
+}
+
 const invoices = [
-  { id: "INV001", status: "Paid", method: "Card", amount: "$250.00" },
-  { id: "INV002", status: "Pending", method: "PayPal", amount: "$120.00" },
-  { id: "INV003", status: "Unpaid", method: "Bank", amount: "$350.00" },
+  { id: "001", status: "Paid", method: "Card", amount: "$250.00" },
+  { id: "002", status: "Pending", method: "PayPal", amount: "$120.00" },
+  { id: "003", status: "Unpaid", method: "Bank", amount: "$350.00" },
 ];
 
 export const Default = {
@@ -195,7 +202,7 @@ const paymentColumns = [
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
         Status
-        <ArrowUpDown className="ml-2 size-4" />
+        <SortIcon direction={column.getIsSorted()} />
       </Button>
     ),
     cell: ({ row }) => (
@@ -211,7 +218,7 @@ const paymentColumns = [
         onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
       >
         Email
-        <ArrowUpDown className="ml-2 size-4" />
+        <SortIcon direction={column.getIsSorted()} />
       </Button>
     ),
     cell: ({ row }) => (
@@ -228,7 +235,7 @@ const paymentColumns = [
           onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
           Amount
-          <ArrowUpDown className="ml-2 size-4" />
+          <SortIcon direction={column.getIsSorted()} />
         </Button>
       </div>
     ),
