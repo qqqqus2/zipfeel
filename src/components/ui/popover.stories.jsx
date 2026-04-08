@@ -4,13 +4,41 @@ import { Input } from "./input";
 import { Label } from "./label";
 import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 
+const POPOVER_DOC_PROPS = ["open", "defaultOpen", "onOpenChange", "modal"];
+
 const meta = {
   title: "UI/Popover",
   component: Popover,
   parameters: {
     layout: "centered",
+    controls: { include: POPOVER_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props (Popover 루트)
+
+- **open** — 제어: 열림 여부.
+- **defaultOpen** — 비제어: 초기 열림.
+- **onOpenChange** — 열림 상태 변경 콜백.
+- **modal** — Radix \`modal\`에 대응하는 포인터·포커스 격리 방식.
+
+트리거·패널은 \`PopoverTrigger\`, \`PopoverContent\`(\`variant\` 등)로 구성합니다.`,
+      },
+      controls: { include: POPOVER_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    open: { control: "boolean", description: "제어: 열림 여부" },
+    defaultOpen: { control: "boolean", description: "비제어: 초기 열림" },
+    onOpenChange: {
+      control: false,
+      description: "열림 상태 변경 콜백",
+    },
+    modal: {
+      control: "boolean",
+      description: "포커스/포인터 이벤트 격리 방식(Radix modal)",
+    },
+  },
 };
 
 export default meta;

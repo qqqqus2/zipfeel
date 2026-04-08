@@ -1,13 +1,56 @@
 import React from "react";
 import { RadioGroup, RadioGroupItem } from "./radio-group";
 
+const RADIO_GROUP_DOC_PROPS = [
+  "value",
+  "defaultValue",
+  "onValueChange",
+  "disabled",
+  "name",
+  "orientation",
+  "required",
+];
+
 const meta = {
   title: "UI/RadioGroup",
   component: RadioGroup,
   parameters: {
     layout: "centered",
+    controls: { include: RADIO_GROUP_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props (RadioGroup)
+
+- **value** — 제어: 선택된 항목의 \`value\`.
+- **defaultValue** — 비제어: 초기 선택.
+- **onValueChange** — 선택 변경 콜백.
+- **disabled** — 그룹 전체 비활성.
+- **name** — 폼 제출 시 필드 이름.
+- **orientation** — \`vertical\` / \`horizontal\` 배치.
+- **required** — 필수 선택 힌트.
+
+개별 라디오는 \`RadioGroupItem value="..."\`로 둡니다.`,
+      },
+      controls: { include: RADIO_GROUP_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    value: { control: "text", description: "제어: 선택된 value" },
+    defaultValue: { control: "text", description: "비제어: 초기 value" },
+    onValueChange: {
+      control: false,
+      description: "선택 변경 콜백",
+    },
+    disabled: { control: "boolean", description: "그룹 전체 비활성" },
+    name: { control: "text", description: "폼 필드 name" },
+    orientation: {
+      control: "select",
+      options: ["vertical", "horizontal"],
+      description: "항목 배치 방향",
+    },
+    required: { control: "boolean", description: "필수 선택" },
+  },
 };
 
 export default meta;

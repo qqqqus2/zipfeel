@@ -62,9 +62,12 @@ function moveItemBetweenContainers({
     const container = containers.find((c) => c.id === fromId);
     const oldIndex = container.items.findIndex((it) => it.id === activeId);
     const newIndex = container.items.findIndex((it) => it.id === overId);
-    if (oldIndex < 0 || newIndex < 0 || oldIndex === newIndex) return containers;
+    if (oldIndex < 0 || newIndex < 0 || oldIndex === newIndex)
+      return containers;
     return containers.map((c) =>
-      c.id === fromId ? { ...c, items: arrayMove(c.items, oldIndex, newIndex) } : c,
+      c.id === fromId
+        ? { ...c, items: arrayMove(c.items, oldIndex, newIndex) }
+        : c,
     );
   }
 
@@ -106,7 +109,9 @@ function DropContainer({ id, title, description, className, children }) {
     >
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
-          <div className="truncate text-base font-semibold leading-6">{title}</div>
+          <div className="truncate text-base font-semibold leading-6">
+            {title}
+          </div>
           {description ? (
             <div className="mt-0.5 text-sm text-muted-foreground">
               {description}
@@ -175,7 +180,9 @@ function SortableCardItem({
       ) : null}
 
       <div className="min-w-0 flex-1">
-        <div className="truncate text-sm font-medium text-foreground">{title}</div>
+        <div className="truncate text-sm font-medium text-foreground">
+          {title}
+        </div>
         {meta ? (
           <div className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
             {meta}
@@ -221,7 +228,9 @@ function DragOverlayCard({ title, meta }) {
         <GripVertical className="size-4" aria-hidden />
       </div>
       <div className="min-w-0 flex-1">
-        <div className="truncate text-sm font-medium text-foreground">{title}</div>
+        <div className="truncate text-sm font-medium text-foreground">
+          {title}
+        </div>
         {meta ? (
           <div className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
             {meta}
@@ -260,7 +269,9 @@ export function DragDropBoard({ containers, onContainersChange, className }) {
 
   const sensors = useSensors(
     useSensor(PointerSensor, { activationConstraint: { distance: 6 } }),
-    useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates }),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    }),
   );
 
   const activeItem = activeId
@@ -292,10 +303,14 @@ export function DragDropBoard({ containers, onContainersChange, className }) {
 
     const overRect = event.over?.rect;
     const activeRect =
-      event.active?.rect?.current?.translated ?? event.active?.rect?.current?.initial;
+      event.active?.rect?.current?.translated ??
+      event.active?.rect?.current?.initial;
 
     const position =
-      overRect && activeRect && activeRect.top + activeRect.height / 2 > overRect.top + overRect.height / 2
+      overRect &&
+      activeRect &&
+      activeRect.top + activeRect.height / 2 >
+        overRect.top + overRect.height / 2
         ? "after"
         : "before";
 
@@ -345,13 +360,16 @@ export function DragDropBoard({ containers, onContainersChange, className }) {
       const newIndex = container.items.findIndex((it) => it.id === over);
       if (oldIndex < 0 || newIndex < 0 || oldIndex === newIndex) return;
       const next = containers.map((c) =>
-        c.id === fromId ? { ...c, items: arrayMove(c.items, oldIndex, newIndex) } : c,
+        c.id === fromId
+          ? { ...c, items: arrayMove(c.items, oldIndex, newIndex) }
+          : c,
       );
       onContainersChange?.(next);
       return;
     }
 
-    const insertPosition = indicator?.overId === over ? indicator.position : "before";
+    const insertPosition =
+      indicator?.overId === over ? indicator.position : "before";
     const next = moveItemBetweenContainers({
       containers,
       activeId: active,
@@ -411,8 +429,13 @@ export function DragDropBoard({ containers, onContainersChange, className }) {
                         leading={
                           container.variant === "list" ? (
                             <div className="flex items-center gap-2 text-muted-foreground">
-                              <Check className="size-4 opacity-70" aria-hidden />
-                              <div className="w-4 text-xs tabular-nums">{index + 1}</div>
+                              <Check
+                                className="size-4 opacity-70"
+                                aria-hidden
+                              />
+                              <div className="w-4 text-xs tabular-nums">
+                                {index + 1}
+                              </div>
                             </div>
                           ) : null
                         }
@@ -448,7 +471,10 @@ export function DragDropBoard({ containers, onContainersChange, className }) {
         ? createPortal(
             <DragOverlay className="pointer-events-none">
               {activeItem ? (
-                <DragOverlayCard title={activeItem.title} meta={activeItem.meta} />
+                <DragOverlayCard
+                  title={activeItem.title}
+                  meta={activeItem.meta}
+                />
               ) : null}
             </DragOverlay>,
             document.body,
@@ -457,4 +483,3 @@ export function DragDropBoard({ containers, onContainersChange, className }) {
     </DndContext>
   );
 }
-

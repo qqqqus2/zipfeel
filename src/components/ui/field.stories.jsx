@@ -20,6 +20,8 @@ import {
   TooltipTrigger,
 } from "./tooltip";
 
+const FIELD_DOC_PROPS = ["orientation", "invalid"];
+
 const meta = {
   title: "UI/Field",
   component: Field,
@@ -27,8 +29,31 @@ const meta = {
     // centered는 flex로 자식 폭이 min-content로 줄어들 수 있어
     // Field의 % 너비·줄바꿈이 깨짐 → 폼 스토리는 padded 권장
     layout: "padded",
+    controls: { include: FIELD_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props (Field 루트)
+
+- **orientation** — \`vertical\`, \`horizontal\`, \`responsive\` 레이아웃.
+- **invalid** — 검증 오류 시각 상태(\`data-invalid\`).
+
+라벨·설명·에러는 \`FieldLabel\`, \`FieldDescription\`, \`FieldError\`, \`FieldSet\` 등과 함께 씁니다.`,
+      },
+      controls: { include: FIELD_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    orientation: {
+      control: "select",
+      options: ["vertical", "horizontal", "responsive"],
+      description: "필드 그룹 방향",
+    },
+    invalid: {
+      control: "boolean",
+      description: "검증 오류 시각 상태(data-invalid)",
+    },
+  },
 };
 
 export default meta;

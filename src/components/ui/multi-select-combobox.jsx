@@ -14,7 +14,11 @@ import {
   CommandItem,
   CommandList,
 } from "@/components/ui/command";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 export function MultiSelectCombobox({
   label,
@@ -40,7 +44,7 @@ export function MultiSelectCombobox({
       if (value.includes(v)) onValueChange(value.filter((x) => x !== v));
       else onValueChange([...value, v]);
     },
-    [onValueChange, value]
+    [onValueChange, value],
   );
 
   return (
@@ -56,7 +60,7 @@ export function MultiSelectCombobox({
           disabled={disabled}
           className={cn(
             "h-11 w-full justify-between gap-3 rounded-md border border-input px-4",
-            className
+            className,
           )}
         >
           <span className="flex min-w-0 flex-1 items-center gap-3 text-left">
@@ -66,7 +70,9 @@ export function MultiSelectCombobox({
             <span
               className={cn(
                 "min-w-0 flex-1 truncate text-sm",
-                selectedCount === 0 ? "text-muted-foreground" : "text-foreground"
+                selectedCount === 0
+                  ? "text-muted-foreground"
+                  : "text-foreground",
               )}
             >
               {selectedCount === 0 ? placeholder : `${selectedCount}건 선택`}
@@ -76,11 +82,18 @@ export function MultiSelectCombobox({
         </Button>
       </PopoverTrigger>
 
-      <PopoverContent align="start" className="w-[--radix-popover-trigger-width] p-0">
+      <PopoverContent
+        align="start"
+        className={cn(
+          "w-[var(--radix-popover-trigger-width)] min-w-[var(--radix-popover-trigger-width)] max-w-[var(--radix-popover-trigger-width)] p-0",
+        )}
+      >
         <Command>
           {searchable ? <CommandInput placeholder={searchPlaceholder} /> : null}
           <CommandList>
-            {searchable ? <CommandEmpty>검색 결과가 없습니다.</CommandEmpty> : null}
+            {searchable ? (
+              <CommandEmpty>검색 결과가 없습니다.</CommandEmpty>
+            ) : null}
             <CommandGroup>
               {options.map((opt) => {
                 const checked = value.includes(opt.value);
@@ -102,7 +115,7 @@ export function MultiSelectCombobox({
                     <Check
                       className={cn(
                         "ml-2 h-4 w-4",
-                        checked ? "opacity-100" : "opacity-0"
+                        checked ? "opacity-100" : "opacity-0",
                       )}
                     />
                   </CommandItem>

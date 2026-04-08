@@ -44,10 +44,40 @@
  * - **sortable? / sorting? / onSortingChange? / defaultSorting?**: 헤더 정렬
  */
 import * as React from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-import { SortIcon } from "./table";
+/**
+ * TableGrid 헤더 전용: 위·아래 쉐브론. 활성 방향만 point-2, 나머지는 회색.
+ * `direction`: `"asc"` | `"desc"` | `false`
+ */
+function TableGridSortIcon({ direction }) {
+  const inactive = "text-gray-4";
+  const both = "text-gray-6";
+
+  return (
+    <span
+      className="inline-flex shrink-0 flex-col items-center justify-center leading-none"
+      aria-hidden
+    >
+      <ChevronUp
+        className={cn(
+          "size-3 shrink-0",
+          direction === "asc" ? "text-point-2" : direction === "desc" ? inactive : both,
+        )}
+        strokeWidth={2.5}
+      />
+      <ChevronDown
+        className={cn(
+          "-mt-0.5 size-3 shrink-0",
+          direction === "desc" ? "text-point-2" : direction === "asc" ? inactive : both,
+        )}
+        strokeWidth={2.5}
+      />
+    </span>
+  );
+}
 
 const TableGridContext = React.createContext(null);
 
@@ -180,9 +210,9 @@ function tableGridAlignToText(a) {
 
 /**
  * `table.jsx` `TableHead`와 동일한 정렬 헤더(버튼 + `SortIcon`).
- * @param {{ col: object }} props
+ * @param {{ col: object; isLastColumn?: boolean }} props
  */
-function TableGridColumnHeader({ col }) {
+function TableGridColumnHeader({ col, isLastColumn = false }) {
   const ctx = useTableGridSort();
   const sortKey = col.sortKey ?? col.key;
   const columnSortOff = col.sortable === false;
@@ -202,7 +232,12 @@ function TableGridColumnHeader({ col }) {
 
   const { sizeClassName } = resolveTableGridColumn(col);
   const baseCell = cn(
-    "flex min-h-10 items-center px-2 py-2 align-middle [&:has([role=checkbox])]:pr-0",
+    "relative isolate flex h-full min-h-[30px] items-center px-2 py-0 align-middle [&:has([role=checkbox])]:pr-0",
+    /* 상단 절반 흰 오버레이 — 세로 구분선은 회색(하단) 절반만 보이게 */
+    "before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-0 before:h-1/2 before:bg-white before:content-['']",
+    !isLastColumn &&
+      "after:pointer-events-none after:absolute after:right-0 after:top-1/2 after:z-[1] after:h-1/2 after:w-px after:bg-black after:content-['']",
+    "[&>*]:relative [&>*]:z-10",
     cellJustify,
     cellText,
     col.className,
@@ -232,13 +267,13 @@ function TableGridColumnHeader({ col }) {
       <button
         type="button"
         className={cn(
-          "-m-1 inline-flex h-8 w-full min-w-0 items-center gap-1 rounded-md px-1 font-bold text-inherit hover:bg-accent/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+          "-m-1 inline-flex h-7 w-full min-w-0 items-center gap-1 rounded-md px-1 text-sm font-bold text-inherit hover:bg-transparent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
           buttonJustify,
         )}
         onClick={() => ctx.toggleSort(sortKey)}
       >
         <span className="min-w-0 truncate">{col.header}</span>
-        <SortIcon direction={direction} />
+        <TableGridSortIcon direction={direction} />
       </button>
     </div>
   );
@@ -443,10 +478,14 @@ export function TableGrid({
             <div
               role="row"
               style={gridStyle}
-              className="grid min-h-10 border-b border-border bg-gray-2 font-bold text-gray-6"
+              className="grid h-[30px] min-h-[30px] border-b border-black bg-gray-2 font-bold text-gray-6"
             >
-              {columns.map((col) => (
-                <TableGridColumnHeader key={col.key} col={col} />
+              {columns.map((col, index) => (
+                <TableGridColumnHeader
+                  key={col.key}
+                  col={col}
+                  isLastColumn={index === columns.length - 1}
+                />
               ))}
             </div>
           </div>

@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import * as React from "react";
 import { AlertCircle, CheckCircle, Info, Lightbulb } from "lucide-react";
@@ -9,6 +9,10 @@ const helpTextVariants = {
   default: {
     Icon: Info,
     className: "text-gray-6",
+  },
+  primary: {
+    Icon: Info,
+    className: "text-point-2",
   },
   positive: {
     Icon: CheckCircle,
@@ -26,13 +30,7 @@ const helpTextVariants = {
 
 const HelpText = React.forwardRef(
   (
-    {
-      variant = "default",
-      icon: iconProp,
-      children,
-      className,
-      ...props
-    },
+    { variant = "default", icon: iconProp, children, className, ...props },
     ref,
   ) => {
     const v = helpTextVariants[variant] || helpTextVariants.default;
@@ -41,7 +39,11 @@ const HelpText = React.forwardRef(
     return (
       <div
         ref={ref}
-        className={cn("flex items-center gap-2 text-sm", v.className, className)}
+        className={cn(
+          "flex items-center gap-2 text-sm",
+          v.className,
+          className,
+        )}
         {...props}
       >
         {iconProp === null ? null : iconProp ? (

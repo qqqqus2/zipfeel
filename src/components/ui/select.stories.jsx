@@ -9,13 +9,52 @@ import {
   SelectValue,
 } from "./select";
 
+const SELECT_DOC_PROPS = [
+  "value",
+  "defaultValue",
+  "onValueChange",
+  "disabled",
+  "required",
+  "name",
+  "open",
+  "onOpenChange",
+  "defaultOpen",
+];
+
 const meta = {
   title: "UI/Select",
   component: Select,
   parameters: {
     layout: "centered",
+    controls: { include: SELECT_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props (Select 루트)
+
+- **value** — 제어: 선택된 항목 \`value\`.
+- **defaultValue** — 비제어: 초기 값.
+- **onValueChange** — 값 변경 콜백.
+- **disabled** / **required** — 비활성·필수.
+- **name** — 폼 \`name\`.
+- **open** / **defaultOpen** / **onOpenChange** — 드롭다운 열림 제어.
+
+트리거·목록은 \`SelectTrigger\`, \`SelectContent\`, \`SelectItem\` 등으로 구성합니다.`,
+      },
+      controls: { include: SELECT_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    value: { control: "text", description: "제어: 선택 value" },
+    defaultValue: { control: "text", description: "비제어: 초기 value" },
+    onValueChange: { control: false, description: "값 변경 콜백" },
+    disabled: { control: "boolean", description: "비활성" },
+    required: { control: "boolean", description: "필수" },
+    name: { control: "text", description: "폼 name" },
+    open: { control: "boolean", description: "제어: 드롭다운 열림" },
+    defaultOpen: { control: "boolean", description: "비제어: 초기 열림" },
+    onOpenChange: { control: false, description: "열림 변경 콜백" },
+  },
 };
 
 export default meta;

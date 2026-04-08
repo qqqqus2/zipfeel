@@ -13,21 +13,42 @@ import {
   ItemTitle,
 } from "./item";
 
+const ITEM_DOC_PROPS = ["variant", "size", "asChild"];
+
 const meta = {
   title: "UI/Item",
   component: Item,
   parameters: {
     layout: "padded",
+    controls: { include: ITEM_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props (Item 루트)
+
+- **variant** — \`default\`, \`outline\`, \`muted\` 등 카드형 행 스타일.
+- **size** — \`default\` / \`sm\` 패딩·간격.
+- **asChild** — \`true\`면 루트를 자식 한 요소로 렌더(Slot).
+
+제목·설명·액션은 \`ItemTitle\`, \`ItemDescription\`, \`ItemActions\` 등 하위 컴포넌트로 구성합니다.`,
+      },
+      controls: { include: ITEM_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
     variant: {
       control: "select",
       options: ["default", "outline", "muted"],
+      description: "테두리·배경 톤",
     },
     size: {
       control: "select",
       options: ["default", "sm"],
+      description: "패딩·간격",
+    },
+    asChild: {
+      control: "boolean",
+      description: "true면 자식으로 루트 렌더(Slot)",
     },
   },
 };
@@ -66,7 +87,7 @@ export const WithInfoAndActions = {
                 className="size-6"
                 aria-label="설명"
               >
-                <Info className="size-3.5" />
+                <Info className="size-[14px]" />
               </Button>
             </ItemTitle>
             <ItemActions>

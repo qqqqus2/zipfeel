@@ -22,13 +22,36 @@ import {
   SelectValue,
 } from "./select";
 
+const ALERT_DIALOG_DOC_PROPS = ["open", "onOpenChange", "defaultOpen"];
+
 const meta = {
   title: "UI/AlertDialog",
   component: AlertDialog,
   parameters: {
     layout: "centered",
+    controls: { include: ALERT_DIALOG_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props (AlertDialog 루트)
+
+- **open** — 제어: 열림 여부.
+- **defaultOpen** — 비제어: 초기 열림.
+- **onOpenChange** — 열림 상태 변경 콜백.
+
+일반 Dialog와 달리 확인·취소 등 의도적 조치를 요구하는 패턴에 맞춰 \`AlertDialogAction\` / \`AlertDialogCancel\` 등으로 닫힘을 구성합니다.`,
+      },
+      controls: { include: ALERT_DIALOG_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    open: { control: "boolean", description: "제어: 열림 여부" },
+    defaultOpen: { control: "boolean", description: "비제어: 초기 열림" },
+    onOpenChange: {
+      control: false,
+      description: "열림 상태 변경 시 콜백",
+    },
+  },
 };
 
 export default meta;

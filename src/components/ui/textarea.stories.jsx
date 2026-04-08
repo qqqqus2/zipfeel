@@ -1,25 +1,56 @@
 import * as React from "react";
 import { Textarea, TextareaBox } from "./textarea";
 
+const TEXTAREA_DOC_PROPS = [
+  "placeholder",
+  "disabled",
+  "rows",
+  "readOnly",
+  "required",
+];
+
 const meta = {
   title: "UI/Textarea",
   component: Textarea,
   parameters: {
     layout: "centered",
+    controls: { include: TEXTAREA_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props
+
+- **placeholder** — 빈 상태 안내 문구.
+- **disabled** — 입력 비활성.
+- **rows** — 기본 보이는 줄 수.
+- **readOnly** — 읽기 전용.
+- **required** — 필수 필드 힌트.
+
+글자 수·라벨이 필요하면 스토리의 \`TextareaBox\` 조합을 사용하세요.`,
+      },
+      controls: { include: TEXTAREA_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
     placeholder: {
       control: "text",
-      description: "Placeholder 텍스트",
+      description: "placeholder",
     },
     disabled: {
       control: "boolean",
-      description: "비활성화 상태",
+      description: "비활성",
     },
     rows: {
-      control: { type: "number", min: 2, max: 12, step: 1 },
-      description: "rows 속성",
+      control: "number",
+      description: "표시 줄 수(rows)",
+    },
+    readOnly: {
+      control: "boolean",
+      description: "읽기 전용",
+    },
+    required: {
+      control: "boolean",
+      description: "필수 입력",
     },
   },
 };
@@ -72,8 +103,9 @@ export const SizingExamples = {
   ),
 };
 
-function CharacterLimitDemo() {
-  return (
+export const CharacterLimit = {
+  name: "글자수 제한",
+  render: () => (
     <div className="w-[min(100%,520px)] space-y-2">
       <TextareaBox placeholder="입력하세요" max={5000} label="항목명" />
       <TextareaBox
@@ -83,10 +115,5 @@ function CharacterLimitDemo() {
         className="mt-0"
       />
     </div>
-  );
-}
-
-export const CharacterLimit = {
-  name: "글자수 제한",
-  render: () => <CharacterLimitDemo />,
+  ),
 };

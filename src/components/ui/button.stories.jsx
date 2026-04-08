@@ -1,11 +1,35 @@
 import React from "react";
 import { Button } from "./button";
 import { Icon } from "./icon";
+
+const BUTTON_DOC_PROPS = [
+  "variant",
+  "size",
+  "asChild",
+  "disabled",
+  "children",
+];
+
 const meta = {
   title: "UI/Button",
   component: Button,
   parameters: {
     layout: "centered",
+    controls: { include: BUTTON_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props
+
+- **variant** — 배경·테두리·텍스트 색 등 시각 스타일. 시맨틱(\`default\`, \`destructive\`, \`outline\`, \`secondary\`, \`ghost\`, \`link\`)과 Figma 토큰(\`point1\`–\`point3\`, \`sub1\`–\`sub4\`, \`sub8\`), 포인트 테두리 \`oulinePoint1\` 등.
+- **size** — 높이·좌우 패딩·내부 아이콘 크기. \`default\`, \`sm\`, \`lg\`, 가로 전체 \`full\`, 정사각 아이콘 \`icon\` / \`iconSm\`.
+- **asChild** — \`true\`면 내용을 버튼 대신 **자식 한 요소**로 렌더(Radix Slot). 링크·커스텀 컴포넌트를 버튼 스타일로 쓸 때 사용.
+- **disabled** — 상호작용 불가, 비활성 스타일.
+- **children** — 라벨 텍스트, 아이콘, 혼합 콘텐츠.
+
+표준 \`button\` 속성(\`type\`, \`onClick\`, \`aria-*\` 등)은 그대로 전달됩니다.`,
+      },
+      controls: { include: BUTTON_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
@@ -15,6 +39,7 @@ const meta = {
         "default",
         "destructive",
         "outline",
+        "oulinePoint1",
         "secondary",
         "ghost",
         "link",
@@ -27,16 +52,24 @@ const meta = {
         "sub4",
         "sub8",
       ],
-      description: "버튼의 시각적 스타일",
+      description: "시각적 스타일(variant)",
     },
     size: {
       control: "select",
-      options: ["default", "sm", "lg", "icon"],
-      description: "버튼의 크기",
+      options: ["default", "sm", "lg", "full", "icon", "iconSm"],
+      description: "크기·패딩",
     },
     asChild: {
       control: "boolean",
-      description: "자식 요소로 렌더링할지 여부",
+      description: "true면 자식 단일 노드로 렌더(Slot)",
+    },
+    disabled: {
+      control: "boolean",
+      description: "비활성",
+    },
+    children: {
+      control: "text",
+      description: "버튼 텍스트·내용",
     },
   },
 };

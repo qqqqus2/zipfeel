@@ -4,11 +4,38 @@ import { toast } from "sonner";
 import { Button } from "./button";
 import { Toaster } from "./sonner";
 
+const SONNER_DOC_PROPS = [
+  "position",
+  "richColors",
+  "expand",
+  "visibleToasts",
+  "closeButton",
+  "duration",
+  "className",
+];
+
 const meta = {
   title: "UI/Sonner",
   component: Toaster,
   parameters: {
     layout: "centered",
+    controls: { include: SONNER_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props (Toaster)
+
+- **position** — 토스트가 뜨는 화면 모서리.
+- **richColors** — 성공·에러 등 시맨틱 색 강조.
+- **expand** — 호버 시 스택 확장 여부.
+- **visibleToasts** — 동시에 보이는 개수 상한.
+- **closeButton** — 닫기 버튼 표시.
+- **duration** — 자동 사라짐 시간(ms), \`Infinity\`면 유지.
+- **className** — 토스트 컨테이너에 추가 클래스.
+
+개별 알림은 \`toast()\` API로 띄웁니다.`,
+      },
+      controls: { include: SONNER_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
   decorators: [

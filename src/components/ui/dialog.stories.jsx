@@ -10,13 +10,41 @@ import {
   DialogTrigger,
 } from "./dialog";
 
+const DIALOG_DOC_PROPS = ["open", "onOpenChange", "defaultOpen", "modal"];
+
 const meta = {
   title: "UI/Dialog",
   component: Dialog,
   parameters: {
     layout: "centered",
+    controls: { include: DIALOG_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props (Dialog 루트)
+
+- **open** — 제어 모드에서 열림 여부.
+- **defaultOpen** — 비제어 모드 초기 열림.
+- **onOpenChange** — 열림 상태 변경 시 콜백.
+- **modal** — \`true\`면 포커스 트랩·배경 스크롤 차단 등 모달 동작.
+
+본문·트리거는 \`DialogTrigger\`, \`DialogContent\`, \`DialogHeader\` 등 조합으로 구성합니다.`,
+      },
+      controls: { include: DIALOG_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    open: { control: "boolean", description: "제어: 열림 여부" },
+    defaultOpen: { control: "boolean", description: "비제어: 초기 열림" },
+    onOpenChange: {
+      control: false,
+      description: "열림 상태 변경 시 콜백",
+    },
+    modal: {
+      control: "boolean",
+      description: "true면 모달(포커스 트랩·외부 스크롤 차단)",
+    },
+  },
 };
 
 export default meta;

@@ -1,25 +1,56 @@
 import { Input } from "./input";
 
+const INPUT_DOC_PROPS = [
+  "type",
+  "placeholder",
+  "disabled",
+  "required",
+  "readOnly",
+];
+
 const meta = {
   title: "UI/Input",
   component: Input,
   parameters: {
     layout: "centered",
+    controls: { include: INPUT_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props
+
+- **type** — \`text\`, \`email\`, \`password\`, \`number\`, \`tel\`, \`url\` 등 네이티브 input 타입.
+- **placeholder** — 입력 힌트 문구.
+- **disabled** — 포커스·입력 불가.
+- **required** — 폼 제출 시 브라우저·접근성 힌트용 필수 여부.
+- **readOnly** — 값은 보이지만 수정 불가.
+
+접두·접미 라벨 등 확장 props는 \`input.jsx\`·스토리 예시를 참고하세요.`,
+      },
+      controls: { include: INPUT_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
     type: {
       control: "select",
       options: ["text", "email", "password", "number", "tel", "url"],
-      description: "Input 타입",
+      description: "input type",
     },
     placeholder: {
       control: "text",
-      description: "Placeholder 텍스트",
+      description: "placeholder",
     },
     disabled: {
       control: "boolean",
-      description: "비활성화 상태",
+      description: "비활성",
+    },
+    required: {
+      control: "boolean",
+      description: "필수 입력(폼 검증 힌트)",
+    },
+    readOnly: {
+      control: "boolean",
+      description: "읽기 전용",
     },
   },
 };

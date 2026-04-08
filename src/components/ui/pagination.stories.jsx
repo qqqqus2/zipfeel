@@ -12,13 +12,32 @@ import {
   PaginationPrevious,
 } from "./pagination";
 
+const PAGINATION_DOC_PROPS = ["className"];
+
 const meta = {
   title: "UI/Pagination",
   component: Pagination,
   parameters: {
     layout: "centered",
+    controls: { include: PAGINATION_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props
+
+- **className** — \`<nav>\` 루트에 붙는 Tailwind·추가 클래스.
+
+페이지 링크·이전/다음 등은 \`PaginationContent\`, \`PaginationItem\`, \`PaginationLink\`, \`PaginationPrevious\` 등 하위 컴포넌트로 조합합니다.`,
+      },
+      controls: { include: PAGINATION_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    className: {
+      control: "text",
+      description: "루트 nav에 붙는 Tailwind·추가 클래스",
+    },
+  },
 };
 
 export default meta;
@@ -37,7 +56,7 @@ export const Default = {
           <PaginationLink href="#">1</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#" isActive>
+          <PaginationLink href="#" isActive={true}>
             2
           </PaginationLink>
         </PaginationItem>
@@ -69,7 +88,7 @@ export const WithEllipsis = {
           <PaginationLink href="#">1</PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink href="#" isActive>
+          <PaginationLink href="#" isActive={true}>
             2
           </PaginationLink>
         </PaginationItem>

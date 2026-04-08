@@ -1,12 +1,38 @@
 import React from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs";
 
+const TABS_DOC_PROPS = [
+  "defaultValue",
+  "value",
+  "onValueChange",
+  "orientation",
+  "variant",
+  "accentColor",
+  "dir",
+];
+
 const meta = {
   title: "UI/Tabs",
   component: Tabs,
   parameters: {
     // centered는 좁은 캔버스에서 탭·링이 가장자리에 붙어 잘린 것처럼 보이기 쉬움
     layout: "padded",
+    controls: { include: TABS_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props (Tabs 루트)
+
+- **defaultValue** — 비제어: 초기 활성 탭 \`value\`.
+- **value** — 제어: 현재 활성 탭.
+- **onValueChange** — 탭 전환 콜백.
+- **orientation** — 가로/세로 탭 방향.
+- **variant** / **accentColor** — 트리거·인디케이터 스타일 변형.
+- **dir** — RTL 등 문서 방향.
+
+목록·패널은 \`TabsList\`, \`TabsTrigger\`, \`TabsContent\`로 구성합니다.`,
+      },
+      controls: { include: TABS_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
 };

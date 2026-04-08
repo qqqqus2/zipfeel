@@ -2,41 +2,58 @@ import * as React from "react";
 import { Eye, Gem, History, Pencil } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
-import {
-  tableGridColumnSize,
-  TableGrid,
-  TableGridCell,
-  TableGridRow,
-} from "./table-grid";
-import {
-  DataTable,
-  ResponsiveTableCard,
-  ResponsiveTableLayout,
-  sortTableRows,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./table";
+import { TableGrid, TableGridCell, TableGridRow } from "./table-grid";
+import { DataTable, sortTableRows, Table } from "./table";
+
+const TABLE_DOC_PROPS = [
+  "sortable",
+  "sorting",
+  "onSortingChange",
+  "defaultSorting",
+];
 
 const meta = {
   title: "UI/Table",
   component: Table,
   parameters: {
     layout: "padded",
+    controls: { include: TABLE_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props (DataTable / Table)
+
+- **sortable** — 헤더 클릭 정렬 UI 사용 여부.
+- **sorting** — 제어: \`{ id: columnId, desc: boolean } | null\`.
+- **defaultSorting** — 비제어: 초기 정렬.
+- **onSortingChange** — 정렬 상태 변경 콜백.
+
+그리드형 복합 행은 \`TableGrid\` 스토리를 참고하세요.`,
+      },
+      controls: { include: TABLE_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    sortable: {
+      control: "boolean",
+      description: "헤더 정렬 UI 사용 여부",
+    },
+    sorting: {
+      control: false,
+      description: "제어: { id: sortKey, desc: boolean } | null",
+    },
+    defaultSorting: {
+      control: false,
+      description: "비제어: 초기 정렬 상태",
+    },
+    onSortingChange: {
+      control: false,
+      description: "정렬 변경 시 콜백",
+    },
+  },
 };
 
 export default meta;
-
-const splitDemoRows = [
-  { id: "001", role: "엑스트라", status: "초고", summary: "한줄 요약 텍스트" },
-  { id: "002", role: "주연", status: "완료", summary: "다른 요약" },
-  { id: "003", role: "조연", status: "대기", summary: "또 다른 요약" },
-];
 
 /** TableGrid 복합 행 예시 — 문자열 배열이 아니라 객체 + 셀 안에 JSX(버튼·다단 레이아웃) */
 const gridRichRows = [

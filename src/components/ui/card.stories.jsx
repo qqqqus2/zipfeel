@@ -1,4 +1,7 @@
 import * as React from "react";
+import { Glasses, Info, Tag } from "lucide-react";
+
+import { cn } from "@/lib/utils";
 import { Button } from "./button";
 import {
   Card,
@@ -9,16 +12,108 @@ import {
   CardTitle,
 } from "./card";
 
+const CARD_DOC_PROPS = ["variant"];
+
 const meta = {
   title: "UI/Card",
   component: Card,
   parameters: {
     layout: "centered",
+    controls: { include: CARD_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props
+
+- **variant** — \`default\`, \`hover\`, \`active\`, \`filled\`, \`disabled\` 등 카드 시각 상태.
+
+헤더·본문·푸터는 \`CardHeader\`, \`CardTitle\`, \`CardDescription\`, \`CardContent\`, \`CardFooter\`로 나눕니다.`,
+      },
+      controls: { include: CARD_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    variant: {
+      control: "select",
+      options: ["default", "hover", "active", "filled", "disabled"],
+      description: "카드 시각 상태(variant)",
+    },
+  },
 };
 
 export default meta;
+
+/** 설정 카드형 UI — `variant`: default · hover(고정) · active · filled(값 있음) · disabled */
+function ColumnSettingCard({ variant, description }) {
+  return (
+    <Card variant={variant} className="w-full max-w-md">
+      <div className="flex items-start justify-between gap-3">
+        <div className="min-w-0 flex-1 space-y-1">
+          <div className="flex items-center gap-1">
+            <CardTitle className="text-sm font-semibold">컬럼명</CardTitle>
+            <button
+              type="button"
+              className={cn(
+                "inline-flex size-5 items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none",
+                variant === "active"
+                  ? "text-white/80 hover:text-white"
+                  : "text-gray-4 hover:text-gray-6",
+              )}
+              aria-label="도움말"
+            >
+              <Info className="size-3.5" strokeWidth={2} aria-hidden />
+            </button>
+          </div>
+          <CardDescription className="text-xs leading-snug">
+            {description}
+          </CardDescription>
+        </div>
+        <div className="shrink-0 pt-0.5">
+          {variant === "hover" ? (
+            <span
+              className="inline-flex size-9 items-center justify-center rounded-full bg-point-2 text-white shadow-sm"
+              aria-hidden
+            >
+              <Glasses className="size-4" strokeWidth={2} />
+            </span>
+          ) : null}
+          {variant === "active" ? (
+            <span
+              className="inline-flex size-9 items-center justify-center rounded-full bg-black/25 text-white shadow-inner"
+              aria-hidden
+            >
+              <Glasses className="size-4" strokeWidth={2} />
+            </span>
+          ) : null}
+          {variant === "default" || variant === "filled" || variant === "disabled" ? (
+            <Tag
+              className={cn(
+                "size-9",
+                variant === "filled" ? "text-gray-6" : "text-gray-4",
+              )}
+              strokeWidth={1.75}
+              aria-hidden
+            />
+          ) : null}
+        </div>
+      </div>
+    </Card>
+  );
+}
+
+export const VariantsColumnStyle = {
+  name: "Variants (컬럼 설정 카드)",
+  render: () => (
+    <div className="flex w-full max-w-md flex-col gap-4">
+      <ColumnSettingCard variant="default" description="설정 안함" />
+      <ColumnSettingCard variant="hover" description="설정 안함" />
+      <ColumnSettingCard variant="active" description="설정 안함" />
+      <ColumnSettingCard variant="filled" description="일이삼사오육칠팔구십…" />
+      <ColumnSettingCard variant="disabled" description="일이삼사오육칠팔구십…" />
+    </div>
+  ),
+  parameters: { layout: "padded" },
+};
 
 /** 헤더·본문·푸터를 모두 쓰는 기본 패턴 */
 export const Default = {

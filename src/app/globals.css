@@ -151,7 +151,7 @@
   }
 
   body {
-    background-color: var(--color-background);
+    background-color: var(--color-gray-1);
     color: var(--color-foreground);
   }
 }

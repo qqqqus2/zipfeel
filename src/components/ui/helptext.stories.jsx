@@ -3,20 +3,35 @@ import React from "react";
 import { HelpText } from "./helptext";
 import { Icon } from "./icon";
 
+const HELPTEXT_DOC_PROPS = ["variant", "children", "icon"];
+
 const meta = {
   title: "UI/HelpText",
   component: HelpText,
   parameters: {
     layout: "centered",
+    controls: { include: HELPTEXT_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props
+
+- **variant** — \`default\`, \`primary\`, \`positive\`, \`negative\`, \`info\` 등 톤·아이콘 기본값.
+- **children** — 본문 설명 텍스트.
+- **icon** — 아이콘 노드 직접 전달 또는 \`null\`로 기본 아이콘 숨김.`,
+      },
+      controls: { include: HELPTEXT_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
   argTypes: {
     variant: {
       control: "select",
-      options: ["default", "positive", "negative", "info"],
+      options: ["default", "primary", "positive", "negative", "info"],
+      description: "색·아이콘 톤",
     },
     children: {
       control: "text",
+      description: "본문 텍스트",
     },
     icon: {
       control: false,
@@ -88,4 +103,3 @@ export const WithLongText = {
     </div>
   ),
 };
-

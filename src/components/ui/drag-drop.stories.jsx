@@ -3,13 +3,45 @@
 import * as React from "react";
 import { DragDropBoard } from "./drag-drop";
 
+const DRAG_DROP_DOC_PROPS = [
+  "containers",
+  "onContainersChange",
+  "className",
+];
+
 const meta = {
   title: "UI/DragDrop",
   component: DragDropBoard,
   parameters: {
     layout: "padded",
+    controls: { include: DRAG_DROP_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props
+
+- **containers** — 칸반 컬럼 배열: \`{ id, title, description?, items: [{ id, title, ... }] }\`.
+- **onContainersChange** — 드래그 앤 드롭 후 다음 상태로 갱신하는 콜백.
+- **className** — 보드 루트 \`className\`.`,
+      },
+      controls: { include: DRAG_DROP_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
+  argTypes: {
+    containers: {
+      control: false,
+      description:
+        "칸반 컬럼 배열: { id, title, description?, items: [{ id, title, ... }] }",
+    },
+    onContainersChange: {
+      control: false,
+      description: "드래그 후 다음 상태로 갱신",
+    },
+    className: {
+      control: "text",
+      description: "보드 루트 className",
+    },
+  },
 };
 
 export default meta;
@@ -49,7 +81,10 @@ function BoardStory() {
 
   return (
     <div className="min-h-[60vh]">
-      <DragDropBoard containers={containers} onContainersChange={setContainers} />
+      <DragDropBoard
+        containers={containers}
+        onContainersChange={setContainers}
+      />
     </div>
   );
 }
@@ -83,7 +118,8 @@ function SingleColumnLikeImageStory() {
         { id: "i-5", title: "Drag & Drop 시 번호는 자동으로 변경", meta: "" },
         {
           id: "i-6",
-          title: "요금제별로 신규 추가 가능 건 수 다름: 무료 3 / 유료 10 / 센서 30",
+          title:
+            "요금제별로 신규 추가 가능 건 수 다름: 무료 3 / 유료 10 / 센서 30",
           meta: "",
         },
       ],
@@ -91,8 +127,11 @@ function SingleColumnLikeImageStory() {
   ]);
 
   return (
-    <div className="mx-auto w-full max-w-md py-8">
-      <DragDropBoard containers={containers} onContainersChange={setContainers} />
+    <div className="mx-auto w-full max-w-lg py-8">
+      <DragDropBoard
+        containers={containers}
+        onContainersChange={setContainers}
+      />
     </div>
   );
 }

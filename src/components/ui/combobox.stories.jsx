@@ -21,6 +21,19 @@ const frameworks = [
   { value: "astro", label: "Astro" },
 ];
 
+const COMBO_DOC_PROPS = [
+  "options",
+  "onSelect",
+  "prefixLabel",
+  "suffixLabel",
+  "open",
+  "onOpenChange",
+  "commandPlaceholder",
+  "disabled",
+  "type",
+  "emptyMessage",
+];
+
 function ComboboxDemo() {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState("");
@@ -280,9 +293,25 @@ function ComboboxLargeListDemo() {
 
 const meta = {
   title: "UI/Combobox",
-  component: ComboboxDemo,
+  component: Combobox,
   parameters: {
     layout: "centered",
+    controls: { include: COMBO_DOC_PROPS },
+    docs: {
+      description: {
+        component: `### 주요 props
+
+- **options** — 선택 가능한 항목 목록(구조는 컴포넌트 타입 정의 참고).
+- **onSelect** — 항목 선택 시 콜백.
+- **prefixLabel** / **suffixLabel** — 입력 행 앞·뒤 보조 텍스트.
+- **open** / **onOpenChange** — 목록 패널 열림 제어.
+- **commandPlaceholder** — 검색/명령 입력 placeholder.
+- **disabled** — 전체 비활성.
+- **type** — 입력 필드 \`type\`(예: \`text\`, \`search\`).
+- **emptyMessage** — 필터 결과 없을 때 문구.`,
+      },
+      controls: { include: COMBO_DOC_PROPS },
+    },
   },
   tags: ["autodocs"],
 };
