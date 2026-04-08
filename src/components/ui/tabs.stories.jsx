@@ -5,7 +5,8 @@ const meta = {
   title: "UI/Tabs",
   component: Tabs,
   parameters: {
-    layout: "centered",
+    // centered는 좁은 캔버스에서 탭·링이 가장자리에 붙어 잘린 것처럼 보이기 쉬움
+    layout: "padded",
   },
   tags: ["autodocs"],
 };
@@ -22,6 +23,10 @@ export const Default = {
             Disabled
           </TabsTrigger>
           <TabsTrigger value="tab3">Enabled</TabsTrigger>
+          <TabsTrigger value="home">Home</TabsTrigger>
+          <TabsTrigger value="profile">Profile</TabsTrigger>
+          <TabsTrigger value="settings">Settings</TabsTrigger>
+          <TabsTrigger value="help">Help</TabsTrigger>
         </TabsList>
         <TabsContent value="tab1">
           <div className="p-4 border rounded-md">
@@ -75,6 +80,18 @@ export const FullWidth = {
         <TabsTrigger value="help" className="flex-1">
           Help
         </TabsTrigger>
+        <TabsTrigger value="home2" className="flex-1">
+          Home
+        </TabsTrigger>
+        <TabsTrigger value="profile2" className="flex-1">
+          Profile
+        </TabsTrigger>
+        <TabsTrigger value="settings2" className="flex-1">
+          Settings
+        </TabsTrigger>
+        <TabsTrigger value="help2" className="flex-1">
+          Help
+        </TabsTrigger>
       </TabsList>
       <TabsContent value="home">
         <div className="p-4 border rounded-md">
@@ -101,6 +118,36 @@ export const FullWidth = {
         </div>
       </TabsContent>
       <TabsContent value="help">
+        <div className="p-4 border rounded-md">
+          <h3 className="font-semibold mb-2">Help</h3>
+          <p className="text-sm text-muted-foreground">Get help and support.</p>
+        </div>
+      </TabsContent>
+      <TabsContent value="home2">
+        <div className="p-4 border rounded-md">
+          <h3 className="font-semibold mb-2">Home</h3>
+          <p className="text-sm text-muted-foreground">
+            Welcome to your home page.
+          </p>
+        </div>
+      </TabsContent>
+      <TabsContent value="profile2">
+        <div className="p-4 border rounded-md">
+          <h3 className="font-semibold mb-2">Profile</h3>
+          <p className="text-sm text-muted-foreground">
+            Manage your profile information.
+          </p>
+        </div>
+      </TabsContent>
+      <TabsContent value="settings2">
+        <div className="p-4 border rounded-md">
+          <h3 className="font-semibold mb-2">Settings</h3>
+          <p className="text-sm text-muted-foreground">
+            Configure your preferences.
+          </p>
+        </div>
+      </TabsContent>
+      <TabsContent value="help2">
         <div className="p-4 border rounded-md">
           <h3 className="font-semibold mb-2">Help</h3>
           <p className="text-sm text-muted-foreground">Get help and support.</p>

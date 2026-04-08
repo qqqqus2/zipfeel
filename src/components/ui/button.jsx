@@ -16,7 +16,7 @@ const buttonVariants = cva(
         outline:
           "border border-input bg-background shadow-sm hover:bg-accent hover:text-accent-foreground aria-invalid:border-destructive aria-invalid:ring-1 aria-invalid:ring-destructive/40",
         oulinePoint1:
-          "border border-point-1 text-point-1 bg-transparent hover:text-white hover:bg-point-2 hover:border-point-2 active:text-white active:bg-point-1 active:border-point-1 disabled:bg-transparent disabeld:text-point-3",
+          "border border-point-1 text-point-1 bg-transparent hover:text-white hover:bg-point-2 hover:border-point-2 active:text-white active:bg-point-1 active:border-point-1 disabled:bg-transparent disabled:text-point-3",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",

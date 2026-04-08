@@ -40,7 +40,7 @@ Pagination.displayName = "Pagination";
 const PaginationContent = React.forwardRef(({ className, ...props }, ref) => (
   <ul
     ref={ref}
-    className={cn("flex flex-row items-center gap-1", className)}
+    className={cn("flex flex-row flex-wrap items-center justify-center gap-1 sm:gap-2", className)}
     {...props}
   />
 ));
@@ -61,7 +61,7 @@ const PaginationLink = ({ className, isActive, size = "icon", ...props }) => (
       }),
       // 밑줄은 border 대신 ::after (클릭 시 두께 변화로 들썩이지 않음). 아래 여백은 고정 pb만 사용.
       "relative rounded-none border-0 bg-transparent pb-[3px] shadow-none",
-      "text-gray-6",
+      "text-xs text-gray-6 sm:text-sm",
       "[&_svg]:shrink-0 [&_svg]:text-current",
       "hover:font-bold hover:bg-transparent hover:text-point-2",
       "after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:content-[''] after:opacity-0 after:transition-[opacity,background-color]",

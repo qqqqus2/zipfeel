@@ -1,19 +1,21 @@
 import * as React from "react";
-import { useState } from "react";
-import {
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { ArrowDown, ArrowUp, ChevronsUpDown } from "lucide-react";
+import { Eye, Gem, History, Pencil } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "./button";
 import {
+  tableGridColumnSize,
+  TableGrid,
+  TableGridCell,
+  TableGridRow,
+} from "./table-grid";
+import {
+  DataTable,
+  ResponsiveTableCard,
+  ResponsiveTableLayout,
+  sortTableRows,
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -30,301 +32,294 @@ const meta = {
 
 export default meta;
 
-function SortIcon({ direction }) {
-  if (direction === "asc") return <ArrowUp className="ml-2 size-4" />;
-  if (direction === "desc") return <ArrowDown className="ml-2 size-4" />;
-  return <ChevronsUpDown className="ml-2 size-4 opacity-70" />;
-}
-
-const invoices = [
-  { id: "001", status: "Paid", method: "Card", amount: "$250.00" },
-  { id: "002", status: "Pending", method: "PayPal", amount: "$120.00" },
-  { id: "003", status: "Unpaid", method: "Bank", amount: "$350.00" },
+const splitDemoRows = [
+  { id: "001", role: "엑스트라", status: "초고", summary: "한줄 요약 텍스트" },
+  { id: "002", role: "주연", status: "완료", summary: "다른 요약" },
+  { id: "003", role: "조연", status: "대기", summary: "또 다른 요약" },
 ];
 
-export const Default = {
-  render: () => (
-    <div className="w-full max-w-3xl">
-      <Table>
-        <TableCaption>A list of recent invoices.</TableCaption>
-        <TableHeader>
-          <TableRow>
-            <TableHead className="w-[100px]">Invoice</TableHead>
-            <TableHead>Status</TableHead>
-            <TableHead>Method</TableHead>
-            <TableHead className="text-right">Amount</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {invoices.map((row) => (
-            <TableRow key={row.id}>
-              <TableCell className="font-medium">{row.id}</TableCell>
-              <TableCell>{row.status}</TableCell>
-              <TableCell>{row.method}</TableCell>
-              <TableCell className="text-right">{row.amount}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
-  ),
-};
-
-export const WithFooter = {
-  render: () => (
-    <div className="w-full max-w-3xl">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>Item</TableHead>
-            <TableHead className="text-right">Qty</TableHead>
-            <TableHead className="text-right">Price</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          <TableRow>
-            <TableCell>Notebook</TableCell>
-            <TableCell className="text-right">2</TableCell>
-            <TableCell className="text-right">$12.00</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell>Pen</TableCell>
-            <TableCell className="text-right">5</TableCell>
-            <TableCell className="text-right">$7.50</TableCell>
-          </TableRow>
-        </TableBody>
-        <TableFooter>
-          <TableRow>
-            <TableCell colSpan={2}>Total</TableCell>
-            <TableCell className="text-right">$19.50</TableCell>
-          </TableRow>
-        </TableFooter>
-      </Table>
-    </div>
-  ),
-};
-
-export const NoData = {
-  render: () => (
-    <div className="w-full max-w-3xl">
-      <Table>
-        <TableBody>
-          <TableRow>
-            <TableCell colSpan={4}>No data</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </div>
-  ),
-};
-
-export const StripedRows = {
-  render: () => (
-    <div className="w-full max-w-3xl">
-      <Table>
-        <TableHeader>
-          <TableRow className="bg-muted/50 hover:bg-muted/50">
-            <TableHead className="w-16">No.</TableHead>
-            <TableHead>구분</TableHead>
-            <TableHead>상태</TableHead>
-            <TableHead>이름</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {[1, 2, 3, 4, 5].map((i) => (
-            <TableRow
-              key={i}
-              className={
-                i % 2 === 0 ? "bg-muted/30 hover:bg-muted/40" : undefined
-              }
-            >
-              <TableCell className="text-muted-foreground">3456</TableCell>
-              <TableCell>엑스트라</TableCell>
-              <TableCell>일이</TableCell>
-              <TableCell>
-                <div className="flex flex-col gap-0.5">
-                  <span className="text-xs text-muted-foreground">
-                    호칭 · 애칭
-                  </span>
-                  <span className="font-medium">이름 텍스트가 길 때…</span>
-                </div>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
-  ),
-};
-
-/* ─── TanStack Table + 정렬 (shadcn Data Table 문서와 동일한 흐름) ─── */
-
-const paymentData = [
+/** TableGrid 복합 행 예시 — 문자열 배열이 아니라 객체 + 셀 안에 JSX(버튼·다단 레이아웃) */
+const gridRichRows = [
   {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@example.com",
+    id: "3456",
+    role: "엑스트라",
+    status: "일이",
+    metaLines: [
+      { label: "호칭", text: "일이삼사오육칠팔구십" },
+      { label: "애칭", text: "일이삼사오육칠팔구십" },
+    ],
+    title:
+      "이름 텍스트가 길 때 이름 텍스트가 길 때… 이름 텍스트가 길 때 이름 텍스트가 길 때… 이름 텍스트가 길 때 이름 텍스트가 길 때…",
+    summary: "한줄 요약 (최대 30자)",
   },
   {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@example.com",
+    id: "2345",
+    role: "엑스트라",
+    status: "일이",
+    metaLines: [{ label: "호칭", text: "일이삼사오육칠팔구십" }],
+    title: "다른 제목이 매우 길 때 줄임표로 처리합니다…",
+    summary: "요약 한 줄",
   },
   {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@example.com",
+    id: "4567",
+    role: "주연",
+    status: "완료",
+    metaLines: [
+      { label: "호칭", text: "일이삼사" },
+      { label: "애칭", text: "오육칠팔" },
+    ],
+    title: "제목 텍스트",
+    summary: "최대 30자 요약 예시",
   },
   {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@example.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@example.com",
+    id: "8901",
+    role: "조연",
+    status: "대기",
+    metaLines: [{ label: "호칭", text: "일이삼사오육칠팔구십일이삼사" }],
+    title: "네 번째 행 제목입니다…",
+    summary: "한줄 요약 (최대 30자)",
   },
 ];
 
-const paymentColumns = [
+const defaultStoryRows = [
+  { id: "003", role: "엑스트라", status: "일이" },
+  { id: "001", role: "엑스트라", status: "일이" },
+  { id: "002", role: "엑스트라", status: "일이" },
+  { id: "004", role: "엑스트라", status: "일이" },
+  { id: "005", role: "엑스트라", status: "일이" },
+];
+
+/**
+ * TableGrid — `headerAlign` / `sortAlign`: `left` | `center` | `right`
+ * `mobileClassName`: `max-md`에서 행이 flex-wrap 카드가 될 때 셀 `order`·너비로 첫 줄 2칸 등 배치
+ */
+const gridStep1Columns = [
   {
-    accessorKey: "status",
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        className="-ml-3 h-8 hover:bg-transparent"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        Status
-        <SortIcon direction={column.getIsSorted()} />
-      </Button>
-    ),
-    cell: ({ row }) => (
-      <span className="capitalize">{row.getValue("status")}</span>
-    ),
+    key: "id",
+    header: "No.",
+    size: "w-[80px]",
+    sortAlign: "left",
+    mobileClassName:
+      "max-md:order-3 max-md:w-full max-md:justify-start max-md:pt-1",
   },
   {
-    accessorKey: "email",
-    header: ({ column }) => (
-      <Button
-        variant="ghost"
-        className="-ml-3 h-8 hover:bg-transparent"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-      >
-        Email
-        <SortIcon direction={column.getIsSorted()} />
-      </Button>
-    ),
-    cell: ({ row }) => (
-      <span className="lowercase">{row.getValue("email")}</span>
-    ),
+    key: "role",
+    header: "구분",
+    size: "w-[80px]",
+    mobileClassName:
+      "max-md:order-1 max-md:w-[calc(50%-4px)] max-md:shrink-0 max-md:justify-start max-md:font-semibold",
   },
   {
-    accessorKey: "amount",
-    header: ({ column }) => (
-      <div className="text-right">
-        <Button
-          variant="ghost"
-          className="-mr-3 h-8 hover:bg-transparent"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Amount
-          <SortIcon direction={column.getIsSorted()} />
-        </Button>
+    key: "status",
+    header: "상태",
+    size: "w-[80px]",
+    headerAlign: "left",
+    mobileClassName:
+      "max-md:order-2 max-md:flex max-md:w-[calc(50%-4px)] max-md:shrink-0 max-md:justify-end max-md:text-sm max-md:text-muted-foreground",
+  },
+  {
+    key: "name",
+    header: "긴 헤더 텍스트",
+    size: "fill",
+    sortable: false,
+    headerAlign: "left",
+    mobileClassName: "max-md:order-4 max-md:w-full max-md:p-0",
+  },
+];
+
+const sortDemoColumns = [
+  {
+    key: "id",
+    header: "No.",
+    className: "w-20",
+    sortAlign: "start",
+    cellClassName: "text-muted-foreground",
+  },
+  { key: "role", header: "구분", className: "w-18" },
+  {
+    key: "status",
+    header: "상태",
+    className: "w-18",
+    cellClassName: "text-center",
+  },
+  {
+    key: "name",
+    header: "이름",
+    sortable: false,
+    render: () => (
+      <div className="flex items-center justify-between gap-1">
+        <div className="flex flex-col gap-0.5">
+          <div className="flex flex-wrap items-center gap-1 [&>p+p]:before:inline-block [&>p+p]:before:shrink-0 [&>p+p]:before:text-muted-foreground [&>p+p]:before:content-['·']">
+            <p className="m-0 flex items-center gap-1">
+              <span className="font-bold">호칭</span>
+              <span>일이삼사오육칠팔구십</span>
+            </p>
+            <p className="m-0 flex items-center gap-1">
+              <span className="font-bold">호칭</span>
+              <span>일이삼사오육칠팔구십</span>
+            </p>
+            <p className="m-0 flex items-center gap-1">
+              <span className="font-bold">호칭</span>
+              <span>일이삼사오육칠팔구십</span>
+            </p>
+          </div>
+          <p className="max-w-lg truncate font-medium">
+            이름 텍스트가 길 때 이름 텍스트가 길 때…
+          </p>
+          <p className="max-w-lg truncate text-xs">한줄 요약 (최대 30자)</p>
+        </div>
+        <div className="flex items-center justify-center gap-1">
+          <Button type="button" variant="ghost" size="sm">
+            <Eye className="size-4" />
+            보기
+          </Button>
+          <Button type="button" variant="ghost" size="sm">
+            <Eye className="size-4" />
+            보기
+          </Button>
+          <Button type="button" variant="ghost" size="sm">
+            <Eye className="size-4" />
+            보기
+          </Button>
+        </div>
       </div>
     ),
-    cell: ({ row }) => {
-      const amount = Number(row.getValue("amount"));
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount);
-      return <div className="text-right font-medium">{formatted}</div>;
-    },
   },
 ];
 
-function DataTableSortableExample() {
-  const [sorting, setSorting] = useState([]);
-
-  const table = useReactTable({
-    data: paymentData,
-    columns: paymentColumns,
-    state: { sorting },
-    onSortingChange: setSorting,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-  });
-
+function GridRichDetailCell({ row }) {
+  const lastMetaIndex = Math.max(0, (row.metaLines?.length ?? 0) - 1);
   return (
-    <div className="w-full max-w-3xl">
-      <p className="mb-2 text-sm text-muted-foreground">
-        헤더의 Status / Email / Amount 를 누르면 정렬됩니다. (
-        <a
-          className="underline underline-offset-4"
-          href="https://ui.shadcn.com/docs/components/base/data-table"
-          target="_blank"
-          rel="noreferrer"
-        >
-          shadcn Data Table
-        </a>
-        의 getSortedRowModel 패턴)
-      </p>
-      <div className="overflow-hidden rounded-md border">
-        <Table>
-          <TableHeader>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
-                    {header.isPlaceholder
-                      ? null
-                      : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext(),
-                        )}
-                  </TableHead>
-                ))}
-              </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow key={row.id}>
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext(),
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={paymentColumns.length}
-                  className="h-24 text-center"
+    <div className="flex min-w-0 flex-1 flex-col gap-2 py-1 md:flex-row md:items-center md:justify-between md:gap-2">
+      <div className="flex min-w-0 flex-col gap-0.5">
+        <div className="flex min-w-0 flex-nowrap items-center gap-x-1 text-xs text-muted-foreground">
+          {row.metaLines.map((line, i) => (
+            <React.Fragment key={`${i}-${line.label}`}>
+              {i > 0 ? (
+                <span className="shrink-0 text-muted-foreground" aria-hidden>
+                  ·
+                </span>
+              ) : null}
+              <p
+                className={cn(
+                  "m-0 flex items-center gap-1",
+                  i === lastMetaIndex && "min-w-0 flex-1",
+                )}
+              >
+                <span className="shrink-0 font-bold text-foreground">
+                  {line.label}
+                </span>
+                <span
+                  className={cn(
+                    i === lastMetaIndex ? "min-w-0 truncate" : "shrink-0",
+                  )}
                 >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+                  {line.text}
+                </span>
+              </p>
+            </React.Fragment>
+          ))}
+        </div>
+        <p className="m-0 min-w-0 text-sm font-bold max-md:whitespace-normal max-md:break-words md:truncate">
+          {row.title}
+        </p>
+        <p className="m-0 min-w-0 text-xs text-muted-foreground max-md:whitespace-normal max-md:break-words md:truncate">
+          {row.summary}
+        </p>
+      </div>
+      <div className="hidden shrink-0 items-center gap-0.5 md:flex">
+        <Button type="button" variant="ghost" size="iconSm" aria-label="강조">
+          <Gem className="size-4" />
+        </Button>
+        <Button type="button" variant="ghost" size="iconSm" aria-label="수정">
+          <Pencil className="size-4" />
+        </Button>
+        <Button type="button" variant="ghost" size="iconSm" aria-label="보기">
+          <Eye className="size-4" />
+        </Button>
+      </div>
+      <div className="flex w-full flex-wrap items-center justify-between gap-x-1 gap-y-2 md:hidden">
+        <Button type="button" variant="ghost" size="sm">
+          <Eye className="size-4" />
+          보기
+        </Button>
+        <Button type="button" variant="ghost" size="sm">
+          <History className="size-4" />
+          과거 이력
+        </Button>
+        <Button type="button" variant="ghost" size="sm">
+          <Gem className="size-4" />
+          수정
+        </Button>
       </div>
     </div>
   );
 }
 
-export const DataTableWithSorting = {
-  render: () => <DataTableSortableExample />,
+function TableStoriesDemo() {
+  const [gridSorting, setGridSorting] = React.useState(null);
+  const gridSortedRows = React.useMemo(
+    () => sortTableRows(gridRichRows, gridSorting),
+    [gridSorting],
+  );
+
+  return (
+    <div className="mx-auto flex max-w-3xl flex-col gap-14 py-2">
+      <section className="space-y-2">
+        <h3 className="text-sm font-semibold text-foreground">
+          <code className="font-normal text-muted-foreground">DataTable</code> —
+          data · columns · sortable · striped · bordered
+        </h3>
+        <p className="text-sm text-muted-foreground">
+          복잡한 셀만 <code>render</code>로 넘기면 됩니다. 정렬은 내부 상태(또는{" "}
+          <code>sorting</code> / <code>onSortingChange</code>로 제어).
+        </p>
+        <DataTable
+          data={defaultStoryRows}
+          columns={sortDemoColumns}
+          sortable
+          striped
+        />
+      </section>
+
+      <section className="space-y-2">
+        <TableGrid
+          columns={gridStep1Columns}
+          striped
+          sortable
+          sorting={gridSorting}
+          onSortingChange={setGridSorting}
+        >
+          {gridSortedRows.map((row) => (
+            <TableGridRow key={row.id} value={row.id}>
+              <TableGridCell
+                columnKey="id"
+                className="text-muted-foreground tabular-nums"
+              >
+                <span className="flex items-start gap-2 md:contents">
+                  <span className="hidden text-xs font-medium text-muted-foreground max-md:inline-block max-md:[writing-mode:vertical-rl] max-md:leading-tight">
+                    회차
+                  </span>
+                  <span className="md:tabular-nums">{row.id}</span>
+                </span>
+              </TableGridCell>
+              <TableGridCell columnKey="role" className="justify-center">
+                {row.role}
+              </TableGridCell>
+              <TableGridCell columnKey="status" className="justify-center">
+                {row.status}
+              </TableGridCell>
+              <TableGridCell columnKey="name" className="min-w-0">
+                <GridRichDetailCell row={row} />
+              </TableGridCell>
+            </TableGridRow>
+          ))}
+        </TableGrid>
+      </section>
+    </div>
+  );
+}
+
+export const Default = {
+  render: () => <TableStoriesDemo />,
 };

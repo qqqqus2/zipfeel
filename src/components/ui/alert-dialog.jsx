@@ -164,7 +164,7 @@ const AlertDialogHeader = ({ className, ...props }) => {
     <div
       className={cn(
         "flex flex-col gap-4 space-y-2 text-center sm:text-left",
-        showCornerArt,
+        showCornerArt && "sm:pr-[4rem]",
         className,
       )}
       {...props}
@@ -176,7 +176,12 @@ AlertDialogHeader.displayName = "AlertDialogHeader";
 /** 헤더와 푸터 사이 입력·설명 등 — 코너와 겹칠 때 `AlertDialogHeader`와 동일 우측 패딩 */
 const AlertDialogBody = ({ className, ...props }) => {
   const { showCornerArt } = React.useContext(AlertDialogChromeContext);
-  return <div className={cn(showCornerArt, className)} {...props} />;
+  return (
+    <div
+      className={cn(showCornerArt && "sm:pr-[4rem]", className)}
+      {...props}
+    />
+  );
 };
 AlertDialogBody.displayName = "AlertDialogBody";
 

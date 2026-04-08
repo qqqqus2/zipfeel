@@ -90,6 +90,126 @@ function useTabIndicatorPosition(listRef, enabled) {
   }, [enabled, listRef]);
 }
 
+/**
+ * 가로 탭이 많을 때 활성 트리거를 리스트 가로 **중앙**에 오도록 스크롤.
+ * - `scrollIntoView({ inline: "nearest" })`는 이미 보이는 탭에서는 거의 안 움직여서 미적용처럼 보임.
+ * - 스크롤 컨테이너는 TabsList 루트(`listRef`)로 고정해 window 스크롤에 의존하지 않음.
+ */
+function useScrollActiveTabIntoView(listRef, enabled) {
+  React.useLayoutEffect(() => {
+    if (!enabled) return;
+
+    const list = listRef.current;
+    if (!list) return;
+
+    let raf1 = 0;
+    let raf2 = 0;
+    let didMountScroll = false;
+
+    const applyScroll = () => {
+      const active = list.querySelector('[role="tab"][data-state="active"]');
+      if (!active || !list.contains(active)) return;
+
+      const reduceMotion =
+        typeof window !== "undefined" &&
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const useInstant = !didMountScroll || reduceMotion;
+      didMountScroll = true;
+
+      const behavior = useInstant ? "auto" : "smooth";
+
+      const maxScroll = list.scrollWidth - list.clientWidth;
+      if (maxScroll <= 0) return;
+
+      // offsetLeft는 flex·중첩 시 스크롤 박스와 불일치할 수 있음 → 뷰포트 기준 보정
+      const listRect = list.getBoundingClientRect();
+      const activeRect = active.getBoundingClientRect();
+      const activeMid = activeRect.left + activeRect.width / 2;
+      const listMid = listRect.left + listRect.width / 2;
+      const delta = activeMid - listMid;
+
+      const nextRaw = list.scrollLeft + delta;
+      const next = Math.min(maxScroll, Math.max(0, nextRaw));
+
+      list.scrollTo({ left: next, behavior });
+    };
+
+    const run = () => {
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+      raf1 = requestAnimationFrame(() => {
+        raf2 = requestAnimationFrame(applyScroll);
+      });
+    };
+
+    run();
+
+    const mo = new MutationObserver(run);
+    mo.observe(list, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["data-state"],
+    });
+
+    return () => {
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+      mo.disconnect();
+    };
+  }, [enabled, listRef]);
+}
+
+/** 가로 스크롤이 있을 때만, 끝이 아닌 쪽에만 가장자리 그라데이션 표시 */
+function useTabListEdgeFades(listRef, enabled) {
+  const [edges, setEdges] = React.useState({ left: false, right: false });
+
+  const update = React.useCallback(() => {
+    const el = listRef.current;
+    if (!el || !enabled) {
+      setEdges({ left: false, right: false });
+      return;
+    }
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    const maxScroll = scrollWidth - clientWidth;
+    const eps = 1;
+    if (maxScroll <= eps) {
+      setEdges({ left: false, right: false });
+      return;
+    }
+    setEdges({
+      left: scrollLeft > eps,
+      right: scrollLeft < maxScroll - eps,
+    });
+  }, [enabled, listRef]);
+
+  React.useLayoutEffect(() => {
+    if (!enabled) return;
+    const el = listRef.current;
+    if (!el) return;
+
+    update();
+
+    el.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+
+    const mo = new MutationObserver(update);
+    mo.observe(el, { subtree: true, childList: true });
+
+    return () => {
+      el.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+      ro.disconnect();
+      mo.disconnect();
+    };
+  }, [enabled, listRef, update]);
+
+  return edges;
+}
+
 function UnderlineTabIndicatorLayer() {
   return (
     <div
@@ -134,13 +254,27 @@ const tabsListSolidRoundedShellClassName = cn(
   "group-data-[variant=solidRounded]/tabs:after:rounded-l-full",
 );
 
+/** 가로 스크롤은 유지하되 스크롤바 트랙은 숨김(터치·트랙패드·shift+휠로 스크롤 가능) */
+const tabsListHorizontalScrollClassName = cn(
+  "group-data-[orientation=horizontal]/tabs:overflow-x-auto",
+  "group-data-[orientation=horizontal]/tabs:overflow-y-hidden",
+  "group-data-[orientation=horizontal]/tabs:[scrollbar-width:none]",
+  "group-data-[orientation=horizontal]/tabs:[-ms-overflow-style:none]",
+  "group-data-[orientation=horizontal]/tabs:[&::-webkit-scrollbar]:hidden",
+);
+
 const tabsListBaseClassName = cn(
-  "relative inline-flex items-center justify-center text-muted-foreground",
+  // 가로 넘침 + justify-center 조합은 스크롤 시작(left)이 잘려 scrollLeft=0에서도 왼쪽이 안 보임
+  "relative inline-flex items-center justify-start text-muted-foreground",
+  "max-w-full min-w-0",
+  tabsListHorizontalScrollClassName,
   "group-data-[orientation=vertical]/tabs:h-auto group-data-[orientation=vertical]/tabs:w-48 group-data-[orientation=vertical]/tabs:flex-col group-data-[orientation=vertical]/tabs:items-stretch group-data-[orientation=vertical]/tabs:justify-start",
 );
 
 const tabsListUnderlineClassName = cn(
-  "group-data-[variant=underline]/tabs:h-10 group-data-[variant=underline]/tabs:gap-8 group-data-[variant=underline]/tabs:border-b group-data-[variant=underline]/tabs:border-border group-data-[variant=underline]/tabs:bg-transparent group-data-[variant=underline]/tabs:px-1",
+  "group-data-[variant=underline]/tabs:h-10 group-data-[variant=underline]/tabs:gap-8 group-data-[variant=underline]/tabs:border-b group-data-[variant=underline]/tabs:border-border group-data-[variant=underline]/tabs:bg-transparent",
+  // 가로 스크롤 시 뷰포트 경계에 텍스트·포커스 링이 붙어 잘려 보이는 느낌 완화
+  "group-data-[variant=underline]/tabs:px-3",
 );
 
 const tabsListSolidClassName = cn(
@@ -156,7 +290,7 @@ const tabsListSolidRoundedClassName = cn(
 );
 
 const tabsListSlashClassName = cn(
-  "group-data-[variant=slash]/tabs:isolate group-data-[variant=slash]/tabs:h-10 group-data-[variant=slash]/tabs:gap-6 group-data-[variant=slash]/tabs:bg-transparent group-data-[variant=slash]/tabs:p-0",
+  "group-data-[variant=slash]/tabs:isolate group-data-[variant=slash]/tabs:h-10 group-data-[variant=slash]/tabs:gap-6 group-data-[variant=slash]/tabs:bg-transparent group-data-[variant=slash]/tabs:py-0 group-data-[variant=slash]/tabs:px-2",
 );
 
 const tabsTriggerBaseClassName = cn(
@@ -179,7 +313,7 @@ const tabsTriggerUnderlineClassName = cn(
 );
 
 const tabsTriggerSolidClassName = cn(
-  "group-data-[variant=solid]/tabs:h-12 group-data-[variant=solid]/tabs:min-w-[180px] group-data-[variant=solid]/tabs:rounded-none",
+  "group-data-[variant=solid]/tabs:h-12 group-data-[variant=solid]/tabs:min-w-32 group-data-[variant=solid]/tabs:shrink-0 sm:group-data-[variant=solid]/tabs:min-w-[180px] group-data-[variant=solid]/tabs:rounded-none",
   "group-data-[variant=solid]/tabs:bg-tabs-surface group-data-[variant=solid]/tabs:text-tabs-label-muted",
   "group-data-[variant=solid]/tabs:data-[state=active]:text-white",
   "group-data-[variant=solid]/tabs:border-b-4 group-data-[variant=solid]/tabs:border-b-transparent",
@@ -237,7 +371,9 @@ const Tabs = React.forwardRef(
         }
         className={cn(
           "group/tabs",
-          orientation === "vertical" && "flex flex-row gap-4",
+          orientation === "vertical"
+            ? "flex flex-row gap-4"
+            : "min-w-0 max-w-full",
           className,
         )}
         orientation={orientation}
@@ -257,8 +393,22 @@ const TabsList = React.forwardRef(({ className, children, ...props }, ref) => {
     orientation !== "vertical" && SLIDING_VARIANTS.has(variant);
 
   useTabIndicatorPosition(listRef, useSliding);
+  useScrollActiveTabIntoView(
+    listRef,
+    orientation === "horizontal",
+  );
 
-  return (
+  const horizontal = orientation === "horizontal";
+  const { left: showLeftFade, right: showRightFade } = useTabListEdgeFades(
+    listRef,
+    horizontal,
+  );
+
+  const fadeClassName = cn(
+    "pointer-events-none absolute inset-y-0 z-20 w-10 from-background to-transparent transition-opacity duration-200 motion-reduce:transition-none",
+  );
+
+  const listSection = (
     <div className={tabsListSolidRoundedShellClassName}>
       <TabsPrimitive.List
         ref={mergedRef}
@@ -276,6 +426,32 @@ const TabsList = React.forwardRef(({ className, children, ...props }, ref) => {
         {useSliding ? <TabIndicatorSlot variant={variant} /> : null}
         {children}
       </TabsPrimitive.List>
+    </div>
+  );
+
+  if (!horizontal) {
+    return listSection;
+  }
+
+  return (
+    <div className="relative w-full min-w-0">
+      {listSection}
+      <div
+        aria-hidden
+        className={cn(
+          fadeClassName,
+          "left-0 bg-gradient-to-r",
+          showLeftFade ? "opacity-100" : "opacity-0",
+        )}
+      />
+      <div
+        aria-hidden
+        className={cn(
+          fadeClassName,
+          "right-0 bg-gradient-to-l",
+          showRightFade ? "opacity-100" : "opacity-0",
+        )}
+      />
     </div>
   );
 });
@@ -301,8 +477,8 @@ const TabsContent = React.forwardRef(({ className, ...props }, ref) => (
   <TabsPrimitive.Content
     ref={ref}
     className={cn(
-      "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-      "group-data-[orientation=vertical]/tabs:mt-0 group-data-[orientation=vertical]/tabs:min-w-0 group-data-[orientation=vertical]/tabs:flex-1",
+      "mt-2 min-w-0 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+      "group-data-[orientation=vertical]/tabs:mt-0 group-data-[orientation=vertical]/tabs:flex-1",
       className,
     )}
     {...props}

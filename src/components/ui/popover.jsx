@@ -45,12 +45,12 @@ const PopoverContent = React.forwardRef(
             popoverPanelMotionClassName,
             isBubble
               ? cn(
-                  "relative w-auto max-w-[330px] overflow-visible rounded-md bg-point-3 p-[20px] text-[14px] text-white shadow-md",
+                  "relative w-auto max-w-[min(330px,calc(100vw-1.5rem))] overflow-visible rounded-md bg-point-3 p-[20px] text-[14px] text-white shadow-md",
                   "origin-[--radix-popover-content-transform-origin]",
                   mergedShowClose,
                 )
               : cn(
-                  "max-w-[330px] rounded-md bg-point-3 p-4 text-popover-foreground shadow-md",
+                  "max-w-[min(330px,calc(100vw-1.5rem))] rounded-md bg-point-3 p-4 text-popover-foreground shadow-md",
                   "origin-[--radix-popover-content-transform-origin]",
                 ),
             className,
