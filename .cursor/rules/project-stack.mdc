@@ -1,0 +1,17 @@
+---
+description: Zipfeel 스택(Next/React/shadcn/Tailwind/JSX) 및 반응형 기본 전제
+alwaysApply: true
+---
+
+# 프로젝트 스택
+
+- **프레임워크**: Next.js(App Router 등 실제 구조에 맞춤), **React**
+- **UI**: **shadcn/ui** 패턴(`src/components/ui`, Radix + `cn()`)
+- **스타일**: **Tailwind CSS**, 컴포넌트는 **`*.jsx`**
+- **반응형**: 기본 전제. 모바일 퍼스트, 필요 시 `sm:` / `md:` / `lg:` 등으로 뷰포트별 레이아웃·간격·타이포·표시 전환을 고려한다.
+
+# 작업 시 지향점
+
+- 새 UI는 기존 `components/ui` 패턴과 토큰·간격을 맞춘다.
+- 터치 타깃·작은 화면에서의 가독성·줄바꿈·스크롤을 함께 검토한다.
+- 이 규칙은 팀에서 필요에 따라 자유롭게 수정·분리한다.

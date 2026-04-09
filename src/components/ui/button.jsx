@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "border border-point-1 text-point-1 bg-transparent hover:text-white hover:bg-point-2 hover:border-point-2 active:text-white active:bg-point-1 active:border-point-1 disabled:bg-transparent disabled:text-point-3",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
+        ghost: "hover:text-accent-foreground",
         link: "text-gray-6 underline-offset-1 hover:underline hover:text-point-2 hover:font-bold active:text-point-1",
         // Figma design tokens
         point1: "bg-point-1 text-white shadow hover:bg-point-1/90",
@@ -38,6 +38,7 @@ const buttonVariants = cva(
         full: "w-full h-12 px-6 text-lg [&_svg]:size-7",
         icon: "h-10 w-10 [&_svg]:size-6",
         iconSm: "h-8 w-8 [&_svg]:size-4",
+        iconXs: "h-6 w-6 [&_svg]:size-3",
       },
     },
     defaultVariants: {
