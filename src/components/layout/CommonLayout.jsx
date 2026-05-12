@@ -10,7 +10,7 @@ import { Header } from "@/components/layout/Header";
 import { CommonLnb } from "@/components/layout/CommonLnb";
 import { BackPanel } from "@/components/layout/BackPanel";
 
-export function MainLayout({ children, className }) {
+export function CommonLayout({ children, className }) {
     return (
         <div
             className={cn(
@@ -19,23 +19,26 @@ export function MainLayout({ children, className }) {
             )}
         >
             {/* 배경 판낼 */}
-            <BackPanel topColor="bg-point-1" bottomColor="bg-gray-1" />
+            <BackPanel topColor="bg-sub-7" bottomColor="bg-gray-1" />
+
             <Header
-                bgColor="bg-point-1"
-                textColor="text-white"
-                borderColor="border-white/70"
-                hoverBg="hover:bg-white/10"
-                logoColor="text-white"
-                logoName="logo"
+                bgColor="bg-sub-7"
+                textColor="text-point-1"
+                borderColor="border-point-1/70"
+                hoverBg="hover:bg-point-1/10"
+                logoColor="text-black"
+                logoName="logo-black"
             />
+
             {/* 본문: 사이드바 + 메인 — 헤더와 겹치도록 위로 당김 */}
             <div className="relative z-10 flex min-h-0 flex-1 -mt-6 md:-mt-0">
-                {/* <CommonLnb /> */}
+                <CommonLnb />
 
-                <main className="flex min-h-0 flex-1 flex-col md:px-[90px] pb-24 md:px-6 md:pb-20 max-w-[1360px] mx-auto">
+                <main className="flex min-h-0 flex-1 flex-col px-3 pb-24 md:px-[90px] md:pb-20 max-w-[1360px] mx-auto ">
                     <div
                         className={cn(
-                            "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white [box-shadow:4px_4px_10px_0px_rgba(32,32,32,0.25)] md:[box-shadow:none]",
+                            "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white",
+                            // "shadow-[5px_5px_10px_0px_rgb(230_230_230_/_0.8),-5px_-5px_10px_0px_rgb(255_255_255_/_0.2)]",
                         )}
                     >
                         <ScrollArea className="min-h-0 flex-1 overscroll-contain">

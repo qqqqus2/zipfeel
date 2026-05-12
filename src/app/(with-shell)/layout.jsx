@@ -1,5 +1,5 @@
-import { MainLayout } from "@/components/layout/MainLayout";
+import { CommonLayout } from "@/components/layout/CommonLayout";
 
 export default function WithShellLayout({ children }) {
-  return <MainLayout>{children}</MainLayout>;
+    return <CommonLayout>{children}</CommonLayout>;
 }

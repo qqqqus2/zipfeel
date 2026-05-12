@@ -172,6 +172,10 @@
     }
   }
 
+  * {
+    font-family: "NanumSquareRound", sans-serif;
+  }
+
   body {
     background-color: var(--color-gray-1);
     color: var(--color-foreground);

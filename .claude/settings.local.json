@@ -19,7 +19,8 @@
       "Bash(npx storybook:*)",
       "Bash(npx storybook@latest upgrade)",
       "Bash(npx storybook@8 init:*)",
-      "Bash(del nul)"
+      "Bash(del nul)",
+      "Bash(npm run build:icons:*)"
     ],
     "deny": [],
     "ask": []
