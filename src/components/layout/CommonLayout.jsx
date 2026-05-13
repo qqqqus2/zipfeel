@@ -10,7 +10,7 @@ import { Header } from "@/components/layout/Header";
 import { CommonLnb } from "@/components/layout/CommonLnb";
 import { BackPanel } from "@/components/layout/BackPanel";
 
-export function CommonLayout({ children, className }) {
+export function CommonLayout({ children, className, title, description }) {
     return (
         <div
             className={cn(
@@ -31,10 +31,24 @@ export function CommonLayout({ children, className }) {
             />
 
             {/* 본문: 사이드바 + 메인 — 헤더와 겹치도록 위로 당김 */}
-            <div className="relative z-10 flex min-h-0 flex-1 -mt-6 md:-mt-0">
+            <div className="relative z-10 flex min-h-0 flex-col flex-1 -mt-6 md:-mt-0">
                 <CommonLnb />
-
-                <main className="flex min-h-0 flex-1 flex-col px-3 pb-24 md:px-[90px] md:pb-20 max-w-[1360px] mx-auto ">
+                {/* 타이틀 영역 */}
+                {(title || description) && (
+                    <div className="w-full py-6 md:py-8">
+                        {title && (
+                            <h2 className="fz-24 text-center leading-[1]">
+                                {title}
+                            </h2>
+                        )}
+                        {description && (
+                            <p className="fz-16 text-center leading-[1] mt-[11px] [&_strong]:font-bold">
+                                {description}
+                            </p>
+                        )}
+                    </div>
+                )}
+                <main className="flex min-h-0 flex-1 flex-col px-3 pb-24 md:px-[90px] md:pb-20 w-full max-w-[1360px] mx-auto ">
                     <div
                         className={cn(
                             "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white",

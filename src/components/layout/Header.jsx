@@ -40,21 +40,54 @@ export function Header({
 
             <nav className="hidden items-center gap-2 md:flex">
                 {isLoggedIn ? (
-                    <Button
-                        type="button"
-                        variant="outline"
-                        size="sm"
-                        className={cn(
-                            "bg-transparent",
-                            borderColor,
-                            textColor,
-                            hoverBg,
-                            `hover:${textColor}`,
-                        )}
-                    >
-                        <Icon name="logout" size={24} />
-                        로그아웃
-                    </Button>
+                    <>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className={cn(
+                                "bg-transparent",
+                                borderColor,
+                                textColor,
+                                hoverBg,
+                                `hover:${textColor}`,
+                            )}
+                        >
+                            <Icon name="logout" size={24} />
+                            로그아웃
+                        </Button>
+
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className={cn(
+                                "bg-transparent",
+                                borderColor,
+                                textColor,
+                                hoverBg,
+                                `hover:${textColor}`,
+                            )}
+                        >
+                            <Icon name="book_4" size={24} />
+                            작품 생성
+                        </Button>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className={cn(
+                                "bg-transparent",
+                                borderColor,
+                                textColor,
+                                hoverBg,
+                                `hover:${textColor}`,
+                            )}
+                        >
+                            <Icon name="book_ribbon" size={24} />
+                            작품 목록
+                        </Button>
+                    </>
                 ) : (
                     <>
                         <Button
@@ -87,23 +120,24 @@ export function Header({
                             <Icon name="account_circle" size={24} />
                             회원가입
                         </Button>
+                        <Button
+                            type="button"
+                            variant="outline"
+                            size="sm"
+                            className={cn(
+                                "bg-transparent",
+                                borderColor,
+                                textColor,
+                                hoverBg,
+                                `hover:${textColor}`,
+                            )}
+                        >
+                            <Icon name="sell" size={24} />
+                            구독 안내
+                        </Button>
                     </>
                 )}
-                <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className={cn(
-                        "bg-transparent",
-                        borderColor,
-                        textColor,
-                        hoverBg,
-                        `hover:${textColor}`,
-                    )}
-                >
-                    <Icon name="sell" size={24} />
-                    구독 안내
-                </Button>
+
                 <Button
                     type="button"
                     variant="outline"
