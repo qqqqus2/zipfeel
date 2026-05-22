@@ -248,7 +248,7 @@ function FieldMessage({
         >
             {isError && (
                 <svg
-                    className="size-6 shrink-0"
+                    className="size-5 shrink-0"
                     viewBox="0 0 20 20"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -261,7 +261,7 @@ function FieldMessage({
             )}
             {isSuccess && (
                 <svg
-                    className="size-6 shrink-0"
+                    className="size-5 shrink-0"
                     viewBox="0 0 20 20"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -272,7 +272,7 @@ function FieldMessage({
                     />
                 </svg>
             )}
-            <span className="pt-[3px]">{content}</span>
+            <span className="">{content}</span>
         </div>
     );
 }

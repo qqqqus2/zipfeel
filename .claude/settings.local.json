@@ -20,7 +20,10 @@
       "Bash(npx storybook@latest upgrade)",
       "Bash(npx storybook@8 init:*)",
       "Bash(del nul)",
-      "Bash(npm run build:icons:*)"
+      "Bash(npm run build:icons:*)",
+      "Bash(tree:*)",
+      "Bash(timeout /t 5)",
+      "Bash(dir:*)"
     ],
     "deny": [],
     "ask": []

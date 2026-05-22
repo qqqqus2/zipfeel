@@ -7,7 +7,6 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
-import { CommonLnb } from "@/components/layout/CommonLnb";
 import { BackPanel } from "@/components/layout/BackPanel";
 
 export function MainLayout({ children, className, title, description }) {
@@ -36,12 +35,12 @@ export function MainLayout({ children, className, title, description }) {
                 {(title || description) && (
                     <div className="w-full py-6 md:pt-[70px] md:pb-[50px] text-white">
                         {title && (
-                            <h1 className="fz-24 text-center leading-[1]">
+                            <h1 className="md:fz-24 fz-20 text-center leading-[1]">
                                 {title}
                             </h1>
                         )}
                         {description && (
-                            <p className="fz-16 text-center leading-[1] mt-[11px] [&_strong]:font-bold ">
+                            <p className="fz-16 text-center md:max-w-full max-w-[330px] leading-[1] mt-[11px] [&_strong]:font-bold m-auto">
                                 {description}
                             </p>
                         )}

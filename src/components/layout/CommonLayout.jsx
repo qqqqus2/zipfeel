@@ -34,20 +34,15 @@ export function CommonLayout({ children, className, title, description }) {
             <div className="relative z-10 flex min-h-0 flex-col flex-1 -mt-6 md:-mt-0">
                 <CommonLnb />
                 {/* 타이틀 영역 */}
-                {(title || description) && (
-                    <div className="w-full py-6 md:py-8">
-                        {title && (
-                            <h2 className="fz-24 text-center leading-[1]">
-                                {title}
-                            </h2>
-                        )}
-                        {description && (
-                            <p className="fz-16 text-center leading-[1] mt-[11px] [&_strong]:font-bold">
-                                {description}
-                            </p>
-                        )}
-                    </div>
-                )}
+                <div className="w-full py-6 md:py-8">
+                    <h2 className="fz-24 text-center leading-[1] text-gray-6">
+                        {title || "페이지 타이틀"}
+                    </h2>
+                    <p className="fz-16 text-center md:max-w-full max-w-[330px] md:leading-[1] mt-[11px] [&_strong]:font-bold m-auto">
+                        {description ||
+                            "페이지에 대한 간단한 설명을 입력하세요. 이 영역은 선택적으로 사용할 수 있습니다."}
+                    </p>
+                </div>
                 <main className="flex min-h-0 flex-1 flex-col px-3 pb-24 md:px-[90px] md:pb-20 w-full max-w-[1360px] mx-auto ">
                     <div
                         className={cn(

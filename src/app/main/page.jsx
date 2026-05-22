@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 
-export default function Home() {
+export default function MainPage() {
     return (
         <div className="space-y-8">
             <div className="space-y-2">
@@ -18,6 +18,9 @@ export default function Home() {
             <div className="flex flex-wrap gap-3">
                 <Button asChild>
                     <Link href="/sub">서브 페이지</Link>
+                </Button>
+                <Button variant="outline" asChild>
+                    <Link href="/page-list">페이지 목록</Link>
                 </Button>
                 <Button variant="outline" asChild>
                     <a href="#section-bottom">아래로 스크롤 테스트</a>

@@ -6,6 +6,7 @@ import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { headerMenuLoggedIn, headerMenuLoggedOut } from "@/data/menuData";
 
 export function Header({
     bgColor = "bg-point-1",
@@ -41,100 +42,50 @@ export function Header({
             <nav className="hidden items-center gap-2 md:flex">
                 {isLoggedIn ? (
                     <>
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className={cn(
-                                "bg-transparent",
-                                borderColor,
-                                textColor,
-                                hoverBg,
-                                `hover:${textColor}`,
-                            )}
-                        >
-                            <Icon name="logout" size={24} />
-                            로그아웃
-                        </Button>
-
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className={cn(
-                                "bg-transparent",
-                                borderColor,
-                                textColor,
-                                hoverBg,
-                                `hover:${textColor}`,
-                            )}
-                        >
-                            <Icon name="book_4" size={24} />
-                            작품 생성
-                        </Button>
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className={cn(
-                                "bg-transparent",
-                                borderColor,
-                                textColor,
-                                hoverBg,
-                                `hover:${textColor}`,
-                            )}
-                        >
-                            <Icon name="book_ribbon" size={24} />
-                            작품 목록
-                        </Button>
+                        {headerMenuLoggedIn.map((menuItem) => (
+                            <Button
+                                key={menuItem.id}
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className={cn(
+                                    "bg-transparent",
+                                    borderColor,
+                                    textColor,
+                                    hoverBg,
+                                    `hover:${textColor}`,
+                                )}
+                                asChild
+                            >
+                                <Link href={menuItem.path}>
+                                    {menuItem.icon && <Icon name={menuItem.icon} size={24} />}
+                                    {menuItem.label}
+                                </Link>
+                            </Button>
+                        ))}
                     </>
                 ) : (
                     <>
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className={cn(
-                                "bg-transparent",
-                                borderColor,
-                                textColor,
-                                hoverBg,
-                                `hover:${textColor}`,
-                            )}
-                        >
-                            <Icon name="login" size={24} />
-                            로그인
-                        </Button>
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className={cn(
-                                "bg-transparent",
-                                borderColor,
-                                textColor,
-                                hoverBg,
-                                `hover:${textColor}`,
-                            )}
-                        >
-                            <Icon name="account_circle" size={24} />
-                            회원가입
-                        </Button>
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className={cn(
-                                "bg-transparent",
-                                borderColor,
-                                textColor,
-                                hoverBg,
-                                `hover:${textColor}`,
-                            )}
-                        >
-                            <Icon name="sell" size={24} />
-                            구독 안내
-                        </Button>
+                        {headerMenuLoggedOut.map((menuItem) => (
+                            <Button
+                                key={menuItem.id}
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className={cn(
+                                    "bg-transparent",
+                                    borderColor,
+                                    textColor,
+                                    hoverBg,
+                                    `hover:${textColor}`,
+                                )}
+                                asChild
+                            >
+                                <Link href={menuItem.path}>
+                                    {menuItem.label}
+                                </Link>
+                            </Button>
+                        ))}
                     </>
                 )}
 
