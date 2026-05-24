@@ -39,7 +39,7 @@ function AllPagesView() {
   const router = useRouter();
 
   const handleRowClick = (page) => {
-    if (page.status === "완료") {
+    if (page.status === "완료" || page.status === "진행중") {
       router.push(page.path);
     }
   };
@@ -58,7 +58,7 @@ function AllPagesView() {
         </TableHeader>
         <TableBody>
           {pageListData.map((page) => {
-            const isClickable = page.status === "완료";
+            const isClickable = page.status === "완료" || page.status === "진행중";
 
             return (
               <TableRow
@@ -133,7 +133,7 @@ function CategoryView() {
           <CardContent>
             <div className="grid gap-3">
               {pages.map((page) => {
-                const isClickable = page.status === "완료";
+                const isClickable = page.status === "완료" || page.status === "진행중";
 
                 if (isClickable) {
                   return (

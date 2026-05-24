@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { Icon } from "@/components/ui/icon";
 
 const groupShellClass =
     "flex h-10 w-full items-center gap-2 rounded-md border border-input bg-background px-3 text-base ring-offset-background focus-within:outline-none focus-within:ring-2 focus-within:ring-ring focus-within:ring-offset-2";
@@ -11,19 +12,20 @@ const innerInputClass =
 const addonClass = "shrink-0 text-sm font-medium text-foreground select-none";
 
 const invalidInputClass =
-    "aria-invalid:border-destructive aria-invalid:focus-visible:ring-destructive/40";
+    "aria-invalid:border-destructive aria-invalid:border-dashed aria-invalid:border-2 aria-invalid:focus-visible:ring-destructive/40";
 
 const invalidGroupClass =
-    "has-[input[aria-invalid=true]]:border-destructive has-[input[aria-invalid=true]]:focus-within:ring-destructive/40";
+    "has-[input[aria-invalid=true]]:border-destructive has-[input[aria-invalid=true]]:border-dashed has-[input[aria-invalid=true]]:border-2 has-[input[aria-invalid=true]]:focus-within:ring-destructive/40";
 
 const Input = React.forwardRef(
     (
-        { className, type, prefixLabel, suffixLabel, disabled, ...props },
+        { className, type, prefixLabel, suffixLabel, suffixButton, disabled, ...props },
         ref,
     ) => {
         const hasAddon =
             (prefixLabel != null && prefixLabel !== "") ||
-            (suffixLabel != null && suffixLabel !== "");
+            (suffixLabel != null && suffixLabel !== "") ||
+            suffixButton;
 
         if (!hasAddon) {
             return (
@@ -62,6 +64,15 @@ const Input = React.forwardRef(
                 />
                 {suffixLabel ? (
                     <span className={addonClass}>{suffixLabel}</span>
+                ) : null}
+                {suffixButton ? (
+                    <button
+                        type="button"
+                        className="shrink-0 flex items-center justify-center w-5 h-5 hover:opacity-70 transition-opacity"
+                        onClick={suffixButton.onClick}
+                    >
+                        <Icon name={suffixButton.icon} size={20} />
+                    </button>
                 ) : null}
             </div>
         );

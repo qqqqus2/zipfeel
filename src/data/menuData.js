@@ -86,18 +86,28 @@ export const headerMenuLoggedOut = [
         label: "로그인",
         path: "/login",
         variant: "ghost",
+        icon: "login",
     },
     {
         id: "signup",
         label: "회원가입",
         path: "/join",
         variant: "point1",
+        icon: "account_circle",
+    },
+    {
+        id: "create-work",
+        label: "작품 생성",
+        path: "",
+        variant: "outline",
+        icon: "book_4",
     },
     {
         id: "subscription",
         label: "구독안내",
         path: "/subscription",
         variant: "outline",
+        icon: "sell",
     },
 ];
 
@@ -110,19 +120,28 @@ export const headerMenuLoggedIn = [
         label: "로그아웃",
         path: "/logout",
         variant: "ghost",
+        icon: "logout",
+    },
+    {
+        id: "profile",
+        label: "내정보관리",
+        path: "/profile",
+        variant: "point1",
+        icon: "face_4",
     },
     {
         id: "create-work",
         label: "작품 생성",
         path: "/work-settings/new",
         variant: "point1",
-        icon: "add",
+        icon: "book_4",
     },
     {
         id: "work-list",
         label: "작품 목록",
         path: "/work-list",
         variant: "outline",
+        icon: "import_contacts",
     },
 ];
 
@@ -137,7 +156,7 @@ export const pageListData = [
         path: "/main",
         description: "메인 랜딩 페이지",
         layout: "MainLayout",
-        status: "완료",
+        status: "진행중",
     },
     {
         id: "join",
@@ -146,7 +165,7 @@ export const pageListData = [
         path: "/join",
         description: "사용자 회원가입 페이지",
         layout: "Custom",
-        status: "완료",
+        status: "진행중",
     },
     {
         id: "login",
@@ -154,8 +173,8 @@ export const pageListData = [
         title: "로그인",
         path: "/login",
         description: "사용자 로그인 페이지",
-        layout: "MainLayout",
-        status: "예정",
+        layout: "Custom",
+        status: "진행중",
     },
     {
         id: "page-list",
@@ -164,7 +183,7 @@ export const pageListData = [
         path: "/page-list",
         description: "전체 페이지 목록 및 개발 현황",
         layout: "CommonLayout",
-        status: "완료",
+        status: "진행중",
     },
     {
         id: "work-settings",
@@ -173,7 +192,7 @@ export const pageListData = [
         path: "/work-settings",
         description: "작품 기본 정보 및 설정 관리",
         layout: "CommonLayout",
-        status: "예정",
+        status: "진행중",
     },
     {
         id: "work-settings-new",
@@ -191,7 +210,7 @@ export const pageListData = [
         path: "/work-list",
         description: "사용자의 모든 작품 목록",
         layout: "CommonLayout",
-        status: "예정",
+        status: "진행중",
     },
     {
         id: "writing-activity",
@@ -227,7 +246,7 @@ export const pageListData = [
         path: "/event-management",
         description: "플롯 및 사건 타임라인 관리",
         layout: "CommonLayout",
-        status: "예정",
+        status: "진행중",
     },
     {
         id: "world-management",

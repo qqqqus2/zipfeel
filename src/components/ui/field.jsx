@@ -6,6 +6,7 @@ import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import { Icon } from "@/components/ui/icon";
 
 function FieldSet({ className, ...props }) {
     return (
@@ -233,15 +234,23 @@ function FieldMessage({
 
     const isError = type === "error";
     const isSuccess = type === "success";
+    const isDuplicate = type === "duplicate";
 
     return (
         <div
             role={isError ? "alert" : "status"}
-            data-slot={isError ? "field-error" : "field-success"}
+            data-slot={
+                isError
+                    ? "field-error"
+                    : isDuplicate
+                      ? "field-duplicate"
+                      : "field-success"
+            }
             className={cn(
-                "text-xs font-normal flex items-start gap-1",
+                "text-xs font-normal flex items-start gap-1 font-bold",
                 isError && "text-destructive",
                 isSuccess && "text-point-2",
+                isDuplicate && "text-[rgb(var(--sub-color5))] ",
                 className,
             )}
             {...props}
@@ -271,6 +280,13 @@ function FieldMessage({
                         fill="currentColor"
                     />
                 </svg>
+            )}
+            {isDuplicate && (
+                <Icon
+                    name="emoji_objects_3"
+                    size={20}
+                    className="shrink-0 -top-0.5 relative"
+                />
             )}
             <span className="">{content}</span>
         </div>
