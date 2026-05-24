@@ -131,8 +131,12 @@ export function Header({
                                     <Icon name="ico-lang" size={24} />
                                 </Button>
                             </TooltipTrigger>
-                            <TooltipContent side="bottom" align="end">
-                                <p className="">
+                            <TooltipContent
+                                side="bottom"
+                                align="end"
+                                className="whitespace-nowrap text-right max-w-none"
+                            >
+                                <p>
                                     클릭 시 한글로 변경되며 메인 화면으로
                                     이동합니다.
                                 </p>
@@ -163,7 +167,11 @@ export function Header({
                                 <Icon name="ico-lang" size={24} />
                             </Button>
                         </TooltipTrigger>
-                        <TooltipContent side="bottom" align="end">
+                        <TooltipContent
+                            side="bottom"
+                            align="end"
+                            className="whitespace-nowrap text-right max-w-none"
+                        >
                             <p>
                                 클릭 시 한글로 변경되며 메인 화면으로
                                 이동합니다.
