@@ -62,7 +62,7 @@ export function MainLayout({ children, className, title, description }) {
                     </div>
                 )}
 
-                <main className="flex min-h-0 flex-1 flex-col md:px-[90px] pb-24 md:px-6 md:pb-20 w-full max-w-[1360px] mx-auto">
+                <main className="flex min-h-0 flex-1 flex-col md:px-[90px] pb-24 md:px-6 lg:pb-20 pb-[188px] w-full max-w-[1540px] mx-auto">
                     <div
                         className={cn(
                             "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white [box-shadow:4px_4px_10px_0px_rgba(32,32,32,0.25)] md:[box-shadow:none]",
@@ -72,7 +72,7 @@ export function MainLayout({ children, className, title, description }) {
                             className="min-h-0 flex-1 overscroll-contain"
                             onScroll={handleScroll}
                         >
-                            <div className="p-4 md:p-6">{children}</div>
+                            <div className="md:px-4 px-[30px]">{children}</div>
                         </ScrollArea>
                     </div>
                 </main>

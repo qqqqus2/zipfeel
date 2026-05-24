@@ -65,7 +65,7 @@ export function CommonLayout({
                             "페이지에 대한 간단한 설명을 입력하세요. 이 영역은 선택적으로 사용할 수 있습니다."}
                     </p>
                 </div>
-                <main className="flex min-h-0 flex-1 flex-col  pb-24 md:px-[90px] md:pb-20 w-full max-w-[1360px] mx-auto ">
+                <main className="flex min-h-0 flex-1 flex-col  pb-24 md:px-[90px] lg:pb-20 pb-[188px] w-full max-w-[1540px] mx-auto ">
                     {showTabs && tabs.length > 0 ? (
                         <Tabs
                             variant="slash"
@@ -100,7 +100,7 @@ export function CommonLayout({
                                             className="min-h-0 flex-1 overscroll-contain"
                                             onScroll={handleScroll}
                                         >
-                                            <div className="p-4 max-w-[630px] m-auto pt-[58px]">
+                                            <div className="md:px-4 px-[30px] max-w-[630px] m-auto pt-[58px]">
                                                 {tab.content}
                                             </div>
                                         </ScrollArea>
@@ -118,7 +118,7 @@ export function CommonLayout({
                                 className="min-h-0 flex-1 overscroll-contain"
                                 onScroll={handleScroll}
                             >
-                                <div className="p-4 max-w-[630px] m-auto pt-[58px]">
+                                <div className="md:px-4 px-[30px] max-w-[630px] m-auto pt-[58px]">
                                     {children}
                                 </div>
                             </ScrollArea>

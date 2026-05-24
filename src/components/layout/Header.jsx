@@ -7,13 +7,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { headerMenuLoggedIn, headerMenuLoggedOut } from "@/data/menuData";
-import {
-    Tooltip,
-    TooltipContent,
-    TooltipProvider,
-    TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { useRouter } from "next/navigation";
+import { MobileNav } from "@/components/layout/MobileNav";
+import { DesktopNav } from "@/components/layout/DesktopNav";
 
 export function Header({
     bgColor = "bg-point-1",
@@ -44,273 +40,98 @@ export function Header({
     }, [isMobileMenuOpen]);
 
     return (
-        //
-        <header
-            className={cn(
-                "relative md:h-[80px] flex shrink-0 items-center justify-between gap-2 pl-8 pr-6 py-3 md:px-6 md:py-4",
-                isMobileMenuOpen ? "z-[100]" : "z-20",
-                bgColor,
-                textColor,
-            )}
-        >
-            <div className="flex min-w-0 items-center gap-3 relative z-2">
-                <Link href="/">
-                    <span
+        <>
+            <header
+                className={cn(
+                    "relative md:h-[80px] flex shrink-0 items-center justify-between gap-2 pl-8 pr-6 py-3 md:px-6 md:py-4",
+                    isMobileMenuOpen ? "z-[100] !bg-point-1" : "z-20",
+                    bgColor,
+                    textColor,
+                )}
+            >
+                <div className="flex min-w-0 items-center gap-3 relative z-2">
+                    <Link href="/">
+                        <span
+                            className={cn(
+                                "inline-flex size-9 shrink-0 items-center justify-center text-xs font-semibold",
+                                isMobileMenuOpen ? "text-white" : logoColor,
+                            )}
+                            aria-hidden
+                        >
+                            <Icon
+                                name={isMobileMenuOpen ? "logo" : logoName}
+                                size={40}
+                            />
+                        </span>
+                    </Link>
+                </div>
+
+                {!isMobileMenuOpen && (
+                    <DesktopNav
+                        menuItems={
+                            isLoggedIn
+                                ? headerMenuLoggedIn
+                                : headerMenuLoggedOut
+                        }
+                        borderColor={borderColor}
+                        textColor={textColor}
+                        hoverBg={hoverBg}
+                        onLanguageChange={handleLanguageChange}
+                    />
+                )}
+
+                {/* 메뉴 버튼 모바일에서만 보임 */}
+                <div className="flex ml-auto gap-3 md:hidden self-start relative z-2">
+                    <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
                         className={cn(
-                            "inline-flex size-9 shrink-0 items-center justify-center text-xs font-semibold",
-                            isMobileMenuOpen ? "text-white" : logoColor,
+                            "bg-transparent border-0 md:ml-0 ml-auto",
+                            isMobileMenuOpen ? "border-white/70" : borderColor,
+                            isMobileMenuOpen ? "text-white" : textColor,
+                            isMobileMenuOpen ? "hover:bg-white/10" : hoverBg,
+                            isMobileMenuOpen
+                                ? "hover:text-white"
+                                : `hover:${textColor}`,
                         )}
-                        aria-hidden
+                        onClick={handleLanguageChange}
+                    >
+                        <Icon name="ico-lang" size={24} />
+                    </Button>
+                    {/* 모바일 GNB 버튼 */}
+                    <Button
+                        type="button"
+                        variant="ghost"
+                        size="iconSm"
+                        className={cn(
+                            "flex",
+                            isMobileMenuOpen ? "text-white" : textColor,
+                            isMobileMenuOpen ? "hover:bg-white/10" : hoverBg,
+                        )}
+                        aria-label="메뉴"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                     >
                         <Icon
-                            name={isMobileMenuOpen ? "logo" : logoName}
-                            size={40}
+                            name={
+                                isMobileMenuOpen
+                                    ? "collapse_content_30"
+                                    : "more_vert"
+                            }
+                            size={24}
                         />
-                    </span>
-                </Link>
-            </div>
-
-            {!isMobileMenuOpen && (
-                <nav className=" items-center gap-2 relative z-2 hidden md:flex">
-                    {isLoggedIn ? (
-                        <>
-                            {headerMenuLoggedIn.map((menuItem) => (
-                                <Button
-                                    key={menuItem.id}
-                                    type="button"
-                                    variant="outline"
-                                    size="sm"
-                                    className={cn(
-                                        "bg-transparent ",
-                                        borderColor,
-                                        textColor,
-                                        hoverBg,
-                                        `hover:${textColor}`,
-                                    )}
-                                    asChild
-                                >
-                                    <Link href={menuItem.path}>
-                                        {menuItem.icon && (
-                                            <Icon
-                                                name={menuItem.icon}
-                                                size={24}
-                                            />
-                                        )}
-                                        {menuItem.label}
-                                    </Link>
-                                </Button>
-                            ))}
-                        </>
-                    ) : (
-                        <>
-                            {headerMenuLoggedOut.map((menuItem) => (
-                                <Button
-                                    key={menuItem.id}
-                                    type="button"
-                                    variant="outline"
-                                    size="sm"
-                                    className={cn(
-                                        "bg-transparent ",
-                                        borderColor,
-                                        textColor,
-                                        hoverBg,
-                                        `hover:${textColor}`,
-                                    )}
-                                    asChild
-                                >
-                                    <Link href={menuItem.path}>
-                                        {menuItem.label}
-                                    </Link>
-                                </Button>
-                            ))}
-                        </>
-                    )}
-
-                    <TooltipProvider>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <Button
-                                    type="button"
-                                    variant="outline"
-                                    size="sm"
-                                    className={cn(
-                                        "bg-transparent md:ml-0 ml-auto",
-                                        borderColor,
-                                        textColor,
-                                        hoverBg,
-                                        `hover:${textColor}`,
-                                    )}
-                                    onClick={handleLanguageChange}
-                                >
-                                    <Icon name="ico-lang" size={24} />
-                                </Button>
-                            </TooltipTrigger>
-                            <TooltipContent
-                                side="bottom"
-                                align="end"
-                                className="whitespace-nowrap text-right max-w-none"
-                            >
-                                <p>
-                                    클릭 시 한글로 변경되며 메인 화면으로
-                                    이동합니다.
-                                </p>
-                            </TooltipContent>
-                        </Tooltip>
-                    </TooltipProvider>
-                </nav>
-            )}
-
-            {/* 메뉴 버튼 모바일에서만 보임 */}
-            <div className="flex ml-auto gap-3 md:hidden self-start relative z-2">
-                <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    className={cn(
-                        "bg-transparent border-0 md:ml-0 ml-auto",
-                        isMobileMenuOpen ? "border-white/70" : borderColor,
-                        isMobileMenuOpen ? "text-white" : textColor,
-                        isMobileMenuOpen ? "hover:bg-white/10" : hoverBg,
-                        isMobileMenuOpen
-                            ? "hover:text-white"
-                            : `hover:${textColor}`,
-                    )}
-                    onClick={handleLanguageChange}
-                >
-                    <Icon name="ico-lang" size={24} />
-                </Button>
-                {/* 모바일 GNB 버튼 */}
-                <Button
-                    type="button"
-                    variant="ghost"
-                    size="iconSm"
-                    className={cn(
-                        "flex",
-                        isMobileMenuOpen ? "text-white" : textColor,
-                        isMobileMenuOpen ? "hover:bg-white/10" : hoverBg,
-                    )}
-                    aria-label="메뉴"
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                >
-                    <Icon
-                        name={
-                            isMobileMenuOpen
-                                ? "collapse_content_30"
-                                : "more_vert"
-                        }
-                        size={24}
-                    />
-                </Button>
-            </div>
+                    </Button>
+                </div>
+            </header>
 
             {/* 모바일 GNB */}
-            {isMobileMenuOpen && (
-                <article className="fixed top-0 right-0 left-0 bottom-0 bg-point-1 px-8 pt-[67px] min-w-[300px]">
-                    <div className="flex flex-col gap-5">
-                        {isLoggedIn ? (
-                            <>
-                                {/* 로그아웃 / 작품 생성 - 나란히 50% */}
-                                <div className="flex flex-row gap-2.5">
-                                    {headerMenuLoggedIn
-                                        .slice(0, 2)
-                                        .map((menuItem) => (
-                                            <Button
-                                                key={menuItem.id}
-                                                type="button"
-                                                variant="outline"
-                                                size="md"
-                                                className="bg-transparent flex-1 border-white/70 text-white hover:bg-white/10 hover:text-white"
-                                                asChild
-                                            >
-                                                <Link href={menuItem.path}>
-                                                    {menuItem.icon && (
-                                                        <Icon
-                                                            name={menuItem.icon}
-                                                            size={24}
-                                                        />
-                                                    )}
-                                                    {menuItem.label}
-                                                </Link>
-                                            </Button>
-                                        ))}
-                                </div>
-                                {/* 나머지 버튼들 - 세로로 */}
-                                {headerMenuLoggedIn.slice(2).map((menuItem) => (
-                                    <Button
-                                        key={menuItem.id}
-                                        type="button"
-                                        variant="outline"
-                                        size="md"
-                                        className="bg-transparent w-full border-white/70 text-white hover:bg-white/10 hover:text-white"
-                                        asChild
-                                    >
-                                        <Link href={menuItem.path}>
-                                            {menuItem.icon && (
-                                                <Icon
-                                                    name={menuItem.icon}
-                                                    size={24}
-                                                />
-                                            )}
-                                            {menuItem.label}
-                                        </Link>
-                                    </Button>
-                                ))}
-                            </>
-                        ) : (
-                            <>
-                                {/* 로그인 / 회원가입 - 나란히 50% */}
-                                <div className="flex flex-row gap-[10px]">
-                                    {headerMenuLoggedOut
-                                        .slice(0, 2)
-                                        .map((menuItem) => (
-                                            <Button
-                                                key={menuItem.id}
-                                                type="button"
-                                                variant="outline"
-                                                size="md"
-                                                className="bg-transparent flex-1 border-white/70 text-white hover:bg-white/10 hover:text-white"
-                                                asChild
-                                            >
-                                                <Link href={menuItem.path}>
-                                                    {menuItem.icon && (
-                                                        <Icon
-                                                            name={menuItem.icon}
-                                                            size={24}
-                                                        />
-                                                    )}
-                                                    {menuItem.label}
-                                                </Link>
-                                            </Button>
-                                        ))}
-                                </div>
-                                {/* 나머지 버튼들 - 세로로 */}
-                                {headerMenuLoggedOut
-                                    .slice(2)
-                                    .map((menuItem) => (
-                                        <Button
-                                            key={menuItem.id}
-                                            type="button"
-                                            variant="outline"
-                                            size="md"
-                                            className="bg-transparent w-full border-white/70 text-white hover:bg-white/10 hover:text-white"
-                                            asChild
-                                        >
-                                            <Link href={menuItem.path}>
-                                                {menuItem.icon && (
-                                                    <Icon
-                                                        name={menuItem.icon}
-                                                        size={24}
-                                                    />
-                                                )}
-                                                {menuItem.label}
-                                            </Link>
-                                        </Button>
-                                    ))}
-                            </>
-                        )}
-                    </div>
-                </article>
-            )}
-        </header>
+            <MobileNav
+                isOpen={isMobileMenuOpen}
+                onClose={() => setIsMobileMenuOpen(false)}
+                menuItems={
+                    isLoggedIn ? headerMenuLoggedIn : headerMenuLoggedOut
+                }
+            />
+        </>
     );
 }
