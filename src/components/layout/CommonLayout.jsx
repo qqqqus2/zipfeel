@@ -57,7 +57,7 @@ export function CommonLayout({
                     <p
                         className={cn(
                             "fz-16 text-center md:max-w-full pt-2 md:pt-3 overflow-hidden max-w-[330px] md:leading-[1] mt-[11px] [&_strong]:font-bold m-auto transition-opacity duration-300",
-                            "md:opacity-100",
+                            "md:opacity-100 md:h-auto md:pt-3",
                             isScrolled ? "opacity-0 h-0 pt-0" : "opacity-100",
                         )}
                     >
