@@ -2,7 +2,8 @@
 
 export const VALIDATION_MESSAGES = {
     id: {
-        success: "사용할 수 있는 아이디입니다.\n다른 아이디 사용을 원할 경우 '다시하기' 버튼을 눌러주세요.",
+        success:
+            "사용할 수 있는 아이디입니다.\n다른 아이디 사용을 원할 경우 '다시하기' 버튼을 눌러주세요.",
         error: "사용할 수 없는 아이디입니다.",
     },
     password: {
@@ -10,6 +11,9 @@ export const VALIDATION_MESSAGES = {
     },
     penName: {
         duplicate: "동일 필명 사용자 : 0,0000",
+    },
+    terms: {
+        error: "이용약관 및 개인정보처리방침에 동의해 주세요.",
     },
 };
 
@@ -62,6 +66,8 @@ export const LABELS = {
     penName: "필명",
     email: "이메일 주소",
     marketingConsent: "마케팅 메일 수신 동의",
+    termsOfService: "이용약관 동의",
+    privacyPolicy: "개인정보 처리방침 동의",
 };
 
 export const BUTTONS = {

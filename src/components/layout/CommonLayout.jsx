@@ -100,7 +100,7 @@ export function CommonLayout({
                                             className="min-h-0 flex-1 overscroll-contain"
                                             onScroll={handleScroll}
                                         >
-                                            <div className="md:px-4 px-[30px] max-w-[630px] m-auto pt-[58px]">
+                                            <div className="md:px-4 px-[30px] max-w-[630px] m-auto py-[58px]">
                                                 {tab.content}
                                             </div>
                                         </ScrollArea>
@@ -111,14 +111,14 @@ export function CommonLayout({
                     ) : (
                         <div
                             className={cn(
-                                "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white",
+                                "flex min-h-0 flex- 1 flex-col overflow-hidden rounded-[40px] bg-white",
                             )}
                         >
                             <ScrollArea
                                 className="min-h-0 flex-1 overscroll-contain"
                                 onScroll={handleScroll}
                             >
-                                <div className="md:px-4 px-[30px] max-w-[630px] m-auto pt-[58px]">
+                                <div className="md:px-4 px-[30px] max-w-[630px] m-auto py-[58px]">
                                     {children}
                                 </div>
                             </ScrollArea>

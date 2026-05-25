@@ -72,7 +72,9 @@ export function MainLayout({ children, className, title, description }) {
                             className="min-h-0 flex-1 overscroll-contain"
                             onScroll={handleScroll}
                         >
-                            <div className="md:px-4 px-[30px]">{children}</div>
+                            <div className="md:px-4 px-[30px] pb-[58px]">
+                                {children}
+                            </div>
                         </ScrollArea>
                     </div>
                 </main>
