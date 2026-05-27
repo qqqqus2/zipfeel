@@ -19,7 +19,15 @@ const invalidGroupClass =
 
 const Input = React.forwardRef(
     (
-        { className, type, prefixLabel, suffixLabel, suffixButton, disabled, ...props },
+        {
+            className,
+            type,
+            prefixLabel,
+            suffixLabel,
+            suffixButton,
+            disabled,
+            ...props
+        },
         ref,
     ) => {
         const hasAddon =
@@ -68,7 +76,7 @@ const Input = React.forwardRef(
                 {suffixButton ? (
                     <button
                         type="button"
-                        className="shrink-0 flex items-center justify-center w-5 h-5 hover:opacity-70 transition-opacity"
+                        className="shrink-0 flex items-center justify-center w-5 h-5 hover:opacity-70 transition-opacity cursor-pointer"
                         onClick={suffixButton.onClick}
                     >
                         <Icon name={suffixButton.icon} size={20} />
