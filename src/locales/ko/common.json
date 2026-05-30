@@ -1,0 +1,75 @@
+{
+  "buttons": {
+    "save": "저장",
+    "cancel": "취소",
+    "confirm": "확인",
+    "delete": "삭제",
+    "edit": "수정",
+    "add": "추가",
+    "close": "닫기",
+    "next": "다음",
+    "previous": "이전",
+    "submit": "제출",
+    "reset": "다시하기",
+    "search": "검색",
+    "filter": "필터",
+    "sort": "정렬",
+    "download": "다운로드",
+    "upload": "업로드",
+    "refresh": "새로고침",
+    "apply": "적용",
+    "retry": "재시도",
+    "back": "뒤로가기"
+  },
+  "status": {
+    "inProgress": "진행중",
+    "completed": "완료",
+    "planned": "예정",
+    "draft": "구상중",
+    "pending": "대기중",
+    "cancelled": "취소됨"
+  },
+  "common": {
+    "loading": "로딩중...",
+    "error": "오류가 발생했습니다",
+    "success": "성공했습니다",
+    "noData": "데이터가 없습니다",
+    "required": "필수",
+    "optional": "선택",
+    "total": "전체",
+    "count": "{count}개",
+    "selected": "{count}개 선택됨",
+    "all": "전체",
+    "search": "검색",
+    "searchPlaceholder": "검색어를 입력하세요"
+  },
+  "messages": {
+    "confirmDelete": "정말 삭제하시겠습니까?",
+    "deleteSuccess": "삭제되었습니다",
+    "saveSuccess": "저장되었습니다",
+    "updateSuccess": "수정되었습니다",
+    "createSuccess": "생성되었습니다",
+    "actionCancelled": "취소되었습니다",
+    "pleaseTryAgain": "다시 시도해주세요",
+    "invalidInput": "올바른 값을 입력해주세요"
+  },
+  "categories": {
+    "main": "메인",
+    "auth": "인증",
+    "development": "개발",
+    "workManagement": "작품 관리",
+    "worldManagement": "세계관 관리",
+    "resource": "리소스",
+    "publication": "출판",
+    "service": "서비스",
+    "user": "사용자"
+  },
+  "footer": {
+    "businessInfo": "사업자 정보 상세보기",
+    "help": "도움누리",
+    "termsOfService": "이용약관",
+    "privacyPolicy": "개인정보처리방침",
+    "businessRegistration": "통신판매업신고번호 : 제 0000-일이삼사-00000",
+    "copyright": "© 2026. 유한회사 올음. All rights reserved."
+  }
+}

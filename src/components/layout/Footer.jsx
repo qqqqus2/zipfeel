@@ -2,8 +2,11 @@
 
 import * as React from "react";
 import { Icon } from "@/components/ui/icon";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export function Footer() {
+    const { t } = useTranslation('common');
+
     return (
         <>
             {/* PC 하단 플로팅 푸터 (본문과 겹침, 카드 위에 떠 있음) */}
@@ -16,32 +19,32 @@ export function Footer() {
                                 className="flex items-center gap-1  transition-colors"
                             >
                                 <Icon name="more" size={18} />
-                                사업자 정보 상세보기
+                                {t('footer.businessInfo')}
                             </a>
                             <a href="#" className="block lg:hidden">
-                                도움누리
+                                {t('footer.help')}
                             </a>
                         </div>
                         <div className="flex gap-4 lg:inline-flex">
                             <a href="#" className=" transition-colors">
-                                이용약관
+                                {t('footer.termsOfService')}
                             </a>
                             <a href="#" className=" transition-colors">
-                                개인정보처리방침
+                                {t('footer.privacyPolicy')}
                             </a>
                         </div>
 
                         <span className="">
-                            통신판매업신고번호 : 제 0000-일이삼사-00000
+                            {t('footer.businessRegistration')}
                         </span>
                         <a href="#" className="hidden lg:block">
-                            도움누리
+                            {t('footer.help')}
                         </a>
                     </div>
 
                     <div className="lg:ml-auto">
                         <span className=" transition-colors">
-                            © 2026. 유한회사 올음. All rights reserved.
+                            {t('footer.copyright')}
                         </span>
                     </div>
                 </div>

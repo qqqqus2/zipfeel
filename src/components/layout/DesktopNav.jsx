@@ -11,6 +11,7 @@ import {
     TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/useTranslation";
 
 /**
  * DesktopNav - 데스크톱 네비게이션 컴포넌트
@@ -30,10 +31,29 @@ export function DesktopNav({
     onLanguageChange,
     className,
 }) {
+    const { t, language } = useTranslation('navigation');
+
+    // 메뉴 아이템을 번역된 텍스트로 변환
+    const translatedMenuItems = menuItems.map((item) => {
+        // navigation.json에서 해당 메뉴의 label을 찾아서 반환
+        const translationKey = `header.${item.id}`;
+        const translatedLabel = t(translationKey);
+
+        return {
+            ...item,
+            label: translatedLabel !== translationKey ? translatedLabel : item.label,
+        };
+    });
+
+    // 언어 변경 버튼 툴팁 텍스트
+    const languageTooltip = language === 'ko'
+        ? '클릭 시 영문으로 변경됩니다.'
+        : 'Click to change to Korean.';
+
     return (
         <nav className={cn("items-center gap-2 relative z-2 hidden md:flex", className)}>
             {/* 메뉴 아이템들 */}
-            {menuItems.map((menuItem) => (
+            {translatedMenuItems.map((menuItem) => (
                 <Button
                     key={menuItem.id}
                     type="button"
@@ -81,9 +101,7 @@ export function DesktopNav({
                             align="end"
                             className="whitespace-nowrap text-right max-w-none"
                         >
-                            <p>
-                                클릭 시 한글로 변경되며 메인 화면으로 이동합니다.
-                            </p>
+                            <p>{languageTooltip}</p>
                         </TooltipContent>
                     </Tooltip>
                 </TooltipProvider>

@@ -1,0 +1,77 @@
+{
+  "workList": {
+    "title": "Work List",
+    "description": "View and manage all your works at a glance",
+    "totalWorks": "Total Works ({count})",
+    "subtitle": "Manage your works in progress and completed works",
+    "createNewWork": "Create New Work",
+    "createFirstWork": "Create Your First Work",
+    "noWorks": "You don't have any works yet",
+    "chapters": "{count} chapters",
+    "lastUpdated": "Last updated",
+    "viewButton": "View",
+    "editButton": "Edit"
+  },
+  "workSettings": {
+    "title": "Work Settings",
+    "description": "Manage basic information and settings for your work",
+    "newWork": "Create a new work"
+  },
+  "genres": {
+    "fantasy": "Fantasy",
+    "romance": "Romance",
+    "sf": "Science Fiction",
+    "mystery": "Mystery",
+    "thriller": "Thriller",
+    "horror": "Horror",
+    "drama": "Drama",
+    "comedy": "Comedy",
+    "action": "Action",
+    "historical": "Historical",
+    "other": "Other"
+  },
+  "status": {
+    "draft": "Draft",
+    "inProgress": "In Progress",
+    "completed": "Completed",
+    "paused": "Paused"
+  },
+  "eventManagement": {
+    "title": "Event Management",
+    "description": "Systematically manage events and plots in your work",
+    "flowOrder": {
+      "tab": "Story Order",
+      "title": "Event Flow Timeline",
+      "description": "Manage events in story progression order"
+    },
+    "timeOrder": {
+      "tab": "Time Order",
+      "title": "Time-based Timeline",
+      "description": "Manage events in chronological order within the work"
+    },
+    "addNewEvent": "Add New Event",
+    "relatedCharacters": "Related Characters",
+    "location": "Location",
+    "eventStatus": {
+      "completed": "Completed",
+      "inProgress": "In Progress",
+      "planned": "Planned"
+    }
+  },
+  "characterManagement": {
+    "title": "Character Management",
+    "description": "Manage character information in your work"
+  },
+  "worldManagement": {
+    "title": "World Management",
+    "description": "Manage work background and world settings"
+  },
+  "skillManagement": {
+    "title": "Skill Management",
+    "description": "Manage character skills and abilities"
+  },
+  "itemManagement": {
+    "title": "Item Management",
+    "description": "Manage items and objects in your work"
+  }
+}

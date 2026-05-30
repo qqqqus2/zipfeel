@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "@/hooks/useTranslation";
 
 /**
  * MobileNav - 모바일 전체 화면 네비게이션 컴포넌트
@@ -15,11 +16,24 @@ import { cn } from "@/lib/utils";
  * @param {string} className - 추가 CSS 클래스
  */
 export function MobileNav({ isOpen, onClose, menuItems = [], className }) {
+    const { t } = useTranslation('navigation');
+
     // 네비게이션이 열려있지 않으면 렌더링하지 않음
     if (!isOpen) return null;
 
     // 메뉴 아이템이 없으면 렌더링하지 않음
     if (menuItems.length === 0) return null;
+
+    // 메뉴 아이템을 번역된 텍스트로 변환
+    const translatedMenuItems = menuItems.map((item) => {
+        const translationKey = `header.${item.id}`;
+        const translatedLabel = t(translationKey);
+
+        return {
+            ...item,
+            label: translatedLabel !== translationKey ? translatedLabel : item.label,
+        };
+    });
 
     // 링크 클릭 시 메뉴 닫기
     const handleLinkClick = () => {
@@ -37,9 +51,9 @@ export function MobileNav({ isOpen, onClose, menuItems = [], className }) {
         >
             <div className="flex flex-col gap-5">
                 {/* 첫 두 개의 메뉴 아이템 - 가로로 나란히 (50%씩) */}
-                {menuItems.length >= 2 && (
+                {translatedMenuItems.length >= 2 && (
                     <div className="flex flex-row gap-2.5">
-                        {menuItems.slice(0, 2).map((menuItem) => (
+                        {translatedMenuItems.slice(0, 2).map((menuItem) => (
                             <Button
                                 key={menuItem.id}
                                 type="button"
@@ -63,7 +77,7 @@ export function MobileNav({ isOpen, onClose, menuItems = [], className }) {
                 )}
 
                 {/* 나머지 메뉴 아이템들 - 세로로 */}
-                {menuItems.slice(2).map((menuItem) => (
+                {translatedMenuItems.slice(2).map((menuItem) => (
                     <Button
                         key={menuItem.id}
                         type="button"
@@ -82,9 +96,9 @@ export function MobileNav({ isOpen, onClose, menuItems = [], className }) {
                 ))}
 
                 {/* 메뉴 아이템이 1개만 있는 경우 */}
-                {menuItems.length === 1 && (
+                {translatedMenuItems.length === 1 && (
                     <Button
-                        key={menuItems[0].id}
+                        key={translatedMenuItems[0].id}
                         type="button"
                         variant="outline"
                         size="md"
@@ -92,13 +106,13 @@ export function MobileNav({ isOpen, onClose, menuItems = [], className }) {
                         asChild
                     >
                         <Link
-                            href={menuItems[0].path}
+                            href={translatedMenuItems[0].path}
                             onClick={handleLinkClick}
                         >
-                            {menuItems[0].icon && (
-                                <Icon name={menuItems[0].icon} size={24} />
+                            {translatedMenuItems[0].icon && (
+                                <Icon name={translatedMenuItems[0].icon} size={24} />
                             )}
-                            {menuItems[0].label}
+                            {translatedMenuItems[0].label}
                         </Link>
                     </Button>
                 )}

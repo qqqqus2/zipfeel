@@ -1,0 +1,58 @@
+{
+  "messages": {
+    "id": {
+      "success": "This ID is available.\nIf you want to use a different ID, please click the 'Reset' button.",
+      "error": "This ID is not available."
+    },
+    "password": {
+      "error": "The passwords do not match."
+    },
+    "penName": {
+      "duplicate": "Users with same pen name: {count}"
+    },
+    "terms": {
+      "error": "Please agree to the Terms of Service and Privacy Policy."
+    }
+  },
+  "rules": {
+    "id": {
+      "title": "Use letters, numbers, and special characters within 4-20 characters.",
+      "items": [
+        "Letters are case-sensitive.",
+        "Special characters allowed: underscore (_) and hyphen (-)."
+      ]
+    },
+    "idDuplicate": {
+      "title": "User ID must be unique.",
+      "items": [
+        "Please click the duplicate check button to complete verification."
+      ]
+    },
+    "password": {
+      "rules": [
+        {
+          "title": "Must include at least 2 of the following: letters, numbers, special characters."
+        },
+        {
+          "title": "Must be between 8-20 characters"
+        }
+      ]
+    },
+    "penName": {
+      "title": "Use letters, numbers, and special characters within 4-20 characters.",
+      "items": [
+        "Letters are case-sensitive.",
+        "Special characters allowed: underscore (_) and hyphen (-)."
+      ]
+    },
+    "penNameDuplicate": {
+      "title": "Pen name must be unique.",
+      "items": [
+        "Please click the duplicate check button to complete verification."
+      ]
+    },
+    "email": {
+      "title": "Notices related to writing services and changes to terms will be sent regardless of marketing consent."
+    }
+  }
+}

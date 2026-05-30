@@ -1,0 +1,139 @@
+{
+  "sidebar": {
+    "workSettings": {
+      "label": "Work Settings",
+      "description": "Manage basic information and settings for your work"
+    },
+    "writingActivity": {
+      "label": "Writing Activity",
+      "description": "Write and manage chapters"
+    },
+    "characterManagement": {
+      "label": "Character Management",
+      "description": "Manage character information"
+    },
+    "eventManagement": {
+      "label": "Event Management",
+      "description": "Manage events and plots"
+    },
+    "worldManagement": {
+      "label": "World Management",
+      "description": "Manage world settings and background"
+    },
+    "skillManagement": {
+      "label": "Skill Management",
+      "description": "Manage character skills and abilities"
+    },
+    "itemManagement": {
+      "label": "Item Management",
+      "description": "Manage items and objects"
+    },
+    "referenceLibrary": {
+      "label": "Reference Library",
+      "description": "Manage reference materials and resources"
+    },
+    "submissionManagement": {
+      "label": "Submission Management",
+      "description": "Track publisher submissions"
+    }
+  },
+  "header": {
+    "login": "Login",
+    "logout": "Logout",
+    "signup": "Sign Up",
+    "profile": "My Profile",
+    "create-work": "Create Work",
+    "work-list": "Work List",
+    "subscription": "Subscription",
+    "loggedOut": {
+      "login": "Login",
+      "signup": "Sign Up",
+      "createWork": "Create Work",
+      "subscription": "Subscription"
+    },
+    "loggedIn": {
+      "logout": "Logout",
+      "profile": "My Profile",
+      "createWork": "Create Work",
+      "workList": "Work List"
+    }
+  },
+  "pages": {
+    "home": {
+      "title": "Home",
+      "description": "Main landing page"
+    },
+    "join": {
+      "title": "Sign Up",
+      "description": "User registration page"
+    },
+    "login": {
+      "title": "Login",
+      "description": "User login page"
+    },
+    "pageList": {
+      "title": "Page List",
+      "description": "All pages and development status"
+    },
+    "workSettings": {
+      "title": "Work Settings",
+      "description": "Manage basic work information and settings"
+    },
+    "workSettingsNew": {
+      "title": "Create Work",
+      "description": "Create a new work"
+    },
+    "workList": {
+      "title": "Work List",
+      "description": "View all your works"
+    },
+    "writingActivity": {
+      "title": "Writing Activity",
+      "description": "Write chapters and manage writing"
+    },
+    "characterManagement": {
+      "title": "Character Management",
+      "description": "Manage character profiles and relationships"
+    },
+    "characterDetail": {
+      "title": "Character Detail",
+      "description": "Individual character details"
+    },
+    "eventManagement": {
+      "title": "Event Management",
+      "description": "Manage plot and event timeline"
+    },
+    "worldManagement": {
+      "title": "World Management",
+      "description": "Set work background and world settings"
+    },
+    "skillManagement": {
+      "title": "Skill Management",
+      "description": "Character skills and ability system"
+    },
+    "itemManagement": {
+      "title": "Item Management",
+      "description": "Items and objects in your work"
+    },
+    "referenceLibrary": {
+      "title": "Reference Library",
+      "description": "Store reference materials and resources"
+    },
+    "submissionManagement": {
+      "title": "Submission Management",
+      "description": "Track publisher submissions and status"
+    },
+    "subscription": {
+      "title": "Subscription",
+      "description": "Service subscription plan information"
+    },
+    "mypage": {
+      "title": "My Page",
+      "description": "User profile and settings"
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Application settings"
+    }
+  }
+}

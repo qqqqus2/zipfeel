@@ -7,9 +7,9 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { headerMenuLoggedIn, headerMenuLoggedOut } from "@/data/menuData";
-import { useRouter } from "next/navigation";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { DesktopNav } from "@/components/layout/DesktopNav";
+import { useTranslation } from "@/hooks/useTranslation";
 
 export function Header({
     bgColor = "bg-point-1",
@@ -21,11 +21,12 @@ export function Header({
     logoName = "logo",
 }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-    const router = useRouter();
+    const { language, changeLanguage } = useTranslation();
 
     const handleLanguageChange = () => {
-        // TODO: 언어를 한글로 변경하는 로직
-        router.push("/");
+        // 현재 언어에 따라 토글 (ko <-> en)
+        const newLanguage = language === 'ko' ? 'en' : 'ko';
+        changeLanguage(newLanguage);
     };
 
     React.useEffect(() => {
