@@ -3,7 +3,6 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 import { Footer } from "@/components/layout/Footer";
@@ -20,13 +19,6 @@ export function CommonLayout({
     tabs = [],
     defaultTab,
 }) {
-    const [isScrolled, setIsScrolled] = React.useState(false);
-
-    const handleScroll = React.useCallback((event) => {
-        const scrollTop = event.target.scrollTop;
-        setIsScrolled(scrollTop > 0);
-    }, []);
-
     return (
         <div
             className={cn(
@@ -56,16 +48,14 @@ export function CommonLayout({
                     </h2>
                     <p
                         className={cn(
-                            "fz-16 text-center md:max-w-full pt-2 md:pt-3 overflow-hidden max-w-[330px] md:leading-[1] mt-[11px] [&_strong]:font-bold m-auto transition-opacity duration-300",
-                            "md:opacity-100 md:h-auto md:pt-3",
-                            isScrolled ? "opacity-0 h-0 pt-0" : "opacity-100",
+                            "fz-16 text-center md:max-w-full pt-2 md:pt-3 overflow-hidden max-w-[330px] md:leading-[1] mt-[11px] [&_strong]:font-bold m-auto",
                         )}
                     >
                         {description ||
                             "페이지에 대한 간단한 설명을 입력하세요. 이 영역은 선택적으로 사용할 수 있습니다."}
                     </p>
                 </div>
-                <main className="flex min-h-0 flex-1 flex-col  pb-24 md:px-[90px] lg:pb-20 pb-[188px] w-full max-w-[1540px] mx-auto ">
+                <main className="flex min-h-0 flex-1 flex-col pb-24 md:px-[90px] lg:pb-15 pb-[188px] w-full max-w-[1540px] mx-auto ">
                     {showTabs && tabs.length > 0 ? (
                         <Tabs
                             variant="slash"
@@ -96,14 +86,9 @@ export function CommonLayout({
                                             "flex min-h-0 flex-1 flex-col overflow-hidden md:mt-0 mt-10 rounded-[40px] bg-white",
                                         )}
                                     >
-                                        <ScrollArea
-                                            className="min-h-0 flex-1 overscroll-contain"
-                                            onScroll={handleScroll}
-                                        >
-                                            <div className="md:px-4 px-[30px] max-w-[630px] m-auto py-[58px]">
-                                                {tab.content}
-                                            </div>
-                                        </ScrollArea>
+                                        <div className="md:px-4 px-[30px] m-auto py-[58px] min-h-0 flex-1">
+                                            {tab.content}
+                                        </div>
                                     </div>
                                 </TabsContent>
                             ))}
@@ -111,17 +96,12 @@ export function CommonLayout({
                     ) : (
                         <div
                             className={cn(
-                                "flex min-h-0 flex- 1 flex-col overflow-hidden rounded-[40px] bg-white",
+                                "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white",
                             )}
                         >
-                            <ScrollArea
-                                className="min-h-0 flex-1 overscroll-contain"
-                                onScroll={handleScroll}
-                            >
-                                <div className="md:px-4 px-[30px] max-w-[630px] m-auto py-[58px]">
-                                    {children}
-                                </div>
-                            </ScrollArea>
+                            <div className="md:px-4 px-[30px] max-w-[630px] m-auto py-[58px] min-h-0 flex-1 overflow-y-auto custom-scrollbar">
+                                {children}
+                            </div>
                         </div>
                     )}
                 </main>

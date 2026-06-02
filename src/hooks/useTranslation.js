@@ -34,11 +34,18 @@ export function useTranslation(namespace = 'common') {
    * @returns {string} 번역된 텍스트
    */
   const t = (key, params = {}) => {
+    // 로딩 중이거나 번역 데이터가 없으면 키 반환
+    if (isLoading || !translations || Object.keys(translations).length === 0) {
+      return key;
+    }
+
     // 네임스페이스에 해당하는 번역 데이터 가져오기
     let value = translations[namespace];
 
     if (!value) {
-      console.warn(`Translation namespace '${namespace}' not found`);
+      if (!isLoading) {
+        console.warn(`Translation namespace '${namespace}' not found`);
+      }
       return key;
     }
 
@@ -96,6 +103,11 @@ export function useTranslations(namespaces = ['common']) {
    * @param {Object} params - 동적 파라미터 객체
    */
   const t = (key, params = {}) => {
+    // 로딩 중이거나 번역 데이터가 없으면 키 반환
+    if (isLoading || !translations || Object.keys(translations).length === 0) {
+      return key;
+    }
+
     const [namespace, ...keyParts] = key.split(':');
     const actualKey = keyParts.join(':');
 
@@ -107,7 +119,9 @@ export function useTranslations(namespaces = ['common']) {
     let value = translations[namespace];
 
     if (!value) {
-      console.warn(`Translation namespace '${namespace}' not found`);
+      if (!isLoading) {
+        console.warn(`Translation namespace '${namespace}' not found`);
+      }
       return key;
     }
 
