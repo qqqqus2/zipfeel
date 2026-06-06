@@ -33,6 +33,7 @@ import {
     LayerPopupNotice,
     StepLayerPopupFooter,
 } from "./layer-popup";
+import { CharacterPopup } from "./character-popup";
 
 const SEARCH_OPEN_OPTIONS = [
     { value: "input", label: "입력" },
@@ -357,6 +358,29 @@ export const TermsAgreement = {
         };
 
         return <TermsPopupExample />;
+    },
+};
+
+/**
+ * 탭이 포함된 레이어 팝업 - CharacterPopup 컴포넌트 사용
+ */
+export const WithTabs = {
+    render: () => {
+        const CharacterPopupExample = () => {
+            const [isOpen, setIsOpen] = useState(false);
+
+            return (
+                <>
+                    <Button variant="outline" onClick={() => setIsOpen(true)}>
+                        캐릭터 팝업 열기
+                    </Button>
+
+                    <CharacterPopup open={isOpen} onOpenChange={setIsOpen} />
+                </>
+            );
+        };
+
+        return <CharacterPopupExample />;
     },
 };
 

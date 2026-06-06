@@ -95,22 +95,50 @@ LayerPopupContent.displayName = DialogPrimitive.Content.displayName;
  * - 상단에 고정
  * - 타이틀과 닫기 버튼 포함
  * - 스크롤 시에도 고정됨
+ * - variant="dark": 어두운 배경 (#474554), 타이틀이 닫기 버튼 아래 위치
  */
-const LayerPopupHeader = ({ className, children, ...props }) => (
-    <div
-        className={cn(
-            "flex items-center justify-between",
-            "px-[30px] py-5",
-            "border-b border-gray-2",
-            "bg-white rounded-t-[40px]",
-            "shrink-0", // 헤더 영역이 축소되지 않도록
-            className,
-        )}
-        {...props}
-    >
-        {children}
-    </div>
-);
+const LayerPopupHeader = ({ className, children, variant, ...props }) => {
+    const isDark = variant === "dark";
+
+    return (
+        <div
+            className={cn(
+                "shrink-0", // 헤더 영역이 축소되지 않도록
+                "px-[30px] py-5",
+                "border-b border-gray-2",
+                "rounded-t-[40px]",
+                isDark
+                    ? "bg-[#474554] text-white flex flex-col gap-3"
+                    : "bg-white flex items-center justify-between",
+                className,
+            )}
+            {...props}
+        >
+            {isDark ? (
+                <>
+                    <div className="flex justify-end -mr-[6px]">
+                        {React.Children.toArray(children).find(
+                            (child) =>
+                                React.isValidElement(child) &&
+                                child.type?.displayName ===
+                                    "LayerPopupCloseButton",
+                        )}
+                    </div>
+                    <div>
+                        {React.Children.toArray(children).find(
+                            (child) =>
+                                React.isValidElement(child) &&
+                                child.type?.displayName ===
+                                    DialogPrimitive.Title.displayName,
+                        )}
+                    </div>
+                </>
+            ) : (
+                children
+            )}
+        </div>
+    );
+};
 LayerPopupHeader.displayName = "LayerPopupHeader";
 
 /**
@@ -120,7 +148,7 @@ const LayerPopupTitle = React.forwardRef(({ className, ...props }, ref) => (
     <DialogPrimitive.Title
         ref={ref}
         className={cn(
-            "text-[20px] font-bold leading-none tracking-tight text-gray-6",
+            "text-[20px] font-bold leading-none tracking-tight",
             className,
         )}
         {...props}
@@ -132,12 +160,14 @@ LayerPopupTitle.displayName = DialogPrimitive.Title.displayName;
  * LayerPopup Close Button - 닫기 버튼
  */
 const LayerPopupCloseButton = React.forwardRef(
-    ({ className, ...props }, ref) => (
+    ({ className, variant, ...props }, ref) => (
         <DialogPrimitive.Close
             ref={ref}
             className={cn(
-                "rounded-full p-1.5",
-                "text-gray-6 hover:text-point-2",
+                "rounded-full ",
+                variant === "dark"
+                    ? "text-white hover:text-gray-3"
+                    : "text-gray-6 hover:text-point-2",
                 "transition-colors",
                 "focus:outline-none focus:ring-2 focus:ring-point-2 focus:ring-offset-2",
                 "disabled:pointer-events-none disabled:opacity-50",

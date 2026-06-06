@@ -64,6 +64,7 @@ function HexagonChart({
     showLegend = true,
     legendLabelMaxWidth = 96,
     size = 220,
+    title,
     ...props
 }) {
     const items = normalizeItems(data);
@@ -104,6 +105,9 @@ function HexagonChart({
             className={cn("w-full min-w-0", className)}
             {...props}
         >
+            {title && (
+                <div className="text-[14px] mb-[6px] font-bold">{title}</div>
+            )}
             <div
                 className="relative mx-auto w-full max-w-[280px] overflow-visible"
                 style={{ aspectRatio: "1 / 1" }}
@@ -152,12 +156,13 @@ function HexagonChart({
                     return (
                         <span
                             key={`label-${item.label}-${index}`}
-                            className="pointer-events-none absolute whitespace-nowrap text-center text-xs text-foreground"
+                            className="absolute text-center text-xs text-foreground max-w-[60px] truncate cursor-default"
                             style={{
                                 left: `${pos.x}%`,
                                 top: `${pos.y}%`,
                                 transform: "translate(-50%, -50%)",
                             }}
+                            title={item.label}
                         >
                             {item.label}
                         </span>
@@ -194,38 +199,39 @@ function HexagonChart({
 }
 
 function HexagonChartLegendRow({ item, labelMaxWidth }) {
-    const hasDelta = item.delta !== undefined && !Number.isNaN(item.delta);
+    const hasDelta =
+        item.delta !== undefined &&
+        !Number.isNaN(item.delta) &&
+        item.delta !== 0;
     const deltaText =
-        hasDelta &&
-        (item.delta > 0
-            ? `+${item.delta}`
-            : `${item.delta}`);
+        hasDelta && (item.delta > 0 ? `+${item.delta}` : `${item.delta}`);
 
     return (
-        <div className="flex min-w-0 items-baseline justify-between gap-2">
+        <div className="flex min-w-0 fz-14 items-baseline gap-[5px]">
             <span
-                className="min-w-0 truncate"
+                className="min-w-0 truncate font-medium"
                 style={{ maxWidth: labelMaxWidth }}
                 title={item.label}
             >
                 {item.label}
             </span>
-            <span className="shrink-0 tabular-nums">
-                {item.value}
+            <span className="shrink-0 tabular-nums font-bold">
+                ({item.value}
                 {hasDelta ? (
                     <span
                         className={cn(
-                            "ml-1 text-xs",
+                            "ml-1",
                             item.delta > 0
                                 ? "text-point-2"
                                 : item.delta < 0
-                                  ? "text-sub-1"
+                                  ? "text-sub-6"
                                   : "text-gray-6",
                         )}
                     >
-                        ({deltaText})
+                        {deltaText}
                     </span>
                 ) : null}
+                )
             </span>
         </div>
     );

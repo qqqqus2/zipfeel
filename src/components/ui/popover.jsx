@@ -6,13 +6,49 @@ import { X } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
-const Popover = PopoverPrimitive.Root;
+/**
+ * Context for managing hover state
+ */
+const PopoverContext = React.createContext(null);
 
-const PopoverTrigger = PopoverPrimitive.Trigger;
+/**
+ * Popover - 마우스 오버시 열리고 닫기 버튼으로 닫히는 Popover
+ */
+const Popover = ({ children, ...props }) => {
+  const [open, setOpen] = React.useState(false);
+
+  return (
+    <PopoverContext.Provider value={{ open, setOpen }}>
+      <PopoverPrimitive.Root open={open} onOpenChange={setOpen} {...props}>
+        {children}
+      </PopoverPrimitive.Root>
+    </PopoverContext.Provider>
+  );
+};
 
 const PopoverAnchor = PopoverPrimitive.Anchor;
 
 const PopoverClose = PopoverPrimitive.Close;
+
+/**
+ * PopoverTrigger with hover support
+ * 마우스 오버시 팝오버가 열리도록 수정
+ */
+const PopoverTrigger = React.forwardRef(({ children, ...props }, ref) => {
+  const context = React.useContext(PopoverContext);
+
+  return (
+    <PopoverPrimitive.Trigger
+      ref={ref}
+      asChild
+      onMouseEnter={() => context?.setOpen(true)}
+      {...props}
+    >
+      {children}
+    </PopoverPrimitive.Trigger>
+  );
+});
+PopoverTrigger.displayName = "PopoverTrigger";
 
 const popoverPanelMotionClassName =
   "data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2";
@@ -88,4 +124,10 @@ const PopoverContent = React.forwardRef(
 );
 PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 
-export { Popover, PopoverTrigger, PopoverAnchor, PopoverContent, PopoverClose };
+export {
+  Popover,
+  PopoverTrigger,
+  PopoverAnchor,
+  PopoverContent,
+  PopoverClose,
+};

@@ -167,56 +167,6 @@ function useScrollActiveTabIntoView(listRef, enabled) {
     }, [enabled, listRef]);
 }
 
-/** 가로 스크롤이 있을 때만, 끝이 아닌 쪽에만 가장자리 그라데이션 표시 */
-function useTabListEdgeFades(listRef, enabled) {
-    const [edges, setEdges] = React.useState({ left: false, right: false });
-
-    const update = React.useCallback(() => {
-        const el = listRef.current;
-        if (!el || !enabled) {
-            setEdges({ left: false, right: false });
-            return;
-        }
-        const { scrollLeft, scrollWidth, clientWidth } = el;
-        const maxScroll = scrollWidth - clientWidth;
-        const eps = 1;
-        if (maxScroll <= eps) {
-            setEdges({ left: false, right: false });
-            return;
-        }
-        setEdges({
-            left: scrollLeft > eps,
-            right: scrollLeft < maxScroll - eps,
-        });
-    }, [enabled, listRef]);
-
-    React.useLayoutEffect(() => {
-        if (!enabled) return;
-        const el = listRef.current;
-        if (!el) return;
-
-        update();
-
-        el.addEventListener("scroll", update, { passive: true });
-        window.addEventListener("resize", update);
-
-        const ro = new ResizeObserver(update);
-        ro.observe(el);
-
-        const mo = new MutationObserver(update);
-        mo.observe(el, { subtree: true, childList: true });
-
-        return () => {
-            el.removeEventListener("scroll", update);
-            window.removeEventListener("resize", update);
-            ro.disconnect();
-            mo.disconnect();
-        };
-    }, [enabled, listRef, update]);
-
-    return edges;
-}
-
 function UnderlineTabIndicatorLayer() {
     return (
         <div
@@ -254,13 +204,7 @@ function TabIndicatorSlot({ variant }) {
 }
 
 /** solidRounded: 리스트 뒤 둥근 배경 레이어 */
-const tabsListSolidRoundedShellClassName = cn(
-    "contents",
-    "group-data-[variant=solidRounded]/tabs:relative group-data-[variant=solidRounded]/tabs:inline-flex",
-    "group-data-[variant=solidRounded]/tabs:after:absolute group-data-[variant=solidRounded]/tabs:after:inset-0",
-    "group-data-[variant=solidRounded]/tabs:after:translate-y-1 group-data-[variant=solidRounded]/tabs:after:bg-sub-3",
-    "group-data-[variant=solidRounded]/tabs:after:rounded-l-full",
-);
+const tabsListSolidRoundedShellClassName = cn("contents");
 
 /** 가로 스크롤은 유지하되 스크롤바 트랙은 숨김(터치·트랙패드·shift+휠로 스크롤 가능) */
 const tabsListHorizontalScrollClassName = cn(
@@ -293,7 +237,7 @@ const tabsListSolidClassName = cn(
 const tabsListSolidRoundedClassName = cn(
     "group-data-[variant=solidRounded]/tabs:z-10 group-data-[variant=solidRounded]/tabs:h-12 group-data-[variant=solidRounded]/tabs:gap-0",
     "group-data-[variant=solidRounded]/tabs:overflow-hidden group-data-[variant=solidRounded]/tabs:rounded-l-full",
-    "group-data-[variant=solidRounded]/tabs:border-b group-data-[variant=solidRounded]/tabs:border-sub-3",
+    "group-data-[variant=solidRounded]/tabs:border-b-[3px] group-data-[variant=solidRounded]/tabs:border-solid group-data-[variant=solidRounded]/tabs:border-[color:var(--tabs-accent)]",
     "group-data-[variant=solidRounded]/tabs:bg-tabs-surface",
 );
 
@@ -333,9 +277,9 @@ const tabsTriggerSolidRoundedClassName = cn(
     "group-data-[variant=solidRounded]/tabs:h-12 group-data-[variant=solidRounded]/tabs:px-6",
     "group-data-[variant=solidRounded]/tabs:bg-tabs-surface group-data-[variant=solidRounded]/tabs:text-tabs-label-muted",
     "group-data-[variant=solidRounded]/tabs:data-[state=active]:text-white group-data-[variant=solidRounded]/tabs:data-[state=active]:font-semibold",
-    "group-data-[variant=solidRounded]/tabs:after:pointer-events-none group-data-[variant=solidRounded]/tabs:after:absolute group-data-[variant=solidRounded]/tabs:after:bottom-[-2px]",
-    "group-data-[variant=solidRounded]/tabs:after:left-3 group-data-[variant=solidRounded]/tabs:after:right-3 group-data-[variant=solidRounded]/tabs:after:h-1",
-    "group-data-[variant=solidRounded]/tabs:after:rounded-sm group-data-[variant=solidRounded]/tabs:after:bg-[color:var(--tabs-accent)]",
+    "group-data-[variant=solidRounded]/tabs:after:pointer-events-none group-data-[variant=solidRounded]/tabs:after:absolute group-data-[variant=solidRounded]/tabs:after:bottom-[1px]",
+    "group-data-[variant=solidRounded]/tabs:after:left-2 group-data-[variant=solidRounded]/tabs:after:right-2 group-data-[variant=solidRounded]/tabs:after:h-[4px]",
+    "group-data-[variant=solidRounded]/tabs:after:rounded-none group-data-[variant=solidRounded]/tabs:after:bg-[color:var(--tabs-accent)]",
     "group-data-[variant=solidRounded]/tabs:after:opacity-0 group-data-[variant=solidRounded]/tabs:after:transition-opacity",
     "group-data-[variant=solidRounded]/tabs:data-[state=active]:after:opacity-100",
 );
@@ -404,14 +348,6 @@ const TabsList = React.forwardRef(({ className, children, ...props }, ref) => {
     useScrollActiveTabIntoView(listRef, orientation === "horizontal");
 
     const horizontal = orientation === "horizontal";
-    const { left: showLeftFade, right: showRightFade } = useTabListEdgeFades(
-        listRef,
-        horizontal,
-    );
-
-    const fadeClassName = cn(
-        "pointer-events-none absolute inset-y-0 z-20 w-10 from-background to-transparent transition-opacity duration-200 motion-reduce:transition-none",
-    );
 
     const listSection = (
         <div className={tabsListSolidRoundedShellClassName}>
@@ -438,27 +374,7 @@ const TabsList = React.forwardRef(({ className, children, ...props }, ref) => {
         return listSection;
     }
 
-    return (
-        <div className="relative w-full min-w-0">
-            {listSection}
-            <div
-                aria-hidden
-                className={cn(
-                    fadeClassName,
-                    "left-0 bg-gradient-to-r",
-                    showLeftFade ? "opacity-100" : "opacity-0",
-                )}
-            />
-            <div
-                aria-hidden
-                className={cn(
-                    fadeClassName,
-                    "right-0 bg-gradient-to-l",
-                    showRightFade ? "opacity-100" : "opacity-0",
-                )}
-            />
-        </div>
-    );
+    return <div className="relative w-full min-w-0">{listSection}</div>;
 });
 TabsList.displayName = TabsPrimitive.List.displayName;
 
