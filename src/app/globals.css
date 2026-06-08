@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "react-quill/dist/quill.snow.css";
 
 /* Tailwind v4 source scanning (Storybook 포함) */
 @source "../**/*.{js,jsx,ts,tsx,md,mdx}";
@@ -319,5 +320,74 @@
     /* Radix UI의 인라인 스타일 오버라이드 */
     .accordion-content-custom[style*="height"] {
         height: auto !important;
+    }
+
+    /* 커스텀 bullet 리스트 - 작은 bullet 크기 */
+    .list-disc-small {
+        list-style: none;
+    }
+
+    .list-disc-small li {
+        position: relative;
+        padding-left: 15px;
+    }
+
+    .list-disc-small li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        font-size: 8px;
+        line-height: 16px;
+        top: 0;
+        color: currentColor;
+    }
+
+    /* dd 요소 패딩 */
+    .character-basic-info dl dd {
+        padding-inline: 20px;
+        font-size: 14px;
+    }
+
+    /* React Quill 에디터 스타일 커스터마이징 */
+    .quill-editor-wrapper .ql-container {
+        font-size: 16px;
+        font-family: "NanumSquareRound", sans-serif;
+        min-height: 200px;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+    }
+
+    .quill-editor-wrapper .ql-toolbar {
+        border-top-left-radius: 8px;
+        border-top-right-radius: 8px;
+        background-color: rgb(var(--gray-scale-1));
+        border-color: rgb(var(--gray-scale-2));
+    }
+
+    .quill-editor-wrapper .ql-container {
+        border-color: rgb(var(--gray-scale-2));
+    }
+
+    .quill-editor-wrapper .ql-editor {
+        min-height: 200px;
+        color: rgb(var(--gray-scale-6));
+        background-color: white;
+    }
+
+    .quill-editor-wrapper .ql-editor.ql-blank::before {
+        color: rgb(var(--gray-scale-4));
+        font-style: normal;
+    }
+
+    .quill-editor-wrapper .ql-stroke {
+        stroke: rgb(var(--gray-scale-5));
+    }
+
+    .quill-editor-wrapper .ql-fill {
+        fill: rgb(var(--gray-scale-5));
+    }
+
+    .quill-editor-wrapper .ql-picker-label {
+        color: rgb(var(--gray-scale-6));
     }
 }

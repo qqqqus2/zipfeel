@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import dynamic from "next/dynamic";
 import { Icon } from "./icon";
 import {
     Accordion,
@@ -19,6 +20,9 @@ import {
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "./tabs";
 import { Checkbox } from "./checkbox";
 import { HexagonChart } from "./hexagon-chart";
+
+// React Quill을 동적으로 임포트 (SSR 방지)
+const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
 
 // 히스토리 아코디언 데이터
 const historyData = [
@@ -110,6 +114,7 @@ export const CharacterPopup = ({ open, onOpenChange }) => {
     const [currentTab, setCurrentTab] = useState("history");
     const [isHexaCorrectionEnabled, setIsHexaCorrectionEnabled] =
         useState(false);
+    const [editorContent, setEditorContent] = useState("");
 
     return (
         <LayerPopup open={open} onOpenChange={onOpenChange}>
@@ -217,6 +222,154 @@ export const CharacterPopup = ({ open, onOpenChange }) => {
                                     <Icon name="ico-title" size={16} />
                                     Section명
                                 </h3>
+                                <div className="character-basic-info flex flex-col gap-[30px]">
+                                    <dl>
+                                        <dt className="fz-14 font-bold mb-[6px]">
+                                            캐릭터 이름
+                                        </dt>
+                                        <dd>라디오까지는 Input Stroke Hide</dd>
+                                    </dl>
+                                    <dl>
+                                        <dt className="fz-14 font-bold mb-[6px]">
+                                            항목명
+                                        </dt>
+                                        <dd>
+                                            <div className="flex items-center gap-[10px]">
+                                                <strong>세부 항목</strong>
+                                                <span>
+                                                    세부항목은 항목명 없을
+                                                    수도...
+                                                </span>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt className="fz-14 font-bold mb-[6px] flex justify-between">
+                                            항목명
+                                            <span className="fz-14 font-normal">
+                                                0 / 10
+                                            </span>
+                                        </dt>
+                                        <dd className="flex flex-col gap-[6px] p-[10px]">
+                                            <div className="flex justify-between items-center gap-[10px]">
+                                                입력된 내용이 보여집니다
+                                                <strong>항목명</strong>
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt className="fz-14 font-bold mb-[6px]">
+                                            항목명
+                                        </dt>
+                                        <dd>
+                                            <ul className="list-disc-small">
+                                                <li className="fz-16 font-normal">
+                                                    선택 항목 1
+                                                </li>
+                                                <li className="fz-16 font-normal">
+                                                    선택 항목 2
+                                                </li>
+                                                <li className="fz-16 font-normal">
+                                                    선택 항목 3
+                                                </li>
+                                                <li className="fz-16 font-normal">
+                                                    선택 항목 4
+                                                </li>
+                                            </ul>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt className="fz-14 font-bold mb-[6px]">
+                                            항목명
+                                        </dt>
+                                        <dd className="flex flex-col gap-[6px]">
+                                            <div className="flex justify-between items-center gap-[10px] fz-16 font-normal">
+                                                <strong>항목명</strong>
+                                                입력된 내용이 보여집니다
+                                            </div>
+                                            <div className="flex justify-between items-center gap-[10px] fz-16 font-normal">
+                                                <strong>항목명</strong>
+                                                입력된 내용이 보여집니다
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt className="fz-14 font-bold mb-[6px] ">
+                                            항목명
+                                        </dt>
+                                        <dd>
+                                            <ul className="list-disc-small">
+                                                <li className="fz-16 font-normal">
+                                                    선택 항목 1
+                                                </li>
+                                                <li className="fz-16 font-normal">
+                                                    선택 항목 2
+                                                </li>
+                                                <li className="fz-16 font-normal">
+                                                    선택 항목 3
+                                                </li>
+                                                <li className="fz-16 font-normal">
+                                                    선택 항목 4
+                                                </li>
+                                            </ul>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt className="fz-14 font-bold mb-[6px]">
+                                            항목명
+                                        </dt>
+                                        <dd>
+                                            <div className="quill-editor-wrapper -mx-5">
+                                                <ReactQuill
+                                                    theme="snow"
+                                                    value={editorContent}
+                                                    onChange={setEditorContent}
+                                                    modules={{
+                                                        toolbar: [
+                                                            [
+                                                                {
+                                                                    header: [
+                                                                        1,
+                                                                        2,
+                                                                        3,
+                                                                        false,
+                                                                    ],
+                                                                },
+                                                            ],
+                                                            [
+                                                                "bold",
+                                                                "italic",
+                                                                "underline",
+                                                            ],
+                                                            [
+                                                                {
+                                                                    list: "ordered",
+                                                                },
+                                                                {
+                                                                    list: "bullet",
+                                                                },
+                                                            ],
+                                                            ["link"],
+                                                            ["clean"],
+                                                        ],
+                                                    }}
+                                                    placeholder="내용을 입력하세요..."
+                                                />
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                    <dl>
+                                        <dt className="fz-14 font-bold mb-[6px]">
+                                            항목명
+                                        </dt>
+                                        <dd>
+                                            <div className="fz-16 font-normal text-gray-6 p-2">
+                                                Text Area Case는 View에서는 Min
+                                                없이 그냥 Hug
+                                            </div>
+                                        </dd>
+                                    </dl>
+                                </div>
                             </section>
 
                             <section className="flex flex-col gap-5 p-[30px]">
