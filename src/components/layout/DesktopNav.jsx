@@ -31,7 +31,7 @@ export function DesktopNav({
     onLanguageChange,
     className,
 }) {
-    const { t, language } = useTranslation('navigation');
+    const { t, language } = useTranslation("navigation");
 
     // 메뉴 아이템을 번역된 텍스트로 변환
     const translatedMenuItems = menuItems.map((item) => {
@@ -41,24 +41,33 @@ export function DesktopNav({
 
         return {
             ...item,
-            label: translatedLabel !== translationKey ? translatedLabel : item.label,
+            label:
+                translatedLabel !== translationKey
+                    ? translatedLabel
+                    : item.label,
         };
     });
 
     // 언어 변경 버튼 툴팁 텍스트
-    const languageTooltip = language === 'ko'
-        ? '클릭 시 영문으로 변경됩니다.'
-        : 'Click to change to Korean.';
+    const languageTooltip =
+        language === "ko"
+            ? "클릭 시 영문으로 변경됩니다."
+            : "Click to change to Korean.";
 
     return (
-        <nav className={cn("items-center gap-2 relative z-2 hidden md:flex", className)}>
+        <nav
+            className={cn(
+                "items-center gap-2 relative z-2 hidden md:flex",
+                className,
+            )}
+        >
             {/* 메뉴 아이템들 */}
             {translatedMenuItems.map((menuItem) => (
                 <Button
                     key={menuItem.id}
                     type="button"
                     variant="outline"
-                    size="sm"
+                    size="md"
                     className={cn(
                         "bg-transparent",
                         borderColor,
@@ -69,11 +78,29 @@ export function DesktopNav({
                     asChild
                 >
                     <Link href={menuItem.path}>
-                        {menuItem.icon && <Icon name={menuItem.icon} size={24} />}
+                        {menuItem.icon && (
+                            <Icon name={menuItem.icon} size={24} />
+                        )}
                         {menuItem.label}
                     </Link>
                 </Button>
             ))}
+
+            {/* Stethoscope 버튼 */}
+            <Button
+                type="button"
+                variant="outline"
+                size="md"
+                className={cn(
+                    "bg-transparent px-0 w-[44px]",
+                    borderColor,
+                    textColor,
+                    hoverBg,
+                    `hover:${textColor}`,
+                )}
+            >
+                <Icon name="stethoscope" size={24} />
+            </Button>
 
             {/* 언어 변경 버튼 */}
             {onLanguageChange && (
@@ -83,9 +110,9 @@ export function DesktopNav({
                             <Button
                                 type="button"
                                 variant="outline"
-                                size="sm"
+                                size="md"
                                 className={cn(
-                                    "bg-transparent md:ml-0 ml-auto",
+                                    "bg-transparent md:ml-0 ml-auto px-0 w-[44px]",
                                     borderColor,
                                     textColor,
                                     hoverBg,

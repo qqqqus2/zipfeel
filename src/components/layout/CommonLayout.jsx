@@ -42,13 +42,13 @@ export function CommonLayout({
             <div className="relative z-10 flex min-h-0 flex-col flex-1 -mt-6 md:-mt-0">
                 <CommonLnb />
                 {/* 타이틀 영역 */}
-                <div className="w-full py-6 md:py-8">
+                <div className="w-full py-6 md:pb-15 md:pt-[90px]">
                     <h2 className="fz-24 text-center leading-[1] text-gray-6 font-bold">
                         {title || "페이지 타이틀"}
                     </h2>
                     <p
                         className={cn(
-                            "fz-16 text-center md:max-w-full pt-2 md:pt-3 overflow-hidden max-w-[330px] md:leading-[1] mt-[11px] [&_strong]:font-bold m-auto",
+                            "fz-16 text-center md:w-[60%] md:max-w-full pt-2 md:pt-3 overflow-hidden max-w-[330px] md:leading-[1] mt-[11px] [&_strong]:font-bold m-auto",
                         )}
                     >
                         {description ||
