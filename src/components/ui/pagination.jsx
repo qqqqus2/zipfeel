@@ -70,7 +70,7 @@ const PaginationLink = ({ className, isActive, size = "icon", ...props }) => (
             "after:pointer-events-none after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[3px] after:content-[''] after:opacity-0 after:transition-[opacity,background-color]",
             "active:text-point-1 active:after:bg-point-1 active:after:opacity-100",
             "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-point-2/40",
-            "aria-disabled:pointer-events-none aria-disabled:bg-point-3 aria-disabled:text-point-3 aria-disabled:shadow-none",
+            "aria-disabled:pointer-events-none aria-disabled:text-point-3 aria-disabled:shadow-none",
             isActive &&
                 "font-bold text-point-1 after:bg-point-1 after:opacity-100 hover:text-point-2",
             className,

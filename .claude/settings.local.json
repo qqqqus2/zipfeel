@@ -24,7 +24,11 @@
       "Bash(tree:*)",
       "Bash(timeout /t 5)",
       "Bash(dir:*)",
-      "Bash(npm cache clean:*)"
+      "Bash(npm cache clean:*)",
+      "Bash(cmd //c \"taskkill //PID 54256 //F\")",
+      "Bash(powershell -Command \"Stop-Process -Id 54256 -Force\")",
+      "Bash(powershell -Command \"Stop-Process -Id 60604 -Force\")",
+      "Bash(powershell -Command \"Stop-Process -Id 52908 -Force\")"
     ],
     "deny": [],
     "ask": []

@@ -1,481 +1,403 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { CommonLayout } from "@/components/layout/CommonLayout";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Icon } from "@/components/ui/icon";
-import { ListPanel } from "@/components/ui/list-panel";
+import { Eye, Gem, History, Pencil } from "lucide-react";
+import { cn } from "@/lib/utils";
+import {
+    TableGrid,
+    TableGridCell,
+    TableGridRow,
+} from "@/components/ui/table-grid";
+import { sortTableRows } from "@/components/ui/table";
+import { PaginationBar } from "@/components/ui/pagination";
 
-// 캐릭터 설정 탭 콘텐츠
-function CharacterSettingsContent() {
-    const [rightPanelItems, setRightPanelItems] = useState([
-        { id: "1", content: "주인공" },
-        { id: "2", content: "조력자" },
-        { id: "3", content: "멘토" },
-    ]);
+// gridRichRows 데이터
+const gridRichRows = [
+    {
+        id: "3456",
+        role: "엑스트라",
+        status: "일이",
+        metaLines: [
+            { label: "호칭", text: "일이삼사오육칠팔구십" },
+            { label: "애칭", text: "일이삼사오육칠팔구십" },
+        ],
+        title: "이름 텍스트가 길 때 이름 텍스트가 길 때… 이름 텍스트가 길 때 이름 텍스트가 길 때… 이름 텍스트가 길 때 이름 텍스트가 길 때…",
+        summary: "한줄 요약 (최대 30자)",
+    },
+    {
+        id: "2345",
+        role: "엑스트라",
+        status: "일이",
+        metaLines: [{ label: "호칭", text: "일이삼사오육칠팔구십" }],
+        title: "다른 제목이 매우 길 때 줄임표로 처리합니다…",
+        summary: "요약 한 줄",
+    },
+    {
+        id: "4567",
+        role: "주연",
+        status: "완료",
+        metaLines: [
+            { label: "호칭", text: "일이삼사" },
+            { label: "애칭", text: "오육칠팔" },
+        ],
+        title: "제목 텍스트",
+        summary: "최대 30자 요약 예시",
+    },
+    {
+        id: "8901",
+        role: "조연",
+        status: "대기",
+        metaLines: [{ label: "호칭", text: "일이삼사오육칠팔구십일이삼사" }],
+        title: "네 번째 행 제목입니다…",
+        summary: "한줄 요약 (최대 30자)",
+    },
+    {
+        id: "1234",
+        role: "주연",
+        status: "완료",
+        metaLines: [
+            { label: "호칭", text: "캐릭터5" },
+            { label: "애칭", text: "별명5" },
+        ],
+        title: "다섯 번째 캐릭터 이름",
+        summary: "캐릭터 요약 설명 5",
+    },
+    {
+        id: "5678",
+        role: "조연",
+        status: "일이",
+        metaLines: [{ label: "호칭", text: "캐릭터6" }],
+        title: "여섯 번째 캐릭터 이름",
+        summary: "캐릭터 요약 설명 6",
+    },
+    {
+        id: "9012",
+        role: "엑스트라",
+        status: "대기",
+        metaLines: [
+            { label: "호칭", text: "캐릭터7" },
+            { label: "애칭", text: "별명7" },
+        ],
+        title: "일곱 번째 캐릭터 이름",
+        summary: "캐릭터 요약 설명 7",
+    },
+    {
+        id: "3457",
+        role: "주연",
+        status: "완료",
+        metaLines: [{ label: "호칭", text: "캐릭터8" }],
+        title: "여덟 번째 캐릭터 이름",
+        summary: "캐릭터 요약 설명 8",
+    },
+    {
+        id: "7890",
+        role: "조연",
+        status: "일이",
+        metaLines: [
+            { label: "호칭", text: "캐릭터9" },
+            { label: "애칭", text: "별명9" },
+        ],
+        title: "아홉 번째 캐릭터 이름",
+        summary: "캐릭터 요약 설명 9",
+    },
+    {
+        id: "2468",
+        role: "엑스트라",
+        status: "대기",
+        metaLines: [{ label: "호칭", text: "캐릭터10" }],
+        title: "열 번째 캐릭터 이름",
+        summary: "캐릭터 요약 설명 10",
+    },
+    {
+        id: "1357",
+        role: "주연",
+        status: "완료",
+        metaLines: [
+            { label: "호칭", text: "캐릭터11" },
+            { label: "애칭", text: "별명11" },
+        ],
+        title: "열한 번째 캐릭터 이름",
+        summary: "캐릭터 요약 설명 11",
+    },
+    {
+        id: "9753",
+        role: "조연",
+        status: "일이",
+        metaLines: [{ label: "호칭", text: "캐릭터12" }],
+        title: "열두 번째 캐릭터 이름",
+        summary: "캐릭터 요약 설명 12",
+    },
+];
 
+// 테이블 컬럼 정의
+const gridColumns = [
+    {
+        key: "id",
+        header: "No.",
+        size: "w-[80px]",
+        sortAlign: "left",
+        mobileClassName:
+            "max-md:order-3 max-md:w-full max-md:justify-start max-md:pt-1",
+    },
+    {
+        key: "role",
+        header: "구분",
+        size: "w-[80px]",
+        mobileClassName:
+            "max-md:order-1 max-md:w-[calc(50%-4px)] max-md:shrink-0 max-md:justify-start max-md:font-semibold",
+    },
+    {
+        key: "status",
+        header: "상태",
+        size: "w-[80px]",
+        headerAlign: "left",
+        mobileClassName:
+            "max-md:order-2 max-md:flex max-md:w-[calc(50%-4px)] max-md:shrink-0 max-md:justify-end max-md:text-sm max-md:text-muted-foreground",
+    },
+    {
+        key: "title",
+        header: "이름",
+        size: "fill",
+        sortable: true,
+        headerAlign: "left",
+        mobileClassName: "max-md:order-4 max-md:w-full max-md:p-0",
+    },
+];
+
+// 상세 셀 컴포넌트
+function GridRichDetailCell({ row }) {
+    const lastMetaIndex = Math.max(0, (row.metaLines?.length ?? 0) - 1);
     return (
-        <div className="flex gap-6 h-[calc(100vh-200px)]">
-            {/* 좌측 빈 영역 */}
-            <div className="w-[300px] shrink-0 hidden min-[1500px]:block"></div>
-
-            {/* 중앙 콘텐츠 */}
-            <div className="w-[630px] shrink-0 space-y-6 min-[1500px]:mx-0 mx-auto overflow-y-auto custom-scrollbar">
-                <div className="flex justify-between items-center">
-                    <div>
-                        <h3 className="text-lg font-bold text-gray-6">
-                            캐릭터 프로필 관리
-                        </h3>
-                        <p className="text-sm text-gray-5 mt-1">
-                            작품 속 캐릭터들의 상세 정보를 관리합니다
-                        </p>
-                    </div>
-                    <Button variant="point1" className="gap-2">
-                        <Icon name="add" size={20} />새 캐릭터 추가
-                    </Button>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {mockCharacters.map((character) => (
-                        <Card key={character.id}>
-                            <CardHeader>
-                                <div className="flex items-start justify-between">
-                                    <div className="flex-1">
-                                        <div className="flex items-center gap-2 mb-2">
-                                            <CardTitle className="text-lg">
-                                                {character.name}
-                                            </CardTitle>
-                                            <span
-                                                className={`inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium ${getRoleColor(character.role)}`}
-                                            >
-                                                {character.role}
-                                            </span>
-                                        </div>
-                                        <p className="text-sm text-gray-5">
-                                            {character.age}세
-                                        </p>
-                                    </div>
-                                </div>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="space-y-3">
-                                    <div>
-                                        <h4 className="text-xs font-semibold text-gray-6 mb-1">
-                                            성격
-                                        </h4>
-                                        <p className="text-sm text-gray-5">
-                                            {character.personality}
-                                        </p>
-                                    </div>
-
-                                    <div>
-                                        <h4 className="text-xs font-semibold text-gray-6 mb-1">
-                                            배경
-                                        </h4>
-                                        <p className="text-sm text-gray-5">
-                                            {character.background}
-                                        </p>
-                                    </div>
-
-                                    <div>
-                                        <h4 className="text-xs font-semibold text-gray-6 mb-1">
-                                            동기
-                                        </h4>
-                                        <p className="text-sm text-gray-5">
-                                            {character.motivation}
-                                        </p>
-                                    </div>
-
-                                    <div>
-                                        <h4 className="text-xs font-semibold text-gray-6 mb-1 flex items-center gap-1">
-                                            <Icon name="group" size={14} />
-                                            관계
-                                        </h4>
-                                        <div className="flex flex-wrap gap-1">
-                                            {character.relationships.map(
-                                                (rel, index) => (
-                                                    <span
-                                                        key={index}
-                                                        className="text-xs bg-gray-1 text-gray-6 px-2 py-1 rounded"
-                                                    >
-                                                        {rel}
-                                                    </span>
-                                                ),
-                                            )}
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div className="flex gap-2 mt-4 pt-4 border-t border-gray-2">
-                                    <Button size="sm" variant="outline">
-                                        수정
-                                    </Button>
-                                    <Button size="sm" variant="ghost">
-                                        삭제
-                                    </Button>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </div>
-            </div>
-
-            {/* 우측 ListPanel */}
-            <div className="w-[300px] shrink-0 hidden min-[1500px]:block overflow-y-auto custom-scrollbar">
-                <ListPanel
-                    items={rightPanelItems}
-                    onItemsChange={setRightPanelItems}
-                    title="역할 분류"
-                    description="드래그하여 순서 변경"
-                />
-            </div>
-        </div>
-    );
-}
-
-// 캐릭터 비교 탭 콘텐츠
-function CharacterComparisonContent() {
-    const [leftPanelItems, setLeftPanelItems] = useState([
-        { id: "1", content: "이한결" },
-        { id: "2", content: "정미래" },
-        { id: "3", content: "강태식" },
-    ]);
-
-    const [rightPanelItems, setRightPanelItems] = useState([
-        { id: "1", content: "성격 비교" },
-        { id: "2", content: "능력 비교" },
-        { id: "3", content: "관계 비교" },
-    ]);
-
-    return (
-        <div className="flex gap-6 h-[calc(100vh-200px)]">
-            {/* 좌측 ListPanel */}
-            <div className="w-[300px] shrink-0 hidden min-[1500px]:block overflow-y-auto custom-scrollbar">
-                <ListPanel
-                    items={leftPanelItems}
-                    onItemsChange={setLeftPanelItems}
-                    title="비교 대상"
-                    description="드래그하여 순서 변경"
-                />
-            </div>
-
-            {/* 중앙 콘텐츠 */}
-            <div className="w-[630px] shrink-0 space-y-6 min-[1500px]:mx-0 mx-auto overflow-y-auto custom-scrollbar">
-                <div className="flex justify-between items-center">
-                    <div>
-                        <h3 className="text-lg font-bold text-gray-6">
-                            캐릭터 비교 분석
-                        </h3>
-                        <p className="text-sm text-gray-5 mt-1">
-                            여러 캐릭터를 한눈에 비교하고 분석합니다
-                        </p>
-                    </div>
-                    <Button variant="outline" className="gap-2">
-                        <Icon name="compare_arrows" size={20} />
-                        비교할 캐릭터 선택
-                    </Button>
-                </div>
-
-                <Card>
-                    <CardHeader>
-                        <CardTitle>비교 대상 캐릭터</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="overflow-x-auto">
-                            <table className="w-full">
-                                <thead>
-                                    <tr className="border-b border-gray-2">
-                                        <th className="text-left py-3 px-4 text-sm font-semibold text-gray-6">
-                                            항목
-                                        </th>
-                                        <th className="text-left py-3 px-4 text-sm font-semibold text-gray-6">
-                                            이한결
-                                        </th>
-                                        <th className="text-left py-3 px-4 text-sm font-semibold text-gray-6">
-                                            정미래
-                                        </th>
-                                        <th className="text-left py-3 px-4 text-sm font-semibold text-gray-6">
-                                            강태식
-                                        </th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr className="border-b border-gray-2">
-                                        <td className="py-3 px-4 text-sm font-medium text-gray-6">
-                                            역할
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            주인공
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            조력자
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            멘토
-                                        </td>
-                                    </tr>
-                                    <tr className="border-b border-gray-2">
-                                        <td className="py-3 px-4 text-sm font-medium text-gray-6">
-                                            나이
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            28세
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            26세
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            55세
-                                        </td>
-                                    </tr>
-                                    <tr className="border-b border-gray-2">
-                                        <td className="py-3 px-4 text-sm font-medium text-gray-6">
-                                            성격
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            냉철하고 분석적
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            밝고 긍정적
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            엄격하지만 자애로움
-                                        </td>
-                                    </tr>
-                                    <tr className="border-b border-gray-2">
-                                        <td className="py-3 px-4 text-sm font-medium text-gray-6">
-                                            주요 동기
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            진실 규명
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            정의 실현
-                                        </td>
-                                        <td className="py-3 px-4 text-sm text-gray-5">
-                                            후배 양성
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </CardContent>
-                </Card>
-
-                <Card>
-                    <CardHeader>
-                        <CardTitle>캐릭터 관계도</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="flex items-center justify-center py-12 text-gray-5">
-                            <div className="text-center">
-                                <Icon
-                                    name="account_tree"
-                                    size={48}
-                                    className="mx-auto mb-4 opacity-50"
-                                />
-                                <p className="text-sm">
-                                    캐릭터 간 관계를 시각적으로 표현합니다
-                                </p>
-                                <p className="text-xs text-gray-4 mt-1">
-                                    (관계도 시각화 기능 예정)
-                                </p>
-                            </div>
-                        </div>
-                    </CardContent>
-                </Card>
-            </div>
-
-            {/* 우측 ListPanel */}
-            <div className="w-[300px] shrink-0 hidden min-[1500px]:block overflow-y-auto custom-scrollbar">
-                <ListPanel
-                    items={rightPanelItems}
-                    onItemsChange={setRightPanelItems}
-                    title="비교 항목"
-                    description="드래그하여 순서 변경"
-                />
-            </div>
-        </div>
-    );
-}
-
-// 공통 설정 관리 탭 콘텐츠
-function CommonSettingsContent() {
-    const [leftPanelItems, setLeftPanelItems] = useState([
-        { id: "1", content: "성격 유형" },
-        { id: "2", content: "능력치" },
-        { id: "3", content: "관계 유형" },
-    ]);
-
-    const [rightPanelItems, setRightPanelItems] = useState([
-        { id: "1", content: "템플릿 1" },
-        { id: "2", content: "템플릿 2" },
-        { id: "3", content: "템플릿 3" },
-    ]);
-
-    return (
-        <div className="flex gap-6 h-[calc(100vh-200px)]">
-            {/* 좌측 ListPanel */}
-            <div className="w-[300px] shrink-0 hidden min-[1500px]:block overflow-y-auto custom-scrollbar">
-                <ListPanel
-                    items={leftPanelItems}
-                    onItemsChange={setLeftPanelItems}
-                    title="설정 항목"
-                    description="드래그하여 순서 변경"
-                />
-            </div>
-
-            {/* 중앙 콘텐츠 */}
-            <div className="w-[630px] shrink-0 space-y-6 min-[1500px]:mx-0 mx-auto overflow-y-auto custom-scrollbar">
-                <div className="flex justify-between items-center">
-                    <div>
-                        <h3 className="text-lg font-bold text-gray-6">
-                            공통 설정 템플릿
-                        </h3>
-                        <p className="text-sm text-gray-5 mt-1">
-                            모든 캐릭터에 공통으로 적용할 속성을 관리합니다
-                        </p>
-                    </div>
-                    <Button variant="point1" className="gap-2">
-                        <Icon name="add" size={20} />새 설정 추가
-                    </Button>
-                </div>
-
-                <div className="space-y-4">
-                    {mockCommonSettings.map((setting) => (
-                        <Card key={setting.id}>
-                            <CardHeader>
-                                <div className="flex items-center justify-between">
-                                    <CardTitle className="text-base">
-                                        {setting.category}
-                                    </CardTitle>
-                                    <div className="flex gap-2">
-                                        <Button
-                                            size="sm"
-                                            variant="ghost"
-                                            className="gap-1"
-                                        >
-                                            <Icon name="edit" size={16} />
-                                            편집
-                                        </Button>
-                                    </div>
-                                </div>
-                            </CardHeader>
-                            <CardContent>
-                                <div className="flex flex-wrap gap-2">
-                                    {setting.items.map((item, index) => (
-                                        <div
-                                            key={index}
-                                            className="inline-flex items-center gap-2 bg-gray-1 text-gray-6 px-3 py-2 rounded-lg text-sm"
-                                        >
-                                            <span>{item}</span>
-                                            <button
-                                                type="button"
-                                                className="text-gray-5 hover:text-gray-6"
-                                            >
-                                                <Icon name="close" size={14} />
-                                            </button>
-                                        </div>
-                                    ))}
-                                    <button
-                                        type="button"
-                                        className="inline-flex items-center gap-1 bg-point-2/10 text-point-2 px-3 py-2 rounded-lg text-sm hover:bg-point-2/20"
-                                    >
-                                        <Icon name="add" size={16} />
-                                        <span>항목 추가</span>
-                                    </button>
-                                </div>
-                            </CardContent>
-                        </Card>
-                    ))}
-                </div>
-
-                <Card>
-                    <CardHeader>
-                        <CardTitle>템플릿 미리보기</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                        <div className="space-y-4">
-                            <p className="text-sm text-gray-5">
-                                설정된 템플릿이 새 캐릭터 생성 시 어떻게
-                                표시되는지 미리 확인할 수 있습니다.
+        <div className="flex min-w-0 flex-1 flex-col gap-2 py-1 md:flex-row md:items-center md:justify-between md:gap-2">
+            <div className="flex min-w-0 flex-col gap-0.5">
+                <div className="flex min-w-0 flex-nowrap items-center gap-x-1 text-xs text-muted-foreground">
+                    {row.metaLines.map((line, i) => (
+                        <div
+                            key={`${i}-${line.label}`}
+                            className="flex items-center"
+                        >
+                            {i > 0 ? (
+                                <span
+                                    className="shrink-0 text-muted-foreground"
+                                    aria-hidden
+                                >
+                                    ·
+                                </span>
+                            ) : null}
+                            <p
+                                className={cn(
+                                    "m-0 flex items-center gap-1",
+                                    i === lastMetaIndex && "min-w-0 flex-1",
+                                )}
+                            >
+                                <span className="shrink-0 font-bold text-foreground">
+                                    {line.label}
+                                </span>
+                                <span
+                                    className={cn(
+                                        i === lastMetaIndex
+                                            ? "min-w-0 truncate"
+                                            : "shrink-0",
+                                    )}
+                                >
+                                    {line.text}
+                                </span>
                             </p>
-                            <div className="border border-gray-2 rounded-lg p-4 bg-gray-1/50">
-                                <h4 className="text-sm font-semibold text-gray-6 mb-3">
-                                    새 캐릭터 프로필
-                                </h4>
-                                <div className="space-y-3 text-sm">
-                                    <div>
-                                        <label className="text-gray-6 font-medium">
-                                            성격 유형
-                                        </label>
-                                        <p className="text-gray-5 mt-1">
-                                            MBTI, 에니어그램, 혈액형
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <label className="text-gray-6 font-medium">
-                                            능력치
-                                        </label>
-                                        <p className="text-gray-5 mt-1">
-                                            체력, 지능, 매력, 운
-                                        </p>
-                                    </div>
-                                    <div>
-                                        <label className="text-gray-6 font-medium">
-                                            관계 유형
-                                        </label>
-                                        <p className="text-gray-5 mt-1">
-                                            친구, 적, 연인, 가족, 동료, 라이벌
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </CardContent>
-                </Card>
+                    ))}
+                </div>
+                <p className="m-0 min-w-0 text-sm font-bold max-md:whitespace-normal max-md:break-words md:truncate">
+                    {row.title}
+                </p>
+                <p className="m-0 min-w-0 text-xs text-muted-foreground max-md:whitespace-normal max-md:break-words md:truncate">
+                    {row.summary}
+                </p>
             </div>
-
-            {/* 우측 ListPanel */}
-            <div className="w-[300px] shrink-0 hidden min-[1500px]:block overflow-y-auto custom-scrollbar">
-                <ListPanel
-                    items={rightPanelItems}
-                    onItemsChange={setRightPanelItems}
-                    title="템플릿"
-                    description="드래그하여 순서 변경"
-                />
+            <div className="hidden shrink-0 items-center gap-0.5 md:flex">
+                <Button
+                    type="button"
+                    variant="ghost"
+                    size="iconSm"
+                    aria-label="강조"
+                >
+                    <Gem className="size-4" />
+                </Button>
+                <Button
+                    type="button"
+                    variant="ghost"
+                    size="iconSm"
+                    aria-label="수정"
+                >
+                    <Pencil className="size-4" />
+                </Button>
+                <Button
+                    type="button"
+                    variant="ghost"
+                    size="iconSm"
+                    aria-label="보기"
+                >
+                    <Eye className="size-4" />
+                </Button>
+            </div>
+            <div className="flex w-full flex-wrap items-center justify-between gap-x-1 gap-y-2 md:hidden">
+                <Button type="button" variant="ghost" size="sm">
+                    <Eye className="size-4" />
+                    보기
+                </Button>
+                <Button type="button" variant="ghost" size="sm">
+                    <History className="size-4" />
+                    과거 이력
+                </Button>
+                <Button type="button" variant="ghost" size="sm">
+                    <Gem className="size-4" />
+                    수정
+                </Button>
             </div>
         </div>
     );
 }
 
-export default function CharacterSettings() {
+// 캐릭터 목록 탭 콘텐츠
+function CharacterListContent() {
+    const [gridSorting, setGridSorting] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const itemsPerPage = 10;
+
+    const gridSortedRows = useMemo(
+        () => sortTableRows(gridRichRows, gridSorting),
+        [gridSorting],
+    );
+
+    // 페이지네이션 적용
+    const totalPages = Math.ceil(gridRichRows.length / itemsPerPage);
+    const paginatedRows = useMemo(() => {
+        const startIndex = (currentPage - 1) * itemsPerPage;
+        const endIndex = startIndex + itemsPerPage;
+        return gridSortedRows.slice(startIndex, endIndex);
+    }, [gridSortedRows, currentPage]);
+
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+        // 스크롤을 테이블 상단으로 이동
+        window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    return (
+        <div className="w-full max-w-[630px] mx-auto py-6">
+            <div className="flex justify-between items-center mb-6">
+                <div>{gridRichRows.length} 개</div>
+                <div className="flex gap-2">
+                    <Button
+                        variant="oulinePoint1"
+                        rounded="full"
+                        size="sm"
+                        className="gap-2 min-w-[100px] text-sm font-bold shadow-sm"
+                    >
+                        <Icon name="category_search" size={20} />
+                        상세 검색
+                    </Button>
+                    <Button
+                        variant="oulinePoint1"
+                        rounded="full"
+                        size="sm"
+                        className="gap-2 min-w-[100px] text-sm font-bold shadow-sm  "
+                    >
+                        <Icon name="add" size={20} />
+                        캐릭터 등록
+                    </Button>
+                </div>
+            </div>
+
+            <TableGrid
+                columns={gridColumns}
+                striped
+                sortable
+                sorting={gridSorting}
+                onSortingChange={setGridSorting}
+            >
+                {paginatedRows.map((row) => (
+                    <TableGridRow key={row.id} value={row.id}>
+                        <TableGridCell
+                            columnKey="id"
+                            className="text-muted-foreground tabular-nums"
+                        >
+                            <span className="flex items-start gap-2 md:contents">
+                                <span className="hidden text-xs font-medium text-muted-foreground max-md:inline-block max-md:[writing-mode:vertical-rl] max-md:leading-tight">
+                                    회차
+                                </span>
+                                <span className="md:tabular-nums">
+                                    {row.id}
+                                </span>
+                            </span>
+                        </TableGridCell>
+                        <TableGridCell
+                            columnKey="role"
+                            className="justify-center"
+                        >
+                            {row.role}
+                        </TableGridCell>
+                        <TableGridCell
+                            columnKey="status"
+                            className="justify-center"
+                        >
+                            {row.status}
+                        </TableGridCell>
+                        <TableGridCell columnKey="title" className="min-w-0">
+                            <GridRichDetailCell row={row} />
+                        </TableGridCell>
+                    </TableGridRow>
+                ))}
+            </TableGrid>
+
+            {/* 페이지네이션 */}
+            {totalPages > 1 && (
+                <div className="mt-8">
+                    <div
+                        onClick={(e) => {
+                            const href = e.target
+                                .closest("a")
+                                ?.getAttribute("href");
+                            if (href && href.startsWith("#page-")) {
+                                e.preventDefault();
+                                const page = parseInt(
+                                    href.replace("#page-", ""),
+                                );
+                                handlePageChange(page);
+                            }
+                        }}
+                    >
+                        <PaginationBar
+                            page={currentPage}
+                            totalPages={totalPages}
+                            getPageHref={(page) => `#page-${page}`}
+                            showFirstLast={false}
+                        />
+                    </div>
+                </div>
+            )}
+        </div>
+    );
+}
+
+export default function CharacterList() {
     const tabs = [
         {
-            value: "settings",
-            label: "캐릭터 설정",
-            content: <CharacterSettingsContent />,
-        },
-        {
-            value: "comparison",
-            label: "캐릭터 비교",
-            content: <CharacterComparisonContent />,
-        },
-        {
-            value: "common",
-            label: "공통 설정 관리",
-            content: <CommonSettingsContent />,
+            value: "list",
+            label: "캐릭터 목록",
+            content: <CharacterListContent />,
         },
     ];
 
     return (
         <CommonLayout
-            title="인물 관리"
-            description="작중 출연하는 캐릭터를 생성·관리 할 수 있습니다, 각 항목을 눌러 수정할 수 있으며 저장 버튼을 누르면 즉시 반영되니 참고하세요."
+            title="캐릭터 설정"
+            description="작중 출연하는 캐릭터를 한눈에 확인할 수 있습니다."
             showTabs={true}
             tabs={tabs}
-            defaultTab="settings"
+            defaultTab="list"
         />
     );
 }
