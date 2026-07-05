@@ -30,15 +30,8 @@ export const sidebarMenuItems = [
         id: "character-management",
         label: "인물 관리",
         icon: "identity_platform",
-        path: "/character-management",
+        path: "/character-list",
         description: "작품 속 인물 정보 관리",
-    },
-    {
-        id: "character-settings",
-        label: "캐릭터 설정",
-        icon: "person_edit",
-        path: "/character-settings",
-        description: "캐릭터 프로필 및 관계 설정",
     },
     {
         id: "event-management",
@@ -134,7 +127,14 @@ export const headerMenuLoggedIn = [
         label: "내정보관리",
         path: "/profile",
         variant: "point1",
-        icon: "face_4",
+        icon: "face",
+    },
+    {
+        id: "subscription",
+        label: "구독안내",
+        path: "/subscription",
+        variant: "outline",
+        icon: "sell",
     },
     {
         id: "create-work",
@@ -148,7 +148,7 @@ export const headerMenuLoggedIn = [
         label: "작품 목록",
         path: "/work-list",
         variant: "outline",
-        icon: "import_contacts",
+        icon: "book_ribbon",
     },
 ];
 

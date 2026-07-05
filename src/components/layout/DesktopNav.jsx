@@ -61,6 +61,21 @@ export function DesktopNav({
                 className,
             )}
         >
+            {/* Stethoscope 버튼 */}
+            <Button
+                type="button"
+                variant="outline"
+                size="md"
+                className={cn(
+                    "bg-transparent px-0 w-[44px]",
+                    borderColor,
+                    textColor,
+                    hoverBg,
+                    `hover:${textColor}`,
+                )}
+            >
+                <Icon name="stethoscope" size={24} />
+            </Button>
             {/* 메뉴 아이템들 */}
             {translatedMenuItems.map((menuItem) => (
                 <Button
@@ -85,22 +100,6 @@ export function DesktopNav({
                     </Link>
                 </Button>
             ))}
-
-            {/* Stethoscope 버튼 */}
-            <Button
-                type="button"
-                variant="outline"
-                size="md"
-                className={cn(
-                    "bg-transparent px-0 w-[44px]",
-                    borderColor,
-                    textColor,
-                    hoverBg,
-                    `hover:${textColor}`,
-                )}
-            >
-                <Icon name="stethoscope" size={24} />
-            </Button>
 
             {/* 언어 변경 버튼 */}
             {onLanguageChange && (

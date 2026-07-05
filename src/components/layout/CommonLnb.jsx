@@ -27,10 +27,10 @@ export function CommonLnb() {
                                     <Button
                                         variant="ghost"
                                         size="default"
-                                        className={`flex p-0 hover:bg-transform transition-colors ${
+                                        className={`flex items-center justify-center w-[34px] h-[34px] p-0 transition-colors ${
                                             isActive
-                                                ? "text-point-2"
-                                                : "text-gray-6"
+                                                ? "bg-point-1 text-white rounded-full hover:bg-point-1 hover:text-white"
+                                                : "text-gray-6 hover:bg-transform"
                                         }`}
                                         aria-label={item.label}
                                         asChild

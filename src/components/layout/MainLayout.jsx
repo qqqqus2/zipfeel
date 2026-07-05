@@ -33,6 +33,8 @@ export function MainLayout({ children, className, title, description }) {
                 hoverBg="hover:bg-white/10"
                 logoColor="text-white"
                 logoName="logo"
+                chipsVariant="orange"
+                titleTextColor="text-sub-8"
             />
             {/* 본문: 사이드바 + 메인 — 헤더와 겹치도록 위로 당김 */}
             <div className="relative z-10 flex min-h-0 flex-1 -mt-6 md:-mt-0 flex-col">

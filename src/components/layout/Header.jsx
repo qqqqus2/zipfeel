@@ -10,6 +10,7 @@ import { headerMenuLoggedIn, headerMenuLoggedOut } from "@/data/menuData";
 import { MobileNav } from "@/components/layout/MobileNav";
 import { DesktopNav } from "@/components/layout/DesktopNav";
 import { useTranslation } from "@/hooks/useTranslation";
+import { Chips } from "@/components/ui/chips";
 
 export function Header({
     bgColor = "bg-point-1",
@@ -19,13 +20,15 @@ export function Header({
     hoverBg = "hover:bg-white/10",
     logoColor = "text-white",
     logoName = "logo",
+    chipsVariant = "orange",
+    titleTextColor = "text-sub-8",
 }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
     const { language, changeLanguage } = useTranslation();
 
     const handleLanguageChange = () => {
         // 현재 언어에 따라 토글 (ko <-> en)
-        const newLanguage = language === 'ko' ? 'en' : 'ko';
+        const newLanguage = language === "ko" ? "en" : "ko";
         changeLanguage(newLanguage);
     };
 
@@ -44,7 +47,7 @@ export function Header({
         <>
             <header
                 className={cn(
-                    "relative md:h-[80px] flex shrink-0 items-center justify-between gap-2 pl-8 pr-6 py-3 md:px-6 md:py-4",
+                    "relative md:h-[80px] flex shrink-0 items-center gap-2 pl-8 pr-6 py-3 md:px-6 md:py-4",
                     isMobileMenuOpen ? "z-[100] !bg-point-1" : "z-20",
                     bgColor,
                     textColor,
@@ -68,17 +71,28 @@ export function Header({
                 </div>
 
                 {!isMobileMenuOpen && (
-                    <DesktopNav
-                        menuItems={
-                            isLoggedIn
-                                ? headerMenuLoggedIn
-                                : headerMenuLoggedOut
-                        }
-                        borderColor={borderColor}
-                        textColor={textColor}
-                        hoverBg={hoverBg}
-                        onLanguageChange={handleLanguageChange}
-                    />
+                    <>
+                        <div className="hidden xl:flex items-center gap-5 absolute left-[250px] lg:left-[150px]">
+                            <Chips variant={chipsVariant}>연재</Chips>
+                            <strong
+                                className={cn("fz-18 fw-700", titleTextColor)}
+                            >
+                                아름다운 세상을 위하여
+                            </strong>
+                        </div>
+                        <DesktopNav
+                            menuItems={
+                                isLoggedIn
+                                    ? headerMenuLoggedIn
+                                    : headerMenuLoggedOut
+                            }
+                            borderColor={borderColor}
+                            textColor={textColor}
+                            hoverBg={hoverBg}
+                            onLanguageChange={handleLanguageChange}
+                            className="ml-auto"
+                        />
+                    </>
                 )}
 
                 {/* 메뉴 버튼 모바일에서만 보임 */}
