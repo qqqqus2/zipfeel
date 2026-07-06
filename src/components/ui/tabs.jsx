@@ -172,7 +172,7 @@ function UnderlineTabIndicatorLayer() {
         <div
             aria-hidden
             className={cn(
-                "pointer-events-none absolute z-0 h-[3px] rounded-full bg-[color:var(--tabs-accent)]",
+                "pointer-events-none absolute z-0 h-[3px] rounded-full bg-sub-3",
                 "-bottom-px left-[var(--tab-ind-left,0px)] w-[var(--tab-ind-width,0px)]",
                 "transition-[left,width] duration-200 ease-out motion-reduce:transition-none",
             )}
@@ -224,9 +224,9 @@ const tabsListBaseClassName = cn(
 );
 
 const tabsListUnderlineClassName = cn(
-    "group-data-[variant=underline]/tabs:h-10 group-data-[variant=underline]/tabs:gap-8 group-data-[variant=underline]/tabs:border-b group-data-[variant=underline]/tabs:border-border group-data-[variant=underline]/tabs:bg-transparent",
+    "group-data-[variant=underline]/tabs:h-10 group-data-[variant=underline]/tabs:gap-8 group-data-[variant=underline]/tabs:border-b-2 group-data-[variant=underline]/tabs:border-sub-3 group-data-[variant=underline]/tabs:bg-transparent",
     // 가로 스크롤 시 뷰포트 경계에 텍스트·포커스 링이 붙어 잘려 보이는 느낌 완화
-    "group-data-[variant=underline]/tabs:px-3",
+    "group-data-[variant=underline]/tabs:px-0",
 );
 
 const tabsListSolidClassName = cn(
@@ -248,6 +248,7 @@ const tabsListSlashClassName = cn(
 const tabsTriggerBaseClassName = cn(
     "relative cursor-pointer z-10 inline-flex items-center justify-center whitespace-nowrap text-sm font-normal ring-offset-background transition-colors",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none",
+    "min-w-0",
     "group-data-[orientation=vertical]/tabs:w-full group-data-[orientation=vertical]/tabs:justify-start",
 );
 
@@ -265,7 +266,7 @@ const tabsTriggerUnderlineClassName = cn(
 );
 
 const tabsTriggerSolidClassName = cn(
-    "group-data-[variant=solid]/tabs:h-12 group-data-[variant=solid]/tabs:min-w-32 group-data-[variant=solid]/tabs:shrink-0 sm:group-data-[variant=solid]/tabs:min-w-[180px] group-data-[variant=solid]/tabs:rounded-none",
+    "group-data-[variant=solid]/tabs:h-12 group-data-[variant=solid]/tabs:min-w-0 group-data-[variant=solid]/tabs:shrink-0 group-data-[variant=solid]/tabs:rounded-none",
     "group-data-[variant=solid]/tabs:bg-tabs-surface group-data-[variant=solid]/tabs:text-tabs-label-muted",
     "group-data-[variant=solid]/tabs:data-[state=active]:text-white",
     "group-data-[variant=solid]/tabs:border-b-4 group-data-[variant=solid]/tabs:border-b-transparent",
@@ -285,7 +286,7 @@ const tabsTriggerSolidRoundedClassName = cn(
 );
 
 const tabsTriggerSlashClassName = cn(
-    "group-data-[variant=slash]/tabs:h-10 group-data-[variant=slash]/tabs:min-w-36 group-data-[variant=slash]/tabs:px-6 group-data-[variant=slash]/tabs:font-normal",
+    "group-data-[variant=slash]/tabs:h-10 group-data-[variant=slash]/tabs:min-w-0 group-data-[variant=slash]/tabs:px-6 group-data-[variant=slash]/tabs:font-normal",
     "group-data-[variant=slash]/tabs:bg-transparent group-data-[variant=slash]/tabs:text-[#000000]",
     "group-data-[variant=slash]/tabs:data-[state=active]:text-[#ffffff]",
     "group-data-[variant=slash]/tabs:transition-colors group-data-[variant=slash]/tabs:duration-200",

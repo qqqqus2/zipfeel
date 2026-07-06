@@ -19,7 +19,10 @@ export function CommonLnb() {
             <TooltipProvider delayDuration={300}>
                 <div className="flex flex-1 flex-col items-start justify-center gap-[15px] py-3 text-gray-5">
                     {sidebarMenuItems.map((item) => {
-                        const isActive = pathname === item.path;
+                        // 인물 관리 메뉴는 /character-list와 /character-settings 모두 active
+                        const isActive = item.id === "character-management"
+                            ? pathname === "/character-list" || pathname === "/character-settings"
+                            : pathname === item.path;
 
                         return (
                             <Tooltip key={item.id}>

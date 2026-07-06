@@ -1,5 +1,8 @@
 "use client";
 
+import React from "react";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { CommonLayout } from "@/components/layout/CommonLayout";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -9,6 +12,12 @@ import {
     AccordionTrigger,
     AccordionContent,
 } from "@/components/ui/accordion";
+
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import { characterData, findCharacterById } from "@/data/characterData";
+
+// 캐릭터 목록 더미 데이터 (좌측 LNB용)
+const characterListData = characterData;
 
 // 더미 데이터 (20개의 에피소드)
 const episodesData = Array.from({ length: 20 }, (_, i) => ({
@@ -21,83 +30,246 @@ const episodesData = Array.from({ length: 20 }, (_, i) => ({
 
 // 캐릭터 설정 탭 콘텐츠
 function CharacterSettingsContent() {
+    const searchParams = useSearchParams();
+    const characterId = searchParams.get("id");
+    const character = characterId ? findCharacterById(characterId) : characterListData[0];
+
+    // 캐릭터가 없으면 첫 번째 캐릭터 사용
+    const currentCharacter = character || characterListData[0];
+
     return (
-        <div className="flex gap-6 w-full max-w-none h-full">
-            {/* 좌측 영역 */}
-            <div className="w-[305px] shrink-0 hidden lg:block">
-                <div className="h-full bg-gray-100 rounded-lg p-4">
-                    <p className="text-sm text-gray-500">좌측 컴포넌트 영역</p>
+        <div className="flex gap-6 w-full max-w-none h-full pt-[30px ]">
+            {/* 좌측 영역 - 캐릭터 목록 LNB */}
+            <div className="w-[305px] shrink-0 hidden 2xl:flex flex-col h-full">
+                <div className="p-4 border-b shrink-0">
+                    <h4 className="font-medium text-gray-6">캐릭터 목록</h4>
+                </div>
+                <div className="flex-1 overflow-y-auto custom-scrollbar">
+                    {characterListData.map((char) => (
+                        <a
+                            key={char.id}
+                            href={`/character-settings?id=${char.id}`}
+                            className={`block px-4 py-3 border-b hover:bg-gray-50 transition-colors ${
+                                currentCharacter.id === char.id ? "bg-point-1/10" : ""
+                            }`}
+                        >
+                            <div className="flex items-center justify-between gap-2">
+                                <div className="min-w-0 flex-1">
+                                    <p className="text-sm font-semibold truncate">{char.title}</p>
+                                    <p className="text-xs text-gray-5 truncate">{char.role} · {char.status}</p>
+                                </div>
+                            </div>
+                        </a>
+                    ))}
                 </div>
             </div>
 
             {/* 중앙 콘텐츠 */}
-            <div className="w-full lg:w-[630px] shrink-0 space-y-6 overflow-y-auto custom-scrollbar">
-                <div className="flex justify-between items-center">
-                    <div>
-                        <h3 className="text-lg font-bold text-gray-6">
-                            캐릭터 프로필 관리
-                        </h3>
-                        <p className="text-sm text-gray-5 mt-1">
-                            작품 속 캐릭터들의 상세 정보를 관리합니다
-                        </p>
+            <div className="w-full mx-auto lg:w-[630px] shrink-0 space-y-6 overflow-y-auto custom-scrollbar">
+                <div className="justify-between items-center hidden md:flex">
+                    <div className="flex gap-2 w-full justify-between items-center">
+                        <Button
+                            variant="oulinePoint1"
+                            size="sm"
+                            className="group rounded-full flex items-center gap-1"
+                            asChild
+                        >
+                            <Link href="/character-list">
+                                <Icon name="arrow_left_alt" size={20} />
+                                목록
+                            </Link>
+                        </Button>
+                        <div className="flex gap-2">
+                            <Button
+                                variant="oulinePoint1"
+                                size="sm"
+                                className="group rounded-full "
+                            >
+                                <Icon name="person_raised_hand" size={20} />
+                                0000 안내
+                            </Button>
+                            <Button
+                                variant="oulinePoint1"
+                                size="sm"
+                                className="group rounded-full "
+                            >
+                                <Icon name="folder_check_2" size={20} />
+                                저장
+                            </Button>
+                            <Button
+                                variant="oulinePoint1"
+                                size="sm"
+                                className="group rounded-full "
+                            >
+                                <Icon name="ink_eraser" size={20} />
+                                삭제
+                            </Button>
+                            <Button
+                                variant="oulinePoint1"
+                                size="sm"
+                                className="group rounded-full "
+                            >
+                                <Icon name="eyeglasses" size={20} />
+                                미리보기
+                            </Button>
+                        </div>
                     </div>
-                    <Button variant="point1" className="gap-2">
-                        <Icon name="add" size={20} />새 캐릭터 추가
-                    </Button>
                 </div>
 
-                <div className="space-y-4">
-                    <p className="text-sm text-gray-500">
-                        character-list에서 넘어온 캐릭터 상세 정보 표시 영역
-                    </p>
+                <div className="">
+                    <div className="flex align-center gap-[6px] fz-12 mb-0">
+                        {currentCharacter.metaLines.map((line, index) => (
+                            <React.Fragment key={index}>
+                                {index > 0 && <i className="w-[6px] text-center">·</i>}
+                                <p className="flex gap-[6px]">
+                                    <span className="text-point-1 font-bold">{line.label}</span>
+                                    {line.text}
+                                </p>
+                            </React.Fragment>
+                        ))}
+                    </div>
+                    <div className="flex align-center gap-[6px] justify-between fz-12">
+                        <h4 className="font-bold fz-18">
+                            {currentCharacter.title}
+                        </h4>
+                        <button className="fz-16 font-bold shrink-0 cursor-pointer">
+                            <Icon name="diamond" size={24} />
+                            수정
+                        </button>
+                    </div>
+                    <Tabs
+                        defaultValue="basic"
+                        className="w-full "
+                        variant="underline"
+                    >
+                        <TabsList className="w-full !grid grid-cols-7 !gap-0 overflow-x-visible px-0 max-md:!flex max-md:overflow-x-auto max-md:justify-start max-md:px-3">
+                            <TabsTrigger
+                                value="basic"
+                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                            >
+                                기본
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="appearance"
+                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                            >
+                                외형
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="personality"
+                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                            >
+                                성격
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="ability"
+                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                            >
+                                능력
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="outfit"
+                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                            >
+                                착장
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="relationship"
+                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                            >
+                                관계
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="etc"
+                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                            >
+                                기타
+                            </TabsTrigger>
+                        </TabsList>
+                        <TabsContent value="basic">기본 컨텐츠</TabsContent>
+                        <TabsContent value="appearance">외형 컨텐츠</TabsContent>
+                        <TabsContent value="personality">성격 컨텐츠</TabsContent>
+                        <TabsContent value="ability">능력 컨텐츠</TabsContent>
+                        <TabsContent value="outfit">착장 컨텐츠</TabsContent>
+                        <TabsContent value="relationship">관계 컨텐츠</TabsContent>
+                        <TabsContent value="etc">기타 컨텐츠</TabsContent>
+                    </Tabs>
                 </div>
             </div>
 
             {/* 우측 영역 */}
-            <div className="w-[305px] shrink-0 hidden lg:block flex flex-col">
-                <div className="overflow-y-auto custom-scrollbar">
+            <div className="w-[305px] shrink-0 hidden 2xl:flex flex-col h-full">
+                {/* 상단에 추가  */}
+                <div className="p-4 border-b shrink-0">
+                    <h4 className="font-medium">에피소드 목록</h4>
+                </div>
+                <div className="mt-[15px] mb-2.5 flex justify-between items-center">
+                    <span>000 개</span>
+                    <Button
+                        variant="oulinePoint1"
+                        size="sm"
+                        className="group rounded-full fz-12 px-2.5"
+                    >
+                        <Icon
+                            name="search_activity"
+                            size={20}
+                            className="text-point-1 group-hover:text-white group-disabled:text-point-3"
+                        />
+                        내역 추가
+                    </Button>
+                </div>
+                <div className="flex-1 overflow-y-auto custom-scrollbar rounded-xl">
                     <Accordion
-                        type="multiple"
-                        defaultValue={episodesData
-                            .slice(0, 3)
-                            .map((ep) => `episode-${ep.id}`)}
+                        type="single"
+                        collapsible
+                        defaultValue={`episode-${episodesData[0].id}`}
                         className="w-full"
                     >
                         {episodesData.map((episode) => (
                             <AccordionItem
                                 key={episode.id}
                                 value={`episode-${episode.id}`}
+                                className="bg-[#F5F5F5] even:bg-[#F5F5F5]"
                             >
-                                <AccordionTrigger>
-                                    <span className="text-sm fw-semibold text-gray-6">
-                                        {episode.episode
-                                            .toString()
-                                            .padStart(4, "0")}{" "}
-                                        화 · {episode.character}(
-                                        {episode.status})
-                                    </span>
-                                    <div
-                                        className="ml-auto flex gap-2"
+                                <AccordionTrigger className="group">
+                                    <div className="flex flex-col items-start gap-1 flex-1 min-w-0">
+                                        <span className="text-sm fw-semibold text-gray-6">
+                                            {episode.episode
+                                                .toString()
+                                                .padStart(4, "0")}{" "}
+                                            화 · {episode.character}(
+                                            {episode.status})
+                                        </span>
+                                        <span className="text-xs text-gray-5 line-clamp-1 w-full text-left">
+                                            {episode.content}
+                                        </span>
+                                    </div>
+                                    <span
+                                        className="ml-auto flex gap-2 shrink-0"
                                         onClick={(e) => e.stopPropagation()}
                                     >
-                                        <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            className="w-6 h-6 p-0"
+                                        <span
+                                            className="inline-flex items-center justify-center w-6 h-6 cursor-pointer hover:bg-gray-100 rounded transition-colors"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                // 수정 기능
+                                            }}
                                         >
                                             <Icon name="diamond" size={20} />
-                                        </Button>
-                                        <Button
-                                            variant="ghost"
-                                            size="icon"
-                                            className="w-6 h-6 p-0"
+                                        </span>
+                                        <span
+                                            className="inline-flex items-center justify-center w-6 h-6 cursor-pointer hover:bg-gray-100 rounded transition-colors"
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                // 삭제 기능
+                                            }}
                                         >
                                             <Icon name="ink_eraser" size={20} />
-                                        </Button>
-                                    </div>
+                                        </span>
+                                    </span>
                                 </AccordionTrigger>
                                 <AccordionContent>
-                                    <div className="px-[15px] text-sm text-gray-6">
+                                    <div className="px-[15px] text-sm text-gray-6 pb-[15px]">
                                         {episode.content}
                                     </div>
                                 </AccordionContent>
