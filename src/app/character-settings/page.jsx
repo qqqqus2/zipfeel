@@ -32,13 +32,15 @@ const episodesData = Array.from({ length: 20 }, (_, i) => ({
 function CharacterSettingsContent() {
     const searchParams = useSearchParams();
     const characterId = searchParams.get("id");
-    const character = characterId ? findCharacterById(characterId) : characterListData[0];
+    const character = characterId
+        ? findCharacterById(characterId)
+        : characterListData[0];
 
     // 캐릭터가 없으면 첫 번째 캐릭터 사용
     const currentCharacter = character || characterListData[0];
 
     return (
-        <div className="flex gap-6 w-full max-w-none h-full pt-[30px ]">
+        <div className="flex gap-6 w-full max-w-none h-full md:pt-[30px]">
             {/* 좌측 영역 - 캐릭터 목록 LNB */}
             <div className="w-[305px] shrink-0 hidden 2xl:flex flex-col h-full">
                 <div className="p-4 border-b shrink-0">
@@ -50,13 +52,19 @@ function CharacterSettingsContent() {
                             key={char.id}
                             href={`/character-settings?id=${char.id}`}
                             className={`block px-4 py-3 border-b hover:bg-gray-50 transition-colors ${
-                                currentCharacter.id === char.id ? "bg-point-1/10" : ""
+                                currentCharacter.id === char.id
+                                    ? "bg-point-1/10"
+                                    : ""
                             }`}
                         >
                             <div className="flex items-center justify-between gap-2">
                                 <div className="min-w-0 flex-1">
-                                    <p className="text-sm font-semibold truncate">{char.title}</p>
-                                    <p className="text-xs text-gray-5 truncate">{char.role} · {char.status}</p>
+                                    <p className="text-sm font-semibold truncate">
+                                        {char.title}
+                                    </p>
+                                    <p className="text-xs text-gray-5 truncate">
+                                        {char.role} · {char.status}
+                                    </p>
                                 </div>
                             </div>
                         </a>
@@ -116,33 +124,42 @@ function CharacterSettingsContent() {
                     </div>
                 </div>
 
-                <div className="">
-                    <div className="flex align-center gap-[6px] fz-12 mb-0">
+                <div className="relative px-5">
+                    <i
+                        className="w-full h-10 bg-[#DFD7D5] absolute left-0 rounded-full z-1 bottom-[48px] hidden md:flex"
+                        aria-hidden="true"
+                    ></i>
+                    <div className="hidden relative md:flex align-center gap-[6px] fz-12 mb-0 z-2">
                         {currentCharacter.metaLines.map((line, index) => (
                             <React.Fragment key={index}>
-                                {index > 0 && <i className="w-[6px] text-center">·</i>}
+                                {index > 0 && (
+                                    <i className="w-[6px] text-center">·</i>
+                                )}
                                 <p className="flex gap-[6px]">
-                                    <span className="text-point-1 font-bold">{line.label}</span>
+                                    <span className="text-point-1 font-bold">
+                                        {line.label}
+                                    </span>
                                     {line.text}
                                 </p>
                             </React.Fragment>
                         ))}
                     </div>
-                    <div className="flex align-center gap-[6px] justify-between fz-12">
-                        <h4 className="font-bold fz-18">
+                    {/* pc에서만 보임 */}
+                    <div className="flex align-center gap-[6px] justify-between fz-12 hidden md:flex relative z-2">
+                        <h4 className="font-bold text-[18px]">
                             {currentCharacter.title}
                         </h4>
-                        <button className="fz-16 font-bold shrink-0 cursor-pointer">
+                        <button className="fz-16 font-bold shrink-0 cursor-pointer hidden md:flex">
                             <Icon name="diamond" size={24} />
                             수정
                         </button>
                     </div>
                     <Tabs
                         defaultValue="basic"
-                        className="w-full "
+                        className="w-full relative z-2 "
                         variant="underline"
                     >
-                        <TabsList className="w-full !grid grid-cols-7 !gap-0 overflow-x-visible px-0 max-md:!flex max-md:overflow-x-auto max-md:justify-start max-md:px-3">
+                        <TabsList className="w-full !bg-[#FFFFFF99] !grid grid-cols-7 !gap-0 overflow-x-visible px-0 max-md:!flex max-md:overflow-x-auto max-md:justify-start max-md:px-3">
                             <TabsTrigger
                                 value="basic"
                                 className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
@@ -187,11 +204,17 @@ function CharacterSettingsContent() {
                             </TabsTrigger>
                         </TabsList>
                         <TabsContent value="basic">기본 컨텐츠</TabsContent>
-                        <TabsContent value="appearance">외형 컨텐츠</TabsContent>
-                        <TabsContent value="personality">성격 컨텐츠</TabsContent>
+                        <TabsContent value="appearance">
+                            외형 컨텐츠
+                        </TabsContent>
+                        <TabsContent value="personality">
+                            성격 컨텐츠
+                        </TabsContent>
                         <TabsContent value="ability">능력 컨텐츠</TabsContent>
                         <TabsContent value="outfit">착장 컨텐츠</TabsContent>
-                        <TabsContent value="relationship">관계 컨텐츠</TabsContent>
+                        <TabsContent value="relationship">
+                            관계 컨텐츠
+                        </TabsContent>
                         <TabsContent value="etc">기타 컨텐츠</TabsContent>
                     </Tabs>
                 </div>
@@ -335,6 +358,22 @@ function CommonSettingsContent() {
 }
 
 export default function CharacterSettings() {
+    const searchParams = useSearchParams();
+    const characterId = searchParams.get("id");
+    const character = characterId
+        ? findCharacterById(characterId)
+        : characterListData[0];
+    const currentCharacter = character || characterListData[0];
+
+    // metaLines를 문자열로 변환
+    const metaLinesText = currentCharacter.metaLines
+        .map((line) => `${line.label}: ${line.text}`)
+        .join(" · ");
+
+    const handleEdit = () => {
+        alert("수정");
+    };
+
     const tabs = [
         {
             value: "settings",
@@ -353,13 +392,43 @@ export default function CharacterSettings() {
         },
     ];
 
+    const handleBack = () => {
+        window.history.back();
+    };
+
+    const handlePreview = () => {
+        alert("미리보기");
+    };
+
+    const handleDelete = () => {
+        if (confirm("정말 삭제하시겠습니까?")) {
+            alert("삭제되었습니다");
+        }
+    };
+
+    const handleSave = () => {
+        alert("저장되었습니다");
+    };
+
     return (
         <CommonLayout
             title="인물 관리"
             description="작중 출연하는 캐릭터를 생성·관리 할 수 있습니다, 각 항목을 눌러 수정할 수 있으며 저장 버튼을 누르면 즉시 반영되니 참고하세요."
+            mobileTitle={currentCharacter.title}
+            mobileDescription={metaLinesText}
             showTabs={true}
             tabs={tabs}
             defaultTab="settings"
+            showFooter={false}
+            showDetailHeader={true}
+            onBack={handleBack}
+            onPreview={handlePreview}
+            onDelete={handleDelete}
+            onSave={handleSave}
+            reverseTitleOrder={true}
+            removeTitleSpacing={true}
+            showMobileEditButton={true}
+            onEdit={handleEdit}
         />
     );
 }
