@@ -12,6 +12,7 @@ import {
     AccordionTrigger,
     AccordionContent,
 } from "@/components/ui/accordion";
+import { SectionTitleToggle } from "@/components/ui/section-title-toggle";
 
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { characterData, findCharacterById } from "@/data/characterData";
@@ -125,35 +126,38 @@ function CharacterSettingsContent() {
                 </div>
 
                 <div className="relative px-5">
-                    <i
-                        className="w-full h-10 bg-[#DFD7D5] absolute left-0 rounded-full z-1 bottom-[48px] hidden md:flex"
-                        aria-hidden="true"
-                    ></i>
-                    <div className="hidden relative md:flex align-center gap-[6px] fz-12 mb-0 z-2">
-                        {currentCharacter.metaLines.map((line, index) => (
-                            <React.Fragment key={index}>
-                                {index > 0 && (
-                                    <i className="w-[6px] text-center">·</i>
-                                )}
-                                <p className="flex gap-[6px]">
-                                    <span className="text-point-1 font-bold">
-                                        {line.label}
-                                    </span>
-                                    {line.text}
-                                </p>
-                            </React.Fragment>
-                        ))}
+                    <div className="relative">
+                        <i
+                            className="h-10 bg-[#DFD7D5] absolute -right-5 -left-5 rounded-full z-1 -bottom-[24px] hidden md:flex"
+                            aria-hidden="true"
+                        ></i>
+                        <div className="hidden relative md:flex align-center gap-[6px] fz-12 mb-0 z-2">
+                            {currentCharacter.metaLines.map((line, index) => (
+                                <React.Fragment key={index}>
+                                    {index > 0 && (
+                                        <i className="w-[6px] text-center">·</i>
+                                    )}
+                                    <p className="flex gap-[6px]">
+                                        <span className="text-point-1 font-bold">
+                                            {line.label}
+                                        </span>
+                                        {line.text}
+                                    </p>
+                                </React.Fragment>
+                            ))}
+                        </div>
+                        {/* pc에서만 보임 */}
+                        <div className="flex align-center gap-[6px] justify-between fz-12 hidden md:flex relative z-2">
+                            <h4 className="font-bold text-[18px]">
+                                {currentCharacter.title}
+                            </h4>
+                            <button className="fz-16 font-bold shrink-0 cursor-pointer hidden md:flex">
+                                <Icon name="diamond" size={24} />
+                                수정
+                            </button>
+                        </div>
                     </div>
-                    {/* pc에서만 보임 */}
-                    <div className="flex align-center gap-[6px] justify-between fz-12 hidden md:flex relative z-2">
-                        <h4 className="font-bold text-[18px]">
-                            {currentCharacter.title}
-                        </h4>
-                        <button className="fz-16 font-bold shrink-0 cursor-pointer hidden md:flex">
-                            <Icon name="diamond" size={24} />
-                            수정
-                        </button>
-                    </div>
+
                     <Tabs
                         defaultValue="basic"
                         className="w-full relative z-2 "
@@ -203,7 +207,17 @@ function CharacterSettingsContent() {
                                 기타
                             </TabsTrigger>
                         </TabsList>
-                        <TabsContent value="basic">기본 컨텐츠</TabsContent>
+                        <TabsContent value="basic">
+                            <SectionTitleToggle
+                                requiredLabel="설정 필수"
+                                title="기본 정보"
+                            />
+
+                            <SectionTitleToggle
+                                requiredLabel="설정"
+                                title="부가 정보"
+                            />
+                        </TabsContent>
                         <TabsContent value="appearance">
                             외형 컨텐츠
                         </TabsContent>
