@@ -14,8 +14,16 @@ import {
 } from "@/components/ui/accordion";
 import { SectionTitleToggle } from "@/components/ui/section-title-toggle";
 
+import { Card, CardDescription, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { characterData, findCharacterById } from "@/data/characterData";
+import { cn } from "@/lib/utils";
 
 // 캐릭터 목록 더미 데이터 (좌측 LNB용)
 const characterListData = characterData;
@@ -29,6 +37,107 @@ const episodesData = Array.from({ length: 20 }, (_, i) => ({
     content: `에피소드 ${i + 1}의 상세 내용입니다. 이 부분에는 캐릭터의 등장 장면, 대사, 행동 등이 포함됩니다.`,
 }));
 
+function ColumnSettingCard({
+    variant,
+    description,
+    className,
+    columnName = "컬럼명",
+    required = false,
+    tooltip,
+    preview = false,
+    descriptionFull = false,
+    disabled = false,
+}) {
+    return (
+        <Card
+            variant={variant}
+            className={cn(
+                "w-full p-[17px]",
+                disabled && "opacity-50 pointer-events-none",
+                className,
+            )}
+        >
+            <div className="flex items-start justify-between gap-3">
+                <div className="min-w-0 flex-1 space-y-1">
+                    <div className={cn("flex items-center gap-1")}>
+                        <CardTitle
+                            className={cn(
+                                "text-sm font-semibold",
+
+                                required && "text-point-1",
+                            )}
+                        >
+                            <span>
+                                {columnName}
+                                {required && (
+                                    <span className="text-point-2 ml-1">*</span>
+                                )}
+                            </span>
+                        </CardTitle>
+                        {tooltip && (
+                            <TooltipProvider>
+                                <Tooltip>
+                                    <TooltipTrigger asChild>
+                                        <button
+                                            type="button"
+                                            className={cn(
+                                                "inline-flex fz-14 text-gray-6 cursor-pointer font-bold items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none",
+                                            )}
+                                            aria-label="도움말"
+                                        >
+                                            ⓘ
+                                        </button>
+                                    </TooltipTrigger>
+                                    <TooltipContent>
+                                        <p>{tooltip}</p>
+                                    </TooltipContent>
+                                </Tooltip>
+                            </TooltipProvider>
+                        )}
+                        {preview && (
+                            <Icon
+                                name="eyeglasses"
+                                className="ml-auto opacity-50 text-point-1"
+                                size={20}
+                            />
+                        )}
+                    </div>
+                    <CardDescription
+                        className={cn(
+                            "fz-16 font-light text-gray-6 leading-snug",
+                            !descriptionFull && "line-clamp-1",
+                        )}
+                    >
+                        {description}
+                    </CardDescription>
+                </div>
+                <div className="shrink-0 pt-0.5">
+                    {variant === "hover" ? (
+                        <span
+                            className="inline-flex size-9 items-center justify-center rounded-full bg-point-2 text-white shadow-sm"
+                            aria-hidden
+                        ></span>
+                    ) : null}
+                    {variant === "active" ? (
+                        <span
+                            className="inline-flex size-9 items-center justify-center rounded-full bg-black/25 text-white shadow-inner"
+                            aria-hidden
+                        ></span>
+                    ) : null}
+                </div>
+            </div>
+        </Card>
+    );
+}
+
+// 필터 데이터
+const filterOptions = [
+    { id: "all", label: "전체", count: 1234 },
+    { id: "status1", label: "상태", count: 456 },
+    { id: "status2", label: "전직", count: 678 },
+    { id: "status3", label: "랩업", count: 0 },
+];
+
 // 캐릭터 설정 탭 콘텐츠
 function CharacterSettingsContent() {
     const searchParams = useSearchParams();
@@ -39,6 +148,11 @@ function CharacterSettingsContent() {
 
     // 캐릭터가 없으면 첫 번째 캐릭터 사용
     const currentCharacter = character || characterListData[0];
+
+    // 필터 선택 상태 관리
+    const [selectedFilter, setSelectedFilter] = React.useState("all");
+    // 필터 패널 열림/닫힘 상태 관리
+    const [isFilterOpen, setIsFilterOpen] = React.useState(false);
 
     return (
         <div className="flex gap-6 w-full max-w-none h-full md:pt-[30px]">
@@ -125,7 +239,7 @@ function CharacterSettingsContent() {
                     </div>
                 </div>
 
-                <div className="relative px-5">
+                <div className="relative px-0 md:px-5">
                     <div className="relative">
                         <i
                             className="h-10 bg-[#DFD7D5] absolute -right-5 -left-5 rounded-full z-1 -bottom-[24px] hidden md:flex"
@@ -209,14 +323,209 @@ function CharacterSettingsContent() {
                         </TabsList>
                         <TabsContent value="basic">
                             <SectionTitleToggle
+                                className="mt-[32px]"
                                 requiredLabel="설정 필수"
                                 title="기본 정보"
                             />
+                            <div className="flex flex-col gap-[10px]">
+                                <div className="grid grid-cols-10 gap-5">
+                                    <ColumnSettingCard
+                                        className="col-span-3"
+                                        variant="default"
+                                        columnName="구분"
+                                        required={true}
+                                        description="주인공"
+                                    />
+                                    <ColumnSettingCard
+                                        className="col-span-7"
+                                        variant="default"
+                                        tooltip="컬럼 설명 툴팁입니다"
+                                        description="설정 안함"
+                                        preview={true}
+                                    />
+                                </div>
+                                <div className="flex gap-5">
+                                    <ColumnSettingCard
+                                        variant="default"
+                                        columnName="서사"
+                                        descriptionFull={true}
+                                        description="비 오는 항구 도시에서 자란 그는 늘 떠나는 배들을 보며 살았다. 돌아오지 않은 아버지를 대신해 지도와 별을 읽는 법을 배웠고, 언젠가 길을 잃은 사람들을 집으로 데려오는 항해사가 되겠다고 마음먹었다. 그에게 바다는 두려움이자 약속이었다."
+                                    />
+                                </div>
+                                <div className="grid grid-cols-10 gap-5">
+                                    <ColumnSettingCard
+                                        className="col-span-5"
+                                        variant="default"
+                                        tooltip="컬럼 설명 툴팁입니다"
+                                        description="설정 안함"
+                                        preview={true}
+                                    />
+
+                                    <ColumnSettingCard
+                                        className="col-span-5"
+                                        variant="default"
+                                        tooltip="컬럼 설명 툴팁입니다"
+                                        description="설정 안함"
+                                        preview={true}
+                                    />
+                                </div>
+                            </div>
 
                             <SectionTitleToggle
+                                className="mt-[32px]"
                                 requiredLabel="설정"
                                 title="부가 정보"
                             />
+                            <div className="flex flex-col gap-[10px]">
+                                <div className="grid grid-cols-10 gap-5">
+                                    <ColumnSettingCard
+                                        className="col-span-3"
+                                        variant="default"
+                                        columnName="상태"
+                                        tooltip="상태 설명 툴팁입니다"
+                                        description="설정 안함"
+                                    />
+                                    <ColumnSettingCard
+                                        className="col-span-7"
+                                        variant="point"
+                                        columnName="사망일시"
+                                        tooltip="컬럼 설명 툴팁입니다"
+                                        description="설정 불가"
+                                        disabled={true}
+                                    />
+                                </div>
+                                <div className="grid grid-cols-10 gap-5">
+                                    <ColumnSettingCard
+                                        className="col-span-3"
+                                        variant="default"
+                                        columnName="직업"
+                                        tooltip="직업 설명 툴팁입니다"
+                                        description="설정 안함"
+                                    />
+                                    <ColumnSettingCard
+                                        className="col-span-7"
+                                        variant="default"
+                                        columnName="생년월일"
+                                        description="설정 안함"
+                                    />
+                                </div>
+                                <div className="grid grid-cols-10 gap-5">
+                                    <ColumnSettingCard
+                                        className="col-span-3"
+                                        variant="default"
+                                        columnName="등급"
+                                        description="설정 안함"
+                                    />
+                                    <div className="col-span-7 grid grid-cols-10 gap-5">
+                                        <ColumnSettingCard
+                                            className="col-span-5"
+                                            variant="default"
+                                            columnName="레벨"
+                                            description="설정 안함"
+                                        />
+                                        <ColumnSettingCard
+                                            className="col-span-5"
+                                            variant="default"
+                                            columnName="경험치"
+                                            description="설정 안함"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <SectionTitleToggle
+                                className="mt-[32px]"
+                                requiredLabel="설정"
+                                title="소속"
+                            />
+                            <div className="flex flex-col gap-[10px]">
+                                <div className="grid grid-cols-10 gap-5">
+                                    <ColumnSettingCard
+                                        className="col-span-5"
+                                        variant="default"
+                                        columnName="출신(출생지)"
+                                        description="설정 안함"
+                                    />
+
+                                    <ColumnSettingCard
+                                        className="col-span-5"
+                                        variant="default"
+                                        columnName="거주지"
+                                        description="설정 안함"
+                                    />
+                                </div>
+
+                                <div className="grid grid-cols-10 gap-5">
+                                    <ColumnSettingCard
+                                        className="col-span-5"
+                                        variant="default"
+                                        columnName="가문"
+                                        description="설정 안함"
+                                    />
+
+                                    <button
+                                        type="button"
+                                        className="col-span-5 flex font-regular cursor-pointer flex-col gap-1 text-center bg-point-2 text-white align-center justify-center rounded-lg py-3 hover:bg-point-2/80 transition-colors"
+                                    >
+                                        <span>00 추가</span>
+                                        <span>눌러서 신규 추가</span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <SectionTitleToggle
+                                className="mt-[32px]"
+                                requiredLabel="설정"
+                                title="모티브"
+                            />
+                            <div className="flex flex-col gap-[10px]">
+                                <div className="grid grid-cols-10 gap-5">
+                                    <ColumnSettingCard
+                                        className="col-span-5"
+                                        variant="default"
+                                        columnName="모티브 대상"
+                                        description="설정 안함"
+                                        preview={true}
+                                    />
+
+                                    <ColumnSettingCard
+                                        className="col-span-5"
+                                        variant="default"
+                                        columnName="모티브 이미지"
+                                        description="설정 안함"
+                                    />
+                                </div>
+                                <div className="">
+                                    <ColumnSettingCard
+                                        variant="default"
+                                        columnName="모티브 설명"
+                                        description="설정 안함"
+                                    />
+                                </div>
+                            </div>
+
+                            <SectionTitleToggle
+                                className="mt-[32px]"
+                                requiredLabel="설정"
+                                title="육각형 셋팅"
+                            />
+                            <div className="flex flex-col gap-[10px] pb-5">
+                                <div className="">
+                                    <ColumnSettingCard
+                                        variant="point"
+                                        columnName="기본"
+                                        description="외모(000), 성격(000), 학력(000), 직업(000), 자산(000), 집안(000)"
+                                    />
+                                </div>
+                                <div className="">
+                                    <ColumnSettingCard
+                                        variant="point"
+                                        tooltip="컬럼 설명 툴팁입니다"
+                                        columnName="컬럼명"
+                                        description="일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000)"
+                                    />
+                                </div>
+                            </div>
                         </TabsContent>
                         <TabsContent value="appearance">
                             외형 컨텐츠
@@ -237,8 +546,83 @@ function CharacterSettingsContent() {
             {/* 우측 영역 */}
             <div className="w-[305px] shrink-0 hidden 2xl:flex flex-col h-full">
                 {/* 상단에 추가  */}
-                <div className="p-4 border-b shrink-0">
-                    <h4 className="font-medium">에피소드 목록</h4>
+                <div className=" shrink-0">
+                    {/* 필터 컴포넌트 추가 */}
+                    <div className="relative">
+                        <span className="absolute left-[10px] -top-[7px] text-black fz-12 font-bold">
+                            캐릭터명
+                        </span>
+                        <div
+                            className="border-b-[2px] border-point-2 px-[10px] py-[14px] flex items-center justify-between cursor-pointer"
+                            onClick={() => setIsFilterOpen(!isFilterOpen)}
+                        >
+                            <span className="fz-14 font-regular text-gray-6">
+                                전체(0000개)
+                            </span>
+                            <Icon
+                                name="filter_alt"
+                                size={20}
+                                className="text-point-2"
+                            />
+                        </div>
+                        {/* 필터 패널 */}
+                        {isFilterOpen && (
+                            <div className="absolute top-[calc(100%+10px)] left-0  right-0 bg-point-1 shadow-lg z-10 ">
+                                <button
+                                    type="button"
+                                    aria-label="close"
+                                    className="absolute top-2 right-[10px]"
+                                    onClick={() => setIsFilterOpen(false)}
+                                >
+                                    <Icon
+                                        name="close"
+                                        size={20}
+                                        className="text-white "
+                                    />
+                                </button>
+                            <div className="flex flex-col gap-[14px] fz-14 text-white p-[10px] leading-[20px] font-light pr-[30px]">
+                                {/* 필터 내용 */}
+                                {filterOptions.map((filter) => {
+                                    const isDisabled = filter.count === 0;
+                                    const isSelected =
+                                        selectedFilter === filter.id;
+                                    return (
+                                        <button
+                                            key={filter.id}
+                                            type="button"
+                                            disabled={isDisabled}
+                                            className={cn(
+                                                "text-left flex items-center gap-1",
+                                                isDisabled
+                                                    ? "cursor-not-allowed text-point-3"
+                                                    : "cursor-pointer",
+                                                isSelected &&
+                                                    !isDisabled &&
+                                                    "text-sub-8",
+                                            )}
+                                            onClick={() => {
+                                                if (!isDisabled) {
+                                                    setSelectedFilter(
+                                                        filter.id,
+                                                    );
+                                                }
+                                            }}
+                                        >
+                                            {filter.label} ({filter.count})
+                                            {isSelected && !isDisabled && (
+                                                <Icon
+                                                    name="check_small"
+                                                    size={24}
+                                                    className="text-sub-8"
+                                                />
+                                            )}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                        )}
+                    </div>
                 </div>
                 <div className="mt-[15px] mb-2.5 flex justify-between items-center">
                     <span>000 개</span>

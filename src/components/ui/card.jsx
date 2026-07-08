@@ -20,8 +20,8 @@ const cardVariants = cva(
       variant: {
         /** 기본: 흰 배경, 호버 시 보라 테두리·연한 배경 (이미지 1·2) */
         default: [
-          "border border-transparent bg-white text-card-foreground",
-          "hover:border-2 hover:border-point-2 hover:bg-gray-1",
+          "border-2 border-transparent bg-white text-card-foreground",
+          "hover:border-point-2 hover:bg-gray-1",
         ],
         /** 스토리/문서용: 호버 상태를 고정 표시 */
         hover: "border-2 border-point-2 bg-gray-1 text-card-foreground",
@@ -37,12 +37,17 @@ const cardVariants = cva(
          * 흰 배경 + 제목 포인트 컬러, 본문은 진한 그레이
          */
         filled: [
-          "border border-transparent bg-white text-card-foreground",
-          "hover:border-2 hover:border-point-2 hover:bg-gray-1",
+          "border-2 border-transparent bg-white text-card-foreground",
+          "hover:border-point-2 hover:bg-gray-1",
         ],
         /** 비활성 (이미지 5) */
         disabled:
-          "pointer-events-none border border-transparent bg-white text-card-foreground opacity-45",
+          "pointer-events-none border-2 border-transparent bg-white text-card-foreground opacity-45",
+        /** 포인트 컬러 강조 */
+        point: [
+          "border-2 border-transparent bg-white text-card-foreground",
+          "hover:border-point-2 hover:bg-gray-1",
+        ],
       },
     },
     defaultVariants: {
@@ -59,6 +64,7 @@ const cardTitleVariants = cva("font-semibold leading-none tracking-tight", {
       active: "text-white",
       filled: "text-point-2",
       disabled: "text-gray-3",
+      point: "text-point-1",
     },
   },
   defaultVariants: { variant: "default" },
@@ -72,6 +78,7 @@ const cardDescriptionVariants = cva("text-sm", {
       active: "text-white/90",
       filled: "text-gray-6",
       disabled: "text-gray-3",
+      point: "text-gray-6",
     },
   },
   defaultVariants: { variant: "default" },
