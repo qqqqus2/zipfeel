@@ -22,7 +22,7 @@ import { Checkbox } from "./checkbox";
 import { HexagonChart } from "./hexagon-chart";
 
 // React Quill을 동적으로 임포트 (SSR 방지)
-const ReactQuill = dynamic(() => import("react-quill"), { ssr: false });
+const ReactQuill = dynamic(() => import("react-quill-new"), { ssr: false });
 
 // 히스토리 아코디언 데이터
 const historyData = [
@@ -161,17 +161,52 @@ export const CharacterPopup = ({ open, onOpenChange }) => {
                         value={currentTab}
                         onValueChange={setCurrentTab}
                         variant="solidRounded"
-                        accentColor="#8557ff"
+                        accentColor="#BE94FF"
                         className="w-[calc(100%-30px)] absolute -top-[26px] right-5"
                     >
                         <TabsList className="w-full justify-start gap-3">
-                            <TabsTrigger value="history">히스토리</TabsTrigger>
-                            <TabsTrigger value="basic">기본</TabsTrigger>
-                            <TabsTrigger value="appearance">외형</TabsTrigger>
-                            <TabsTrigger value="personality">성격</TabsTrigger>
-                            <TabsTrigger value="etc">기타1</TabsTrigger>
-                            <TabsTrigger value="etc1">기타2</TabsTrigger>
-                            <TabsTrigger value="etc2">기타3</TabsTrigger>
+                            <TabsTrigger
+                                value="history"
+                                className="px-5 min-w-[80px] shrink-0"
+                            >
+                                히스토리
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="basic"
+                                className="px-5 min-w-[80px] shrink-0"
+                            >
+                                기본
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="appearance"
+                                className="px-5 min-w-[80px] shrink-0"
+                            >
+                                외형
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="personality"
+                                className="px-5 min-w-[80px] shrink-0"
+                            >
+                                성격
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="etc"
+                                className="px-5 min-w-[80px] shrink-0"
+                            >
+                                기타1
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="etc1"
+                                className="px-5 min-w-[80px] shrink-0"
+                            >
+                                기타2
+                            </TabsTrigger>
+                            <TabsTrigger
+                                value="etc2"
+                                className="px-5 min-w-[80px] shrink-0"
+                            >
+                                기타3
+                            </TabsTrigger>
                         </TabsList>
                     </Tabs>
                 </div>

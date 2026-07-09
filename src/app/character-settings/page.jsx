@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/tooltip";
 import { characterData, findCharacterById } from "@/data/characterData";
 import { cn } from "@/lib/utils";
+import { CharacterInfoType1 } from "./_components/CharacterInfoType1";
 
 // 캐릭터 목록 더미 데이터 (좌측 LNB용)
 const characterListData = characterData;
@@ -130,7 +131,15 @@ function ColumnSettingCard({
     );
 }
 
-// 필터 데이터
+// 좌측 필터 데이터 (작품정보)
+const leftFilterOptions = [
+    { id: "work1", label: "작품1" },
+    { id: "work2", label: "작품2" },
+    { id: "work3", label: "작품3" },
+    { id: "work4", label: "작품4" },
+];
+
+// 우측 필터 데이터
 const filterOptions = [
     { id: "all", label: "전체", count: 1234 },
     { id: "status1", label: "상태", count: 456 },
@@ -149,42 +158,91 @@ function CharacterSettingsContent() {
     // 캐릭터가 없으면 첫 번째 캐릭터 사용
     const currentCharacter = character || characterListData[0];
 
-    // 필터 선택 상태 관리
+    // 우측 필터 선택 상태 관리
     const [selectedFilter, setSelectedFilter] = React.useState("all");
-    // 필터 패널 열림/닫힘 상태 관리
-    const [isFilterOpen, setIsFilterOpen] = React.useState(false);
+    // 좌측 필터 패널 열림/닫힘 상태 관리
+    const [isLeftFilterOpen, setIsLeftFilterOpen] = React.useState(false);
+    // 우측 필터 패널 열림/닫힘 상태 관리
+    const [isRightFilterOpen, setIsRightFilterOpen] = React.useState(false);
+    // 좌측 필터 선택 상태 관리
+    const [selectedLeftFilter, setSelectedLeftFilter] = React.useState("work1");
 
     return (
         <div className="flex gap-6 w-full max-w-none h-full md:pt-[30px]">
-            {/* 좌측 영역 - 캐릭터 목록 LNB */}
+            {/* 좌측 영역 */}
             <div className="w-[305px] shrink-0 hidden 2xl:flex flex-col h-full">
-                <div className="p-4 border-b shrink-0">
-                    <h4 className="font-medium text-gray-6">캐릭터 목록</h4>
-                </div>
-                <div className="flex-1 overflow-y-auto custom-scrollbar">
-                    {characterListData.map((char) => (
-                        <a
-                            key={char.id}
-                            href={`/character-settings?id=${char.id}`}
-                            className={`block px-4 py-3 border-b hover:bg-gray-50 transition-colors ${
-                                currentCharacter.id === char.id
-                                    ? "bg-point-1/10"
-                                    : ""
-                            }`}
-                        >
-                            <div className="flex items-center justify-between gap-2">
-                                <div className="min-w-0 flex-1">
-                                    <p className="text-sm font-semibold truncate">
-                                        {char.title}
-                                    </p>
-                                    <p className="text-xs text-gray-5 truncate">
-                                        {char.role} · {char.status}
-                                    </p>
-                                </div>
+                <span className="relative left-[10px] text-black fz-12 font-bold">
+                    참고
+                </span>
+                <div className="relative mb-[15px]">
+                    <div
+                        className="border-b-[2px] border-point-2 px-[10px] py-[14px] flex items-center justify-between cursor-pointer"
+                        onClick={() => setIsLeftFilterOpen(!isLeftFilterOpen)}
+                    >
+                        <span className="fz-14 font-regular text-gray-6">
+                            {leftFilterOptions.find(
+                                (f) => f.id === selectedLeftFilter,
+                            )?.label || "작품정보"}
+                        </span>
+                        <Icon
+                            name="keyboard_arrow_down"
+                            size={12}
+                            className="text-point-2"
+                        />
+                    </div>
+                    {/* 좌측 필터 패널 */}
+                    {isLeftFilterOpen && (
+                        <div className="absolute top-2.5 left-0  right-0 bg-point-1 shadow-lg z-10 ">
+                            <button
+                                type="button"
+                                aria-label="close"
+                                className="absolute top-1 right-[10px]"
+                                onClick={() => setIsLeftFilterOpen(false)}
+                            >
+                                <Icon
+                                    name="keyboard_arrow_down"
+                                    size={12}
+                                    className="text-white rotate-180"
+                                />
+                            </button>
+                            <div className="flex flex-col gap-[14px] fz-14 text-white p-[10px] leading-[20px] font-regular pr-[30px]">
+                                {/* 필터 내용 */}
+                                {leftFilterOptions.map((filter) => {
+                                    const isSelected =
+                                        selectedLeftFilter === filter.id;
+                                    return (
+                                        <button
+                                            key={filter.id}
+                                            type="button"
+                                            className={cn(
+                                                "cursor-pointer text-left flex items-center gap-2",
+                                                isSelected && "text-sub-8",
+                                            )}
+                                            onClick={() => {
+                                                setSelectedLeftFilter(
+                                                    filter.id,
+                                                );
+                                                setIsLeftFilterOpen(false);
+                                            }}
+                                        >
+                                            {filter.label}
+                                            {isSelected && (
+                                                <Icon
+                                                    name="check_small"
+                                                    size={20}
+                                                    className="text-[#FFCC00]"
+                                                />
+                                            )}
+                                        </button>
+                                    );
+                                })}
                             </div>
-                        </a>
-                    ))}
+                        </div>
+                    )}
                 </div>
+                {/* 좌측 컴포넌트 전용 */}
+                {/* type-1 */}
+                <CharacterInfoType1 />
             </div>
 
             {/* 중앙 콘텐츠 */}
@@ -546,18 +604,27 @@ function CharacterSettingsContent() {
             {/* 우측 영역 */}
             <div className="w-[305px] shrink-0 hidden 2xl:flex flex-col h-full">
                 {/* 상단에 추가  */}
-                <div className=" shrink-0">
+                <div className="relative shrink-0 flex flex-col">
                     {/* 필터 컴포넌트 추가 */}
+                    <span className="relative left-[10px] text-black fz-12 font-bold">
+                        캐릭터명
+                    </span>
                     <div className="relative">
-                        <span className="absolute left-[10px] -top-[7px] text-black fz-12 font-bold">
-                            캐릭터명
-                        </span>
                         <div
                             className="border-b-[2px] border-point-2 px-[10px] py-[14px] flex items-center justify-between cursor-pointer"
-                            onClick={() => setIsFilterOpen(!isFilterOpen)}
+                            onClick={() =>
+                                setIsRightFilterOpen(!isRightFilterOpen)
+                            }
                         >
                             <span className="fz-14 font-regular text-gray-6">
-                                전체(0000개)
+                                {filterOptions.find(
+                                    (f) => f.id === selectedFilter,
+                                )?.label || "전체"}{" "}
+                                (
+                                {filterOptions.find(
+                                    (f) => f.id === selectedFilter,
+                                )?.count || 0}
+                                개)
                             </span>
                             <Icon
                                 name="filter_alt"
@@ -565,14 +632,14 @@ function CharacterSettingsContent() {
                                 className="text-point-2"
                             />
                         </div>
-                        {/* 필터 패널 */}
-                        {isFilterOpen && (
-                            <div className="absolute top-[calc(100%+10px)] left-0  right-0 bg-point-1 shadow-lg z-10 ">
+                        {/* 우측 필터 패널 */}
+                        {isRightFilterOpen && (
+                            <div className="absolute top-2.5 left-0  right-0 bg-point-1 shadow-lg z-10 ">
                                 <button
                                     type="button"
                                     aria-label="close"
                                     className="absolute top-2 right-[10px]"
-                                    onClick={() => setIsFilterOpen(false)}
+                                    onClick={() => setIsRightFilterOpen(false)}
                                 >
                                     <Icon
                                         name="close"
@@ -580,47 +647,50 @@ function CharacterSettingsContent() {
                                         className="text-white "
                                     />
                                 </button>
-                            <div className="flex flex-col gap-[14px] fz-14 text-white p-[10px] leading-[20px] font-light pr-[30px]">
-                                {/* 필터 내용 */}
-                                {filterOptions.map((filter) => {
-                                    const isDisabled = filter.count === 0;
-                                    const isSelected =
-                                        selectedFilter === filter.id;
-                                    return (
-                                        <button
-                                            key={filter.id}
-                                            type="button"
-                                            disabled={isDisabled}
-                                            className={cn(
-                                                "text-left flex items-center gap-1",
-                                                isDisabled
-                                                    ? "cursor-not-allowed text-point-3"
-                                                    : "cursor-pointer",
-                                                isSelected &&
-                                                    !isDisabled &&
-                                                    "text-sub-8",
-                                            )}
-                                            onClick={() => {
-                                                if (!isDisabled) {
-                                                    setSelectedFilter(
-                                                        filter.id,
-                                                    );
-                                                }
-                                            }}
-                                        >
-                                            {filter.label} ({filter.count})
-                                            {isSelected && !isDisabled && (
-                                                <Icon
-                                                    name="check_small"
-                                                    size={24}
-                                                    className="text-sub-8"
-                                                />
-                                            )}
-                                        </button>
-                                    );
-                                })}
+                                <div className="flex flex-col gap-[14px] fz-14 text-white p-[10px] leading-[20px] font-light pr-[30px]">
+                                    {/* 필터 내용 */}
+                                    {filterOptions.map((filter) => {
+                                        const isDisabled = filter.count === 0;
+                                        const isSelected =
+                                            selectedFilter === filter.id;
+                                        return (
+                                            <button
+                                                key={filter.id}
+                                                type="button"
+                                                disabled={isDisabled}
+                                                className={cn(
+                                                    "text-left flex items-center gap-1",
+                                                    isDisabled
+                                                        ? "cursor-not-allowed text-point-3"
+                                                        : "cursor-pointer",
+                                                    isSelected &&
+                                                        !isDisabled &&
+                                                        "text-sub-8",
+                                                )}
+                                                onClick={() => {
+                                                    if (!isDisabled) {
+                                                        setSelectedFilter(
+                                                            filter.id,
+                                                        );
+                                                        setIsRightFilterOpen(
+                                                            false,
+                                                        );
+                                                    }
+                                                }}
+                                            >
+                                                {filter.label} ({filter.count})
+                                                {isSelected && !isDisabled && (
+                                                    <Icon
+                                                        name="check_small"
+                                                        size={24}
+                                                        className="text-[#FFCC00]"
+                                                    />
+                                                )}
+                                            </button>
+                                        );
+                                    })}
+                                </div>
                             </div>
-                        </div>
                         )}
                     </div>
                 </div>

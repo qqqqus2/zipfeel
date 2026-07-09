@@ -62,6 +62,7 @@ function HexagonChart({
     max = DEFAULT_MAX,
     gridLevels = DEFAULT_GRID_LEVELS,
     showLegend = true,
+    showDelta = false,
     legendLabelMaxWidth = 96,
     size = 220,
     title,

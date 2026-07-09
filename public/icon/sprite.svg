@@ -393,6 +393,8 @@
 <g mask="url(#keep__mask0_3_29)">
 <path d="M16 12L18 14V16H13V22L12 23L11 22V16H6V14L8 12V5H7V3H17V5H16V12ZM8.85 14H15.15L14 12.85V5H10V12.85L8.85 14Z" fill="currentColor"/>
 </g>
+</symbol><symbol id="keyboard_arrow_down" viewBox="0 0 11 7">
+<path d="M5.37687 6.81625L0 1.43938L1.43937 0L5.37687 3.9375L9.31437 0L10.7538 1.43938L5.37687 6.81625Z" fill="currentColor"/>
 </symbol><symbol id="keyboard_tab" viewBox="0 0 20 20">
 <mask id="keyboard_tab__mask0_3_323" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="20" height="20">
 <rect width="20" height="20" transform="matrix(-1 0 0 1 20 0)" fill="#D9D9D9"/>

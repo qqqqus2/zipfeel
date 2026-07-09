@@ -38,7 +38,7 @@ const AccordionTrigger = React.forwardRef(
                 {...props}
             >
                 {children}
-                <Button variant="ghost" size="icon" className=" p-0">
+                <span variant="ghost" size="icon" className=" p-0">
                     <Icon
                         name="expand_content"
                         size={24}
@@ -49,7 +49,7 @@ const AccordionTrigger = React.forwardRef(
                         size={24}
                         className="accordion-icon-collapse hidden text-gray-6"
                     />
-                </Button>
+                </span>
             </AccordionPrimitive.Trigger>
         </AccordionPrimitive.Header>
     ),

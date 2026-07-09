@@ -1,5 +1,5 @@
 @import "tailwindcss";
-@import "react-quill/dist/quill.snow.css";
+@import "react-quill-new/dist/quill.snow.css";
 
 /* Tailwind v4 source scanning (Storybook 포함) */
 @source "../**/*.{js,jsx,ts,tsx,md,mdx}";
