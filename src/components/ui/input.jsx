@@ -35,6 +35,36 @@ const Input = React.forwardRef(
             (suffixLabel != null && suffixLabel !== "") ||
             suffixButton;
 
+        // Search type 전용 처리
+        if (type === "search") {
+            return (
+                <div className={cn("relative inline-flex items-center w-[130px]", className)}>
+                    <input
+                        type="text"
+                        disabled={disabled}
+                        placeholder="검색어 입력"
+                        className={cn(
+                            "w-full h-[30px] rounded-full border-2 border-point-1 bg-white",
+                            "pl-[18px] pr-10 text-[12px] font-normal leading-[30px]",
+                            "placeholder:text-[#C7C7C7]",
+                            "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-point-1 focus-visible:ring-offset-2",
+                            "disabled:cursor-not-allowed disabled:opacity-50",
+                        )}
+                        ref={ref}
+                        {...props}
+                    />
+                    <button
+                        type="button"
+                        className="absolute right-3 flex items-center justify-center hover:opacity-70 transition-opacity"
+                        onClick={props.onSearch}
+                        disabled={disabled}
+                    >
+                        <Icon name="manage_search" size={20} className="text-point-1" />
+                    </button>
+                </div>
+            );
+        }
+
         if (!hasAddon) {
             return (
                 <input

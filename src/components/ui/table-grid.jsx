@@ -53,30 +53,38 @@ import { cn } from "@/lib/utils";
  * `direction`: `"asc"` | `"desc"` | `false`
  */
 function TableGridSortIcon({ direction }) {
-  const inactive = "text-gray-4";
-  const both = "text-gray-6";
+    const inactive = "text-gray-4";
+    const both = "text-gray-6";
 
-  return (
-    <span
-      className="inline-flex shrink-0 flex-col items-center justify-center leading-none"
-      aria-hidden
-    >
-      <ChevronUp
-        className={cn(
-          "size-3 shrink-0",
-          direction === "asc" ? "text-point-2" : direction === "desc" ? inactive : both,
-        )}
-        strokeWidth={2.5}
-      />
-      <ChevronDown
-        className={cn(
-          "-mt-0.5 size-3 shrink-0",
-          direction === "desc" ? "text-point-2" : direction === "asc" ? inactive : both,
-        )}
-        strokeWidth={2.5}
-      />
-    </span>
-  );
+    return (
+        <span
+            className="inline-flex shrink-0 flex-col items-center justify-center leading-none"
+            aria-hidden
+        >
+            <ChevronUp
+                className={cn(
+                    "size-3 shrink-0",
+                    direction === "asc"
+                        ? "text-point-2"
+                        : direction === "desc"
+                          ? inactive
+                          : both,
+                )}
+                strokeWidth={2.5}
+            />
+            <ChevronDown
+                className={cn(
+                    "-mt-0.5 size-3 shrink-0",
+                    direction === "desc"
+                        ? "text-point-2"
+                        : direction === "asc"
+                          ? inactive
+                          : both,
+                )}
+                strokeWidth={2.5}
+            />
+        </span>
+    );
 }
 
 const TableGridContext = React.createContext(null);
@@ -86,39 +94,39 @@ const TableGridSortContext = React.createContext(null);
 
 /** `table.jsx` `useTableSort`와 동일 — `TableGrid` + `sortable` 안에서만 유효 */
 export function useTableGridSort() {
-  const ctx = React.useContext(TableGridSortContext);
-  if (!ctx) {
-    return {
-      tableSortable: false,
-      sorting: null,
-      setSorting: () => {},
-      toggleSort: () => {},
-      getSortState: () => false,
-    };
-  }
-  return ctx;
+    const ctx = React.useContext(TableGridSortContext);
+    if (!ctx) {
+        return {
+            tableSortable: false,
+            sorting: null,
+            setSorting: () => {},
+            toggleSort: () => {},
+            getSortState: () => false,
+        };
+    }
+    return ctx;
 }
 
 /** `table.jsx`의 `TableBody` + `TableRow` 선택과 동일 */
 const TableGridSelectionContext = React.createContext(null);
 
 export function useTableGridContext() {
-  const ctx = React.useContext(TableGridContext);
-  if (!ctx) {
-    throw new Error(
-      "TableGridRow / TableGridCell은 TableGrid 안에서만 사용하세요.",
-    );
-  }
-  return ctx;
+    const ctx = React.useContext(TableGridContext);
+    if (!ctx) {
+        throw new Error(
+            "TableGridRow / TableGridCell은 TableGrid 안에서만 사용하세요.",
+        );
+    }
+    return ctx;
 }
 
 /** `size`에 Tailwind 너비·기준 유틸만 쓸 때 (프리셋 키·원시 트랙과 구분) */
 function isTailwindColumnSize(size) {
-  if (typeof size !== "string") return false;
-  return size
-    .trim()
-    .split(/\s+/)
-    .some((token) => /^(?:w|min-w|max-w|basis)-/.test(token));
+    if (typeof size !== "string") return false;
+    return size
+        .trim()
+        .split(/\s+/)
+        .some((token) => /^(?:w|min-w|max-w|basis)-/.test(token));
 }
 
 /**
@@ -126,14 +134,14 @@ function isTailwindColumnSize(size) {
  * 필요하면 팀에서 키를 더 늘리면 됩니다.
  */
 export const tableGridColumnSize = {
-  /** 내용 길이만큼 */
-  auto: "auto",
-  /** 짧은 라벨·번호 */
-  content: "max-content",
-  /** 남는 가로 폭을 이 열이 가져감 — 긴 메인 열 한 개에 사용 */
-  fill: "minmax(0, 1fr)",
-  /** `size` 생략 시 */
-  default: "minmax(0, 1fr)",
+    /** 내용 길이만큼 */
+    auto: "auto",
+    /** 짧은 라벨·번호 */
+    content: "max-content",
+    /** 남는 가로 폭을 이 열이 가져감 — 긴 메인 열 한 개에 사용 */
+    fill: "minmax(0, 1fr)",
+    /** `size` 생략 시 */
+    default: "minmax(0, 1fr)",
 };
 
 /**
@@ -141,71 +149,74 @@ export const tableGridColumnSize = {
  * @returns {{ track: string; sizeClassName?: string }}
  */
 export function resolveTableGridColumn(column) {
-  if (column?.width) {
-    return { track: column.width };
-  }
-  const key = column?.size;
-  if (key != null && tableGridColumnSize[key] != null) {
-    return { track: tableGridColumnSize[key] };
-  }
-  if (key != null && typeof key === "string") {
-    const trimmed = key.trim();
-    if (trimmed && isTailwindColumnSize(trimmed)) {
-      return { track: "auto", sizeClassName: trimmed };
+    if (column?.width) {
+        return { track: column.width };
     }
-    if (trimmed) {
-      return { track: trimmed };
+    const key = column?.size;
+    if (key != null && tableGridColumnSize[key] != null) {
+        return { track: tableGridColumnSize[key] };
     }
-  }
-  return { track: tableGridColumnSize.default };
+    if (key != null && typeof key === "string") {
+        const trimmed = key.trim();
+        if (trimmed && isTailwindColumnSize(trimmed)) {
+            return { track: "auto", sizeClassName: trimmed };
+        }
+        if (trimmed) {
+            return { track: trimmed };
+        }
+    }
+    return { track: tableGridColumnSize.default };
 }
 
 /**
  * @param {{ width?: string; size?: string }} column
  */
 export function resolveTableGridColumnTrack(column) {
-  return resolveTableGridColumn(column).track;
+    return resolveTableGridColumn(column).track;
 }
 
 /**
  * `TableGrid`와 동일한 `grid-template-columns` 문자열 (본문 `role="row"`에 그대로 넣기)
  */
 export function getTableGridTemplateColumns(columns = [], columnTemplate) {
-  if (columnTemplate) {
-    return columnTemplate;
-  }
-  if (!columns.length) {
-    return "minmax(0, 1fr)";
-  }
-  return columns.map((c) => resolveTableGridColumn(c).track).join(" ");
+    if (columnTemplate) {
+        return columnTemplate;
+    }
+    if (!columns.length) {
+        return "minmax(0, 1fr)";
+    }
+    return columns.map((c) => resolveTableGridColumn(c).track).join(" ");
 }
 
 /** `style={{ ...getTableGridTracks(columns, columnTemplate) }}` — 행 `style`에 그대로 펼치기 */
 export function getTableGridTracks(columns, columnTemplate) {
-  return {
-    gridTemplateColumns: getTableGridTemplateColumns(columns, columnTemplate),
-  };
+    return {
+        gridTemplateColumns: getTableGridTemplateColumns(
+            columns,
+            columnTemplate,
+        ),
+    };
 }
 
 /** @param {string | undefined} raw */
 function normalizeTableGridAlign(raw) {
-  if (raw == null || raw === "") return "center";
-  if (raw === "start") return "left";
-  if (raw === "end") return "right";
-  if (raw === "left" || raw === "center" || raw === "right") return raw;
-  return "center";
+    if (raw == null || raw === "") return "center";
+    if (raw === "start") return "left";
+    if (raw === "end") return "right";
+    if (raw === "left" || raw === "center" || raw === "right") return raw;
+    return "center";
 }
 
 function tableGridAlignToJustify(a) {
-  if (a === "left") return "justify-start";
-  if (a === "right") return "justify-end";
-  return "justify-center";
+    if (a === "left") return "justify-start";
+    if (a === "right") return "justify-end";
+    return "justify-center";
 }
 
 function tableGridAlignToText(a) {
-  if (a === "left") return "text-left";
-  if (a === "right") return "text-right";
-  return "text-center";
+    if (a === "left") return "text-left";
+    if (a === "right") return "text-right";
+    return "text-center";
 }
 
 /**
@@ -213,70 +224,70 @@ function tableGridAlignToText(a) {
  * @param {{ col: object; isLastColumn?: boolean }} props
  */
 function TableGridColumnHeader({ col, isLastColumn = false }) {
-  const ctx = useTableGridSort();
-  const sortKey = col.sortKey ?? col.key;
-  const columnSortOff = col.sortable === false;
-  const enabled = Boolean(ctx.tableSortable && sortKey && !columnSortOff);
-  const direction = enabled ? ctx.getSortState(sortKey) : false;
+    const ctx = useTableGridSort();
+    const sortKey = col.sortKey ?? col.key;
+    const columnSortOff = col.sortable === false;
+    const enabled = Boolean(ctx.tableSortable && sortKey && !columnSortOff);
+    const direction = enabled ? ctx.getSortState(sortKey) : false;
 
-  const cellAlign = normalizeTableGridAlign(
-    col.headerAlign ?? col.sortAlign ?? "center",
-  );
-  const buttonAlign = normalizeTableGridAlign(
-    col.sortAlign ?? col.headerAlign ?? "center",
-  );
-
-  const cellJustify = tableGridAlignToJustify(cellAlign);
-  const cellText = tableGridAlignToText(cellAlign);
-  const buttonJustify = tableGridAlignToJustify(buttonAlign);
-
-  const { sizeClassName } = resolveTableGridColumn(col);
-  const baseCell = cn(
-    "relative isolate flex h-full min-h-[30px] items-center px-2 py-0 align-middle [&:has([role=checkbox])]:pr-0",
-    /* 상단 절반 흰 오버레이 — 세로 구분선은 회색(하단) 절반만 보이게 */
-    "before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-0 before:h-1/2 before:bg-white before:content-['']",
-    !isLastColumn &&
-      "after:pointer-events-none after:absolute after:right-0 after:top-1/2 after:z-[1] after:h-1/2 after:w-px after:bg-black after:content-['']",
-    "[&>*]:relative [&>*]:z-10",
-    cellJustify,
-    cellText,
-    col.className,
-    sizeClassName,
-  );
-
-  if (!enabled) {
-    return (
-      <div role="columnheader" className={baseCell}>
-        <span className="min-w-0 truncate">{col.header}</span>
-      </div>
+    const cellAlign = normalizeTableGridAlign(
+        col.headerAlign ?? col.sortAlign ?? "center",
     );
-  }
+    const buttonAlign = normalizeTableGridAlign(
+        col.sortAlign ?? col.headerAlign ?? "center",
+    );
 
-  return (
-    <div
-      role="columnheader"
-      className={baseCell}
-      aria-sort={
-        direction === "asc"
-          ? "ascending"
-          : direction === "desc"
-            ? "descending"
-            : "none"
-      }
-    >
-      <button
-        type="button"
-        className={cn(
-          "-m-1 inline-flex h-7 w-full min-w-0 items-center gap-1 rounded-md px-1 text-sm font-bold text-inherit hover:bg-transparent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
-          buttonJustify,
-        )}
-        onClick={() => ctx.toggleSort(sortKey)}
-      >
-        <span className="min-w-0 truncate">{col.header}</span>
-        <TableGridSortIcon direction={direction} />
-      </button>
-    </div>
-  );
+    const cellJustify = tableGridAlignToJustify(cellAlign);
+    const cellText = tableGridAlignToText(cellAlign);
+    const buttonJustify = tableGridAlignToJustify(buttonAlign);
+
+    const { sizeClassName } = resolveTableGridColumn(col);
+    const baseCell = cn(
+        "relative isolate flex h-full min-h-[30px] items-center px-2 py-0 align-middle [&:has([role=checkbox])]:pr-0",
+        /* 상단 절반 흰 오버레이 — 세로 구분선은 회색(하단) 절반만 보이게 */
+        "before:pointer-events-none before:absolute before:inset-x-0 before:top-0 before:z-0 before:h-1/2 before:bg-white before:content-['']",
+        !isLastColumn &&
+            "after:pointer-events-none after:absolute after:right-0 after:top-1/2 after:z-[1] after:h-1/2 after:w-px after:bg-black after:content-['']",
+        "[&>*]:relative [&>*]:z-10",
+        cellJustify,
+        cellText,
+        col.className,
+        sizeClassName,
+    );
+
+    if (!enabled) {
+        return (
+            <div role="columnheader" className={baseCell}>
+                <span className="min-w-0 truncate">{col.header}</span>
+            </div>
+        );
+    }
+
+    return (
+        <div
+            role="columnheader"
+            className={baseCell}
+            aria-sort={
+                direction === "asc"
+                    ? "ascending"
+                    : direction === "desc"
+                      ? "descending"
+                      : "none"
+            }
+        >
+            <button
+                type="button"
+                className={cn(
+                    "-m-1 inline-flex h-7 w-full min-w-0 items-center gap-1 rounded-md px-1 text-sm font-bold text-inherit hover:bg-transparent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+                    buttonJustify,
+                )}
+                onClick={() => ctx.toggleSort(sortKey)}
+            >
+                <span className="min-w-0 truncate">{col.header}</span>
+                <TableGridSortIcon direction={direction} />
+            </button>
+        </div>
+    );
 }
 
 /**
@@ -284,50 +295,54 @@ function TableGridColumnHeader({ col, isLastColumn = false }) {
  * `TableBody`의 `selectable`(기본)과 같이 쓰려면 `value`를 넘기세요.
  */
 const TableGridRow = React.forwardRef(
-  ({ className, children, style, selected, value, ...props }, ref) => {
-    const { gridStyle } = useTableGridContext();
-    const ctx = React.useContext(TableGridSelectionContext);
-    const { "data-state": dataStateProp, onClick, ...rest } = props;
+    ({ className, children, style, selected, value, ...props }, ref) => {
+        const { gridStyle } = useTableGridContext();
+        const ctx = React.useContext(TableGridSelectionContext);
+        const { "data-state": dataStateProp, onClick, ...rest } = props;
 
-    const isControlled = selected !== undefined;
-    const fromContext =
-      !isControlled && ctx && value !== undefined && ctx.selectedKey === value;
-    const rowSelected = isControlled ? selected === true : fromContext;
+        const isControlled = selected !== undefined;
+        const fromContext =
+            !isControlled &&
+            ctx &&
+            value !== undefined &&
+            ctx.selectedKey === value;
+        const rowSelected = isControlled ? selected === true : fromContext;
 
-    const handleClick = (e) => {
-      onClick?.(e);
-      if (isControlled) return;
-      if (ctx && value !== undefined) {
-        ctx.setSelectedKey((prev) => (prev === value ? null : value));
-      }
-    };
+        const handleClick = (e) => {
+            onClick?.(e);
+            if (isControlled) return;
+            if (ctx && value !== undefined) {
+                ctx.setSelectedKey((prev) => (prev === value ? null : value));
+            }
+        };
 
-    const isAuto = !isControlled && ctx && value !== undefined;
-    const clickable = typeof onClick === "function" || isAuto;
+        const isAuto = !isControlled && ctx && value !== undefined;
+        const clickable = typeof onClick === "function" || isAuto;
 
-    return (
-      <div
-        ref={ref}
-        role="row"
-        style={{ ...style, ...gridStyle }}
-        onClick={handleClick}
-        data-state={rowSelected ? "selected" : dataStateProp}
-        aria-selected={rowSelected ? true : undefined}
-        className={cn(
-          "grid min-h-12 items-center border-b border-gray-2 bg-white transition-colors last:border-b-0",
-          "max-md:!flex max-md:flex-row max-md:flex-wrap max-md:items-stretch max-md:gap-x-2 max-md:gap-y-3",
-          "max-md:px-[15px] max-md:py-[20px] max-md:shadow-sm max-md:rounded-0",
-          "max-md:[&:nth-child(odd):not([data-state=selected])]:bg-white max-md:[&:nth-child(even):not([data-state=selected])]:!bg-gray-1",
-          clickable && "cursor-pointer [&_[role=cell]]:cursor-pointer",
-          className,
-          "data-[state=selected]:!bg-gray-2 data-[state=selected]:hover:!bg-gray-2",
-        )}
-        {...rest}
-      >
-        {children}
-      </div>
-    );
-  },
+        return (
+            <div
+                ref={ref}
+                role="row"
+                style={{ ...style, ...gridStyle }}
+                onClick={handleClick}
+                data-state={rowSelected ? "selected" : dataStateProp}
+                aria-selected={rowSelected ? true : undefined}
+                className={cn(
+                    "grid min-h-12 items-center border-b border-gray-2 bg-white transition-colors last:border-b-0",
+                    "max-md:!flex max-md:flex-row max-md:flex-wrap max-md:items-stretch max-md:gap-x-2 max-md:gap-y-3",
+                    "max-md:px-[15px] max-md:py-[20px] max-md:shadow-sm max-md:rounded-0",
+                    "max-md:[&:nth-child(odd):not([data-state=selected])]:bg-white max-md:[&:nth-child(even):not([data-state=selected])]:!bg-gray-1",
+                    clickable &&
+                        "cursor-pointer [&_[role=cell]]:cursor-pointer",
+                    className,
+                    "data-[state=selected]:!bg-gray-2 data-[state=selected]:hover:!bg-gray-2",
+                )}
+                {...rest}
+            >
+                {children}
+            </div>
+        );
+    },
 );
 TableGridRow.displayName = "TableGridRow";
 
@@ -340,25 +355,25 @@ export { TableGridRow };
  * @param {import("react").ReactNode} props.children
  */
 export function TableGridCell({ columnKey, className, children, ...props }) {
-  const { columns } = useTableGridContext();
-  const col = columns.find((c) => c.key === columnKey);
-  const { sizeClassName } = resolveTableGridColumn(col ?? {});
-  return (
-    <div
-      role="cell"
-      className={cn(
-        "flex min-h-12 min-w-0 items-center px-2 align-middle [&:has([role=checkbox])]:pr-0",
-        "max-md:min-h-0 max-md:min-w-0",
-        col?.cellClassName,
-        col?.mobileClassName,
-        sizeClassName,
-        className,
-      )}
-      {...props}
-    >
-      {children}
-    </div>
-  );
+    const { columns } = useTableGridContext();
+    const col = columns.find((c) => c.key === columnKey);
+    const { sizeClassName } = resolveTableGridColumn(col ?? {});
+    return (
+        <div
+            role="cell"
+            className={cn(
+                "flex min-h-12 min-w-0 items-center align-middle fz-12 font-regular [&:has([role=checkbox])]:pr-0",
+                "max-md:min-h-0 max-md:min-w-0",
+                col?.cellClassName,
+                col?.mobileClassName,
+                sizeClassName,
+                className,
+            )}
+            {...props}
+        >
+            {children}
+        </div>
+    );
 }
 TableGridCell.displayName = "TableGridCell";
 
@@ -373,152 +388,155 @@ TableGridCell.displayName = "TableGridCell";
  * @param {{ id: string; desc: boolean } | null} [defaultSorting] — 비제어 모드 초기값.
  */
 export function TableGrid({
-  columns = [],
-  columnTemplate,
-  children,
-  className,
-  bordered = false,
-  selectable = true,
-  striped = false,
-  sortable = false,
-  sorting: sortingProp,
-  onSortingChange,
-  defaultSorting = null,
+    columns = [],
+    columnTemplate,
+    children,
+    className,
+    bordered = false,
+    selectable = true,
+    striped = false,
+    sortable = false,
+    sorting: sortingProp,
+    onSortingChange,
+    defaultSorting = null,
 }) {
-  const [selectedKey, setSelectedKey] = React.useState(null);
+    const [selectedKey, setSelectedKey] = React.useState(null);
 
-  const [uncontrolledSorting, setUncontrolledSorting] =
-    React.useState(defaultSorting);
-  const isSortingControlled = sortingProp !== undefined;
-  const sorting = isSortingControlled ? sortingProp : uncontrolledSorting;
+    const [uncontrolledSorting, setUncontrolledSorting] =
+        React.useState(defaultSorting);
+    const isSortingControlled = sortingProp !== undefined;
+    const sorting = isSortingControlled ? sortingProp : uncontrolledSorting;
 
-  const setSorting = React.useCallback(
-    (next) => {
-      const resolved = typeof next === "function" ? next(sorting) : next;
-      if (isSortingControlled) {
-        onSortingChange?.(resolved);
-      } else {
-        setUncontrolledSorting(resolved);
-      }
-    },
-    [isSortingControlled, sorting, onSortingChange],
-  );
+    const setSorting = React.useCallback(
+        (next) => {
+            const resolved = typeof next === "function" ? next(sorting) : next;
+            if (isSortingControlled) {
+                onSortingChange?.(resolved);
+            } else {
+                setUncontrolledSorting(resolved);
+            }
+        },
+        [isSortingControlled, sorting, onSortingChange],
+    );
 
-  const toggleSort = React.useCallback(
-    (sortKey) => {
-      setSorting((prev) => {
-        if (!prev || prev.id !== sortKey) return { id: sortKey, desc: false };
-        if (!prev.desc) return { id: sortKey, desc: true };
-        return null;
-      });
-    },
-    [setSorting],
-  );
+    const toggleSort = React.useCallback(
+        (sortKey) => {
+            setSorting((prev) => {
+                if (!prev || prev.id !== sortKey)
+                    return { id: sortKey, desc: false };
+                if (!prev.desc) return { id: sortKey, desc: true };
+                return null;
+            });
+        },
+        [setSorting],
+    );
 
-  const getSortState = React.useCallback(
-    (sortKey) => {
-      if (!sorting || sorting.id !== sortKey) return false;
-      return sorting.desc ? "desc" : "asc";
-    },
-    [sorting],
-  );
+    const getSortState = React.useCallback(
+        (sortKey) => {
+            if (!sorting || sorting.id !== sortKey) return false;
+            return sorting.desc ? "desc" : "asc";
+        },
+        [sorting],
+    );
 
-  const sortCtxValue = React.useMemo(
-    () =>
-      sortable
-        ? {
-            tableSortable: true,
-            sorting,
-            setSorting,
-            toggleSort,
-            getSortState,
-          }
-        : null,
-    [sortable, sorting, setSorting, toggleSort, getSortState],
-  );
+    const sortCtxValue = React.useMemo(
+        () =>
+            sortable
+                ? {
+                      tableSortable: true,
+                      sorting,
+                      setSorting,
+                      toggleSort,
+                      getSortState,
+                  }
+                : null,
+        [sortable, sorting, setSorting, toggleSort, getSortState],
+    );
 
-  const gridStyle = React.useMemo(
-    () => getTableGridTracks(columns, columnTemplate),
-    [columns, columnTemplate],
-  );
+    const gridStyle = React.useMemo(
+        () => getTableGridTracks(columns, columnTemplate),
+        [columns, columnTemplate],
+    );
 
-  const contextValue = React.useMemo(
-    () => ({ columns, columnTemplate, gridStyle }),
-    [columns, columnTemplate, gridStyle],
-  );
+    const contextValue = React.useMemo(
+        () => ({ columns, columnTemplate, gridStyle }),
+        [columns, columnTemplate, gridStyle],
+    );
 
-  const bodyChildren = React.useMemo(() => {
-    if (!striped) return children;
-    return React.Children.map(children, (child, index) => {
-      if (!React.isValidElement(child)) return child;
-      if (child.type !== TableGridRow) return child;
-      return React.cloneElement(child, {
-        className: cn(
-          child.props.className,
-          index % 2 === 0 &&
-            "bg-muted/30 hover:bg-muted/40 data-[state=selected]:!bg-gray-2 data-[state=selected]:hover:!bg-gray-2",
-        ),
-      });
-    });
-  }, [children, striped]);
+    const bodyChildren = React.useMemo(() => {
+        if (!striped) return children;
+        return React.Children.map(children, (child, index) => {
+            if (!React.isValidElement(child)) return child;
+            if (child.type !== TableGridRow) return child;
+            return React.cloneElement(child, {
+                className: cn(
+                    child.props.className,
+                    index % 2 === 0 &&
+                        "bg-muted/30 hover:bg-muted/40 data-[state=selected]:!bg-gray-2 data-[state=selected]:hover:!bg-gray-2",
+                ),
+            });
+        });
+    }, [children, striped]);
 
-  const bodySection = selectable ? (
-    <TableGridSelectionContext.Provider value={{ selectedKey, setSelectedKey }}>
-      {bodyChildren}
-    </TableGridSelectionContext.Provider>
-  ) : (
-    bodyChildren
-  );
+    const bodySection = selectable ? (
+        <TableGridSelectionContext.Provider
+            value={{ selectedKey, setSelectedKey }}
+        >
+            {bodyChildren}
+        </TableGridSelectionContext.Provider>
+    ) : (
+        bodyChildren
+    );
 
-  const table = (
-    <TableGridContext.Provider value={contextValue}>
-      <TableGridSortContext.Provider value={sortCtxValue}>
-        <div role="table" className="w-full text-sm">
-          <div role="rowgroup" className="hidden md:block">
-            <div
-              role="row"
-              style={gridStyle}
-              className="grid h-[30px] min-h-[30px] border-b border-black bg-gray-2 font-bold text-gray-6"
-            >
-              {columns.map((col, index) => (
-                <TableGridColumnHeader
-                  key={col.key}
-                  col={col}
-                  isLastColumn={index === columns.length - 1}
-                />
-              ))}
-            </div>
-          </div>
+    const table = (
+        <TableGridContext.Provider value={contextValue}>
+            <TableGridSortContext.Provider value={sortCtxValue}>
+                <div role="table" className="w-full text-sm">
+                    <div role="rowgroup" className="hidden md:block">
+                        <div
+                            role="row"
+                            style={gridStyle}
+                            className="grid h-[30px] min-h-[30px] border-b border-black bg-gray-2 font-bold text-gray-6"
+                        >
+                            {columns.map((col, index) => (
+                                <TableGridColumnHeader
+                                    key={col.key}
+                                    col={col}
+                                    isLastColumn={index === columns.length - 1}
+                                />
+                            ))}
+                        </div>
+                    </div>
 
-          <div
-            role="rowgroup"
-            className={cn(
-              " border-b border-border bg-white [&:empty]:min-h-[4rem]",
-              "[&_[role=row]]:relative [&_[role=row]]:before:content-[''] [&_[role=row]]:before:hidden [&_[role=row]]:before:absolute [&_[role=row]]:before:inset-0",
-              "[&_[role=row]]:before:h-full [&_[role=row]]:before:w-full [&_[role=row]]:before:border-2 [&_[role=row]]:before:border-point-1",
-              "[&_[role=row]]:hover:before:block max-md:[&_[role=row]]:first:before:rounded-tl-[10px] max-md:[&_[role=row]]:first:before:rounded-tr-[10px]",
-              "max-md:[&_[role=row]]:last:before:rounded-bl-[10px] max-md:[&_[role=row]]:last:before:rounded-br-[10px]",
-              "[&_[role=row]]:hover:drop-shadow-sm",
-              "[&_[role=row]:nth-child(odd):not([data-state=selected])]:bg-white [&_[role=row]:nth-child(even):not([data-state=selected])]:bg-gray-1 [&_[role=row]]:border-gray-2",
-              "max-md:overflow-hidden max-md:rounded-[10px] max-md:border max-md:gap-2 max-md:bg-transparent max-md:p-0",
-              "max-md:[&_[role=row]]:hover:border-point-1 max-md:[&_[role=row]]:hover:shadow-md max-md:[&_[role=row]]:hover:drop-shadow-none",
+                    <div
+                        role="rowgroup"
+                        className={cn(
+                            " border-b border-border bg-white [&:empty]:min-h-[4rem]",
+                            "[&_[role=row]]:relative [&_[role=row]]:before:content-[''] [&_[role=row]]:before:hidden [&_[role=row]]:before:absolute [&_[role=row]]:before:inset-0",
+                            "[&_[role=row]]:before:h-full [&_[role=row]]:before:w-full [&_[role=row]]:before:border-2 [&_[role=row]]:before:border-point-1",
+                            "[&_[role=row]]:hover:before:block max-md:[&_[role=row]]:first:before:rounded-tl-[10px] max-md:[&_[role=row]]:first:before:rounded-tr-[10px]",
+                            "max-md:[&_[role=row]]:last:before:rounded-bl-[10px] max-md:[&_[role=row]]:last:before:rounded-br-[10px]",
+                            "[&_[role=row]]:hover:drop-shadow-sm",
+                            "[&_[role=row]:nth-child(odd):not([data-state=selected])]:bg-white [&_[role=row]:nth-child(even):not([data-state=selected])]:bg-gray-1 [&_[role=row]]:border-gray-2",
+                            "max-md:overflow-hidden max-md:rounded-[10px] max-md:border max-md:gap-2 max-md:bg-transparent max-md:p-0",
+                            "max-md:[&_[role=row]]:hover:border-point-1 max-md:[&_[role=row]]:hover:shadow-md max-md:[&_[role=row]]:hover:drop-shadow-none",
+                        )}
+                    >
+                        {bodySection}
+                    </div>
+                </div>
+            </TableGridSortContext.Provider>
+        </TableGridContext.Provider>
+    );
+
+    return (
+        <div className={cn("w-full overflow-auto", className)}>
+            {bordered ? (
+                <div className="overflow-hidden rounded-md border">{table}</div>
+            ) : (
+                table
             )}
-          >
-            {bodySection}
-          </div>
         </div>
-      </TableGridSortContext.Provider>
-    </TableGridContext.Provider>
-  );
-
-  return (
-    <div className={cn("w-full overflow-auto", className)}>
-      {bordered ? (
-        <div className="overflow-hidden rounded-md border">{table}</div>
-      ) : (
-        table
-      )}
-    </div>
-  );
+    );
 }
 TableGrid.displayName = "TableGrid";

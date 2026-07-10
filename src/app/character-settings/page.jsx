@@ -26,6 +26,8 @@ import { characterData, findCharacterById } from "@/data/characterData";
 import { cn } from "@/lib/utils";
 import { CharacterInfoType1 } from "./_components/CharacterInfoType1";
 
+import { CharacterInfoType2 } from "./_components/CharacterInfoType2";
+
 // 캐릭터 목록 더미 데이터 (좌측 LNB용)
 const characterListData = characterData;
 
@@ -174,7 +176,7 @@ function CharacterSettingsContent() {
                 <span className="relative left-[10px] text-black fz-12 font-bold">
                     참고
                 </span>
-                <div className="relative mb-[15px]">
+                <div className="relative shrink-0">
                     <div
                         className="border-b-[2px] border-point-2 px-[10px] py-[14px] flex items-center justify-between cursor-pointer"
                         onClick={() => setIsLeftFilterOpen(!isLeftFilterOpen)}
@@ -240,9 +242,14 @@ function CharacterSettingsContent() {
                         </div>
                     )}
                 </div>
-                {/* 좌측 컴포넌트 전용 */}
-                {/* type-1 */}
-                <CharacterInfoType1 />
+                <div className="flex-1 h-[calc(100%-58px)]">
+                    {/* 좌측 컴포넌트 전용 */}
+                    {/* type-1 */}
+                    {/* <CharacterInfoType1 /> */}
+
+                    {/* type-2 */}
+                    <CharacterInfoType2 />
+                </div>
             </div>
 
             {/* 중앙 콘텐츠 */}

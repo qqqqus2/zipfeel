@@ -105,7 +105,7 @@ export const CharacterInfoType1 = () => {
     const [editorContent, setEditorContent] = useState("");
 
     return (
-        <div className="w-full h-full flex flex-col">
+        <div className="w-full h-full overflow-hidden flex-1 flex flex-col mt-[15px]">
             {/* 헤더 영역 */}
             <div className="bg-gray-6 relative rounded-t-2xl pt-[78px] pb-[52px] px-5 pt-5">
                 <button
@@ -204,7 +204,7 @@ export const CharacterInfoType1 = () => {
             </div>
 
             {/* 바디 영역 */}
-            <div className="flex-1 overflow-y-auto ">
+            <div className="flex-1 w-full overflow-y-auto custom-scrollbar overflow-x-hidden">
                 <Tabs
                     value={currentTab}
                     onValueChange={setCurrentTab}
