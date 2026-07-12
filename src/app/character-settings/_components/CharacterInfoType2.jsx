@@ -83,7 +83,7 @@ function CharacterDetailCell({ row, onSelect, isLast }) {
                     </Button>
                 </div>
 
-                <Button type="button" variant="ghost" size="sm">
+                <Button type="button" variant="ghost" size="sm" className="p-0">
                     <Icon name="balance" size={16} />
                     비교
                 </Button>

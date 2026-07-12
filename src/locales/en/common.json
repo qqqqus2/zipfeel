@@ -71,5 +71,28 @@
     "privacyPolicy": "Privacy Policy",
     "businessRegistration": "Business Registration No.: 0000-12345-00000",
     "copyright": "© 2026. Oleum Co., Ltd. All rights reserved."
+  },
+  "character": {
+    "role": {
+      "주연": "Lead",
+      "조연": "Supporting",
+      "엑스트라": "Extra"
+    },
+    "status": {
+      "생존": "Alive",
+      "죽음": "Dead",
+      "부활": "Revived",
+      "실종": "Missing"
+    },
+    "labels": {
+      "호칭": "Title",
+      "애칭": "Nickname"
+    },
+    "tableHeaders": {
+      "no": "No.",
+      "role": "Role",
+      "status": "Status",
+      "name": "Name"
+    }
   }
 }

@@ -71,5 +71,28 @@
     "privacyPolicy": "개인정보처리방침",
     "businessRegistration": "통신판매업신고번호 : 제 0000-일이삼사-00000",
     "copyright": "© 2026. 유한회사 올음. All rights reserved."
+  },
+  "character": {
+    "role": {
+      "주연": "주연",
+      "조연": "조연",
+      "엑스트라": "엑스트라"
+    },
+    "status": {
+      "생존": "생존",
+      "죽음": "죽음",
+      "부활": "부활",
+      "실종": "실종"
+    },
+    "labels": {
+      "호칭": "호칭",
+      "애칭": "애칭"
+    },
+    "tableHeaders": {
+      "no": "No.",
+      "role": "구분",
+      "status": "상태",
+      "name": "이름"
+    }
   }
 }

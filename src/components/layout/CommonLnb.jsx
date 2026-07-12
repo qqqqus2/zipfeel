@@ -44,9 +44,11 @@ export function CommonLnb() {
                                     </Button>
                                 </TooltipTrigger>
                                 <TooltipContent side="right" className="bg-gray-6 text-white">
-                                    <div className="text-sm font-medium">{item.label}</div>
+                                    <div className="text-sm font-medium" data-eng={item.labelEng}>
+                                        {item.label}
+                                    </div>
                                     {item.description && (
-                                        <div className="text-xs text-gray-3 mt-1 max-w-[200px]">
+                                        <div className="text-xs text-gray-3 mt-1 max-w-[200px]" data-eng={item.descriptionEng}>
                                             {item.description}
                                         </div>
                                     )}

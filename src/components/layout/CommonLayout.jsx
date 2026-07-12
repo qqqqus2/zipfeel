@@ -17,6 +17,8 @@ export function CommonLayout({
     className,
     title,
     description,
+    titleEng,
+    descriptionEng,
     showTabs = false,
     tabs = [],
     defaultTab,
@@ -30,6 +32,8 @@ export function CommonLayout({
     removeTitleSpacing = false,
     mobileTitle,
     mobileDescription,
+    mobileTitleEng,
+    mobileDescriptionEng,
     showMobileEditButton = false,
     onEdit,
 }) {
@@ -81,13 +85,17 @@ export function CommonLayout({
                         <>
                             {/* PC용 - 일반 순서 */}
                             <div className="hidden md:block">
-                                <h2 className="text-[20px] text-center leading-[1]  text-gray-6 font-bold px-5">
+                                <h2
+                                    className="text-[24px] text-center leading-[1]  text-gray-6 font-bold px-5"
+                                    data-eng={titleEng}
+                                >
                                     {title || "페이지 타이틀"}
                                 </h2>
                                 <p
                                     className={cn(
                                         "fz-16 text-center w-[calc(100%-20px)] md:max-w-full pt-2 md:pt-3 overflow-hidden md:leading-[1] text-[#474554] [&_strong]:font-bold m-auto",
                                     )}
+                                    data-eng={descriptionEng}
                                 >
                                     {description ||
                                         "페이지에 대한 간단한 설명을 입력하세요. 이 영역은 선택적으로 사용할 수 있습니다."}
@@ -99,6 +107,9 @@ export function CommonLayout({
                                     className={cn(
                                         "text-[14px] text-center w-[calc(100%-20px)] md:max-w-full overflow-hidden md:leading-[1] [&_strong]:font-bold m-auto",
                                     )}
+                                    data-eng={
+                                        mobileDescriptionEng || descriptionEng
+                                    }
                                 >
                                     {mobileDescription ||
                                         description ||
@@ -109,6 +120,7 @@ export function CommonLayout({
                                         "text-[20px] text-center leading-[1] text-gray-6 font-bold line-clamp-2 px-5",
                                         removeTitleSpacing ? "" : "mt-[5px]",
                                     )}
+                                    data-eng={mobileTitleEng || titleEng}
                                 >
                                     {mobileTitle || title || "페이지 타이틀"}
                                 </h2>
@@ -127,7 +139,10 @@ export function CommonLayout({
                         </>
                     ) : (
                         <>
-                            <h2 className="text-[20px] text-center leading-[1] text-gray-6 font-bold px-5">
+                            <h2
+                                className="text-[20px] text-center leading-[1] text-gray-6 font-bold px-5"
+                                data-eng={titleEng}
+                            >
                                 {title || "페이지 타이틀"}
                             </h2>
                             <p
@@ -137,6 +152,7 @@ export function CommonLayout({
                                         ? ""
                                         : "pt-2 md:pt-3 md:mt-[11px]",
                                 )}
+                                data-eng={descriptionEng}
                             >
                                 {description ||
                                     "페이지에 대한 간단한 설명을 입력하세요. 이 영역은 선택적으로 사용할 수 있습니다."}
@@ -165,6 +181,7 @@ export function CommonLayout({
                                                 key={tab.value}
                                                 value={tab.value}
                                                 className="flex-1 md:flex-initial"
+                                                data-eng={tab.labelEng}
                                             >
                                                 {tab.label}
                                             </TabsTrigger>

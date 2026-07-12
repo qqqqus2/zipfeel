@@ -15,47 +15,14 @@ import {
 import { sortTableRows } from "@/components/ui/table";
 import { PaginationBar } from "@/components/ui/pagination";
 import { characterData, statusIconMap } from "@/data/characterData";
+import { useTranslation } from "@/hooks/useTranslation";
 
 // gridRichRows 데이터 (공유 데이터 사용)
 const gridRichRows = characterData;
 
-// 테이블 컬럼 정의
-const gridColumns = [
-    {
-        key: "id",
-        header: "No.",
-        width: "80px",
-        sortAlign: "left",
-        mobileClassName:
-            "max-md:order-3 max-md:w-full max-md:justify-start max-md:pt-1",
-    },
-    {
-        key: "role",
-        header: "구분",
-        width: "80px",
-        mobileClassName:
-            "max-md:order-1 max-md:w-[calc(50%-4px)] max-md:shrink-0 max-md:justify-start max-md:font-semibold",
-    },
-    {
-        key: "status",
-        header: "상태",
-        width: "80px",
-        headerAlign: "left",
-        mobileClassName:
-            "max-md:order-2 max-md:flex max-md:w-[calc(50%-4px)] max-md:shrink-0 max-md:justify-end max-md:text-sm max-md:text-muted-foreground",
-    },
-    {
-        key: "title",
-        header: "이름",
-        width: "minmax(0, 1fr)",
-        sortable: true,
-        headerAlign: "left",
-        mobileClassName: "max-md:order-4 max-md:w-full max-md:p-0",
-    },
-];
-
 // 상세 셀 컴포넌트
 function GridRichDetailCell({ row }) {
+    const { t } = useTranslation('common');
     const lastMetaIndex = Math.max(0, (row.metaLines?.length ?? 0) - 1);
     return (
         <div className="flex min-w-0 flex-1 flex-col gap-2 py-1 md:flex-row md:items-center md:justify-between md:gap-2">
@@ -81,7 +48,7 @@ function GridRichDetailCell({ row }) {
                                 )}
                             >
                                 <span className="shrink-0 font-bold text-foreground">
-                                    {line.label}
+                                    {t(`character.labels.${line.label}`)}
                                 </span>
                                 <span className="shrink-0">
                                     {line.text.length > 10
@@ -167,10 +134,46 @@ function GridRichDetailCell({ row }) {
 
 // 캐릭터 목록 탭 콘텐츠
 function CharacterListContent() {
+    const { t } = useTranslation('common');
     const [gridSorting, setGridSorting] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
     const scrollContainerRef = React.useRef(null);
+
+    // 테이블 컬럼 정의 (번역 적용)
+    const gridColumns = [
+        {
+            key: "id",
+            header: t('character.tableHeaders.no'),
+            width: "80px",
+            sortAlign: "left",
+            mobileClassName:
+                "max-md:order-3 max-md:w-full max-md:justify-start max-md:pt-1",
+        },
+        {
+            key: "role",
+            header: t('character.tableHeaders.role'),
+            width: "80px",
+            mobileClassName:
+                "max-md:order-1 max-md:w-[calc(50%-4px)] max-md:shrink-0 max-md:justify-start max-md:font-semibold",
+        },
+        {
+            key: "status",
+            header: t('character.tableHeaders.status'),
+            width: "80px",
+            headerAlign: "left",
+            mobileClassName:
+                "max-md:order-2 max-md:flex max-md:w-[calc(50%-4px)] max-md:shrink-0 max-md:justify-end max-md:text-sm max-md:text-muted-foreground",
+        },
+        {
+            key: "title",
+            header: t('character.tableHeaders.name'),
+            width: "minmax(0, 1fr)",
+            sortable: true,
+            headerAlign: "left",
+            mobileClassName: "max-md:order-4 max-md:w-full max-md:p-0",
+        },
+    ];
 
     const gridSortedRows = useMemo(
         () => sortTableRows(gridRichRows, gridSorting),
@@ -207,7 +210,7 @@ function CharacterListContent() {
                             className="gap-2 min-w-[100px] text-sm font-bold shadow-sm"
                         >
                             <Icon name="category_search" size={20} />
-                            상세 검색
+                            <span data-eng="Filter">상세 검색</span>
                         </Button>
                         <Button
                             variant="oulinePoint1"
@@ -216,7 +219,7 @@ function CharacterListContent() {
                             className="gap-2 min-w-[100px] hidden md:block text-sm font-bold shadow-sm  "
                         >
                             <Icon name="add" size={20} />
-                            캐릭터 등록
+                            <span data-eng="Create">캐릭터 등록</span>
                         </Button>
                     </div>
                 </div>
@@ -256,7 +259,7 @@ function CharacterListContent() {
                                         columnKey="role"
                                         className="justify-center"
                                     >
-                                        {row.role}
+                                        {t(`character.role.${row.role}`)}
                                     </TableGridCell>
                                     <TableGridCell
                                         columnKey="status"
@@ -274,7 +277,7 @@ function CharacterListContent() {
                                                     className="md:hidden text-[#000]"
                                                 />
                                             )}
-                                            {row.status}
+                                            {t(`character.status.${row.status}`)}
                                         </div>
                                     </TableGridCell>
                                     <TableGridCell
@@ -341,18 +344,21 @@ function CommonSettingsContent() {
 export default function CharacterList() {
     const tabs = [
         {
-            value: "list",
-            label: "캐릭터 목록",
+            value: "settings",
+            label: "캐릭터 설정",
+            labelEng: "Character Settings",
             content: <CharacterListContent />,
         },
         {
             value: "comparison",
             label: "캐릭터 비교",
+            labelEng: "Comparison",
             content: <CharacterComparisonContent />,
         },
         {
             value: "common",
             label: "공통 설정 관리",
+            labelEng: "Common Management",
             content: <CommonSettingsContent />,
         },
     ];
@@ -361,9 +367,11 @@ export default function CharacterList() {
         <CommonLayout
             title="인물 관리"
             description="작중 출연하는 캐릭터를 생성·관리 할 수 있습니다, 각 항목을 눌러 수정할 수 있으며 저장 버튼을 누르면 즉시 반영되니 참고하세요."
+            titleEng="Characters"
+            descriptionEng="You can create and manage the characters you appear in during the work, you can modify each item by pressing the save button, and it will be reflected immediately."
             showTabs={true}
             tabs={tabs}
-            defaultTab="list"
+            defaultTab="settings"
         />
     );
 }

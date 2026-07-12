@@ -68,6 +68,68 @@ export function LanguageProvider({ children }) {
     load();
   }, [language]);
 
+  // 언어 변경 시 data-eng 속성을 가진 요소들의 텍스트 토글
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    // data-eng 속성을 가진 요소들의 텍스트를 변경하는 함수
+    const updateElements = (elements) => {
+      elements.forEach((element) => {
+        const engText = element.getAttribute('data-eng');
+        const korText = element.getAttribute('data-kor') || element.textContent;
+
+        // data-kor가 없으면 현재 텍스트를 한국어로 저장
+        if (!element.getAttribute('data-kor')) {
+          element.setAttribute('data-kor', korText);
+        }
+
+        // 언어에 따라 텍스트 변경
+        if (language === 'en' && engText) {
+          element.textContent = engText;
+        } else {
+          element.textContent = korText;
+        }
+      });
+    };
+
+    // 초기 요소들 업데이트
+    const elements = document.querySelectorAll('[data-eng]');
+    updateElements(elements);
+
+    // MutationObserver를 사용하여 동적으로 추가되는 요소들 감지
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        // 새로 추가된 노드들 확인
+        mutation.addedNodes.forEach((node) => {
+          if (node.nodeType === 1) { // Element 노드인 경우
+            // 노드 자체가 data-eng를 가지고 있는지 확인
+            if (node.hasAttribute && node.hasAttribute('data-eng')) {
+              updateElements([node]);
+            }
+            // 자식 노드 중에 data-eng를 가진 요소가 있는지 확인
+            if (node.querySelectorAll) {
+              const childElements = node.querySelectorAll('[data-eng]');
+              if (childElements.length > 0) {
+                updateElements(childElements);
+              }
+            }
+          }
+        });
+      });
+    });
+
+    // body의 모든 하위 요소 변경 감지
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true,
+    });
+
+    // cleanup
+    return () => {
+      observer.disconnect();
+    };
+  }, [language]);
+
   /**
    * 언어를 변경하고 localStorage에 저장
    * @param {string} newLanguage - 변경할 언어 코드

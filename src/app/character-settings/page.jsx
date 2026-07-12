@@ -25,8 +25,8 @@ import {
 import { characterData, findCharacterById } from "@/data/characterData";
 import { cn } from "@/lib/utils";
 import { CharacterInfoType1 } from "./_components/CharacterInfoType1";
-
 import { CharacterInfoType2 } from "./_components/CharacterInfoType2";
+import { CharacterInfoType3 } from "./_components/CharacterInfoType3";
 
 // 캐릭터 목록 더미 데이터 (좌측 LNB용)
 const characterListData = characterData;
@@ -173,7 +173,10 @@ function CharacterSettingsContent() {
         <div className="flex gap-6 w-full max-w-none h-full md:pt-[30px]">
             {/* 좌측 영역 */}
             <div className="w-[305px] shrink-0 hidden 2xl:flex flex-col h-full">
-                <span className="relative left-[10px] text-black fz-12 font-bold">
+                <span
+                    className="relative left-[10px] text-black fz-12 font-bold"
+                    data-eng="References"
+                >
                     참고
                 </span>
                 <div className="relative shrink-0">
@@ -248,7 +251,10 @@ function CharacterSettingsContent() {
                     {/* <CharacterInfoType1 /> */}
 
                     {/* type-2 */}
-                    <CharacterInfoType2 />
+                    {/* <CharacterInfoType2 /> */}
+
+                    {/* type-3 */}
+                    <CharacterInfoType3 />
                 </div>
             </div>
 
@@ -264,7 +270,7 @@ function CharacterSettingsContent() {
                         >
                             <Link href="/character-list">
                                 <Icon name="arrow_left_alt" size={20} />
-                                목록
+                                <span data-eng="Back to List">목록</span>
                             </Link>
                         </Button>
                         <div className="flex gap-2">
@@ -274,7 +280,7 @@ function CharacterSettingsContent() {
                                 className="group rounded-full "
                             >
                                 <Icon name="person_raised_hand" size={20} />
-                                0000 안내
+                                <span data-eng="Guide">0000 안내</span>
                             </Button>
                             <Button
                                 variant="oulinePoint1"
@@ -282,7 +288,7 @@ function CharacterSettingsContent() {
                                 className="group rounded-full "
                             >
                                 <Icon name="folder_check_2" size={20} />
-                                저장
+                                <span data-eng="Save">저장</span>
                             </Button>
                             <Button
                                 variant="oulinePoint1"
@@ -290,7 +296,7 @@ function CharacterSettingsContent() {
                                 className="group rounded-full "
                             >
                                 <Icon name="ink_eraser" size={20} />
-                                삭제
+                                <span data-eng="Delete">삭제</span>
                             </Button>
                             <Button
                                 variant="oulinePoint1"
@@ -298,7 +304,7 @@ function CharacterSettingsContent() {
                                 className="group rounded-full "
                             >
                                 <Icon name="eyeglasses" size={20} />
-                                미리보기
+                                <span data-eng="Preview">미리보기</span>
                             </Button>
                         </div>
                     </div>
@@ -346,42 +352,49 @@ function CharacterSettingsContent() {
                             <TabsTrigger
                                 value="basic"
                                 className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                                data-eng="Basic"
                             >
                                 기본
                             </TabsTrigger>
                             <TabsTrigger
                                 value="appearance"
                                 className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                                data-eng="Look"
                             >
                                 외형
                             </TabsTrigger>
                             <TabsTrigger
                                 value="personality"
                                 className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                                data-eng="Traits"
                             >
                                 성격
                             </TabsTrigger>
                             <TabsTrigger
                                 value="ability"
                                 className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                                data-eng="Skills"
                             >
                                 능력
                             </TabsTrigger>
                             <TabsTrigger
                                 value="outfit"
                                 className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                                data-eng="Gear"
                             >
                                 착장
                             </TabsTrigger>
                             <TabsTrigger
                                 value="relationship"
                                 className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                                data-eng="Relations"
                             >
                                 관계
                             </TabsTrigger>
                             <TabsTrigger
                                 value="etc"
                                 className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
+                                data-eng="Traits"
                             >
                                 기타
                             </TabsTrigger>
@@ -613,7 +626,10 @@ function CharacterSettingsContent() {
                 {/* 상단에 추가  */}
                 <div className="relative shrink-0 flex flex-col">
                     {/* 필터 컴포넌트 추가 */}
-                    <span className="relative left-[10px] text-black fz-12 font-bold">
+                    <span
+                        className="relative left-[10px] text-black fz-12 font-bold"
+                        data-eng="Character History"
+                    >
                         캐릭터명
                     </span>
                     <div className="relative">
@@ -713,7 +729,7 @@ function CharacterSettingsContent() {
                             size={20}
                             className="text-point-1 group-hover:text-white group-disabled:text-point-3"
                         />
-                        내역 추가
+                        <span data-eng="Add Entry">내역추가</span>
                     </Button>
                 </div>
                 <div className="flex-1 overflow-y-auto custom-scrollbar rounded-xl">
@@ -853,16 +869,19 @@ export default function CharacterSettings() {
         {
             value: "settings",
             label: "캐릭터 설정",
+            labelEng: "Character Settings",
             content: <CharacterSettingsContent />,
         },
         {
             value: "comparison",
             label: "캐릭터 비교",
+            labelEng: "Comparison",
             content: <CharacterComparisonContent />,
         },
         {
             value: "common",
             label: "공통 설정 관리",
+            labelEng: "Common Management",
             content: <CommonSettingsContent />,
         },
     ];
@@ -889,6 +908,8 @@ export default function CharacterSettings() {
         <CommonLayout
             title="인물 관리"
             description="작중 출연하는 캐릭터를 생성·관리 할 수 있습니다, 각 항목을 눌러 수정할 수 있으며 저장 버튼을 누르면 즉시 반영되니 참고하세요."
+            titleEng="Characters"
+            descriptionEng="You can create and manage the characters you appear in during the work, you can modify each item by pressing the save button, and it will be reflected immediately."
             mobileTitle={currentCharacter.title}
             mobileDescription={metaLinesText}
             showTabs={true}

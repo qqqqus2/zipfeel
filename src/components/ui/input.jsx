@@ -26,6 +26,7 @@ const Input = React.forwardRef(
             suffixLabel,
             suffixButton,
             disabled,
+            onSearch,
             ...props
         },
         ref,
@@ -56,7 +57,7 @@ const Input = React.forwardRef(
                     <button
                         type="button"
                         className="absolute right-3 flex items-center justify-center hover:opacity-70 transition-opacity"
-                        onClick={props.onSearch}
+                        onClick={onSearch}
                         disabled={disabled}
                     >
                         <Icon name="manage_search" size={20} className="text-point-1" />
