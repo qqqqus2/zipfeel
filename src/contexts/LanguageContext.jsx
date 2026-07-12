@@ -1,6 +1,6 @@
 'use client';
 
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect, useContext } from 'react';
 
 export const LanguageContext = createContext();
 
@@ -158,4 +158,18 @@ export function LanguageProvider({ children }) {
       {children}
     </LanguageContext.Provider>
   );
+}
+
+/**
+ * LanguageContext를 사용하는 커스텀 Hook
+ * @returns {Object} { language, changeLanguage, translations, isLoading, supportedLanguages }
+ */
+export function useLanguage() {
+  const context = useContext(LanguageContext);
+
+  if (!context) {
+    throw new Error('useLanguage must be used within a LanguageProvider');
+  }
+
+  return context;
 }
