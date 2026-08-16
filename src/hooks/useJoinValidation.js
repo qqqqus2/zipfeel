@@ -41,6 +41,7 @@ export function useJoinValidation() {
     select: authT('signup.buttons.select'),
     agree: authT('signup.buttons.agree'),
     disagree: authT('signup.buttons.disagree'),
+    agreeAndInput: authT('signup.buttons.agreeAndInput'),
   };
 
   // VALIDATION_MESSAGES - validation.json에서 가져옴
@@ -117,6 +118,9 @@ export function useJoinValidation() {
       notice: authT('signup.popups.terms.notice'),
       languageNotice: authT('signup.popups.terms.languageNotice'),
       requiredAlert: authT('signup.popups.terms.requiredAlert'),
+      viewTermsLabel: authT('signup.popups.terms.viewTermsLabel'),
+      termsOfServiceOption: authT('signup.popups.terms.termsOfServiceOption'),
+      privacyPolicyOption: authT('signup.popups.terms.privacyPolicyOption'),
     },
   };
 

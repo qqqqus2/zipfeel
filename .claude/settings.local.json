@@ -30,7 +30,8 @@
       "Bash(powershell -Command \"Stop-Process -Id 60604 -Force\")",
       "Bash(powershell -Command \"Stop-Process -Id 52908 -Force\")",
       "Bash(node add-filter-icon.js:*)",
-      "Bash(del:*)"
+      "Bash(del:*)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []
