@@ -1145,7 +1145,7 @@ export const Form = {
                                                                         "text-sm font-medium",
                                                                         row.enabled
                                                                             ? "text-point-1"
-                                                                            : "text-foreground",
+                                                                            : "text-gray-6",
                                                                     )}
                                                                 >
                                                                     {row.enabled

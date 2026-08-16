@@ -17,7 +17,7 @@ export const CharacterInfoType3 = () => {
                         </div>
                     </div>
                     <div className="bg-gray-1 py-[30px] px-[15px] min-h-[120px] w-[calc(100%-30px)] ml-auto relative -top-5 rounded-tl-[6px] rounded-tr-[6px] rounded-br-[40px] rounded-bl-[6px]">
-                        <div className="fz-14 text-[#000]">최소사이즈 예시</div>
+                        <div className="fz-14 text-gray-6">최소사이즈 예시</div>
                     </div>
                     <div
                         className="bg-[#47455433] min-h-[90px] ml-[10px] pb-5 pt-[30px] pl-[30px] w-[calc(100%-40px)] pr-[30px] relative -top-10"
@@ -46,7 +46,7 @@ export const CharacterInfoType3 = () => {
                             <span className="fz-12 text-[#8e8e8e]">
                                 기준시간대
                             </span>
-                            <strong className="fz-14 font-regular text-[#000]">
+                            <strong className="fz-14 font-regular text-gray-6">
                                 직접설정
                             </strong>
                         </div>
@@ -54,7 +54,7 @@ export const CharacterInfoType3 = () => {
                             <span className="fz-12 text-[#8e8e8e]">
                                 1년 기준(일)
                             </span>
-                            <strong className="fz-14 font-regular text-[#000]">
+                            <strong className="fz-14 font-regular text-gray-6">
                                 -
                             </strong>
                         </div>
@@ -62,7 +62,7 @@ export const CharacterInfoType3 = () => {
                             <span className="fz-12 text-[#8e8e8e]">
                                 1개월 기준(일)
                             </span>
-                            <strong className="fz-14 font-regular text-[#000]">
+                            <strong className="fz-14 font-regular text-gray-6">
                                 -
                             </strong>
                         </div>
@@ -70,7 +70,7 @@ export const CharacterInfoType3 = () => {
                             <span className="fz-12 text-[#8e8e8e]">
                                 1일 기준(시간)
                             </span>
-                            <strong className="fz-14 font-regular text-[#000]">
+                            <strong className="fz-14 font-regular text-gray-6">
                                 24 시간
                             </strong>
                         </div>
@@ -78,7 +78,7 @@ export const CharacterInfoType3 = () => {
                             <span className="fz-12 text-[#8e8e8e]">
                                 1시간 기준 (분)
                             </span>
-                            <strong className="fz-14 font-regular text-[#000]">
+                            <strong className="fz-14 font-regular text-gray-6">
                                 60 분
                             </strong>
                         </div>

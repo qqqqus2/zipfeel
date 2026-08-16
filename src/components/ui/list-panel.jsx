@@ -56,7 +56,7 @@ function SortableListItem({ id, content, disabled = false }) {
                 type="button"
                 className={cn(
                     "inline-flex size-6 items-center justify-center rounded-sm",
-                    "text-muted-foreground hover:text-foreground",
+                    "text-muted-foreground hover:text-gray-6",
                     "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
                     disabled && "cursor-not-allowed",
                 )}
@@ -68,7 +68,7 @@ function SortableListItem({ id, content, disabled = false }) {
             </button>
 
             <div className="min-w-0 flex-1">
-                <div className="truncate text-sm font-medium text-foreground">
+                <div className="truncate text-sm font-medium text-gray-6">
                     {content}
                 </div>
             </div>
@@ -91,7 +91,7 @@ function DragOverlayItem({ content }) {
                 <GripVertical className="size-4" aria-hidden />
             </div>
             <div className="min-w-0 flex-1">
-                <div className="truncate text-sm font-medium text-foreground">
+                <div className="truncate text-sm font-medium text-gray-6">
                     {content}
                 </div>
             </div>

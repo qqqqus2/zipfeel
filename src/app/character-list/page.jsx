@@ -22,12 +22,12 @@ const gridRichRows = characterData;
 
 // 상세 셀 컴포넌트
 function GridRichDetailCell({ row }) {
-    const { t } = useTranslation('common');
+    const { t } = useTranslation("common");
     const lastMetaIndex = Math.max(0, (row.metaLines?.length ?? 0) - 1);
     return (
         <div className="flex min-w-0 flex-1 flex-col gap-2 py-1 md:flex-row md:items-center md:justify-between md:gap-2">
-            <div className="flex min-w-0 flex-col gap-0.5">
-                <div className="flex min-w-0 flex-nowrap items-center gap-x-1 text-xs text-muted-foreground">
+            <div className="flex min-w-0 flex-col gap-[6px]">
+                <div className="flex min-w-0 flex-nowrap items-center text-xs text-muted-foreground">
                     {row.metaLines.map((line, i) => (
                         <div
                             key={`${i}-${line.label}`}
@@ -35,7 +35,7 @@ function GridRichDetailCell({ row }) {
                         >
                             {i > 0 ? (
                                 <span
-                                    className="shrink-0 text-muted-foreground"
+                                    className="shrink-0 text-muted-foreground inline-block w-[17px] text-center"
                                     aria-hidden
                                 >
                                     ·
@@ -47,7 +47,7 @@ function GridRichDetailCell({ row }) {
                                     i === lastMetaIndex && "min-w-0 flex-1",
                                 )}
                             >
-                                <span className="shrink-0 font-bold text-foreground">
+                                <span className="shrink-0 font-bold text-gray-6">
                                     {t(`character.labels.${line.label}`)}
                                 </span>
                                 <span className="shrink-0">
@@ -134,7 +134,7 @@ function GridRichDetailCell({ row }) {
 
 // 캐릭터 목록 탭 콘텐츠
 function CharacterListContent() {
-    const { t } = useTranslation('common');
+    const { t } = useTranslation("common");
     const [gridSorting, setGridSorting] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
@@ -144,7 +144,7 @@ function CharacterListContent() {
     const gridColumns = [
         {
             key: "id",
-            header: t('character.tableHeaders.no'),
+            header: t("character.tableHeaders.no"),
             width: "80px",
             sortAlign: "left",
             mobileClassName:
@@ -152,14 +152,14 @@ function CharacterListContent() {
         },
         {
             key: "role",
-            header: t('character.tableHeaders.role'),
+            header: t("character.tableHeaders.role"),
             width: "80px",
             mobileClassName:
                 "max-md:order-1 max-md:w-[calc(50%-4px)] max-md:shrink-0 max-md:justify-start max-md:font-semibold",
         },
         {
             key: "status",
-            header: t('character.tableHeaders.status'),
+            header: t("character.tableHeaders.status"),
             width: "80px",
             headerAlign: "left",
             mobileClassName:
@@ -167,7 +167,7 @@ function CharacterListContent() {
         },
         {
             key: "title",
-            header: t('character.tableHeaders.name'),
+            header: t("character.tableHeaders.name"),
             width: "minmax(0, 1fr)",
             sortable: true,
             headerAlign: "left",
@@ -197,11 +197,11 @@ function CharacterListContent() {
     };
 
     return (
-        <div className="flex flex-col md:h-full w-full max-w-[630px] mx-auto overflow-x-hidden">
+        <div className="flex flex-col md:h-full w-full max-w-[678px] mx-auto overflow-x-hidden">
             {/* 고정 헤더 영역 */}
-            <div className="flex-shrink-0 w-full px-4 md:px-6 pt-6">
+            <div className="flex-shrink-0 w-full px-0 md:px-6 pt-6">
                 <div className="flex justify-between items-center mb-6">
-                    <div>{gridRichRows.length} 개</div>
+                    <div className="text-gray-6">{gridRichRows.length} 개</div>
                     <div className="flex gap-2">
                         <Button
                             variant="oulinePoint1"
@@ -230,7 +230,7 @@ function CharacterListContent() {
                 ref={scrollContainerRef}
                 className="flex-1 md:overflow-y-auto w-full"
             >
-                <div className="w-full  md:px-6 px-0 pb-6">
+                <div className="w-full md:px-6 px-0 pb-6">
                     <TableGrid
                         columns={gridColumns}
                         striped
@@ -245,19 +245,19 @@ function CharacterListContent() {
                             >
                                 <TableGridRow
                                     value={row.id}
-                                    className="cursor-pointer hover:bg-gray-50 transition-colors"
+                                    className="cursor-pointer hover:bg-gray-50 transition-colors rounded-none boder-1-red"
                                 >
                                     <TableGridCell
                                         columnKey="id"
                                         className="text-muted-foreground tabular-nums max-md:hidden"
                                     >
-                                        <span className="md:tabular-nums">
+                                        <span className="md:tabular-nums px-3">
                                             {row.id}
                                         </span>
                                     </TableGridCell>
                                     <TableGridCell
                                         columnKey="role"
-                                        className="justify-center"
+                                        className="justify-center text-gray-6 font-light"
                                     >
                                         {t(`character.role.${row.role}`)}
                                     </TableGridCell>
@@ -265,7 +265,7 @@ function CharacterListContent() {
                                         columnKey="status"
                                         className="justify-center"
                                     >
-                                        <div className="flex items-center gap-1 text-[#000] fz-12">
+                                        <div className="flex items-center gap-1 px-3 fz-12">
                                             {statusIconMap[row.status] && (
                                                 <Icon
                                                     name={
@@ -274,15 +274,17 @@ function CharacterListContent() {
                                                         ]
                                                     }
                                                     size={20}
-                                                    className="md:hidden text-[#000]"
+                                                    className="md:hidden text-gray-6"
                                                 />
                                             )}
-                                            {t(`character.status.${row.status}`)}
+                                            {t(
+                                                `character.status.${row.status}`,
+                                            )}
                                         </div>
                                     </TableGridCell>
                                     <TableGridCell
                                         columnKey="title"
-                                        className="min-w-0"
+                                        className="min-w-0 p-3"
                                     >
                                         <GridRichDetailCell row={row} />
                                     </TableGridCell>
@@ -326,7 +328,7 @@ function CharacterListContent() {
 // 캐릭터 비교 탭 콘텐츠
 function CharacterComparisonContent() {
     return (
-        <div className="w-full max-w-[630px] mx-auto space-y-6">
+        <div className="w-full max-w-[678px] mx-auto space-y-6">
             <p className="text-sm text-gray-500">Empty</p>
         </div>
     );
@@ -335,7 +337,7 @@ function CharacterComparisonContent() {
 // 공통 설정 관리 탭 콘텐츠
 function CommonSettingsContent() {
     return (
-        <div className="w-full max-w-[630px] mx-auto space-y-6">
+        <div className="w-full max-w-[678px] mx-auto space-y-6">
             <p className="text-sm text-gray-500">Empty</p>
         </div>
     );

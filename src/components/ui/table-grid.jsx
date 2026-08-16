@@ -70,7 +70,7 @@ function TableGridSortIcon({ direction }) {
                           ? inactive
                           : both,
                 )}
-                strokeWidth={2.5}
+                strokeWidth={3.5}
             />
             <ChevronDown
                 className={cn(
@@ -81,7 +81,7 @@ function TableGridSortIcon({ direction }) {
                           ? inactive
                           : both,
                 )}
-                strokeWidth={2.5}
+                strokeWidth={3.5}
             />
         </span>
     );
@@ -496,7 +496,7 @@ export function TableGrid({
                         <div
                             role="row"
                             style={gridStyle}
-                            className="grid h-[30px] min-h-[30px] border-b border-black bg-gray-2 font-bold text-gray-6"
+                            className="grid h-[30px] min-h-[30px] border-b border-black bg-sub-7 font-bold text-gray-6"
                         >
                             {columns.map((col, index) => (
                                 <TableGridColumnHeader

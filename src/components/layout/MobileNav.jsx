@@ -16,7 +16,7 @@ import { useTranslation } from "@/hooks/useTranslation";
  * @param {string} className - 추가 CSS 클래스
  */
 export function MobileNav({ isOpen, onClose, menuItems = [], className }) {
-    const { t } = useTranslation('navigation');
+    const { t } = useTranslation("navigation");
 
     // 네비게이션이 열려있지 않으면 렌더링하지 않음
     if (!isOpen) return null;
@@ -31,7 +31,10 @@ export function MobileNav({ isOpen, onClose, menuItems = [], className }) {
 
         return {
             ...item,
-            label: translatedLabel !== translationKey ? translatedLabel : item.label,
+            label:
+                translatedLabel !== translationKey
+                    ? translatedLabel
+                    : item.label,
         };
     });
 
@@ -45,7 +48,7 @@ export function MobileNav({ isOpen, onClose, menuItems = [], className }) {
     return (
         <article
             className={cn(
-                "fixed top-0 overflow-y-auto pb-15 right-0 left-0 bottom-0 bg-point-1 px-8 pt-[67px] min-w-[300px] z-50",
+                "fixed top-0 overflow-y-auto pb-15 right-0 left-0 bottom-0 bg-point-1 px-8 pt-[69px] min-w-[300px] z-50",
                 className,
             )}
         >
@@ -110,7 +113,10 @@ export function MobileNav({ isOpen, onClose, menuItems = [], className }) {
                             onClick={handleLinkClick}
                         >
                             {translatedMenuItems[0].icon && (
-                                <Icon name={translatedMenuItems[0].icon} size={24} />
+                                <Icon
+                                    name={translatedMenuItems[0].icon}
+                                    size={24}
+                                />
                             )}
                             {translatedMenuItems[0].label}
                         </Link>

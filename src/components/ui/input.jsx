@@ -9,7 +9,7 @@ const groupShellClass =
 const innerInputClass =
     "min-w-0 flex-1 border-0 bg-transparent p-0 text-base shadow-none outline-none placeholder:text-[#C7C7C7] focus-visible:ring-0 disabled:cursor-not-allowed";
 
-const addonClass = "shrink-0 text-sm font-medium text-foreground select-none";
+const addonClass = "shrink-0 text-sm font-medium text-gray-6 select-none";
 
 const invalidInputClass =
     "aria-invalid:border-destructive aria-invalid:border-dashed aria-invalid:border-2 aria-invalid:focus-visible:ring-destructive/40";
@@ -39,7 +39,12 @@ const Input = React.forwardRef(
         // Search type 전용 처리
         if (type === "search") {
             return (
-                <div className={cn("relative inline-flex items-center w-[130px]", className)}>
+                <div
+                    className={cn(
+                        "relative inline-flex items-center w-[130px]",
+                        className,
+                    )}
+                >
                     <input
                         type="text"
                         disabled={disabled}
@@ -60,7 +65,11 @@ const Input = React.forwardRef(
                         onClick={onSearch}
                         disabled={disabled}
                     >
-                        <Icon name="manage_search" size={20} className="text-point-1" />
+                        <Icon
+                            name="manage_search"
+                            size={20}
+                            className="text-point-1"
+                        />
                     </button>
                 </div>
             );
@@ -72,7 +81,7 @@ const Input = React.forwardRef(
                     type={type}
                     disabled={disabled}
                     className={cn(
-                        "flex h-10 w-full  rounded-md border border-input bg-background font-normal px-3 py-2 pl-[18px] text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-[#C7C7C7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
+                        "flex h-10 w-full  rounded-md border border-input bg-background font-normal px-3 py-2 pl-[18px] text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-gray-6 placeholder:text-[#C7C7C7] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
                         invalidInputClass,
                         className,
                     )}

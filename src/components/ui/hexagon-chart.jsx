@@ -157,7 +157,7 @@ function HexagonChart({
                     return (
                         <span
                             key={`label-${item.label}-${index}`}
-                            className="absolute text-center text-xs text-foreground max-w-[60px] truncate cursor-default"
+                            className="absolute text-center text-xs text-gray-6 max-w-[60px] truncate cursor-default"
                             style={{
                                 left: `${pos.x}%`,
                                 top: `${pos.y}%`,
@@ -173,7 +173,7 @@ function HexagonChart({
 
             {showLegend ? (
                 <div className="mt-4 border-t border-dashed border-gray-3 pt-4">
-                    <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm text-foreground">
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-2 text-sm text-gray-6">
                         <div className="flex flex-col gap-2">
                             {leftLegend.map((item) => (
                                 <HexagonChartLegendRow

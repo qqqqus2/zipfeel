@@ -26,10 +26,10 @@ function CharacterDetailCell({ row, onSelect, isLast }) {
                             <Icon
                                 name={statusIconMap[row.status]}
                                 size={16}
-                                className="text-[#000]"
+                                className="text-gray-6"
                             />
                         )}
-                        <span className="text-xs font-medium text-[#000]">
+                        <span className="text-xs font-medium text-gray-6">
                             {row.status}
                         </span>
                     </div>
@@ -48,7 +48,7 @@ function CharacterDetailCell({ row, onSelect, isLast }) {
                                 </span>
                             )}
                             <div className="flex items-center gap-1 min-w-0 flex-1">
-                                <span className="shrink-0 font-bold text-foreground">
+                                <span className="shrink-0 font-bold text-gray-6">
                                     {line.label}
                                 </span>
                                 <span className="truncate">{line.text}</span>
