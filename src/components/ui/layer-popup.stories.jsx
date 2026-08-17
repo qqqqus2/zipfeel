@@ -232,7 +232,7 @@ export const StepNavigation = {
 
                             <LayerPopupBody>
                                 <div className="flex flex-col gap-4">
-                                    <h3 className="font-bold text-gray-6">
+                                    <h3 className="font-semibold text-gray-6">
                                         단계 {currentStep}
                                     </h3>
                                     <p className="text-sm text-gray-5">
@@ -308,7 +308,7 @@ export const TermsAgreement = {
                             <LayerPopupBody>
                                 <div className="flex flex-col gap-4">
                                     <div>
-                                        <h3 className="font-bold text-gray-6 mb-2">
+                                        <h3 className="font-semibold text-gray-6 mb-2">
                                             제1조 (목적)
                                         </h3>
                                         <p className="text-sm text-gray-5 leading-relaxed">
@@ -320,7 +320,7 @@ export const TermsAgreement = {
                                     </div>
 
                                     <div>
-                                        <h3 className="font-bold text-gray-6 mb-2">
+                                        <h3 className="font-semibold text-gray-6 mb-2">
                                             제2조 (회원가입)
                                         </h3>
                                         <p className="text-sm text-gray-5 leading-relaxed">

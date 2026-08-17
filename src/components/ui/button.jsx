@@ -20,7 +20,7 @@ const buttonVariants = cva(
                 secondary:
                     "bg-secondary text-secondary-foreground  hover:bg-secondary/80",
                 ghost: "hover:text-accent-foreground",
-                link: "text-gray-6 underline-offset-1 hover:underline hover:text-point-2 hover:font-bold active:text-point-1",
+                link: "text-gray-6 underline-offset-1 hover:underline hover:text-point-2 hover:font-semibold active:text-point-1",
                 // Figma design tokens
                 point1: "bg-point-1 text-white  hover:bg-point-1/90",
                 point2: "bg-point-2 text-white  hover:bg-point-2/90",

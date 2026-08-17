@@ -171,7 +171,7 @@ export const FigmaTokens = {
             <Button
               variant="ghost"
               size="sm"
-              className="group text-sm font-bold hover:text-point-2 active:text-point-1"
+              className="group text-sm font-semibold hover:text-point-2 active:text-point-1"
             >
               <Icon
                 name="diamond"
@@ -182,7 +182,7 @@ export const FigmaTokens = {
             <Button
               variant="ghost"
               size="sm"
-              className="group text-sm font-bold hover:text-point-2 active:text-point-1 disabled:text-gray-2"
+              className="group text-sm font-semibold hover:text-point-2 active:text-point-1 disabled:text-gray-2"
               disabled
             >
               <Icon
@@ -194,7 +194,7 @@ export const FigmaTokens = {
             <Button
               variant="ghost"
               size="sm"
-              className="group text-sm font-bold hover:text-point-2 active:text-point-1"
+              className="group text-sm font-semibold hover:text-point-2 active:text-point-1"
             >
               <Icon
                 name="ink_eraser"
@@ -205,7 +205,7 @@ export const FigmaTokens = {
             <Button
               variant="ghost"
               size="sm"
-              className="group text-sm font-bold hover:text-point-2 active:text-point-1 disabled:text-gray-2"
+              className="group text-sm font-semibold hover:text-point-2 active:text-point-1 disabled:text-gray-2"
               disabled
             >
               <Icon
@@ -216,7 +216,7 @@ export const FigmaTokens = {
             </Button>
           </div>
           <div className="flex gap-4 flex-wrap items-center">
-            <Button variant="oulinePoint1" className="group text-sm font-bold">
+            <Button variant="oulinePoint1" className="group text-sm font-semibold">
               <Icon
                 name="login"
                 className="text-point-1 group-hover:text-white group-disabled:text-point-3"
@@ -225,7 +225,7 @@ export const FigmaTokens = {
             </Button>
             <Button
               variant="oulinePoint1"
-              className="group text-sm font-bold"
+              className="group text-sm font-semibold"
               disabled
             >
               <Icon
@@ -234,7 +234,7 @@ export const FigmaTokens = {
               />
               로그인
             </Button>
-            <Button variant="oulinePoint1" className="group text-sm font-bold">
+            <Button variant="oulinePoint1" className="group text-sm font-semibold">
               <Icon
                 name="logout"
                 className="text-point-1 group-hover:text-white group-disabled:text-point-3"
@@ -243,7 +243,7 @@ export const FigmaTokens = {
             </Button>
             <Button
               variant="oulinePoint1"
-              className="group text-sm font-bold"
+              className="group text-sm font-semibold"
               disabled
             >
               <Icon
@@ -254,7 +254,7 @@ export const FigmaTokens = {
             </Button>
           </div>
           <div className="flex gap-4 flex-wrap items-center">
-            <Button variant="oulinePoint1" className="group text-sm font-bold">
+            <Button variant="oulinePoint1" className="group text-sm font-semibold">
               <Icon
                 name="login"
                 className="text-point-1 group-hover:text-white group-disabled:text-point-3"
@@ -263,7 +263,7 @@ export const FigmaTokens = {
             </Button>
             <Button
               variant="oulinePoint1"
-              className="group text-sm font-bold"
+              className="group text-sm font-semibold"
               disabled
             >
               <Icon
@@ -272,7 +272,7 @@ export const FigmaTokens = {
               />
               회원가입
             </Button>
-            <Button variant="oulinePoint1" className="group text-sm font-bold">
+            <Button variant="oulinePoint1" className="group text-sm font-semibold">
               <Icon
                 name="logout"
                 className="text-point-1 group-hover:text-white group-disabled:text-point-3"
@@ -281,7 +281,7 @@ export const FigmaTokens = {
             </Button>
             <Button
               variant="oulinePoint1"
-              className="group text-sm font-bold"
+              className="group text-sm font-semibold"
               disabled
             >
               <Icon
@@ -294,7 +294,7 @@ export const FigmaTokens = {
           <div className="flex gap-4 flex-wrap items-center">
             <Button
               variant="oulinePoint1"
-              className="group rounded-full text-sm font-bold"
+              className="group rounded-full text-sm font-semibold"
             >
               <Icon
                 name="search_activity"
@@ -304,7 +304,7 @@ export const FigmaTokens = {
             </Button>
             <Button
               variant="oulinePoint1"
-              className="group rounded-full text-sm font-bold"
+              className="group rounded-full text-sm font-semibold"
               disabled
             >
               <Icon
@@ -315,7 +315,7 @@ export const FigmaTokens = {
             </Button>
             <Button
               variant="oulinePoint1"
-              className="group rounded-full text-sm font-bold"
+              className="group rounded-full text-sm font-semibold"
             >
               <Icon
                 name="search_activity"
@@ -325,7 +325,7 @@ export const FigmaTokens = {
             </Button>
             <Button
               variant="oulinePoint1"
-              className="group rounded-full text-sm font-bold"
+              className="group rounded-full text-sm font-semibold"
               disabled
             >
               <Icon
@@ -338,7 +338,7 @@ export const FigmaTokens = {
           <div className="flex gap-4 flex-wrap items-center">
             <Button
               variant="oulinePoint1"
-              className="group rounded-full text-sm font-bold"
+              className="group rounded-full text-sm font-semibold"
             >
               <Icon
                 name="search_activity"
@@ -348,7 +348,7 @@ export const FigmaTokens = {
             </Button>
             <Button
               variant="oulinePoint1"
-              className="group rounded-full text-sm font-bold"
+              className="group rounded-full text-sm font-semibold"
               disabled
             >
               <Icon
@@ -359,7 +359,7 @@ export const FigmaTokens = {
             </Button>
             <Button
               variant="oulinePoint1"
-              className="group rounded-full text-sm font-bold"
+              className="group rounded-full text-sm font-semibold"
             >
               <Icon
                 name="search_activity"
@@ -369,7 +369,7 @@ export const FigmaTokens = {
             </Button>
             <Button
               variant="oulinePoint1"
-              className="group rounded-full text-sm font-bold"
+              className="group rounded-full text-sm font-semibold"
               disabled
             >
               <Icon

@@ -84,7 +84,7 @@ function ColumnSettingCard({
                                         <button
                                             type="button"
                                             className={cn(
-                                                "inline-flex fz-14 text-gray-6 cursor-pointer font-bold items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none",
+                                                "inline-flex fz-14 text-gray-6 cursor-pointer font-semibold items-center justify-center rounded-full focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none",
                                             )}
                                             aria-label="도움말"
                                         >
@@ -174,7 +174,7 @@ function CharacterSettingsContent() {
             {/* 좌측 영역 */}
             <div className="w-[305px] shrink-0 hidden 2xl:flex flex-col h-full">
                 <span
-                    className="relative left-[10px] text-black fz-12 font-bold"
+                    className="relative left-[10px] text-black fz-12 font-semibold"
                     data-eng="References"
                 >
                     참고
@@ -323,7 +323,7 @@ function CharacterSettingsContent() {
                                         <i className="w-[6px] text-center">·</i>
                                     )}
                                     <p className="flex gap-[6px]">
-                                        <span className="text-point-1 font-bold">
+                                        <span className="text-point-1 font-semibold">
                                             {line.label}
                                         </span>
                                         {line.text}
@@ -333,10 +333,10 @@ function CharacterSettingsContent() {
                         </div>
                         {/* pc에서만 보임 */}
                         <div className="flex align-center gap-[6px] justify-between fz-12 hidden md:flex relative z-2">
-                            <h4 className="font-bold text-[18px]">
+                            <h4 className="font-semibold text-[18px]">
                                 {currentCharacter.title}
                             </h4>
-                            <button className="fz-16 font-bold shrink-0 cursor-pointer hidden md:flex">
+                            <button className="fz-16 font-semibold shrink-0 cursor-pointer hidden md:flex">
                                 <Icon name="diamond" size={24} />
                                 수정
                             </button>
@@ -627,7 +627,7 @@ function CharacterSettingsContent() {
                 <div className="relative shrink-0 flex flex-col">
                     {/* 필터 컴포넌트 추가 */}
                     <span
-                        className="relative left-[10px] text-black fz-12 font-bold"
+                        className="relative left-[10px] text-black fz-12 font-semibold"
                         data-eng="Character History"
                     >
                         캐릭터명

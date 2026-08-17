@@ -21,13 +21,13 @@
  *
  * ### 헤더 정렬
  * - **TableGrid props**
- *   - `sortable?: boolean` (기본 `false`)
+ *   - `sortable?: boolean` (기본 `false`) - 정렬 기능 활성화
  *   - `sorting?: { id: string; desc: boolean } | null` (제어)
  *   - `onSortingChange?: (next) => void` (제어)
  *   - `defaultSorting?: { id: string; desc: boolean } | null` (비제어 초기값)
  * - **column props**
  *   - `sortKey?: string` (기본: `key`)
- *   - `sortable?: boolean` (`false`면 해당 열 정렬 비활성)
+ *   - `sortable?: boolean` (`true`면 해당 열 정렬 활성화, `false`면 비활성)
  *   - `sortAlign?: "left" | "center" | "right"` (정렬 버튼 가로 정렬)
  *   - `headerAlign?: "left" | "center" | "right"` (헤더 칸 텍스트 정렬)
  *
@@ -226,8 +226,8 @@ function tableGridAlignToText(a) {
 function TableGridColumnHeader({ col, isLastColumn = false }) {
     const ctx = useTableGridSort();
     const sortKey = col.sortKey ?? col.key;
-    const columnSortOff = col.sortable === false;
-    const enabled = Boolean(ctx.tableSortable && sortKey && !columnSortOff);
+    const columnSortable = col.sortable === true;
+    const enabled = Boolean(ctx.tableSortable && sortKey && columnSortable);
     const direction = enabled ? ctx.getSortState(sortKey) : false;
 
     const cellAlign = normalizeTableGridAlign(
@@ -278,7 +278,7 @@ function TableGridColumnHeader({ col, isLastColumn = false }) {
             <button
                 type="button"
                 className={cn(
-                    "-m-1 inline-flex h-7 w-full min-w-0 items-center gap-1 rounded-md px-1 text-sm font-bold text-inherit hover:bg-transparent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+                    "-m-1 inline-flex h-7 w-full min-w-0 items-center gap-1 rounded-md px-1 text-sm font-semibold text-inherit hover:bg-transparent focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
                     buttonJustify,
                 )}
                 onClick={() => ctx.toggleSort(sortKey)}
@@ -496,7 +496,7 @@ export function TableGrid({
                         <div
                             role="row"
                             style={gridStyle}
-                            className="grid h-[30px] min-h-[30px] border-b border-black bg-sub-7 font-bold text-gray-6"
+                            className="grid h-[30px] min-h-[30px] border-b border-black bg-sub-7 font-semibold text-gray-6"
                         >
                             {columns.map((col, index) => (
                                 <TableGridColumnHeader

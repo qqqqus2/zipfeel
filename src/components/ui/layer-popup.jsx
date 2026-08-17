@@ -148,7 +148,7 @@ const LayerPopupTitle = React.forwardRef(({ className, ...props }, ref) => (
     <DialogPrimitive.Title
         ref={ref}
         className={cn(
-            "text-[20px] font-bold leading-none tracking-tight",
+            "text-[20px] font-semibold leading-none tracking-tight",
             className,
         )}
         {...props}

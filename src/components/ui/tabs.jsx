@@ -256,7 +256,7 @@ const tabsTriggerBaseClassName = cn(
 const tabsTriggerUnderlineClassName = cn(
     "group-data-[variant=underline]/tabs:disabled:text-gray-7",
     "group-data-[variant=underline]/tabs:h-10 group-data-[variant=underline]/tabs:px-2 group-data-[variant=underline]/tabs:text-gray-6",
-    "group-data-[variant=underline]/tabs:data-[state=active]:text-black group-data-[variant=underline]/tabs:data-[state=active]:font-bold",
+    "group-data-[variant=underline]/tabs:data-[state=active]:text-black group-data-[variant=underline]/tabs:data-[state=active]:font-semibold",
     "group-data-[orientation=vertical]/tabs:group-data-[variant=underline]/tabs:after:absolute group-data-[orientation=vertical]/tabs:group-data-[variant=underline]/tabs:after:left-0 group-data-[orientation=vertical]/tabs:group-data-[variant=underline]/tabs:after:right-0",
     "group-data-[orientation=vertical]/tabs:group-data-[variant=underline]/tabs:after:-bottom-[1px] group-data-[orientation=vertical]/tabs:group-data-[variant=underline]/tabs:after:h-[3px]",
     "group-data-[orientation=vertical]/tabs:group-data-[variant=underline]/tabs:after:rounded-full group-data-[orientation=vertical]/tabs:group-data-[variant=underline]/tabs:after:opacity-0",

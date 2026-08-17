@@ -54,7 +54,7 @@ export const Default = {
             </PopoverTrigger>
             <PopoverContent variant="bubble">
                 <div className="grid gap-[10px]">
-                    <h4 className="font-bold text-[16px] text-black leading-[20px] ">
+                    <h4 className="font-semibold text-[16px] text-black leading-[20px] ">
                         Popovers Title
                     </h4>
                     <p className="text-sm text-black">

@@ -56,7 +56,7 @@ export default function WorkList() {
             <div className="space-y-6">
                 <div className="flex justify-between items-center">
                     <div>
-                        <h2 className="text-lg font-bold text-gray-6">
+                        <h2 className="text-lg font-semibold text-gray-6">
                             전체 작품 ({mockWorks.length})
                         </h2>
                         <p className="text-sm text-gray-5 mt-1">

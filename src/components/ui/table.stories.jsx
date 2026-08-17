@@ -167,15 +167,15 @@ const sortDemoColumns = [
                 <div className="flex flex-col gap-0.5">
                     <div className="flex flex-wrap items-center gap-1 [&>p+p]:before:inline-block [&>p+p]:before:shrink-0 [&>p+p]:before:text-muted-foreground [&>p+p]:before:content-['·']">
                         <p className="m-0 flex items-center gap-1">
-                            <span className="font-bold">호칭</span>
+                            <span className="font-semibold">호칭</span>
                             <span>일이삼사오육칠팔구십</span>
                         </p>
                         <p className="m-0 flex items-center gap-1">
-                            <span className="font-bold">호칭</span>
+                            <span className="font-semibold">호칭</span>
                             <span>일이삼사오육칠팔구십</span>
                         </p>
                         <p className="m-0 flex items-center gap-1">
-                            <span className="font-bold">호칭</span>
+                            <span className="font-semibold">호칭</span>
                             <span>일이삼사오육칠팔구십</span>
                         </p>
                     </div>
@@ -227,7 +227,7 @@ function GridRichDetailCell({ row }) {
                                     i === lastMetaIndex && "min-w-0 flex-1",
                                 )}
                             >
-                                <span className="shrink-0 font-bold text-gray-6">
+                                <span className="shrink-0 font-semibold text-gray-6">
                                     {line.label}
                                 </span>
                                 <span
@@ -243,7 +243,7 @@ function GridRichDetailCell({ row }) {
                         </React.Fragment>
                     ))}
                 </div>
-                <p className="m-0 min-w-0 text-sm font-bold max-md:whitespace-normal max-md:break-words md:truncate">
+                <p className="m-0 min-w-0 text-sm font-semibold max-md:whitespace-normal max-md:break-words md:truncate">
                     {row.title}
                 </p>
                 <p className="m-0 min-w-0 text-xs text-muted-foreground max-md:whitespace-normal max-md:break-words md:truncate">

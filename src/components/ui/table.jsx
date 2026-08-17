@@ -315,7 +315,7 @@ const TableHead = React.forwardRef(
         <th
           ref={ref}
           className={cn(
-            "h-10 px-2 bg-gray-2 text-center text-gray-6 align-middle font-bold [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+            "h-10 px-2 bg-gray-2 text-center text-gray-6 align-middle font-semibold [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
             className,
           )}
           {...props}
@@ -329,7 +329,7 @@ const TableHead = React.forwardRef(
       <th
         ref={ref}
         className={cn(
-          "h-10 px-2 bg-gray-2 text-center text-gray-6 align-middle font-bold [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
+          "h-10 px-2 bg-gray-2 text-center text-gray-6 align-middle font-semibold [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
           className,
         )}
         aria-sort={
@@ -344,7 +344,7 @@ const TableHead = React.forwardRef(
         <button
           type="button"
           className={cn(
-            "-m-1 inline-flex h-8 w-full min-w-0 items-center gap-1 rounded-md px-1 font-bold text-inherit hover:bg-accent/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+            "-m-1 inline-flex h-8 w-full min-w-0 items-center gap-1 rounded-md px-1 font-semibold text-inherit hover:bg-accent/60 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
             justify,
           )}
           onClick={() => ctx.toggleSort(sortKey)}

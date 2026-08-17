@@ -48,7 +48,7 @@ function CharacterDetailCell({ row, onSelect, isLast }) {
                                 </span>
                             )}
                             <div className="flex items-center gap-1 min-w-0 flex-1">
-                                <span className="shrink-0 font-bold text-gray-6">
+                                <span className="shrink-0 font-semibold text-gray-6">
                                     {line.label}
                                 </span>
                                 <span className="truncate">{line.text}</span>
@@ -56,7 +56,7 @@ function CharacterDetailCell({ row, onSelect, isLast }) {
                         </React.Fragment>
                     ))}
                 </div>
-                <p className="m-0 min-w-0 text-sm font-bold whitespace-normal break-words line-clamp-2">
+                <p className="m-0 min-w-0 text-sm font-semibold whitespace-normal break-words line-clamp-2">
                     {row.title}
                 </p>
                 <p className="m-0 min-w-0 text-xs text-muted-foreground whitespace-normal break-words">

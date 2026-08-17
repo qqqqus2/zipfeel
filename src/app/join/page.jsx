@@ -392,7 +392,7 @@ export default function Join() {
                     <LayerPopupBody>
                         <div className="flex flex-col gap-4">
                             <div>
-                                <h3 className="font-bold text-gray-6 mb-2">
+                                <h3 className="font-semibold text-gray-6 mb-2">
                                     {POPUPS.marketing.purpose}
                                 </h3>
                                 <p className="text-sm text-gray-5 leading-relaxed">
@@ -408,7 +408,7 @@ export default function Join() {
                             </div>
 
                             <div>
-                                <h3 className="font-bold text-gray-6 mb-2">
+                                <h3 className="font-semibold text-gray-6 mb-2">
                                     {POPUPS.marketing.collectionTitle}
                                 </h3>
                                 <p className="text-sm text-gray-5">
@@ -417,7 +417,7 @@ export default function Join() {
                             </div>
 
                             <div>
-                                <h3 className="font-bold text-gray-6 mb-2">
+                                <h3 className="font-semibold text-gray-6 mb-2">
                                     {POPUPS.marketing.retentionTitle}
                                 </h3>
                                 <p className="text-sm text-gray-5 leading-relaxed">

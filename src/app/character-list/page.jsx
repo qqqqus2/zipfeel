@@ -47,7 +47,7 @@ function GridRichDetailCell({ row }) {
                                     i === lastMetaIndex && "min-w-0 flex-1",
                                 )}
                             >
-                                <span className="shrink-0 font-bold text-gray-6">
+                                <span className="shrink-0 font-semibold text-gray-6">
                                     {t(`character.labels.${line.label}`)}
                                 </span>
                                 <span className="shrink-0">
@@ -59,7 +59,7 @@ function GridRichDetailCell({ row }) {
                         </div>
                     ))}
                 </div>
-                <p className="m-0 min-w-0 text-sm font-bold max-md:whitespace-normal max-md:break-words md:truncate">
+                <p className="m-0 min-w-0 text-sm font-semibold max-md:whitespace-normal max-md:break-words md:truncate">
                     {row.title}
                 </p>
                 <p className="m-0 min-w-0 text-xs text-muted-foreground max-md:whitespace-normal max-md:break-words md:truncate">
@@ -146,6 +146,7 @@ function CharacterListContent() {
             key: "id",
             header: t("character.tableHeaders.no"),
             width: "80px",
+            sortable: true,
             sortAlign: "left",
             mobileClassName:
                 "max-md:order-3 max-md:w-full max-md:justify-start max-md:pt-1",
@@ -207,7 +208,7 @@ function CharacterListContent() {
                             variant="oulinePoint1"
                             rounded="full"
                             size="sm"
-                            className="gap-2 min-w-[100px] text-sm font-bold shadow-sm"
+                            className="gap-2 min-w-[100px] text-sm font-semibold shadow-sm"
                         >
                             <Icon name="category_search" size={20} />
                             <span data-eng="Filter">상세 검색</span>
@@ -216,7 +217,7 @@ function CharacterListContent() {
                             variant="oulinePoint1"
                             rounded="full"
                             size="sm"
-                            className="gap-2 min-w-[100px] hidden md:block text-sm font-bold shadow-sm  "
+                            className="gap-2 min-w-[100px] hidden md:block text-sm font-semibold shadow-sm  "
                         >
                             <Icon name="add" size={20} />
                             <span data-eng="Create">캐릭터 등록</span>

@@ -11,8 +11,8 @@ export const CharacterInfoType3 = () => {
             <div className="h-full overflow-y-auto custom-scrollbar min-h-0">
                 <div className="pb-[20px]">
                     <div className="bg-gray-6 min-h-[146px] flex flex-col gap-2 text-white pt-10 pb-[30px] pl-[30px] pr-[10px] w-[calc(100%-20px)] rounded-tl-[100px] rounded-tr-[40px] rounded-br-[100px] rounded-bl-[40px]">
-                        <div className="fz-14 font-bold">연재중 · 계약완료</div>
-                        <div className="fz-18 font-bold leading-[110%]">
+                        <div className="fz-14 font-semibold">연재중 · 계약완료</div>
+                        <div className="fz-18 font-semibold leading-[110%]">
                             일일일일일일일일일일이이이이이이이이이이삼삼삼삼삼삼삼삼삼삼
                         </div>
                     </div>
@@ -35,7 +35,7 @@ export const CharacterInfoType3 = () => {
                     </div>
                     <div className="relative z-2 rounded-tl-[40px] rounded-tr-[6px] rounded-br-[40px] rounded-bl-[6px] bg-point-1 -top-15 w-[calc(100%-30px)] ml-auto">
                         <div className="flex flex-col text-center gap-[6px] py-[30px] text-white fz-18 leading-[100%]">
-                            <span className="fz-14 font-bold">
+                            <span className="fz-14 font-semibold">
                                 본문 주요 시간대
                             </span>
                             0000년 00월 00일

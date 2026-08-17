@@ -129,18 +129,18 @@ export const CharacterInfoType1 = () => {
                             혼수상태
                         </span>
                     </div>
-                    <strong className="fz-20 font-bold line-clamp-2 leading-[1.2]">
+                    <strong className="fz-20 font-semibold line-clamp-2 leading-[1.2]">
                         일일일일일일일일일일이이이이이이이
                         일일일일일일일일일일이이이이이이이
                     </strong>
                     <div className="flex items-center w-full mt-2">
                         <div className="fz-14 flex gap-[3px] flex-1 justify-start">
-                            <strong className="font-bold">애칭</strong>
+                            <strong className="font-semibold">애칭</strong>
                             <span className="font-normal">일이삼사</span>
                         </div>
                         <span className="fz-14 px-2">·</span>
                         <div className="fz-14 flex gap-[3px] flex-1">
-                            <strong className="font-bold">호칭</strong>
+                            <strong className="font-semibold">호칭</strong>
                             <span className="font-normal">일이삼사오육</span>
                         </div>
                     </div>
@@ -233,7 +233,7 @@ export const CharacterInfoType1 = () => {
 
                     <TabsContent value="basic" className="-mx-5">
                         <section className="flex flex-col gap-4 p-[30px]">
-                            <h3 className="font-bold text-gray-6 flex items-center gap-1">
+                            <h3 className="font-semibold text-gray-6 flex items-center gap-1">
                                 <Icon name="ico-title" size={16} />
                                 Section명
                             </h3>
@@ -244,19 +244,19 @@ export const CharacterInfoType1 = () => {
                             </div>
                         </section>
                         <section className="flex flex-col gap-4 bg-gray-2 p-[30px]">
-                            <h3 className="font-bold text-gray-6 flex items-center gap-1">
+                            <h3 className="font-semibold text-gray-6 flex items-center gap-1">
                                 <Icon name="ico-title" size={16} />
                                 Section명
                             </h3>
                             <div className="character-basic-info flex flex-col gap-[30px]">
                                 <dl>
-                                    <dt className="fz-14 font-bold mb-[6px]">
+                                    <dt className="fz-14 font-semibold mb-[6px]">
                                         캐릭터 이름
                                     </dt>
                                     <dd>라디오까지는 Input Stroke Hide</dd>
                                 </dl>
                                 <dl>
-                                    <dt className="fz-14 font-bold mb-[6px]">
+                                    <dt className="fz-14 font-semibold mb-[6px]">
                                         항목명
                                     </dt>
                                     <dd>
@@ -269,7 +269,7 @@ export const CharacterInfoType1 = () => {
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt className="fz-14 font-bold mb-[6px] flex justify-between">
+                                    <dt className="fz-14 font-semibold mb-[6px] flex justify-between">
                                         항목명
                                         <span className="fz-14 font-normal">
                                             0 / 10
@@ -283,7 +283,7 @@ export const CharacterInfoType1 = () => {
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt className="fz-14 font-bold mb-[6px]">
+                                    <dt className="fz-14 font-semibold mb-[6px]">
                                         항목명
                                     </dt>
                                     <dd>
@@ -304,7 +304,7 @@ export const CharacterInfoType1 = () => {
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt className="fz-14 font-bold mb-[6px]">
+                                    <dt className="fz-14 font-semibold mb-[6px]">
                                         항목명
                                     </dt>
                                     <dd className="flex flex-col gap-[6px]">
@@ -319,7 +319,7 @@ export const CharacterInfoType1 = () => {
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt className="fz-14 font-bold mb-[6px]">
+                                    <dt className="fz-14 font-semibold mb-[6px]">
                                         항목명
                                     </dt>
                                     <dd>
@@ -340,7 +340,7 @@ export const CharacterInfoType1 = () => {
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt className="fz-14 font-bold mb-[6px]">
+                                    <dt className="fz-14 font-semibold mb-[6px]">
                                         항목명
                                     </dt>
                                     <dd>
@@ -384,7 +384,7 @@ export const CharacterInfoType1 = () => {
                                     </dd>
                                 </dl>
                                 <dl>
-                                    <dt className="fz-14 font-bold mb-[6px]">
+                                    <dt className="fz-14 font-semibold mb-[6px]">
                                         항목명
                                     </dt>
                                     <dd>
@@ -399,7 +399,7 @@ export const CharacterInfoType1 = () => {
 
                         <section className="flex flex-col gap-5 p-[30px]">
                             <div className="flex justify-between">
-                                <h3 className="font-bold text-gray-6 flex items-center gap-1">
+                                <h3 className="font-semibold text-gray-6 flex items-center gap-1">
                                     <Icon
                                         name={
                                             isHexaCorrectionEnabled
@@ -443,7 +443,7 @@ export const CharacterInfoType1 = () => {
 
                     <TabsContent value="appearance">
                         <div className="flex flex-col gap-4">
-                            <h3 className="font-bold text-gray-6">외형</h3>
+                            <h3 className="font-semibold text-gray-6">외형</h3>
                             <p className="text-sm text-gray-5">
                                 이것은 외형 탭입니다.
                             </p>

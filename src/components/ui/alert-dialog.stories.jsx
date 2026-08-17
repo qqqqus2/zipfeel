@@ -165,7 +165,7 @@ export const RequiredFieldsKo = {
             </AlertDialogTrigger>
             <AlertDialogContent>
                 <AlertDialogHeader>
-                    <AlertDialogTitle className="text-left font-bold text-gray-6">
+                    <AlertDialogTitle className="text-left font-semibold text-gray-6">
                         필수 입력 값을
                         <br />
                         모두 입력해 주세요.

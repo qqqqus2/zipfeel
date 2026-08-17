@@ -107,7 +107,7 @@ function HexagonChart({
             {...props}
         >
             {title && (
-                <div className="text-[14px] mb-[6px] font-bold">{title}</div>
+                <div className="text-[14px] mb-[6px] font-semibold">{title}</div>
             )}
             <div
                 className="relative mx-auto w-full max-w-[280px] overflow-visible"
@@ -216,7 +216,7 @@ function HexagonChartLegendRow({ item, labelMaxWidth }) {
             >
                 {item.label}
             </span>
-            <span className="shrink-0 tabular-nums font-bold">
+            <span className="shrink-0 tabular-nums font-semibold">
                 ({item.value}
                 {hasDelta ? (
                     <span

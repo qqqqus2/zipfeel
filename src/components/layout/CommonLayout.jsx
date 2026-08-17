@@ -36,6 +36,7 @@ export function CommonLayout({
     mobileDescriptionEng,
     showMobileEditButton = false,
     onEdit,
+    showMobileTabs = false,
 }) {
     const [isMobile, setIsMobile] = useState(false);
 
@@ -87,14 +88,14 @@ export function CommonLayout({
                                 {/* PC용 - 일반 순서 */}
                                 <div className="hidden md:block">
                                     <h2
-                                        className="text-[24px] text-center leading-[1]  text-gray-6 font-bold px-5"
+                                        className="text-[24px] text-center leading-[1]  text-gray-6 font-semibold px-5"
                                         data-eng={titleEng}
                                     >
                                         {title || "페이지 타이틀"}
                                     </h2>
                                     <p
                                         className={cn(
-                                            "fz-16 text-center w-[calc(100%-20px)] md:max-w-full pt-2 md:pt-3 overflow-hidden md:leading-[1] text-[#474554] [&_strong]:font-bold m-auto",
+                                            "fz-16 text-center w-[calc(100%-20px)] md:max-w-full pt-2 md:pt-3 overflow-hidden md:leading-[1] text-[#474554] [&_strong]:font-semibold m-auto",
                                         )}
                                         data-eng={descriptionEng}
                                     >
@@ -104,23 +105,27 @@ export function CommonLayout({
                                 </div>
                                 {/* 모바일용 - 역순 */}
                                 <div className="md:hidden">
-                                    <p
-                                        className={cn(
-                                            "text-[14px] text-center w-[calc(100%-20px)] md:max-w-full overflow-hidden md:leading-[1] [&_strong]:font-bold m-auto",
-                                        )}
-                                        data-eng={
-                                            mobileDescriptionEng ||
-                                            descriptionEng
-                                        }
-                                    >
-                                        {mobileDescription ||
-                                            description ||
-                                            "페이지에 대한 간단한 설명을 입력하세요. 이 영역은 선택적으로 사용할 수 있습니다."}
-                                    </p>
+                                    {(mobileDescription || description) && (
+                                        <p
+                                            className={cn(
+                                                "text-[14px] text-center w-[calc(100%-20px)] md:max-w-full overflow-hidden md:leading-[1] [&_strong]:font-semibold m-auto",
+                                            )}
+                                            data-eng={
+                                                mobileDescriptionEng ||
+                                                descriptionEng
+                                            }
+                                        >
+                                            {mobileDescription || description}
+                                        </p>
+                                    )}
                                     <h2
                                         className={cn(
-                                            "text-[20px] text-center leading-[1] text-gray-6 font-bold line-clamp-2 px-5",
-                                            removeTitleSpacing
+                                            "text-[20px] text-center leading-[1] text-gray-6 font-semibold line-clamp-2 px-5",
+                                            removeTitleSpacing ||
+                                                !(
+                                                    mobileDescription ||
+                                                    description
+                                                )
                                                 ? ""
                                                 : "mt-[5px]",
                                         )}
@@ -133,7 +138,7 @@ export function CommonLayout({
                                     {showMobileEditButton && (
                                         <div className="flex justify-center mt-[5px]">
                                             <button
-                                                className="text-[14px] font-bold cursor-pointer flex items-center gap-2"
+                                                className="text-[14px] font-semibold cursor-pointer flex items-center gap-2"
                                                 onClick={onEdit}
                                             >
                                                 <Icon
@@ -149,17 +154,18 @@ export function CommonLayout({
                         ) : (
                             <>
                                 <h2
-                                    className="text-[20px] text-center leading-[1] text-gray-6 font-bold px-5"
+                                    className="text-[20px] text-center leading-[1] text-gray-6 font-semibold px-5"
                                     data-eng={titleEng}
                                 >
                                     {title || "페이지 타이틀"}
                                 </h2>
                                 <p
                                     className={cn(
-                                        "fz-16 text-center w-[calc(100%-20px)] md:max-w-full overflow-hidden md:leading-[1] [&_strong]:font-bold m-auto",
+                                        "fz-16 text-center w-[calc(100%-20px)] md:max-w-full overflow-hidden md:leading-[1] [&_strong]:font-semibold m-auto",
                                         removeTitleSpacing
                                             ? ""
                                             : "pt-2 md:pt-3 md:mt-[11px]",
+                                        !description && "md:block hidden",
                                     )}
                                     data-eng={descriptionEng}
                                 >
@@ -177,11 +183,16 @@ export function CommonLayout({
                     >
                         {showTabs && tabs.length > 0 ? (
                             <>
-                                {/* 데스크톱: 탭 UI */}
+                                {/* 탭 UI - showMobileTabs가 true면 모바일에서도 표시 */}
                                 <Tabs
                                     variant="slash"
                                     defaultValue={defaultTab || tabs[0]?.value}
-                                    className="hidden md:flex min-h-0 flex-1 flex-col relative"
+                                    className={cn(
+                                        "min-h-0 flex-1 flex-col relative",
+                                        showMobileTabs
+                                            ? "flex"
+                                            : "hidden md:flex",
+                                    )}
                                 >
                                     <div className="mb-4 absolute z-3 -top-[20px] left-0 right-0 px-5 md:px-10">
                                         <TabsList>
@@ -189,7 +200,7 @@ export function CommonLayout({
                                                 <TabsTrigger
                                                     key={tab.value}
                                                     value={tab.value}
-                                                    className="flex-1 md:flex-initial"
+                                                    className="flex-1 md:flex-initial md:!min-w-[140px]"
                                                     data-eng={tab.labelEng}
                                                 >
                                                     {tab.label}
@@ -205,10 +216,10 @@ export function CommonLayout({
                                         >
                                             <div
                                                 className={cn(
-                                                    "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white",
+                                                    "flex min-h-0 flex-1 flex-col rounded-[40px] bg-white",
                                                 )}
                                             >
-                                                <div className="px-4 m-auto py-[58px] md:pt-[30px] min-h-0 flex-1 w-full">
+                                                <div className="px-4 m-auto py-[58px] md:pt-[30px] min-h-0 flex-1 w-full overflow-y-auto">
                                                     {tab.content}
                                                 </div>
                                             </div>
@@ -216,18 +227,20 @@ export function CommonLayout({
                                     ))}
                                 </Tabs>
 
-                                {/* 모바일: 첫 번째 탭 콘텐츠만 표시 */}
-                                <div
-                                    className="md:hidden flex min-h-0 flex-1 flex-col overflow-y-auto rounded-[40px] bg-white"
-                                    style={{
-                                        boxShadow:
-                                            "0px -8px 16px 0px #00000033",
-                                    }}
-                                >
-                                    <div className="px-[30px] m-auto py-[58px] md:pt-[30px] pt-[6px]  min-h-0 flex-1 w-full">
-                                        {tabs[0]?.content}
+                                {/* 모바일: showMobileTabs가 false일 때만 첫 번째 탭 콘텐츠만 표시 */}
+                                {!showMobileTabs && (
+                                    <div
+                                        className="md:hidden flex min-h-0 flex-1 flex-col overflow-y-auto rounded-[40px] bg-white"
+                                        style={{
+                                            boxShadow:
+                                                "0px -8px 16px 0px #00000033",
+                                        }}
+                                    >
+                                        <div className="px-[30px] m-auto py-[58px] md:pt-[30px] pt-[6px]  min-h-0 flex-1 w-full">
+                                            {tabs[0]?.content}
+                                        </div>
                                     </div>
-                                </div>
+                                )}
                             </>
                         ) : (
                             <div

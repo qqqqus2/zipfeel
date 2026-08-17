@@ -16,7 +16,7 @@ export default function Login() {
     return (
         <div className="space-y-8 pt-9 md:pt-[42px] max-w-[330px] mx-auto">
             <div className="text-center mb-8">
-                <h1 className="text-2xl font-bold text-gray-6 mb-2">
+                <h1 className="text-2xl font-semibold text-gray-6 mb-2">
                     {t('login.title')}
                 </h1>
                 <p className="text-sm text-gray-5">

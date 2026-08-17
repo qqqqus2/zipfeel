@@ -53,7 +53,7 @@ export function MainLayout({
                         <div className="w-full py-6 md:pt-[70px] md:pb-[50px] text-white">
                             {title && (
                                 <h1
-                                    className="md:text-6 text-[20px] font-bold text-center leading-[1.2]"
+                                    className="md:text-6 text-[20px] font-semibold text-center leading-[1.2]"
                                     data-eng={titleEng}
                                 >
                                     {title}
@@ -62,7 +62,7 @@ export function MainLayout({
                             {description && (
                                 <p
                                     className={cn(
-                                        "text-4 text-center md:max-w-full pt-2 md:pt-3 overflow-hidden max-w-[330px] leading-[1.2] mt-[11px] [&_strong]:font-bold m-auto transition-opacity duration-300",
+                                        "text-4 text-center md:max-w-full pt-2 md:pt-3 overflow-hidden max-w-[330px] leading-[1.2] mt-[11px] [&_strong]:font-semibold m-auto transition-opacity duration-300",
                                         "md:opacity-100 md:h-auto md:pt-3",
                                         isScrolled
                                             ? "opacity-0 h-0 pt-0"

@@ -247,7 +247,7 @@ function FieldMessage({
                       : "field-success"
             }
             className={cn(
-                "text-xs font-normal flex items-start gap-1 font-bold",
+                "text-xs font-normal flex items-start gap-1 font-semibold",
                 isError && "text-destructive",
                 isSuccess && "text-point-2",
                 isDuplicate && "text-[rgb(var(--sub-color5))] ",

@@ -231,7 +231,7 @@ function StatCards() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
             <Card>
                 <CardContent className="pt-6">
-                    <div className="text-2xl font-bold text-gray-6">
+                    <div className="text-2xl font-semibold text-gray-6">
                         {pageListData.length}
                     </div>
                     <p className="text-sm text-gray-5 mt-1">전체 페이지</p>
@@ -239,7 +239,7 @@ function StatCards() {
             </Card>
             <Card>
                 <CardContent className="pt-6">
-                    <div className="text-2xl font-bold text-sub-8">
+                    <div className="text-2xl font-semibold text-sub-8">
                         {statusCounts["완료"] || 0}
                     </div>
                     <p className="text-sm text-gray-5 mt-1">완료된 페이지</p>
@@ -247,7 +247,7 @@ function StatCards() {
             </Card>
             <Card>
                 <CardContent className="pt-6">
-                    <div className="text-2xl font-bold text-point-2">
+                    <div className="text-2xl font-semibold text-point-2">
                         {statusCounts["진행중"] || 0}
                     </div>
                     <p className="text-sm text-gray-5 mt-1">진행중인 페이지</p>
@@ -255,7 +255,7 @@ function StatCards() {
             </Card>
             <Card>
                 <CardContent className="pt-6">
-                    <div className="text-2xl font-bold text-gray-5">
+                    <div className="text-2xl font-semibold text-gray-5">
                         {statusCounts["예정"] || 0}
                     </div>
                     <p className="text-sm text-gray-5 mt-1">예정된 페이지</p>
@@ -271,7 +271,7 @@ export default function PageListPage() {
             {/* 헤더 */}
             <div className="flex items-start justify-between">
                 <div>
-                    <h1 className="text-2xl font-bold text-gray-6 mb-2">
+                    <h1 className="text-2xl font-semibold text-gray-6 mb-2">
                         페이지 목록
                     </h1>
                     <p className="text-gray-5">
