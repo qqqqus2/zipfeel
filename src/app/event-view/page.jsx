@@ -168,6 +168,8 @@ function ByNarraitveFlow() {
     const [isRightFilterOpen, setIsRightFilterOpen] = React.useState(false);
     // 좌측 필터 선택 상태 관리
     const [selectedLeftFilter, setSelectedLeftFilter] = React.useState("work1");
+    // 아코디언 열림 상태 관리
+    const [openAccordion, setOpenAccordion] = React.useState(`episode-${episodesData[0].id}`);
 
     return (
         <div className="flex gap-6 w-full max-w-none h-full md:pt-5">
@@ -665,30 +667,35 @@ function ByNarraitveFlow() {
                     <Accordion
                         type="single"
                         collapsible
-                        defaultValue={`episode-${episodesData[0].id}`}
+                        value={openAccordion}
+                        onValueChange={setOpenAccordion}
                         className="w-full"
                     >
-                        {episodesData.map((episode) => (
-                            <AccordionItem
-                                key={episode.id}
-                                value={`episode-${episode.id}`}
-                                className="bg-[#F5F5F5] even:bg-[#F5F5F5]"
-                            >
-                                <AccordionTrigger className="group">
-                                    <div className="flex flex-col items-start gap-1 flex-1 min-w-0">
-                                        <span className="text-sm fw-semibold text-gray-6">
-                                            {episode.episode
-                                                .toString()
-                                                .padStart(4, "0")}{" "}
-                                            화 · {episode.character}(
-                                            {episode.status})
-                                        </span>
-                                        <span className="text-xs text-gray-5 line-clamp-1 w-full text-left">
-                                            {episode.content}
-                                        </span>
-                                    </div>
+                        {episodesData.map((episode) => {
+                            const isOpen = openAccordion === `episode-${episode.id}`;
+                            return (
+                                <AccordionItem
+                                    key={episode.id}
+                                    value={`episode-${episode.id}`}
+                                    className="bg-[#F5F5F5] even:bg-[#F5F5F5]"
+                                >
+                                    <AccordionTrigger className="group">
+                                        <div className="flex flex-col items-start gap-1 flex-1 min-w-0">
+                                            <span className="text-sm fw-semibold text-gray-6">
+                                                {episode.episode
+                                                    .toString()
+                                                    .padStart(4, "0")}{" "}
+                                                화 · {episode.character}(
+                                                {episode.status})
+                                            </span>
+                                            {!isOpen && (
+                                                <span className="text-sm text-gray-6 line-clamp-1 w-full text-left">
+                                                    {episode.content}
+                                                </span>
+                                            )}
+                                        </div>
                                     <span
-                                        className="ml-auto flex gap-2 shrink-0"
+                                        className="ml-auto flex gap-2 shrink-0 mr-2"
                                         onClick={(e) => e.stopPropagation()}
                                     >
                                         <span
@@ -717,7 +724,8 @@ function ByNarraitveFlow() {
                                     </div>
                                 </AccordionContent>
                             </AccordionItem>
-                        ))}
+                            );
+                        })}
                     </Accordion>
                 </div>
             </div>
