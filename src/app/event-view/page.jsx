@@ -15,7 +15,7 @@ import {
 import { SectionTitleToggle } from "@/components/ui/section-title-toggle";
 
 import { Card, CardDescription, CardTitle } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+
 import {
     Tooltip,
     TooltipContent,
@@ -150,7 +150,7 @@ const filterOptions = [
 ];
 
 // 캐릭터 설정 탭 콘텐츠
-function CharacterSettingsContent() {
+function ByNarraitveFlow() {
     const searchParams = useSearchParams();
     const characterId = searchParams.get("id");
     const character = characterId
@@ -313,7 +313,7 @@ function CharacterSettingsContent() {
                 <div className="relative px-0 md:px-5">
                     <div className="relative">
                         <i
-                            className="h-10 bg-[#DFD7D5] absolute -right-5 -left-5 rounded-full z-1 -bottom-[24px] hidden md:flex"
+                            className="h-[60px] bg-[#DFD7D5] absolute -right-5 -left-5 rounded-[20px] z-1 -bottom-5 hidden md:flex"
                             aria-hidden="true"
                         ></i>
                         <div className="hidden relative md:flex align-center gap-[6px] fz-12 mb-0 z-2">
@@ -343,281 +343,210 @@ function CharacterSettingsContent() {
                         </div>
                     </div>
 
-                    <Tabs
-                        defaultValue="basic"
-                        className="w-full relative z-2 "
-                        variant="underline"
-                    >
-                        <TabsList className="w-full !bg-[#FFFFFF99] !grid grid-cols-7 !gap-0 overflow-x-visible px-0 max-md:!flex max-md:overflow-x-auto max-md:justify-start max-md:px-3">
-                            <TabsTrigger
-                                value="basic"
-                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
-                                data-eng="Basic"
-                            >
-                                기본
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="appearance"
-                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
-                                data-eng="Look"
-                            >
-                                외형
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="personality"
-                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
-                                data-eng="Traits"
-                            >
-                                성격
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="ability"
-                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
-                                data-eng="Skills"
-                            >
-                                능력
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="outfit"
-                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
-                                data-eng="Gear"
-                            >
-                                착장
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="relationship"
-                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
-                                data-eng="Relations"
-                            >
-                                관계
-                            </TabsTrigger>
-                            <TabsTrigger
-                                value="etc"
-                                className="min-w-0 w-auto gap-0 max-md:min-w-[84px] max-md:flex-1 max-md:shrink-0"
-                                data-eng="Traits"
-                            >
-                                기타
-                            </TabsTrigger>
-                        </TabsList>
-                        <TabsContent value="basic">
-                            <SectionTitleToggle
-                                className="mt-[32px]"
-                                requiredLabel="설정 필수"
-                                title="기본 정보"
+                    <SectionTitleToggle
+                        className="mt-[32px]"
+                        requiredLabel="설정 필수"
+                        title="기본 정보"
+                    />
+                    <div className="flex flex-col gap-[10px]">
+                        <div className="grid grid-cols-10 gap-5">
+                            <ColumnSettingCard
+                                className="col-span-3"
+                                variant="default"
+                                columnName="구분"
+                                required={true}
+                                description="주인공"
                             />
-                            <div className="flex flex-col gap-[10px]">
-                                <div className="grid grid-cols-10 gap-5">
-                                    <ColumnSettingCard
-                                        className="col-span-3"
-                                        variant="default"
-                                        columnName="구분"
-                                        required={true}
-                                        description="주인공"
-                                    />
-                                    <ColumnSettingCard
-                                        className="col-span-7"
-                                        variant="default"
-                                        tooltip="컬럼 설명 툴팁입니다"
-                                        description="설정 안함"
-                                        preview={true}
-                                    />
-                                </div>
-                                <div className="flex gap-5">
-                                    <ColumnSettingCard
-                                        variant="default"
-                                        columnName="서사"
-                                        descriptionFull={true}
-                                        description="비 오는 항구 도시에서 자란 그는 늘 떠나는 배들을 보며 살았다. 돌아오지 않은 아버지를 대신해 지도와 별을 읽는 법을 배웠고, 언젠가 길을 잃은 사람들을 집으로 데려오는 항해사가 되겠다고 마음먹었다. 그에게 바다는 두려움이자 약속이었다."
-                                    />
-                                </div>
-                                <div className="grid grid-cols-10 gap-5">
-                                    <ColumnSettingCard
-                                        className="col-span-5"
-                                        variant="default"
-                                        tooltip="컬럼 설명 툴팁입니다"
-                                        description="설정 안함"
-                                        preview={true}
-                                    />
-
-                                    <ColumnSettingCard
-                                        className="col-span-5"
-                                        variant="default"
-                                        tooltip="컬럼 설명 툴팁입니다"
-                                        description="설정 안함"
-                                        preview={true}
-                                    />
-                                </div>
-                            </div>
-
-                            <SectionTitleToggle
-                                className="mt-[32px]"
-                                requiredLabel="설정"
-                                title="부가 정보"
+                            <ColumnSettingCard
+                                className="col-span-7"
+                                variant="default"
+                                tooltip="컬럼 설명 툴팁입니다"
+                                description="설정 안함"
+                                preview={true}
                             />
-                            <div className="flex flex-col gap-[10px]">
-                                <div className="grid grid-cols-10 gap-5">
-                                    <ColumnSettingCard
-                                        className="col-span-3"
-                                        variant="default"
-                                        columnName="상태"
-                                        tooltip="상태 설명 툴팁입니다"
-                                        description="설정 안함"
-                                    />
-                                    <ColumnSettingCard
-                                        className="col-span-7"
-                                        variant="point"
-                                        columnName="사망일시"
-                                        tooltip="컬럼 설명 툴팁입니다"
-                                        description="설정 불가"
-                                        disabled={true}
-                                    />
-                                </div>
-                                <div className="grid grid-cols-10 gap-5">
-                                    <ColumnSettingCard
-                                        className="col-span-3"
-                                        variant="default"
-                                        columnName="직업"
-                                        tooltip="직업 설명 툴팁입니다"
-                                        description="설정 안함"
-                                    />
-                                    <ColumnSettingCard
-                                        className="col-span-7"
-                                        variant="default"
-                                        columnName="생년월일"
-                                        description="설정 안함"
-                                    />
-                                </div>
-                                <div className="grid grid-cols-10 gap-5">
-                                    <ColumnSettingCard
-                                        className="col-span-3"
-                                        variant="default"
-                                        columnName="등급"
-                                        description="설정 안함"
-                                    />
-                                    <div className="col-span-7 grid grid-cols-10 gap-5">
-                                        <ColumnSettingCard
-                                            className="col-span-5"
-                                            variant="default"
-                                            columnName="레벨"
-                                            description="설정 안함"
-                                        />
-                                        <ColumnSettingCard
-                                            className="col-span-5"
-                                            variant="default"
-                                            columnName="경험치"
-                                            description="설정 안함"
-                                        />
-                                    </div>
-                                </div>
-                            </div>
-
-                            <SectionTitleToggle
-                                className="mt-[32px]"
-                                requiredLabel="설정"
-                                title="소속"
+                        </div>
+                        <div className="flex gap-5">
+                            <ColumnSettingCard
+                                variant="default"
+                                columnName="서사"
+                                descriptionFull={true}
+                                description="비 오는 항구 도시에서 자란 그는 늘 떠나는 배들을 보며 살았다. 돌아오지 않은 아버지를 대신해 지도와 별을 읽는 법을 배웠고, 언젠가 길을 잃은 사람들을 집으로 데려오는 항해사가 되겠다고 마음먹었다. 그에게 바다는 두려움이자 약속이었다."
                             />
-                            <div className="flex flex-col gap-[10px]">
-                                <div className="grid grid-cols-10 gap-5">
-                                    <ColumnSettingCard
-                                        className="col-span-5"
-                                        variant="default"
-                                        columnName="출신(출생지)"
-                                        description="설정 안함"
-                                    />
-
-                                    <ColumnSettingCard
-                                        className="col-span-5"
-                                        variant="default"
-                                        columnName="거주지"
-                                        description="설정 안함"
-                                    />
-                                </div>
-
-                                <div className="grid grid-cols-10 gap-5">
-                                    <ColumnSettingCard
-                                        className="col-span-5"
-                                        variant="default"
-                                        columnName="가문"
-                                        description="설정 안함"
-                                    />
-
-                                    <button
-                                        type="button"
-                                        className="col-span-5 flex font-regular cursor-pointer flex-col gap-1 text-center bg-point-2 text-white align-center justify-center rounded-lg py-3 hover:bg-point-2/80 transition-colors"
-                                    >
-                                        <span>00 추가</span>
-                                        <span>눌러서 신규 추가</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <SectionTitleToggle
-                                className="mt-[32px]"
-                                requiredLabel="설정"
-                                title="모티브"
+                        </div>
+                        <div className="grid grid-cols-10 gap-5">
+                            <ColumnSettingCard
+                                className="col-span-5"
+                                variant="default"
+                                tooltip="컬럼 설명 툴팁입니다"
+                                description="설정 안함"
+                                preview={true}
                             />
-                            <div className="flex flex-col gap-[10px]">
-                                <div className="grid grid-cols-10 gap-5">
-                                    <ColumnSettingCard
-                                        className="col-span-5"
-                                        variant="default"
-                                        columnName="모티브 대상"
-                                        description="설정 안함"
-                                        preview={true}
-                                    />
 
-                                    <ColumnSettingCard
-                                        className="col-span-5"
-                                        variant="default"
-                                        columnName="모티브 이미지"
-                                        description="설정 안함"
-                                    />
-                                </div>
-                                <div className="">
-                                    <ColumnSettingCard
-                                        variant="default"
-                                        columnName="모티브 설명"
-                                        description="설정 안함"
-                                    />
-                                </div>
-                            </div>
-
-                            <SectionTitleToggle
-                                className="mt-[32px]"
-                                requiredLabel="설정"
-                                title="육각형 셋팅"
+                            <ColumnSettingCard
+                                className="col-span-5"
+                                variant="default"
+                                tooltip="컬럼 설명 툴팁입니다"
+                                description="설정 안함"
+                                preview={true}
                             />
-                            <div className="flex flex-col gap-[10px] pb-5">
-                                <div className="">
-                                    <ColumnSettingCard
-                                        variant="point"
-                                        columnName="기본"
-                                        description="외모(000), 성격(000), 학력(000), 직업(000), 자산(000), 집안(000)"
-                                    />
-                                </div>
-                                <div className="">
-                                    <ColumnSettingCard
-                                        variant="point"
-                                        tooltip="컬럼 설명 툴팁입니다"
-                                        columnName="컬럼명"
-                                        description="일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000)"
-                                    />
-                                </div>
+                        </div>
+                    </div>
+
+                    <SectionTitleToggle
+                        className="mt-[32px]"
+                        requiredLabel="설정"
+                        title="부가 정보"
+                    />
+                    <div className="flex flex-col gap-[10px]">
+                        <div className="grid grid-cols-10 gap-5">
+                            <ColumnSettingCard
+                                className="col-span-3"
+                                variant="default"
+                                columnName="상태"
+                                tooltip="상태 설명 툴팁입니다"
+                                description="설정 안함"
+                            />
+                            <ColumnSettingCard
+                                className="col-span-7"
+                                variant="point"
+                                columnName="사망일시"
+                                tooltip="컬럼 설명 툴팁입니다"
+                                description="설정 불가"
+                                disabled={true}
+                            />
+                        </div>
+                        <div className="grid grid-cols-10 gap-5">
+                            <ColumnSettingCard
+                                className="col-span-3"
+                                variant="default"
+                                columnName="직업"
+                                tooltip="직업 설명 툴팁입니다"
+                                description="설정 안함"
+                            />
+                            <ColumnSettingCard
+                                className="col-span-7"
+                                variant="default"
+                                columnName="생년월일"
+                                description="설정 안함"
+                            />
+                        </div>
+                        <div className="grid grid-cols-10 gap-5">
+                            <ColumnSettingCard
+                                className="col-span-3"
+                                variant="default"
+                                columnName="등급"
+                                description="설정 안함"
+                            />
+                            <div className="col-span-7 grid grid-cols-10 gap-5">
+                                <ColumnSettingCard
+                                    className="col-span-5"
+                                    variant="default"
+                                    columnName="레벨"
+                                    description="설정 안함"
+                                />
+                                <ColumnSettingCard
+                                    className="col-span-5"
+                                    variant="default"
+                                    columnName="경험치"
+                                    description="설정 안함"
+                                />
                             </div>
-                        </TabsContent>
-                        <TabsContent value="appearance">
-                            외형 컨텐츠
-                        </TabsContent>
-                        <TabsContent value="personality">
-                            성격 컨텐츠
-                        </TabsContent>
-                        <TabsContent value="ability">능력 컨텐츠</TabsContent>
-                        <TabsContent value="outfit">착장 컨텐츠</TabsContent>
-                        <TabsContent value="relationship">
-                            관계 컨텐츠
-                        </TabsContent>
-                        <TabsContent value="etc">기타 컨텐츠</TabsContent>
-                    </Tabs>
+                        </div>
+                    </div>
+
+                    <SectionTitleToggle
+                        className="mt-[32px]"
+                        requiredLabel="설정"
+                        title="소속"
+                    />
+                    <div className="flex flex-col gap-[10px]">
+                        <div className="grid grid-cols-10 gap-5">
+                            <ColumnSettingCard
+                                className="col-span-5"
+                                variant="default"
+                                columnName="출신(출생지)"
+                                description="설정 안함"
+                            />
+
+                            <ColumnSettingCard
+                                className="col-span-5"
+                                variant="default"
+                                columnName="거주지"
+                                description="설정 안함"
+                            />
+                        </div>
+
+                        <div className="grid grid-cols-10 gap-5">
+                            <ColumnSettingCard
+                                className="col-span-5"
+                                variant="default"
+                                columnName="가문"
+                                description="설정 안함"
+                            />
+
+                            <button
+                                type="button"
+                                className="col-span-5 flex font-regular cursor-pointer flex-col gap-1 text-center bg-point-2 text-white align-center justify-center rounded-lg py-3 hover:bg-point-2/80 transition-colors"
+                            >
+                                <span>00 추가</span>
+                                <span>눌러서 신규 추가</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <SectionTitleToggle
+                        className="mt-[32px]"
+                        requiredLabel="설정"
+                        title="모티브"
+                    />
+                    <div className="flex flex-col gap-[10px]">
+                        <div className="grid grid-cols-10 gap-5">
+                            <ColumnSettingCard
+                                className="col-span-5"
+                                variant="default"
+                                columnName="모티브 대상"
+                                description="설정 안함"
+                                preview={true}
+                            />
+
+                            <ColumnSettingCard
+                                className="col-span-5"
+                                variant="default"
+                                columnName="모티브 이미지"
+                                description="설정 안함"
+                            />
+                        </div>
+                        <div className="">
+                            <ColumnSettingCard
+                                variant="default"
+                                columnName="모티브 설명"
+                                description="설정 안함"
+                            />
+                        </div>
+                    </div>
+
+                    <SectionTitleToggle
+                        className="mt-[32px]"
+                        requiredLabel="설정"
+                        title="육각형 셋팅"
+                    />
+                    <div className="flex flex-col gap-[10px] pb-5">
+                        <div className="">
+                            <ColumnSettingCard
+                                variant="point"
+                                columnName="기본"
+                                description="외모(000), 성격(000), 학력(000), 직업(000), 자산(000), 집안(000)"
+                            />
+                        </div>
+                        <div className="">
+                            <ColumnSettingCard
+                                variant="point"
+                                tooltip="컬럼 설명 툴팁입니다"
+                                columnName="컬럼명"
+                                description="일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000)"
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -796,8 +725,8 @@ function CharacterSettingsContent() {
     );
 }
 
-// 캐릭터 비교 탭 콘텐츠
-function CharacterComparisonContent() {
+// 시간순 탭 콘텐츠
+function ByTimelineContent() {
     return (
         <div className="flex gap-6 w-full max-w-none h-full">
             {/* 좌측 영역 */}
@@ -868,21 +797,15 @@ export default function CharacterSettings() {
     const tabs = [
         {
             value: "settings",
-            label: "캐릭터 설정",
-            labelEng: "Character Settings",
-            content: <CharacterSettingsContent />,
+            label: "흐름순",
+            labelEng: "By Narrative Flow",
+            content: <ByNarraitveFlow />,
         },
         {
             value: "comparison",
-            label: "캐릭터 비교",
-            labelEng: "Comparison",
-            content: <CharacterComparisonContent />,
-        },
-        {
-            value: "common",
-            label: "공통 설정 관리",
-            labelEng: "Common Management",
-            content: <CommonSettingsContent />,
+            label: "시간순",
+            labelEng: "By Timeline",
+            content: <ByTimelineContent />,
         },
     ];
 
