@@ -170,9 +170,9 @@ function ByNarraitveFlow() {
     const [selectedLeftFilter, setSelectedLeftFilter] = React.useState("work1");
 
     return (
-        <div className="flex gap-6 w-full max-w-none h-full md:pt-[30px]">
+        <div className="flex gap-6 w-full max-w-none h-full md:pt-5">
             {/* 좌측 영역 */}
-            <div className="w-[305px] shrink-0 hidden 2xl:flex flex-col h-full">
+            <div className="w-[300px] shrink-0 hidden 2xl:flex flex-col h-full">
                 <span
                     className="relative left-[10px] text-black fz-12 font-semibold top-2"
                     data-eng="References"
@@ -551,7 +551,7 @@ function ByNarraitveFlow() {
             </div>
 
             {/* 우측 영역 */}
-            <div className="w-[305px] shrink-0 hidden 2xl:flex flex-col h-full">
+            <div className="w-[300px] shrink-0 hidden 2xl:flex flex-col h-full">
                 {/* 상단에 추가  */}
                 <div className="relative shrink-0 flex flex-col">
                     {/* 필터 컴포넌트 추가 */}

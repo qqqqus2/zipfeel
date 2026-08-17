@@ -219,7 +219,7 @@ export function CommonLayout({
                                                     "flex min-h-0 flex-1 flex-col rounded-[40px] bg-white",
                                                 )}
                                             >
-                                                <div className="px-4 m-auto py-[58px] md:pt-[30px] min-h-0 flex-1 w-full overflow-y-auto">
+                                                <div className="px-4 md:px-10 m-auto py-[58px] md:pt-[30px] min-h-0 flex-1 w-full overflow-y-auto">
                                                     {tab.content}
                                                 </div>
                                             </div>
