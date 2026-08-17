@@ -103,9 +103,9 @@ function FlowOrderContent() {
                             variant="oulinePoint1"
                             rounded="full"
                             size="sm"
-                            className="gap-2 min-w-[100px] hidden md:block text-sm font-semibold shadow-sm"
+                            className="gap-2 min-w-[100px] hidden md:block text-sm font-semibold shadow-sm group"
                         >
-                            <Icon name="clear_all" size={20} />
+                            <Icon name="clear_all" size={20} className="group-hover:text-white transition-colors" />
                             <span data-eng="Filter">A라인 관리</span>
                         </Button>
                         <Button

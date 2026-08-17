@@ -212,6 +212,15 @@ export const pageListData = [
         status: "진행중",
     },
     {
+        id: "event-view",
+        category: "세계관 관리",
+        title: "사건 보기",
+        path: "/event-view",
+        description: "사건 상세 정보를 확인하고 관리합니다",
+        layout: "CommonLayout",
+        status: "진행중",
+    },
+    {
         id: "character-settings",
         category: "세계관 관리",
         title: "인물 관리",
