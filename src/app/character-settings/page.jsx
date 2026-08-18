@@ -932,7 +932,7 @@ export default function CharacterSettings() {
             showTabs={true}
             tabs={tabs}
             defaultTab="settings"
-            showFooter={false}
+            showFooter={true}
             showDetailHeader={true}
             onBack={handleBack}
             onPreview={handlePreview}

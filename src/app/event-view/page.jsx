@@ -169,7 +169,9 @@ function ByNarraitveFlow() {
     // 좌측 필터 선택 상태 관리
     const [selectedLeftFilter, setSelectedLeftFilter] = React.useState("work1");
     // 아코디언 열림 상태 관리
-    const [openAccordion, setOpenAccordion] = React.useState(`episode-${episodesData[0].id}`);
+    const [openAccordion, setOpenAccordion] = React.useState(
+        `episode-${episodesData[0].id}`,
+    );
 
     return (
         <div className="flex gap-6 w-full max-w-none h-full md:pt-5">
@@ -672,7 +674,8 @@ function ByNarraitveFlow() {
                         className="w-full"
                     >
                         {episodesData.map((episode) => {
-                            const isOpen = openAccordion === `episode-${episode.id}`;
+                            const isOpen =
+                                openAccordion === `episode-${episode.id}`;
                             return (
                                 <AccordionItem
                                     key={episode.id}
@@ -694,36 +697,42 @@ function ByNarraitveFlow() {
                                                 </span>
                                             )}
                                         </div>
-                                    <span
-                                        className="ml-auto flex gap-2 shrink-0 mr-2"
-                                        onClick={(e) => e.stopPropagation()}
-                                    >
                                         <span
-                                            className="inline-flex items-center justify-center w-6 h-6 cursor-pointer hover:bg-gray-100 rounded transition-colors"
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                // 수정 기능
-                                            }}
+                                            className="ml-auto flex gap-2 shrink-0 mr-2"
+                                            onClick={(e) => e.stopPropagation()}
                                         >
-                                            <Icon name="diamond" size={20} />
+                                            <span
+                                                className="inline-flex items-center justify-center w-6 h-6 cursor-pointer hover:bg-gray-100 rounded transition-colors"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    // 수정 기능
+                                                }}
+                                            >
+                                                <Icon
+                                                    name="diamond"
+                                                    size={20}
+                                                />
+                                            </span>
+                                            <span
+                                                className="inline-flex items-center justify-center w-6 h-6 cursor-pointer hover:bg-gray-100 rounded transition-colors"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    // 삭제 기능
+                                                }}
+                                            >
+                                                <Icon
+                                                    name="ink_eraser"
+                                                    size={20}
+                                                />
+                                            </span>
                                         </span>
-                                        <span
-                                            className="inline-flex items-center justify-center w-6 h-6 cursor-pointer hover:bg-gray-100 rounded transition-colors"
-                                            onClick={(e) => {
-                                                e.stopPropagation();
-                                                // 삭제 기능
-                                            }}
-                                        >
-                                            <Icon name="ink_eraser" size={20} />
-                                        </span>
-                                    </span>
-                                </AccordionTrigger>
-                                <AccordionContent>
-                                    <div className="px-[15px] text-sm text-gray-6 pb-[15px]">
-                                        {episode.content}
-                                    </div>
-                                </AccordionContent>
-                            </AccordionItem>
+                                    </AccordionTrigger>
+                                    <AccordionContent>
+                                        <div className="px-[15px] text-sm text-gray-6 pb-[15px]">
+                                            {episode.content}
+                                        </div>
+                                    </AccordionContent>
+                                </AccordionItem>
                             );
                         })}
                     </Accordion>
@@ -846,7 +855,7 @@ export default function CharacterSettings() {
             showTabs={true}
             tabs={tabs}
             defaultTab="settings"
-            showFooter={false}
+            showFooter={true}
             showDetailHeader={true}
             onBack={handleBack}
             onPreview={handlePreview}

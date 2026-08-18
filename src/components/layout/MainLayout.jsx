@@ -18,11 +18,16 @@ export function MainLayout({
     descriptionEng,
 }) {
     const [isScrolled, setIsScrolled] = React.useState(false);
+    const [isFooterExpanded, setIsFooterExpanded] = React.useState(false);
 
     const handleScroll = React.useCallback((event) => {
         const scrollTop = event.target.scrollTop;
         setIsScrolled(scrollTop > 0);
     }, []);
+
+    const handleFooterExpandChange = (expanded) => {
+        setIsFooterExpanded(expanded);
+    };
 
     return (
         <>
@@ -76,7 +81,14 @@ export function MainLayout({
                         </div>
                     )}
 
-                    <main className="flex min-h-0 flex-1 flex-col md:px-[90px] pb-24 md:px-6 lg:pb-20 pb-[188px] w-full max-w-[1540px] md: mx-auto">
+                    <main
+                        className={cn(
+                            "flex min-h-0 flex-1 flex-col md:px-[90px] md:px-6 w-full max-w-[1540px] md: mx-auto",
+                            isFooterExpanded
+                                ? "lg:pb-[168px] pb-[450px] footer-expand"
+                                : "lg:pb-20 pb-[200px]",
+                        )}
+                    >
                         <div
                             className={cn(
                                 "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white [box-shadow:4px_4px_10px_0px_rgba(32,32,32,0.25)] md:[box-shadow:none]",
@@ -94,7 +106,7 @@ export function MainLayout({
                     </main>
                 </div>
             </div>
-            <Footer />
+            <Footer onExpandChange={handleFooterExpandChange} />
         </>
     );
 }
