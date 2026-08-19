@@ -82,10 +82,7 @@ export function Header({
                                     )}
                                     aria-hidden
                                 >
-                                    <Icon
-                                        name={logoName}
-                                        size={40}
-                                    />
+                                    <Icon name={logoName} size={40} />
                                 </span>
                             </Link>
                         </>
@@ -112,9 +109,12 @@ export function Header({
                         <div className="hidden xl:flex items-center gap-5 absolute left-[250px] lg:left-[150px]">
                             <Chips variant={chipsVariant}>연재</Chips>
                             <strong
-                                className={cn("fz-18 fw-700", titleTextColor)}
+                                className={cn(
+                                    "fz-18 font-medium",
+                                    titleTextColor,
+                                )}
                             >
-                                아름다운 세상을 위하여
+                                선택한 작품명이 노출됩니다.
                             </strong>
                         </div>
                         <DesktopNav

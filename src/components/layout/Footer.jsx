@@ -96,7 +96,7 @@ export function Footer({ onExpandChange }) {
                                                 본사
                                             </strong>{" "}
                                             경기도 성남시 중원구 산성대로 106,
-                                            <br class="lg:hidden" />
+                                            <br className="lg:hidden" />
                                             성남동 A381호(성남동, 원천빌딩)
                                         </span>
                                         <span className="flex gap-2.5">
