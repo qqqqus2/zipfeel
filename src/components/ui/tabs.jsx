@@ -242,7 +242,7 @@ const tabsListSolidRoundedClassName = cn(
 );
 
 const tabsListSlashClassName = cn(
-    "group-data-[variant=slash]/tabs:isolate group-data-[variant=slash]/tabs:h-10 group-data-[variant=slash]/tabs:gap-0 group-data-[variant=slash]/tabs:bg-transparent group-data-[variant=slash]/tabs:py-0 group-data-[variant=slash]/tabs:px-2",
+    "group-data-[variant=slash]/tabs:isolate group-data-[variant=slash]/tabs:h-10 group-data-[variant=slash]/tabs:gap-0 group-data-[variant=slash]/tabs:bg-transparent group-data-[variant=slash]/tabs:py-0 group-data-[variant=slash]/tabs:pl-[10px] group-data-[variant=slash]/tabs:pr-2",
 );
 
 const tabsTriggerBaseClassName = cn(
@@ -286,10 +286,12 @@ const tabsTriggerSolidRoundedClassName = cn(
 );
 
 const tabsTriggerSlashClassName = cn(
-    "group-data-[variant=slash]/tabs:h-10 group-data-[variant=slash]/tabs:min-w-0 group-data-[variant=slash]/tabs:px-6 group-data-[variant=slash]/tabs:font-normal",
-    "group-data-[variant=slash]/tabs:bg-transparent group-data-[variant=slash]/tabs:text-[#000000]",
-    "group-data-[variant=slash]/tabs:data-[state=active]:text-[#ffffff]",
+    "group-data-[variant=slash]/tabs:h-10 group-data-[variant=slash]/tabs:min-w-0 group-data-[variant=slash]/tabs:px-6 group-data-[variant=slash]/tabs:font-normal group-data-[variant=slash]/tabs:text-[18px]",
+    "group-data-[variant=slash]/tabs:bg-[rgba(255,255,255,0.4)] group-data-[variant=slash]/tabs:text-[#000000]",
+    "group-data-[variant=slash]/tabs:data-[state=active]:bg-transparent group-data-[variant=slash]/tabs:data-[state=active]:text-[#ffffff]",
     "group-data-[variant=slash]/tabs:transition-colors group-data-[variant=slash]/tabs:duration-200",
+    "group-data-[variant=slash]/tabs:[clip-path:polygon(10px_0,100%_0,calc(100%-10px)_100%,0_100%)]",
+    "group-data-[variant=slash]/tabs:-ml-[10px]",
 );
 
 /**

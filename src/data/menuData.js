@@ -238,6 +238,15 @@ export const pageListData = [
         layout: "CommonLayout",
         status: "완료",
     },
+    {
+        id: "customer-center",
+        category: "고객 지원",
+        title: "도움누리",
+        path: "/customer-center",
+        description: "집필 이용에 도움이 되는 정보로 1:1 문의는 로그인 후 이용할 수 있습니다",
+        layout: "MainLayout",
+        status: "진행중",
+    },
 ];
 
 /**

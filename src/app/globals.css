@@ -98,6 +98,63 @@
 }
 
 @layer base {
+    /* NanumSquareRound 폰트 */
+    @font-face {
+        font-family: "NanumSquareRound";
+        font-weight: 300;
+        src: url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acL.eot");
+        src: url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acL.eot?#iefix")
+                format("embedded-opentype"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acL.woff2")
+                format("woff2"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acL.woff")
+                format("woff"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acL.ttf")
+                format("truetype");
+    }
+
+    @font-face {
+        font-family: "NanumSquareRound";
+        font-weight: 400;
+        src: url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acR.eot");
+        src: url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acR.eot?#iefix")
+                format("embedded-opentype"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acR.woff2")
+                format("woff2"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acR.woff")
+                format("woff"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acR.ttf")
+                format("truetype");
+    }
+
+    @font-face {
+        font-family: "NanumSquareRound";
+        font-weight: 700;
+        src: url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acB.eot");
+        src: url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acB.eot?#iefix")
+                format("embedded-opentype"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acB.woff2")
+                format("woff2"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acB.woff")
+                format("woff"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acB.ttf")
+                format("truetype");
+    }
+
+    @font-face {
+        font-family: "NanumSquareRound";
+        font-weight: 800;
+        src: url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acEB.eot");
+        src: url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acEB.eot?#iefix")
+                format("embedded-opentype"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acEB.woff2")
+                format("woff2"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acEB.woff")
+                format("woff"),
+            url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@2.0/nanumsquare_acEB.ttf")
+                format("truetype");
+    }
+
     :root {
         /* shadcn 시맨틱 (bg-background 등) — R G B 공백 구분, 우측 #hex 는 미리보기용 */
         --background: 255 255 255; /* #ffffff */

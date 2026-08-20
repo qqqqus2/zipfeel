@@ -1,9 +1,10 @@
 "use client";
 
 import * as React from "react";
+import { useState, useEffect } from "react";
 
 import { cn } from "@/lib/utils";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 
 import { Footer } from "@/components/layout/Footer";
 import { Header } from "@/components/layout/Header";
@@ -16,13 +17,22 @@ export function MainLayout({
     description,
     titleEng,
     descriptionEng,
+    showTabs = false,
+    tabs = [],
+    defaultTab,
 }) {
-    const [isScrolled, setIsScrolled] = React.useState(false);
-    const [isFooterExpanded, setIsFooterExpanded] = React.useState(false);
+    const [isMobile, setIsMobile] = useState(false);
+    const [isFooterExpanded, setIsFooterExpanded] = useState(false);
 
-    const handleScroll = React.useCallback((event) => {
-        const scrollTop = event.target.scrollTop;
-        setIsScrolled(scrollTop > 0);
+    useEffect(() => {
+        const checkMobile = () => {
+            setIsMobile(window.innerWidth < 768);
+        };
+
+        checkMobile();
+        window.addEventListener("resize", checkMobile);
+
+        return () => window.removeEventListener("resize", checkMobile);
     }, []);
 
     const handleFooterExpandChange = (expanded) => {
@@ -39,6 +49,7 @@ export function MainLayout({
             >
                 {/* 배경 판낼 */}
                 <BackPanel topColor="bg-point-1" bottomColor="bg-gray-1" />
+
                 <Header
                     bgColor="bg-point-1"
                     textColor="text-white"
@@ -48,61 +59,97 @@ export function MainLayout({
                     logoName="logo"
                     chipsVariant="orange"
                     titleTextColor="text-sub-8"
+                    showWorkTitle={false}
                 />
+
                 {/* 본문: 사이드바 + 메인 — 헤더와 겹치도록 위로 당김 */}
-                <div className="relative z-10 flex min-h-0 flex-1 mt-0  flex-col">
-                    {/* <CommonLnb /> */}
-
+                <div className="relative z-10 flex min-h-0 flex-col flex-1 -mt-6 md:-mt-0">
                     {/* 타이틀 영역 */}
-                    {(title || description) && (
-                        <div className="w-full py-6 md:pt-[70px] md:pb-[50px] text-white">
-                            {title && (
-                                <h1
-                                    className="md:text-6 text-[20px] font-semibold text-center leading-[1.2]"
-                                    data-eng={titleEng}
-                                >
-                                    {title}
-                                </h1>
+                    <div className="w-full py-6 md:pb-15 md:pt-[90px]">
+                        <h2
+                            className="text-[20px] text-center leading-[1] text-white font-semibold px-5"
+                            data-eng={titleEng}
+                        >
+                            {title || "페이지 타이틀"}
+                        </h2>
+                        <p
+                            className={cn(
+                                "fz-16 text-center w-[calc(100%-20px)] md:max-w-full overflow-hidden md:leading-[1] [&_strong]:font-semibold m-auto pt-2 md:pt-3 md:mt-[11px] text-white",
+                                !description && "md:block hidden",
                             )}
-                            {description && (
-                                <p
-                                    className={cn(
-                                        "text-4 text-center md:max-w-full pt-2 md:pt-3 overflow-hidden max-w-[330px] leading-[1.2] mt-[11px] [&_strong]:font-semibold m-auto transition-opacity duration-300",
-                                        "md:opacity-100 md:h-auto md:pt-3",
-                                        isScrolled
-                                            ? "opacity-0 h-0 pt-0"
-                                            : "opacity-100",
-                                    )}
-                                    data-eng={descriptionEng}
-                                >
-                                    {description}
-                                </p>
-                            )}
-                        </div>
-                    )}
-
+                            data-eng={descriptionEng}
+                        >
+                            {description ||
+                                "페이지에 대한 간단한 설명을 입력하세요. 이 영역은 선택적으로 사용할 수 있습니다."}
+                        </p>
+                    </div>
                     <main
                         className={cn(
-                            "flex min-h-0 flex-1 flex-col md:px-[90px] md:px-6 w-full max-w-[1540px] md: mx-auto",
+                            "flex min-h-0 flex-1 flex-col md:px-[90px] w-full max-w-[1540px] mx-auto",
                             isFooterExpanded
-                                ? "lg:pb-[168px] pb-[450px] footer-expand"
+                                ? "lg:pb-[168px] pb-[390px] footer-expand"
                                 : "lg:pb-20 pb-[200px]",
                         )}
                     >
-                        <div
-                            className={cn(
-                                "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white [box-shadow:4px_4px_10px_0px_rgba(32,32,32,0.25)] md:[box-shadow:none]",
-                            )}
-                        >
-                            <ScrollArea
-                                className="min-h-0 flex-1 overscroll-contain"
-                                onScroll={handleScroll}
+                        {showTabs && tabs.length > 0 ? (
+                            <Tabs
+                                variant="slash"
+                                defaultValue={defaultTab || tabs[0]?.value}
+                                className="min-h-0 flex-1 flex-col relative flex"
                             >
-                                <div className="md:px-4 px-[30px] max-w-[678px] m-auto py-[58px] min-h-0 flex-1 overflow-y-auto custom-scrollbar">
+                                <div className="mb-4 absolute z-3 -top-[20px] left-0 right-0 pl-5 pr-5 md:pl-10 md:pr-10">
+                                    <TabsList>
+                                        {tabs.map((tab) => (
+                                            <TabsTrigger
+                                                key={tab.value}
+                                                value={tab.value}
+                                                className="flex-1 md:flex-initial md:!min-w-[140px]"
+                                                data-eng={tab.labelEng}
+                                            >
+                                                {tab.label}
+                                            </TabsTrigger>
+                                        ))}
+                                    </TabsList>
+                                </div>
+                                {tabs.map((tab) => (
+                                    <TabsContent
+                                        key={tab.value}
+                                        value={tab.value}
+                                        className="flex min-h-0 flex-1 flex-col mt-0"
+                                    >
+                                        <div
+                                            className={cn(
+                                                "flex min-h-0 flex-1 flex-col rounded-[40px] bg-white",
+                                            )}
+                                            style={{
+                                                boxShadow: isMobile
+                                                    ? "0px -8px 16px 0px #00000033"
+                                                    : "none",
+                                            }}
+                                        >
+                                            <div className="md:px-4 px-[30px] max-w-[678px] w-full m-auto py-[58px] md:pt-[30px] pt-[6px] min-h-0 flex-1 overflow-y-auto custom-scrollbar">
+                                                {tab.content}
+                                            </div>
+                                        </div>
+                                    </TabsContent>
+                                ))}
+                            </Tabs>
+                        ) : (
+                            <div
+                                className={cn(
+                                    "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white",
+                                )}
+                                style={{
+                                    boxShadow: isMobile
+                                        ? "0px -8px 16px 0px #00000033"
+                                        : "none",
+                                }}
+                            >
+                                <div className="md:px-4 px-[30px] max-w-[678px] w-full m-auto py-[58px] md:pt-[30px] pt-[6px] min-h-0 flex-1 overflow-y-auto custom-scrollbar">
                                     {children}
                                 </div>
-                            </ScrollArea>
-                        </div>
+                            </div>
+                        )}
                     </main>
                 </div>
             </div>
