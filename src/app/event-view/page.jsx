@@ -174,7 +174,7 @@ function ByNarraitveFlow() {
     );
 
     return (
-        <div className="flex gap-6 w-full max-w-none h-full md:pt-5">
+        <div className="flex gap-[18px] w-full max-w-none h-full md:pt-5">
             {/* 좌측 영역 */}
             <div className="w-[300px] shrink-0 hidden 2xl:flex flex-col h-full">
                 <span
@@ -745,7 +745,7 @@ function ByNarraitveFlow() {
 // 시간순 탭 콘텐츠
 function ByTimelineContent() {
     return (
-        <div className="flex gap-6 w-full max-w-none h-full">
+        <div className="flex gap-[18px] w-full max-w-none h-full">
             {/* 좌측 영역 */}
             <div className="w-[305px] shrink-0 hidden lg:block">
                 <div className="h-full bg-gray-100 rounded-lg p-4">
@@ -771,7 +771,7 @@ function ByTimelineContent() {
 // 공통 설정 관리 탭 콘텐츠
 function CommonSettingsContent() {
     return (
-        <div className="flex gap-6 w-full max-w-none h-full">
+        <div className="flex gap-[18px] w-full max-w-none h-full">
             {/* 좌측 영역 */}
             <div className="w-[305px] shrink-0 hidden lg:block">
                 <div className="h-full bg-gray-100 rounded-lg p-4">

@@ -5,7 +5,12 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Icon } from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import {
+    Tooltip,
+    TooltipContent,
+    TooltipProvider,
+    TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { sidebarMenuItems } from "@/data/menuData";
 
 export function CommonLnb() {
@@ -13,16 +18,18 @@ export function CommonLnb() {
 
     return (
         <aside
-            className="hidden w-14 h-full shrink-0 flex-col bg-transform md:flex md:w-auto md:left-[30px] fixed"
+            className="hidden w-14 h-full shrink-0 flex-col bg-transform 2xl:flex md:w-auto md:left-[30px] fixed"
             aria-label="보조 메뉴"
         >
             <TooltipProvider delayDuration={300}>
                 <div className="flex flex-1 flex-col items-start justify-center gap-[15px] py-3 text-gray-5">
                     {sidebarMenuItems.map((item) => {
                         // 인물 관리 메뉴는 /character-list와 /character-settings 모두 active
-                        const isActive = item.id === "character-management"
-                            ? pathname === "/character-list" || pathname === "/character-settings"
-                            : pathname === item.path;
+                        const isActive =
+                            item.id === "character-management"
+                                ? pathname === "/character-list" ||
+                                  pathname === "/character-settings"
+                                : pathname === item.path;
 
                         return (
                             <Tooltip key={item.id}>
@@ -43,12 +50,21 @@ export function CommonLnb() {
                                         </Link>
                                     </Button>
                                 </TooltipTrigger>
-                                <TooltipContent side="right" className="bg-gray-6 text-white">
-                                    <div className="text-sm font-medium" data-eng={item.labelEng}>
+                                <TooltipContent
+                                    side="right"
+                                    className="bg-gray-6 text-white"
+                                >
+                                    <div
+                                        className="text-sm font-medium"
+                                        data-eng={item.labelEng}
+                                    >
                                         {item.label}
                                     </div>
                                     {item.description && (
-                                        <div className="text-xs text-gray-3 mt-1 max-w-[200px]" data-eng={item.descriptionEng}>
+                                        <div
+                                            className="text-xs text-gray-3 mt-1 max-w-[200px]"
+                                            data-eng={item.descriptionEng}
+                                        >
                                             {item.description}
                                         </div>
                                     )}

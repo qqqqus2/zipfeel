@@ -182,7 +182,7 @@ export function CommonLayout({
                     </div>
                     <main
                         className={cn(
-                            "flex min-h-0 flex-1 flex-col md:px-[90px] w-full max-w-[1540px] mx-auto",
+                            "flex min-h-0 flex-1 flex-col 2xl:px-[90px] xl:px-[40px] w-full max-w-[1540px] mx-auto",
                             showFooter ? "pb-24 lg:pb-[188px]" : "!pb-0",
                             isFooterExpanded
                                 ? "lg:pb-[168px] pb-[390px] footer-expand"

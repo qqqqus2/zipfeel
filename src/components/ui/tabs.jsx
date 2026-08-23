@@ -286,7 +286,7 @@ const tabsTriggerSolidRoundedClassName = cn(
 );
 
 const tabsTriggerSlashClassName = cn(
-    "group-data-[variant=slash]/tabs:h-10 group-data-[variant=slash]/tabs:min-w-0 group-data-[variant=slash]/tabs:px-6 group-data-[variant=slash]/tabs:font-normal group-data-[variant=slash]/tabs:text-[18px]",
+    "group-data-[variant=slash]/tabs:h-10 group-data-[variant=slash]/tabs:min-w-0 group-data-[variant=slash]/tabs:px-6 group-data-[variant=slash]/tabs:font-normal group-data-[variant=slash]/tabs:text-[14px] md:group-data-[variant=slash]/tabs:text-[18px]",
     "group-data-[variant=slash]/tabs:bg-[rgba(255,255,255,0.4)] group-data-[variant=slash]/tabs:text-[#000000]",
     "group-data-[variant=slash]/tabs:data-[state=active]:bg-transparent group-data-[variant=slash]/tabs:data-[state=active]:text-[#ffffff]",
     "group-data-[variant=slash]/tabs:transition-colors group-data-[variant=slash]/tabs:duration-200",

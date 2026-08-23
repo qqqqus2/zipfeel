@@ -43,15 +43,9 @@ export function SectionTitleToggle({
     const [expandedUncontrolled, setExpandedUncontrolled] =
         React.useState(defaultExpanded);
 
-    // 요구사항: 체크박스 ON => 토글 ON, 체크박스 OFF => 토글 OFF
-    const isExpanded = isRequired
-        ? isExpandedControlled
-            ? expanded
-            : expandedUncontrolled
-        : false;
+    const isExpanded = isExpandedControlled ? expanded : expandedUncontrolled;
 
     const toggleExpanded = () => {
-        if (!isRequired) return;
         const next = !isExpanded;
         onExpandedChange?.(next);
         if (!isExpandedControlled) setExpandedUncontrolled(next);
@@ -60,16 +54,6 @@ export function SectionTitleToggle({
     const setRequired = (next) => {
         onRequiredCheckedChange?.(next);
         if (!isRequiredControlled) setRequiredUncontrolled(next);
-
-        // 체크 해제 시 토글은 무조건 OFF로 강제
-        if (!next) {
-            onExpandedChange?.(false);
-            if (!isExpandedControlled) setExpandedUncontrolled(false);
-        } else {
-            // 체크 시 토글 ON (기본 동작)
-            onExpandedChange?.(true);
-            if (!isExpandedControlled) setExpandedUncontrolled(true);
-        }
     };
 
     return (
@@ -82,8 +66,11 @@ export function SectionTitleToggle({
             <button
                 type="button"
                 onClick={toggleExpanded}
-                disabled={disabled || !isRequired}
-                className="flex min-w-0 flex-1 items-center gap-3 text-left disabled:opacity-50"
+                disabled={disabled}
+                className={cn(
+                    "flex min-w-0 flex-1 items-center gap-3 text-left disabled:opacity-50",
+                    !isExpanded && "opacity-50",
+                )}
                 aria-expanded={isExpanded}
                 aria-label={`${title} ${isExpanded ? "접기" : "펼치기"}`}
             >

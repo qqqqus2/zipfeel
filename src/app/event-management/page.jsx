@@ -105,7 +105,11 @@ function FlowOrderContent() {
                             size="sm"
                             className="gap-2 min-w-[100px] hidden md:block text-sm font-semibold shadow-sm group"
                         >
-                            <Icon name="clear_all" size={20} className="group-hover:text-white transition-colors" />
+                            <Icon
+                                name="clear_all"
+                                size={20}
+                                className="group-hover:text-white transition-colors"
+                            />
                             <span data-eng="Filter">A라인 관리</span>
                         </Button>
                         <Button
@@ -173,7 +177,7 @@ function FlowOrderContent() {
                                         </span>
                                     </div>
                                     <span
-                                        className="ml-auto mr-2 flex gap-2 shrink-0"
+                                        className="ml-auto mr-2 flex gap-2 shrink-0 self-start"
                                         onClick={(e) => e.stopPropagation()}
                                     >
                                         <span
@@ -200,7 +204,8 @@ function FlowOrderContent() {
                                     <div className="p-5 flex flex-wrap gap-5">
                                         <div
                                             className={`w-full md:w-[calc(50%-10px)] rounded-lg overflow-hidden transition-all ${
-                                                focusedTextarea === `${event.id}-81`
+                                                focusedTextarea ===
+                                                `${event.id}-81`
                                                     ? "border-2 border-point-1 bg-white"
                                                     : "border-1 border-[rgba(71,69,84,0.6)] bg-transparent"
                                             }`}
@@ -222,13 +227,20 @@ function FlowOrderContent() {
                                                 className="w-full min-h-[200px] p-3 text-base font-semibold text-gray-6 bg-transparent border-0 resize-none focus:outline-none"
                                                 placeholder="사건 내용을 입력하세요..."
                                                 defaultValue={event.description}
-                                                onFocus={() => setFocusedTextarea(`${event.id}-81`)}
-                                                onBlur={() => setFocusedTextarea(null)}
+                                                onFocus={() =>
+                                                    setFocusedTextarea(
+                                                        `${event.id}-81`,
+                                                    )
+                                                }
+                                                onBlur={() =>
+                                                    setFocusedTextarea(null)
+                                                }
                                             />
                                         </div>
                                         <div
                                             className={`w-full md:w-[calc(50%-10px)] rounded-lg overflow-hidden transition-all ${
-                                                focusedTextarea === `${event.id}-82`
+                                                focusedTextarea ===
+                                                `${event.id}-82`
                                                     ? "border-2 border-point-1 bg-white"
                                                     : "border-1 border-[rgba(71,69,84,0.6)] bg-transparent"
                                             }`}
@@ -250,13 +262,20 @@ function FlowOrderContent() {
                                                 className="w-full min-h-[200px] p-3 text-base font-semibold text-gray-6 bg-transparent border-0 resize-none focus:outline-none"
                                                 placeholder="사건 내용을 입력하세요..."
                                                 defaultValue={event.description}
-                                                onFocus={() => setFocusedTextarea(`${event.id}-82`)}
-                                                onBlur={() => setFocusedTextarea(null)}
+                                                onFocus={() =>
+                                                    setFocusedTextarea(
+                                                        `${event.id}-82`,
+                                                    )
+                                                }
+                                                onBlur={() =>
+                                                    setFocusedTextarea(null)
+                                                }
                                             />
                                         </div>
                                         <div
                                             className={`w-full md:w-[calc(50%-10px)] rounded-lg overflow-hidden transition-all ${
-                                                focusedTextarea === `${event.id}-83`
+                                                focusedTextarea ===
+                                                `${event.id}-83`
                                                     ? "border-2 border-point-1 bg-white"
                                                     : "border-1 border-[rgba(71,69,84,0.6)] bg-transparent"
                                             }`}
@@ -278,13 +297,20 @@ function FlowOrderContent() {
                                                 className="w-full min-h-[200px] p-3 text-base font-semibold text-gray-6 bg-transparent border-0 resize-none focus:outline-none"
                                                 placeholder="사건 내용을 입력하세요..."
                                                 defaultValue={event.description}
-                                                onFocus={() => setFocusedTextarea(`${event.id}-83`)}
-                                                onBlur={() => setFocusedTextarea(null)}
+                                                onFocus={() =>
+                                                    setFocusedTextarea(
+                                                        `${event.id}-83`,
+                                                    )
+                                                }
+                                                onBlur={() =>
+                                                    setFocusedTextarea(null)
+                                                }
                                             />
                                         </div>
                                         <div
                                             className={`w-full md:w-[calc(50%-10px)] rounded-lg overflow-hidden transition-all ${
-                                                focusedTextarea === `${event.id}-84`
+                                                focusedTextarea ===
+                                                `${event.id}-84`
                                                     ? "border-2 border-point-1 bg-white"
                                                     : "border-1 border-[rgba(71,69,84,0.6)] bg-transparent"
                                             }`}
@@ -306,13 +332,20 @@ function FlowOrderContent() {
                                                 className="w-full min-h-[200px] p-3 text-base font-semibold text-gray-6 bg-transparent border-0 resize-none focus:outline-none"
                                                 placeholder="사건 내용을 입력하세요..."
                                                 defaultValue={event.description}
-                                                onFocus={() => setFocusedTextarea(`${event.id}-84`)}
-                                                onBlur={() => setFocusedTextarea(null)}
+                                                onFocus={() =>
+                                                    setFocusedTextarea(
+                                                        `${event.id}-84`,
+                                                    )
+                                                }
+                                                onBlur={() =>
+                                                    setFocusedTextarea(null)
+                                                }
                                             />
                                         </div>
                                         <div
                                             className={`w-full md:w-[calc(50%-10px)] rounded-lg overflow-hidden transition-all ${
-                                                focusedTextarea === `${event.id}-85`
+                                                focusedTextarea ===
+                                                `${event.id}-85`
                                                     ? "border-2 border-point-1 bg-white"
                                                     : "border-1 border-[rgba(71,69,84,0.6)] bg-transparent"
                                             }`}
@@ -334,8 +367,14 @@ function FlowOrderContent() {
                                                 className="w-full min-h-[200px] p-3 text-base font-semibold text-gray-6 bg-transparent border-0 resize-none focus:outline-none"
                                                 placeholder="사건 내용을 입력하세요..."
                                                 defaultValue={event.description}
-                                                onFocus={() => setFocusedTextarea(`${event.id}-85`)}
-                                                onBlur={() => setFocusedTextarea(null)}
+                                                onFocus={() =>
+                                                    setFocusedTextarea(
+                                                        `${event.id}-85`,
+                                                    )
+                                                }
+                                                onBlur={() =>
+                                                    setFocusedTextarea(null)
+                                                }
                                             />
                                         </div>
                                     </div>

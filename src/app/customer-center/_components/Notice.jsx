@@ -7,7 +7,7 @@ const mockNoticeData = [
     {
         id: 1,
         category: "이벤트",
-        title: "신규 기능 업데이트 안내",
+        title: "신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내 신규 기능 업데이트 안내",
         date: "2026-08-10",
         isFirst: true,
     },
@@ -70,7 +70,10 @@ const NoticeItem = ({ category, title, date, isFirst }) => {
                 </div>
                 <span className="text-[14px] text-point-3">{date}</span>
             </div>
-            <div className="text-[16px] text-gray-6 font-semibold">{title}</div>
+            {/* 6줄 까지 표기 */}
+            <div className="text-[16px] text-gray-6 font-semibold line-clamp-6">
+                {title}
+            </div>
         </div>
     );
 };
@@ -80,8 +83,10 @@ const NoticeItem = ({ category, title, date, isFirst }) => {
  */
 export const Notice = () => {
     return (
-        <div className="p-5 flex flex-col gap-[30px]">
-            <div>Event Banner</div>
+        <div className="pt-[30px] flex flex-col gap-[30px]">
+            <div className="h-[210px] bg-point-3 text-center flex items-center justify-center">
+                Event Banner
+            </div>
             <div className="text-[14px] text-gray-6 font-regular">
                 {mockNoticeData.length}개
             </div>

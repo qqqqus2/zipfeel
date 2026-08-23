@@ -17,5 +17,11 @@ import { HexagonChart } from "@/components/ui/hexagon-chart";
  * FAQ
  */
 export const Faq = () => {
-    return <div>Faq</div>;
+    return (
+        <div className="pt-[30px] flex flex-col gap-[30px]">
+            <div className="h-[210px] bg-point-3 text-center flex items-center justify-center">
+                Event Banner
+            </div>
+        </div>
+    );
 };
