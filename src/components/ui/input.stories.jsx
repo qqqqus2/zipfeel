@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Input } from "./input";
 
 const INPUT_DOC_PROPS = [

@@ -35,7 +35,7 @@ const meta = {
     argTypes: {
         variant: {
             control: "select",
-            options: ["default", "hover", "active", "filled", "disabled"],
+            options: ["default", "hover", "active", "filled", "disabled", "both"],
             description: "카드 시각 상태(variant)",
         },
     },
@@ -43,8 +43,13 @@ const meta = {
 
 export default meta;
 
-/** 설정 카드형 UI — `variant`: default · hover(고정) · active · filled(값 있음) · disabled */
-function ColumnSettingCard({ variant, description }) {
+/** 설정 카드형 UI — `variant`: default · hover(고정) · active · filled(값 있음) · disabled · both(아이콘 2개) */
+function ColumnSettingCard({
+    variant,
+    description,
+    onGlassesClick,
+    onTagClick,
+}) {
     return (
         <Card variant={variant} className="w-full max-w-md">
             <div className="flex items-start justify-between gap-3">
@@ -74,36 +79,76 @@ function ColumnSettingCard({ variant, description }) {
                         {description}
                     </CardDescription>
                 </div>
-                <div className="shrink-0 pt-0.5">
+                <div className="shrink-0 pt-0.5 flex gap-2">
                     {variant === "hover" ? (
-                        <span
-                            className="inline-flex size-9 items-center justify-center rounded-full bg-point-2 text-white shadow-sm"
-                            aria-hidden
+                        <button
+                            type="button"
+                            onClick={onGlassesClick}
+                            className="inline-flex size-9 items-center justify-center rounded-full bg-point-2 text-white shadow-sm cursor-pointer hover:bg-point-2/80 transition-colors"
+                            aria-label="미리보기"
                         >
                             <Glasses className="size-4" strokeWidth={2} />
-                        </span>
+                        </button>
                     ) : null}
                     {variant === "active" ? (
-                        <span
-                            className="inline-flex size-9 items-center justify-center rounded-full bg-black/25 text-white shadow-inner"
-                            aria-hidden
+                        <button
+                            type="button"
+                            onClick={onGlassesClick}
+                            className="inline-flex size-9 items-center justify-center rounded-full bg-black/25 text-white shadow-inner cursor-pointer hover:bg-black/30 transition-colors"
+                            aria-label="미리보기"
                         >
                             <Glasses className="size-4" strokeWidth={2} />
-                        </span>
+                        </button>
                     ) : null}
                     {variant === "default" ||
                     variant === "filled" ||
                     variant === "disabled" ? (
-                        <Tag
+                        <button
+                            type="button"
+                            onClick={onTagClick}
+                            disabled={variant === "disabled"}
                             className={cn(
-                                "size-9",
-                                variant === "filled"
-                                    ? "text-gray-6"
-                                    : "text-gray-4",
+                                "cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80",
                             )}
-                            strokeWidth={1.75}
-                            aria-hidden
-                        />
+                            aria-label="태그"
+                        >
+                            <Tag
+                                className={cn(
+                                    "size-9",
+                                    variant === "filled"
+                                        ? "text-gray-6"
+                                        : "text-gray-4",
+                                )}
+                                strokeWidth={1.75}
+                                aria-hidden
+                            />
+                        </button>
+                    ) : null}
+                    {variant === "both" ? (
+                        <>
+                            <button
+                                type="button"
+                                onClick={onGlassesClick}
+                                className="inline-flex size-9 items-center justify-center rounded-full bg-point-2 text-white shadow-sm cursor-pointer hover:bg-point-2/80 transition-colors"
+                                aria-label="미리보기"
+                            >
+                                <Glasses className="size-4" strokeWidth={2} />
+                            </button>
+                            <button
+                                type="button"
+                                onClick={onTagClick}
+                                className={cn(
+                                    "cursor-pointer transition-colors hover:opacity-80",
+                                )}
+                                aria-label="태그"
+                            >
+                                <Tag
+                                    className="size-9 text-gray-4"
+                                    strokeWidth={1.75}
+                                    aria-hidden
+                                />
+                            </button>
+                        </>
                     ) : null}
                 </div>
             </div>
@@ -125,6 +170,12 @@ export const VariantsColumnStyle = {
             <ColumnSettingCard
                 variant="disabled"
                 description="일이삼사오육칠팔구십…"
+            />
+            <ColumnSettingCard
+                variant="both"
+                description="아이콘 2개 (Glasses + Tag)"
+                onGlassesClick={() => console.log("Glasses clicked")}
+                onTagClick={() => console.log("Tag clicked")}
             />
         </div>
     ),

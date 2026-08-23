@@ -62,6 +62,7 @@ const AccordionContent = React.forwardRef(
             ref={ref}
             className={cn(
                 "text-sm text-[#474554]",
+                "p-[15px]",
                 "accordion-content-custom",
                 "[&>div]:data-[state=open]:pt-0 [&>div]:data-[state=open]:px-[15px] [&>div]:data-[state=open]:pb-[15px]",
                 "[&>div]:max-md:data-[state=open]:px-[15px] [&>div]:max-md:data-[state=open]:pb-[15px]",
