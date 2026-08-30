@@ -43,7 +43,7 @@ export function MainLayout({
         <>
             <div
                 className={cn(
-                    "relative flex h-dvh max-h-dvh flex-col overflow-hidden text-gray-6",
+                    "relative flex min-h-screen flex-col text-gray-6",
                     className,
                 )}
             >
@@ -51,7 +51,7 @@ export function MainLayout({
                 <BackPanel topColor="bg-point-1" bottomColor="bg-gray-1" />
 
                 <Header
-                    bgColor="bg-point-1"
+                    customBgColor="rgba(79, 55, 138, 0.3)"
                     textColor="text-white"
                     borderColor="border-white/70"
                     hoverBg="hover:bg-white/10"
@@ -63,7 +63,7 @@ export function MainLayout({
                 />
 
                 {/* 본문: 사이드바 + 메인 — 헤더와 겹치도록 위로 당김 */}
-                <div className="relative z-10 flex min-h-0 flex-col flex-1 -mt-6 md:-mt-0">
+                <div className="relative z-10 flex flex-col flex-1 -mt-6 md:-mt-0">
                     {/* 타이틀 영역 */}
                     <div className="w-full py-6 md:pb-15 md:pt-[90px]">
                         <h2
@@ -85,7 +85,7 @@ export function MainLayout({
                     </div>
                     <main
                         className={cn(
-                            "flex min-h-0 flex-1 flex-col md:px-[90px] w-full max-w-[1540px] mx-auto",
+                            "flex flex-1 flex-col md:px-[90px] w-full max-w-[1540px] mx-auto",
                             isFooterExpanded
                                 ? "lg:pb-[168px] pb-[390px] footer-expand"
                                 : "lg:pb-20 pb-[200px]",
@@ -95,7 +95,7 @@ export function MainLayout({
                             <Tabs
                                 variant="slash"
                                 defaultValue={defaultTab || tabs[0]?.value}
-                                className="min-h-0 flex-1 flex-col relative flex"
+                                className="flex-1 flex-col relative flex"
                             >
                                 <div className="mb-4 absolute z-3 -top-[20px] left-0 right-0 pl-5 pr-5 md:pl-10 md:pr-10">
                                     <TabsList>
@@ -115,11 +115,11 @@ export function MainLayout({
                                     <TabsContent
                                         key={tab.value}
                                         value={tab.value}
-                                        className="flex min-h-0 flex-1 flex-col mt-0"
+                                        className="flex flex-1 flex-col mt-0"
                                     >
                                         <div
                                             className={cn(
-                                                "flex min-h-0 flex-1 flex-col rounded-[40px] bg-white",
+                                                "flex flex-1 flex-col rounded-[40px] bg-white",
                                             )}
                                             style={{
                                                 boxShadow: isMobile
@@ -127,7 +127,7 @@ export function MainLayout({
                                                     : "none",
                                             }}
                                         >
-                                            <div className="md:px-4 px-[30px] max-w-[678px] w-full m-auto py-[58px] md:pt-[30px] pt-[6px] min-h-0 flex-1 overflow-y-auto custom-scrollbar">
+                                            <div className="md:px-4 px-[30px] max-w-[1096px] w-full m-auto py-[58px] md:pt-[30px] pt-[6px]">
                                                 {tab.content}
                                             </div>
                                         </div>
@@ -137,7 +137,7 @@ export function MainLayout({
                         ) : (
                             <div
                                 className={cn(
-                                    "flex min-h-0 flex-1 flex-col overflow-hidden rounded-[40px] bg-white",
+                                    "flex flex-1 flex-col rounded-[40px] bg-white",
                                 )}
                                 style={{
                                     boxShadow: isMobile
@@ -145,7 +145,7 @@ export function MainLayout({
                                         : "none",
                                 }}
                             >
-                                <div className="md:px-4 px-[30px] max-w-[678px] w-full m-auto py-[58px] md:pt-[30px] pt-[6px] min-h-0 flex-1 overflow-y-auto custom-scrollbar">
+                                <div className="md:px-4 px-[30px] max-w-[1096px] w-full m-auto py-[58px] md:pt-[30px] pt-[6px]">
                                     {children}
                                 </div>
                             </div>

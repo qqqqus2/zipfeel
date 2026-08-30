@@ -14,6 +14,7 @@ import { Chips } from "@/components/ui/chips";
 
 export function Header({
     bgColor = "bg-point-1",
+    customBgColor,
     isLoggedIn = true, // true로 하면 로그인 된 상태로 변함
     textColor = "text-white",
     borderColor = "border-white/70",
@@ -53,12 +54,13 @@ export function Header({
         <>
             <header
                 className={cn(
-                    "relative md:h-[80px] flex shrink-0 items-center gap-2 pl-8 pr-6 py-3 md:px-6 md:py-4",
+                    "sticky top-0 md:h-[80px] flex shrink-0 items-center gap-2 pl-8 pr-6 py-3 md:px-6 md:py-4",
                     isMobileMenuOpen ? "z-[100] !bg-point-1" : "z-20",
                     showDetailHeader ? "pl-5" : "pl-8",
-                    bgColor,
+                    !customBgColor && bgColor,
                     textColor,
                 )}
+                style={customBgColor ? { backgroundColor: customBgColor } : undefined}
             >
                 <div className="flex min-w-0 items-center gap-3 relative z-2">
                     {showDetailHeader ? (

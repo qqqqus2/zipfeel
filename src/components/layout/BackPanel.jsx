@@ -9,7 +9,7 @@ export function BackPanel({
 }) {
     return (
         <div
-            className="pointer-events-none absolute inset-0 z-0 flex flex-col"
+            className="pointer-events-none fixed inset-0 z-0 flex flex-col"
             aria-hidden
         >
             <div className={cn("md:h-1/2 h-1/3 min-h-0", topColor)} />
