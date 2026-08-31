@@ -1,139 +1,139 @@
 {
-  "sidebar": {
-    "workSettings": {
-      "label": "작품 설정",
-      "description": "작품의 기본 정보와 설정을 관리합니다"
+    "sidebar": {
+        "workSettings": {
+            "label": "작품 설정",
+            "description": "작품의 기본 정보와 설정을 관리합니다"
+        },
+        "writingActivity": {
+            "label": "집필 활동",
+            "description": "작품 집필 및 챕터 관리"
+        },
+        "characterManagement": {
+            "label": "인물 관리",
+            "description": "작품 속 인물 정보 관리"
+        },
+        "eventManagement": {
+            "label": "사건 관리",
+            "description": "작품 속 사건 및 플롯 관리"
+        },
+        "worldManagement": {
+            "label": "배경 관리",
+            "description": "작품 배경 및 세계관 관리"
+        },
+        "skillManagement": {
+            "label": "스킬 관리",
+            "description": "캐릭터 스킬 및 능력 관리"
+        },
+        "itemManagement": {
+            "label": "아이템 관리",
+            "description": "작품 속 아이템 및 오브젝트 관리"
+        },
+        "referenceLibrary": {
+            "label": "자료실",
+            "description": "참고 자료 및 리소스 관리"
+        },
+        "submissionManagement": {
+            "label": "투고 관리",
+            "description": "출판사 투고 현황 관리"
+        }
     },
-    "writingActivity": {
-      "label": "집필 활동",
-      "description": "작품 집필 및 챕터 관리"
+    "header": {
+        "login": "로그인",
+        "logout": "로그아웃",
+        "signup": "회원가입",
+        "profile": "내정보관리",
+        "create-work": "작품 생성",
+        "work-list": "작품 목록",
+        "subscription": "요금안내",
+        "loggedOut": {
+            "login": "로그인",
+            "signup": "회원가입",
+            "createWork": "작품 생성",
+            "subscription": "요금안내"
+        },
+        "loggedIn": {
+            "logout": "로그아웃",
+            "profile": "내정보관리",
+            "createWork": "작품 생성",
+            "workList": "작품 목록"
+        }
     },
-    "characterManagement": {
-      "label": "인물 관리",
-      "description": "작품 속 인물 정보 관리"
-    },
-    "eventManagement": {
-      "label": "사건 관리",
-      "description": "작품 속 사건 및 플롯 관리"
-    },
-    "worldManagement": {
-      "label": "배경 관리",
-      "description": "작품 배경 및 세계관 관리"
-    },
-    "skillManagement": {
-      "label": "스킬 관리",
-      "description": "캐릭터 스킬 및 능력 관리"
-    },
-    "itemManagement": {
-      "label": "아이템 관리",
-      "description": "작품 속 아이템 및 오브젝트 관리"
-    },
-    "referenceLibrary": {
-      "label": "자료실",
-      "description": "참고 자료 및 리소스 관리"
-    },
-    "submissionManagement": {
-      "label": "투고 관리",
-      "description": "출판사 투고 현황 관리"
+    "pages": {
+        "home": {
+            "title": "홈",
+            "description": "메인 랜딩 페이지"
+        },
+        "join": {
+            "title": "회원가입",
+            "description": "사용자 회원가입 페이지"
+        },
+        "login": {
+            "title": "로그인",
+            "description": "사용자 로그인 페이지"
+        },
+        "pageList": {
+            "title": "페이지 목록",
+            "description": "전체 페이지 목록 및 개발 현황"
+        },
+        "workSettings": {
+            "title": "작품 설정",
+            "description": "작품 기본 정보 및 설정 관리"
+        },
+        "workSettingsNew": {
+            "title": "작품 생성",
+            "description": "새로운 작품 생성"
+        },
+        "workList": {
+            "title": "작품 목록",
+            "description": "사용자의 모든 작품 목록"
+        },
+        "writingActivity": {
+            "title": "집필 활동",
+            "description": "챕터 작성 및 집필 관리"
+        },
+        "characterManagement": {
+            "title": "인물 관리",
+            "description": "캐릭터 프로필 및 관계 관리"
+        },
+        "characterDetail": {
+            "title": "인물 상세",
+            "description": "개별 캐릭터 상세 정보"
+        },
+        "eventManagement": {
+            "title": "사건 관리",
+            "description": "플롯 및 사건 타임라인 관리"
+        },
+        "worldManagement": {
+            "title": "배경 관리",
+            "description": "작품 배경 및 세계관 설정"
+        },
+        "skillManagement": {
+            "title": "스킬 관리",
+            "description": "캐릭터 스킬 및 능력 시스템"
+        },
+        "itemManagement": {
+            "title": "아이템 관리",
+            "description": "작품 속 아이템 및 오브젝트"
+        },
+        "referenceLibrary": {
+            "title": "자료실",
+            "description": "참고 자료 및 리소스 보관"
+        },
+        "submissionManagement": {
+            "title": "투고 관리",
+            "description": "출판사 투고 및 현황 추적"
+        },
+        "subscription": {
+            "title": "요금안내",
+            "description": "서비스 구독 플랜 안내"
+        },
+        "mypage": {
+            "title": "마이페이지",
+            "description": "사용자 프로필 및 설정"
+        },
+        "settings": {
+            "title": "환경설정",
+            "description": "애플리케이션 환경설정"
+        }
     }
-  },
-  "header": {
-    "login": "로그인",
-    "logout": "로그아웃",
-    "signup": "회원가입",
-    "profile": "내정보관리",
-    "create-work": "작품 생성",
-    "work-list": "작품 목록",
-    "subscription": "구독안내",
-    "loggedOut": {
-      "login": "로그인",
-      "signup": "회원가입",
-      "createWork": "작품 생성",
-      "subscription": "구독안내"
-    },
-    "loggedIn": {
-      "logout": "로그아웃",
-      "profile": "내정보관리",
-      "createWork": "작품 생성",
-      "workList": "작품 목록"
-    }
-  },
-  "pages": {
-    "home": {
-      "title": "홈",
-      "description": "메인 랜딩 페이지"
-    },
-    "join": {
-      "title": "회원가입",
-      "description": "사용자 회원가입 페이지"
-    },
-    "login": {
-      "title": "로그인",
-      "description": "사용자 로그인 페이지"
-    },
-    "pageList": {
-      "title": "페이지 목록",
-      "description": "전체 페이지 목록 및 개발 현황"
-    },
-    "workSettings": {
-      "title": "작품 설정",
-      "description": "작품 기본 정보 및 설정 관리"
-    },
-    "workSettingsNew": {
-      "title": "작품 생성",
-      "description": "새로운 작품 생성"
-    },
-    "workList": {
-      "title": "작품 목록",
-      "description": "사용자의 모든 작품 목록"
-    },
-    "writingActivity": {
-      "title": "집필 활동",
-      "description": "챕터 작성 및 집필 관리"
-    },
-    "characterManagement": {
-      "title": "인물 관리",
-      "description": "캐릭터 프로필 및 관계 관리"
-    },
-    "characterDetail": {
-      "title": "인물 상세",
-      "description": "개별 캐릭터 상세 정보"
-    },
-    "eventManagement": {
-      "title": "사건 관리",
-      "description": "플롯 및 사건 타임라인 관리"
-    },
-    "worldManagement": {
-      "title": "배경 관리",
-      "description": "작품 배경 및 세계관 설정"
-    },
-    "skillManagement": {
-      "title": "스킬 관리",
-      "description": "캐릭터 스킬 및 능력 시스템"
-    },
-    "itemManagement": {
-      "title": "아이템 관리",
-      "description": "작품 속 아이템 및 오브젝트"
-    },
-    "referenceLibrary": {
-      "title": "자료실",
-      "description": "참고 자료 및 리소스 보관"
-    },
-    "submissionManagement": {
-      "title": "투고 관리",
-      "description": "출판사 투고 및 현황 추적"
-    },
-    "subscription": {
-      "title": "구독안내",
-      "description": "서비스 구독 플랜 안내"
-    },
-    "mypage": {
-      "title": "마이페이지",
-      "description": "사용자 프로필 및 설정"
-    },
-    "settings": {
-      "title": "환경설정",
-      "description": "애플리케이션 환경설정"
-    }
-  }
 }

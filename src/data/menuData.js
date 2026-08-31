@@ -122,7 +122,7 @@ export const headerMenuLoggedOut = [
     },
     {
         id: "subscription",
-        label: "구독안내",
+        label: "요금안내",
         path: "/subscription",
         variant: "outline",
         icon: "sell",
@@ -149,7 +149,7 @@ export const headerMenuLoggedIn = [
     },
     {
         id: "subscription",
-        label: "구독안내",
+        label: "요금안내 ",
         path: "/subscription",
         variant: "outline",
         icon: "sell",
@@ -225,7 +225,8 @@ export const pageListData = [
         category: "세계관 관리",
         title: "인물 관리",
         path: "/character-settings",
-        description: "작중 출연하는 캐릭터를 생성·관리 할 수 있습니다, 각 항목을 눌러 수정할 수 있으며 저장 버튼을 누르면 즉시 반영됩니다",
+        description:
+            "작중 출연하는 캐릭터를 생성·관리 할 수 있습니다, 각 항목을 눌러 수정할 수 있으며 저장 버튼을 누르면 즉시 반영됩니다",
         layout: "CommonLayout",
         status: "완료",
     },
@@ -243,7 +244,8 @@ export const pageListData = [
         category: "고객 지원",
         title: "도움누리",
         path: "/customer-center",
-        description: "집필 이용에 도움이 되는 정보로 1:1 문의는 로그인 후 이용할 수 있습니다",
+        description:
+            "집필 이용에 도움이 되는 정보로 1:1 문의는 로그인 후 이용할 수 있습니다",
         layout: "MainLayout",
         status: "진행중",
     },
