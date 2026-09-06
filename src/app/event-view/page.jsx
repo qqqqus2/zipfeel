@@ -151,14 +151,16 @@ const filterOptions = [
 
 // 캐릭터 설정 탭 콘텐츠
 function ByNarraitveFlow() {
-    const searchParams = useSearchParams();
-    const characterId = searchParams.get("id");
-    const character = characterId
-        ? findCharacterById(characterId)
-        : characterListData[0];
-
-    // 캐릭터가 없으면 첫 번째 캐릭터 사용
-    const currentCharacter = character || characterListData[0];
+    // 이벤트 더미 데이터
+    const currentEvent = {
+        title: "B라인 일일일일 이이이이 삼삼삼 일일일일 이이이이 삼삼삼 일일일일 이이이이 삼삼삼 일일일일 이이이이 삼삼삼 일일일일 이이이이 삼삼삼 일일일일 이이이이 삼삼삼",
+        metaLines: [
+            {
+                label: "A라인",
+                text: "도시 연쇄 실종사건과 정체불명 조직의 개입",
+            },
+        ],
+    };
 
     // 우측 필터 선택 상태 관리
     const [selectedFilter, setSelectedFilter] = React.useState("all");
@@ -172,6 +174,17 @@ function ByNarraitveFlow() {
     const [openAccordion, setOpenAccordion] = React.useState(
         `episode-${episodesData[0].id}`,
     );
+    // 기본정보 섹션 토글 상태
+    const [basicInfoExpanded, setBasicInfoExpanded] = React.useState(true);
+    // 부가 정보 섹션 토글 상태
+    const [additionalInfoExpanded, setAdditionalInfoExpanded] =
+        React.useState(true);
+    // 소속 섹션 토글 상태
+    const [affiliationExpanded, setAffiliationExpanded] = React.useState(true);
+    // 모티브 섹션 토글 상태
+    const [motiveExpanded, setMotiveExpanded] = React.useState(true);
+    // 육각형 셋팅 섹션 토글 상태
+    const [hexagonExpanded, setHexagonExpanded] = React.useState(true);
 
     return (
         <div className="flex gap-[18px] w-full max-w-none h-full md:pt-5">
@@ -321,7 +334,7 @@ function ByNarraitveFlow() {
                             aria-hidden="true"
                         ></i>
                         <div className="hidden relative md:flex align-center gap-[6px] fz-12 mb-0 z-2">
-                            {currentCharacter.metaLines.map((line, index) => (
+                            {currentEvent.metaLines.map((line, index) => (
                                 <React.Fragment key={index}>
                                     {index > 0 && (
                                         <i className="w-[6px] text-center">·</i>
@@ -337,8 +350,8 @@ function ByNarraitveFlow() {
                         </div>
                         {/* pc에서만 보임 */}
                         <div className="flex align-center gap-[6px] justify-between fz-12 hidden md:flex relative z-2">
-                            <h4 className="font-semibold text-[18px]">
-                                {currentCharacter.title}
+                            <h4 className="font-semibold text-[18px] line-clamp-3">
+                                {currentEvent.title}
                             </h4>
                             <button className="fz-16 font-semibold shrink-0 cursor-pointer hidden md:flex">
                                 <Icon name="diamond" size={24} />
@@ -351,206 +364,226 @@ function ByNarraitveFlow() {
                         className="mt-[32px]"
                         requiredLabel="설정 필수"
                         title="기본 정보"
+                        expanded={basicInfoExpanded}
+                        onExpandedChange={setBasicInfoExpanded}
                     />
-                    <div className="flex flex-col gap-[10px]">
-                        <div className="grid grid-cols-10 gap-5">
-                            <ColumnSettingCard
-                                className="col-span-3"
-                                variant="default"
-                                columnName="구분"
-                                required={true}
-                                description="주인공"
-                            />
-                            <ColumnSettingCard
-                                className="col-span-7"
-                                variant="default"
-                                tooltip="컬럼 설명 툴팁입니다"
-                                description="설정 안함"
-                                preview={true}
-                            />
-                        </div>
-                        <div className="flex gap-5">
-                            <ColumnSettingCard
-                                variant="default"
-                                columnName="서사"
-                                descriptionFull={true}
-                                description="비 오는 항구 도시에서 자란 그는 늘 떠나는 배들을 보며 살았다. 돌아오지 않은 아버지를 대신해 지도와 별을 읽는 법을 배웠고, 언젠가 길을 잃은 사람들을 집으로 데려오는 항해사가 되겠다고 마음먹었다. 그에게 바다는 두려움이자 약속이었다."
-                            />
-                        </div>
-                        <div className="grid grid-cols-10 gap-5">
-                            <ColumnSettingCard
-                                className="col-span-5"
-                                variant="default"
-                                tooltip="컬럼 설명 툴팁입니다"
-                                description="설정 안함"
-                                preview={true}
-                            />
+                    {basicInfoExpanded && (
+                        <div className="flex flex-col gap-[10px]">
+                            <div className="grid grid-cols-10 gap-5">
+                                <ColumnSettingCard
+                                    className="col-span-3"
+                                    variant="default"
+                                    columnName="구분"
+                                    required={true}
+                                    description="주인공"
+                                />
+                                <ColumnSettingCard
+                                    className="col-span-7"
+                                    variant="default"
+                                    tooltip="컬럼 설명 툴팁입니다"
+                                    description="설정 안함"
+                                    preview={true}
+                                />
+                            </div>
+                            <div className="flex gap-5">
+                                <ColumnSettingCard
+                                    variant="default"
+                                    columnName="서사"
+                                    descriptionFull={true}
+                                    description="비 오는 항구 도시에서 자란 그는 늘 떠나는 배들을 보며 살았다. 돌아오지 않은 아버지를 대신해 지도와 별을 읽는 법을 배웠고, 언젠가 길을 잃은 사람들을 집으로 데려오는 항해사가 되겠다고 마음먹었다. 그에게 바다는 두려움이자 약속이었다."
+                                />
+                            </div>
+                            <div className="grid grid-cols-10 gap-5">
+                                <ColumnSettingCard
+                                    className="col-span-5"
+                                    variant="default"
+                                    tooltip="컬럼 설명 툴팁입니다"
+                                    description="설정 안함"
+                                    preview={true}
+                                />
 
-                            <ColumnSettingCard
-                                className="col-span-5"
-                                variant="default"
-                                tooltip="컬럼 설명 툴팁입니다"
-                                description="설정 안함"
-                                preview={true}
-                            />
+                                <ColumnSettingCard
+                                    className="col-span-5"
+                                    variant="default"
+                                    tooltip="컬럼 설명 툴팁입니다"
+                                    description="설정 안함"
+                                    preview={true}
+                                />
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     <SectionTitleToggle
                         className="mt-[32px]"
                         requiredLabel="설정"
                         title="부가 정보"
+                        expanded={additionalInfoExpanded}
+                        onExpandedChange={setAdditionalInfoExpanded}
                     />
-                    <div className="flex flex-col gap-[10px]">
-                        <div className="grid grid-cols-10 gap-5">
-                            <ColumnSettingCard
-                                className="col-span-3"
-                                variant="default"
-                                columnName="상태"
-                                tooltip="상태 설명 툴팁입니다"
-                                description="설정 안함"
-                            />
-                            <ColumnSettingCard
-                                className="col-span-7"
-                                variant="point"
-                                columnName="사망일시"
-                                tooltip="컬럼 설명 툴팁입니다"
-                                description="설정 불가"
-                                disabled={true}
-                            />
-                        </div>
-                        <div className="grid grid-cols-10 gap-5">
-                            <ColumnSettingCard
-                                className="col-span-3"
-                                variant="default"
-                                columnName="직업"
-                                tooltip="직업 설명 툴팁입니다"
-                                description="설정 안함"
-                            />
-                            <ColumnSettingCard
-                                className="col-span-7"
-                                variant="default"
-                                columnName="생년월일"
-                                description="설정 안함"
-                            />
-                        </div>
-                        <div className="grid grid-cols-10 gap-5">
-                            <ColumnSettingCard
-                                className="col-span-3"
-                                variant="default"
-                                columnName="등급"
-                                description="설정 안함"
-                            />
-                            <div className="col-span-7 grid grid-cols-10 gap-5">
+                    {additionalInfoExpanded && (
+                        <div className="flex flex-col gap-[10px]">
+                            <div className="grid grid-cols-10 gap-5">
                                 <ColumnSettingCard
-                                    className="col-span-5"
+                                    className="col-span-3"
                                     variant="default"
-                                    columnName="레벨"
+                                    columnName="상태"
+                                    tooltip="상태 설명 툴팁입니다"
                                     description="설정 안함"
                                 />
                                 <ColumnSettingCard
-                                    className="col-span-5"
+                                    className="col-span-7"
+                                    variant="point"
+                                    columnName="사망일시"
+                                    tooltip="컬럼 설명 툴팁입니다"
+                                    description="설정 불가"
+                                    disabled={true}
+                                />
+                            </div>
+                            <div className="grid grid-cols-10 gap-5">
+                                <ColumnSettingCard
+                                    className="col-span-3"
                                     variant="default"
-                                    columnName="경험치"
+                                    columnName="직업"
+                                    tooltip="직업 설명 툴팁입니다"
+                                    description="설정 안함"
+                                />
+                                <ColumnSettingCard
+                                    className="col-span-7"
+                                    variant="default"
+                                    columnName="생년월일"
                                     description="설정 안함"
                                 />
                             </div>
+                            <div className="grid grid-cols-10 gap-5">
+                                <ColumnSettingCard
+                                    className="col-span-3"
+                                    variant="default"
+                                    columnName="등급"
+                                    description="설정 안함"
+                                />
+                                <div className="col-span-7 grid grid-cols-10 gap-5">
+                                    <ColumnSettingCard
+                                        className="col-span-5"
+                                        variant="default"
+                                        columnName="레벨"
+                                        description="설정 안함"
+                                    />
+                                    <ColumnSettingCard
+                                        className="col-span-5"
+                                        variant="default"
+                                        columnName="경험치"
+                                        description="설정 안함"
+                                    />
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    )}
 
                     <SectionTitleToggle
                         className="mt-[32px]"
                         requiredLabel="설정"
                         title="소속"
+                        expanded={affiliationExpanded}
+                        onExpandedChange={setAffiliationExpanded}
                     />
-                    <div className="flex flex-col gap-[10px]">
-                        <div className="grid grid-cols-10 gap-5">
-                            <ColumnSettingCard
-                                className="col-span-5"
-                                variant="default"
-                                columnName="출신(출생지)"
-                                description="설정 안함"
-                            />
+                    {affiliationExpanded && (
+                        <div className="flex flex-col gap-[10px]">
+                            <div className="grid grid-cols-10 gap-5">
+                                <ColumnSettingCard
+                                    className="col-span-5"
+                                    variant="default"
+                                    columnName="출신(출생지)"
+                                    description="설정 안함"
+                                />
 
-                            <ColumnSettingCard
-                                className="col-span-5"
-                                variant="default"
-                                columnName="거주지"
-                                description="설정 안함"
-                            />
+                                <ColumnSettingCard
+                                    className="col-span-5"
+                                    variant="default"
+                                    columnName="거주지"
+                                    description="설정 안함"
+                                />
+                            </div>
+
+                            <div className="grid grid-cols-10 gap-5">
+                                <ColumnSettingCard
+                                    className="col-span-5"
+                                    variant="default"
+                                    columnName="가문"
+                                    description="설정 안함"
+                                />
+
+                                <button
+                                    type="button"
+                                    className="col-span-5 flex font-regular cursor-pointer flex-col gap-1 text-center bg-point-2 text-white align-center justify-center rounded-lg py-3 hover:bg-point-2/80 transition-colors"
+                                >
+                                    <span>00 추가</span>
+                                    <span>눌러서 신규 추가</span>
+                                </button>
+                            </div>
                         </div>
-
-                        <div className="grid grid-cols-10 gap-5">
-                            <ColumnSettingCard
-                                className="col-span-5"
-                                variant="default"
-                                columnName="가문"
-                                description="설정 안함"
-                            />
-
-                            <button
-                                type="button"
-                                className="col-span-5 flex font-regular cursor-pointer flex-col gap-1 text-center bg-point-2 text-white align-center justify-center rounded-lg py-3 hover:bg-point-2/80 transition-colors"
-                            >
-                                <span>00 추가</span>
-                                <span>눌러서 신규 추가</span>
-                            </button>
-                        </div>
-                    </div>
+                    )}
 
                     <SectionTitleToggle
                         className="mt-[32px]"
                         requiredLabel="설정"
                         title="모티브"
+                        expanded={motiveExpanded}
+                        onExpandedChange={setMotiveExpanded}
                     />
-                    <div className="flex flex-col gap-[10px]">
-                        <div className="grid grid-cols-10 gap-5">
-                            <ColumnSettingCard
-                                className="col-span-5"
-                                variant="default"
-                                columnName="모티브 대상"
-                                description="설정 안함"
-                                preview={true}
-                            />
+                    {motiveExpanded && (
+                        <div className="flex flex-col gap-[10px]">
+                            <div className="grid grid-cols-10 gap-5">
+                                <ColumnSettingCard
+                                    className="col-span-5"
+                                    variant="default"
+                                    columnName="모티브 대상"
+                                    description="설정 안함"
+                                    preview={true}
+                                />
 
-                            <ColumnSettingCard
-                                className="col-span-5"
-                                variant="default"
-                                columnName="모티브 이미지"
-                                description="설정 안함"
-                            />
+                                <ColumnSettingCard
+                                    className="col-span-5"
+                                    variant="default"
+                                    columnName="모티브 이미지"
+                                    description="설정 안함"
+                                />
+                            </div>
+                            <div className="">
+                                <ColumnSettingCard
+                                    variant="default"
+                                    columnName="모티브 설명"
+                                    description="설정 안함"
+                                />
+                            </div>
                         </div>
-                        <div className="">
-                            <ColumnSettingCard
-                                variant="default"
-                                columnName="모티브 설명"
-                                description="설정 안함"
-                            />
-                        </div>
-                    </div>
+                    )}
 
                     <SectionTitleToggle
                         className="mt-[32px]"
                         requiredLabel="설정"
                         title="육각형 셋팅"
+                        expanded={hexagonExpanded}
+                        onExpandedChange={setHexagonExpanded}
                     />
-                    <div className="flex flex-col gap-[10px] pb-5">
-                        <div className="">
-                            <ColumnSettingCard
-                                variant="point"
-                                columnName="기본"
-                                description="외모(000), 성격(000), 학력(000), 직업(000), 자산(000), 집안(000)"
-                            />
+                    {hexagonExpanded && (
+                        <div className="flex flex-col gap-[10px] pb-5">
+                            <div className="">
+                                <ColumnSettingCard
+                                    variant="point"
+                                    columnName="기본"
+                                    description="외모(000), 성격(000), 학력(000), 직업(000), 자산(000), 집안(000)"
+                                />
+                            </div>
+                            <div className="">
+                                <ColumnSettingCard
+                                    variant="point"
+                                    tooltip="컬럼 설명 툴팁입니다"
+                                    columnName="컬럼명"
+                                    description="일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000)"
+                                />
+                            </div>
                         </div>
-                        <div className="">
-                            <ColumnSettingCard
-                                variant="point"
-                                tooltip="컬럼 설명 툴팁입니다"
-                                columnName="컬럼명"
-                                description="일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000), 일이삼사오(000)"
-                            />
-                        </div>
-                    </div>
+                    )}
                 </div>
             </div>
 
@@ -560,7 +593,7 @@ function ByNarraitveFlow() {
                 <div className="relative shrink-0 flex flex-col">
                     {/* 필터 컴포넌트 추가 */}
                     <span
-                        className="relative left-[10px] text-black fz-12 font-semibold"
+                        className="relative left-[10px] text-black fz-12 font-semibold top-2"
                         data-eng="Character History"
                     >
                         캐릭터명
@@ -656,6 +689,10 @@ function ByNarraitveFlow() {
                         variant="oulinePoint1"
                         size="sm"
                         className="group rounded-full fz-12 px-2.5"
+                        style={{
+                            boxShadow:
+                                "2px 2px 10px 0px rgba(0, 0, 0, 0.1), -2px -2px 10px 0px rgba(0, 0, 0, 0.1)",
+                        }}
                     >
                         <Icon
                             name="search_activity"
