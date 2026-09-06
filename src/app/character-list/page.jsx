@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState, useMemo } from "react";
-import Link from "next/link";
 import { CommonLayout } from "@/components/layout/CommonLayout";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
@@ -16,12 +15,13 @@ import { sortTableRows } from "@/components/ui/table";
 import { PaginationBar } from "@/components/ui/pagination";
 import { characterData, statusIconMap } from "@/data/characterData";
 import { useTranslation } from "@/hooks/useTranslation";
+import { ContentsDetailPop } from "@/components/ui/contents-detail-pop";
 
 // gridRichRows 데이터 (공유 데이터 사용)
 const gridRichRows = characterData;
 
 // 상세 셀 컴포넌트
-function GridRichDetailCell({ row }) {
+function GridRichDetailCell({ row, onDetailClick }) {
     const { t } = useTranslation("common");
     const lastMetaIndex = Math.max(0, (row.metaLines?.length ?? 0) - 1);
     return (
@@ -90,10 +90,13 @@ function GridRichDetailCell({ row }) {
                     type="button"
                     variant="ghost"
                     size="iconSm"
-                    aria-label="보기"
+                    aria-label="상세 보기"
+                    className="relative z-2"
                     onClick={(e) => {
                         e.stopPropagation();
-                        window.location.href = `/character-settings?id=${row.id}`;
+                        if (onDetailClick) {
+                            onDetailClick(row);
+                        }
                     }}
                 >
                     <Icon name="eyeglasses" size={16} />
@@ -108,14 +111,16 @@ function GridRichDetailCell({ row }) {
                         type="button"
                         variant="ghost"
                         size="sm"
-                        className="p-0"
+                        className="p-0 relative z-2"
                         onClick={(e) => {
                             e.stopPropagation();
-                            window.location.href = `/character-settings?id=${row.id}`;
+                            if (onDetailClick) {
+                                onDetailClick(row);
+                            }
                         }}
                     >
                         <Icon name="eyeglasses" size={16} />
-                        보기
+                        상세 보기
                     </Button>
                     <Button type="button" variant="ghost" size="sm">
                         <Gem className="size-4" />
@@ -137,6 +142,8 @@ function CharacterListContent() {
     const { t } = useTranslation("common");
     const [gridSorting, setGridSorting] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+    const [selectedCharacter, setSelectedCharacter] = useState(null);
     const itemsPerPage = 10;
     const scrollContainerRef = React.useRef(null);
 
@@ -197,56 +204,64 @@ function CharacterListContent() {
         }
     };
 
+    const handleDetailClick = (character) => {
+        setSelectedCharacter(character);
+        setIsPopupOpen(true);
+    };
+
     return (
-        <div className="flex flex-col md:h-full w-full max-w-[678px] mx-auto overflow-x-hidden">
-            {/* 고정 헤더 영역 */}
-            <div className="flex-shrink-0 w-full px-0 md:px-6 pt-6">
-                <div className="flex justify-between items-center mb-6">
-                    <div className="text-gray-6">{gridRichRows.length} 개</div>
-                    <div className="flex gap-2">
-                        <Button
-                            variant="oulinePoint1"
-                            rounded="full"
-                            size="sm"
-                            className="gap-2 min-w-[100px] text-sm font-semibold shadow-sm"
-                        >
-                            <Icon name="category_search" size={20} />
-                            <span data-eng="Filter">상세 검색</span>
-                        </Button>
-                        <Button
-                            variant="oulinePoint1"
-                            rounded="full"
-                            size="sm"
-                            className="gap-2 min-w-[100px] hidden md:block text-sm font-semibold shadow-sm  "
-                        >
-                            <Icon name="add" size={20} />
-                            <span data-eng="Create">캐릭터 등록</span>
-                        </Button>
+        <>
+            <div className="flex flex-col md:h-full w-full max-w-[678px] mx-auto overflow-x-hidden">
+                {/* 고정 헤더 영역 */}
+                <div className="flex-shrink-0 w-full px-0 md:px-6 pt-6">
+                    <div className="flex justify-between items-center mb-6">
+                        <div className="text-gray-6">
+                            {gridRichRows.length} 개
+                        </div>
+                        <div className="flex gap-2">
+                            <Button
+                                variant="oulinePoint1"
+                                rounded="full"
+                                size="sm"
+                                className="gap-2 min-w-[100px] text-sm font-semibold shadow-sm"
+                            >
+                                <Icon name="category_search" size={20} />
+                                <span data-eng="Filter">상세 검색</span>
+                            </Button>
+                            <Button
+                                variant="oulinePoint1"
+                                rounded="full"
+                                size="sm"
+                                className="gap-2 min-w-[100px] hidden md:block text-sm font-semibold shadow-sm  "
+                            >
+                                <Icon name="add" size={20} />
+                                <span data-eng="Create">캐릭터 등록</span>
+                            </Button>
+                        </div>
                     </div>
                 </div>
-            </div>
 
-            {/* 스크롤 가능한 콘텐츠 영역 */}
-            <div
-                ref={scrollContainerRef}
-                className="flex-1 md:overflow-y-auto w-full"
-            >
-                <div className="w-full md:px-6 px-0 pb-6">
-                    <TableGrid
-                        columns={gridColumns}
-                        striped
-                        sortable
-                        sorting={gridSorting}
-                        onSortingChange={setGridSorting}
-                    >
-                        {paginatedRows.map((row) => (
-                            <Link
-                                href={`/character-settings?id=${row.id}`}
-                                key={row.id}
-                            >
+                {/* 스크롤 가능한 콘텐츠 영역 */}
+                <div
+                    ref={scrollContainerRef}
+                    className="flex-1 md:overflow-y-auto w-full"
+                >
+                    <div className="w-full md:px-6 px-0 pb-6">
+                        <TableGrid
+                            columns={gridColumns}
+                            striped
+                            sortable
+                            sorting={gridSorting}
+                            onSortingChange={setGridSorting}
+                        >
+                            {paginatedRows.map((row) => (
                                 <TableGridRow
+                                    key={row.id}
                                     value={row.id}
                                     className="cursor-pointer hover:bg-gray-50 transition-colors rounded-none boder-1-red"
+                                    onClick={() => {
+                                        window.location.href = `/character-settings?id=${row.id}`;
+                                    }}
                                 >
                                     <TableGridCell
                                         columnKey="id"
@@ -287,42 +302,52 @@ function CharacterListContent() {
                                         columnKey="title"
                                         className="min-w-0 p-3"
                                     >
-                                        <GridRichDetailCell row={row} />
+                                        <GridRichDetailCell
+                                            row={row}
+                                            onDetailClick={handleDetailClick}
+                                        />
                                     </TableGridCell>
                                 </TableGridRow>
-                            </Link>
-                        ))}
-                    </TableGrid>
+                            ))}
+                        </TableGrid>
 
-                    {/* 페이지네이션 */}
-                    {totalPages > 1 && (
-                        <div className="mt-8">
-                            <div
-                                onClick={(e) => {
-                                    const href = e.target
-                                        .closest("a")
-                                        ?.getAttribute("href");
-                                    if (href && href.startsWith("#page-")) {
-                                        e.preventDefault();
-                                        const page = parseInt(
-                                            href.replace("#page-", ""),
-                                        );
-                                        handlePageChange(page);
-                                    }
-                                }}
-                            >
-                                <PaginationBar
-                                    page={currentPage}
-                                    totalPages={totalPages}
-                                    getPageHref={(page) => `#page-${page}`}
-                                    showFirstLast={false}
-                                />
+                        {/* 페이지네이션 */}
+                        {totalPages > 1 && (
+                            <div className="mt-8">
+                                <div
+                                    onClick={(e) => {
+                                        const href = e.target
+                                            .closest("a")
+                                            ?.getAttribute("href");
+                                        if (href && href.startsWith("#page-")) {
+                                            e.preventDefault();
+                                            const page = parseInt(
+                                                href.replace("#page-", ""),
+                                            );
+                                            handlePageChange(page);
+                                        }
+                                    }}
+                                >
+                                    <PaginationBar
+                                        page={currentPage}
+                                        totalPages={totalPages}
+                                        getPageHref={(page) => `#page-${page}`}
+                                        showFirstLast={false}
+                                    />
+                                </div>
                             </div>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
+
+            {/* 상세 정보 팝업 */}
+            <ContentsDetailPop
+                open={isPopupOpen}
+                onOpenChange={setIsPopupOpen}
+                characterData={selectedCharacter}
+            />
+        </>
     );
 }
 
