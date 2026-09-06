@@ -353,10 +353,6 @@ function ByNarraitveFlow() {
                             <h4 className="font-semibold text-[18px] line-clamp-3">
                                 {currentEvent.title}
                             </h4>
-                            <button className="fz-16 font-semibold shrink-0 cursor-pointer hidden md:flex">
-                                <Icon name="diamond" size={24} />
-                                수정
-                            </button>
                         </div>
                     </div>
 
