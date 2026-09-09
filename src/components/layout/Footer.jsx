@@ -20,7 +20,7 @@ export function Footer({ onExpandChange }) {
     return (
         <>
             {/* PC 하단 플로팅 푸터 (본문과 겹침, 카드 위에 떠 있음) */}
-            <footer className="pointer-events-none fixed bottom-0 left-0 right-0 z-30 bg-gray-1 text-[14px] lg:pt-0 lg:items-center flex-col flex pb-[30px] lg:pb-0">
+            <footer className="pointer-events-none relative md:fixed bottom-0 left-0 right-0 z-30 bg-gray-1 text-[14px] lg:pt-0 pt-[30px] lg:items-center flex-col flex pb-[30px] lg:pb-0">
                 <div className="pointer-events-auto lg:h-[60px] items-center flex mx-auto flex px-6 lg:px-5 pt-2 max-w-[1400px] m-auto text-gray-6 flex-col lg:flex-row gap-4 lg:gap-0 w-full">
                     <div className="flex gap-[15px] w-full lg:items-center lg:flex-row flex-col">
                         <div className="flex justify-between items-center gap-1 ">

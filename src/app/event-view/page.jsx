@@ -187,7 +187,7 @@ function ByNarraitveFlow() {
     const [hexagonExpanded, setHexagonExpanded] = React.useState(true);
 
     return (
-        <div className="flex gap-[18px] w-full max-w-none h-full md:pt-5">
+        <div className="flex gap-[18px] w-full max-w-none md:h-full md:pt-[30px]">
             {/* 좌측 영역 */}
             <div className="w-[300px] shrink-0 hidden 2xl:flex flex-col h-full">
                 <span
@@ -276,7 +276,7 @@ function ByNarraitveFlow() {
             </div>
 
             {/* 중앙 콘텐츠 */}
-            <div className="w-full mx-auto lg:w-[630px] shrink-0 space-y-6 overflow-y-auto custom-scrollbar">
+            <div className="w-full mx-auto md:max-w-[640px] flex-1 space-y-6 overflow-y-auto custom-scrollbar md:px-0 px-[5px]">
                 <div className="justify-between items-center hidden md:flex">
                     <div className="flex gap-2 w-full justify-between items-center">
                         <Button
@@ -327,10 +327,10 @@ function ByNarraitveFlow() {
                     </div>
                 </div>
 
-                <div className="relative px-0 md:px-5">
-                    <div className="relative">
+                <div className="relative px-0 md:mb-0 mb-10">
+                    <div className="relative px-5">
                         <i
-                            className="h-[60px] bg-[#DFD7D5] absolute -right-5 -left-5 rounded-[20px] z-1 -bottom-5 hidden md:flex"
+                            className="h-[60px] bg-[#DFD7D5] absolute right-0 left-0 rounded-[20px] z-1 -bottom-5 hidden md:flex"
                             aria-hidden="true"
                         ></i>
                         <div className="hidden relative md:flex align-center gap-[6px] fz-12 mb-0 z-2">
@@ -350,7 +350,7 @@ function ByNarraitveFlow() {
                         </div>
                         {/* pc에서만 보임 */}
                         <div className="flex align-center gap-[6px] justify-between fz-12 hidden md:flex relative z-2">
-                            <h4 className="font-semibold text-[18px] line-clamp-3">
+                            <h4 className="font-semibold text-[18px] line-clamp-3 leading-[1.2]">
                                 {currentEvent.title}
                             </h4>
                         </div>
@@ -367,14 +367,14 @@ function ByNarraitveFlow() {
                         <div className="flex flex-col gap-[10px]">
                             <div className="grid grid-cols-10 gap-5">
                                 <ColumnSettingCard
-                                    className="col-span-3"
+                                    className="md:col-span-3 col-span-10"
                                     variant="default"
                                     columnName="구분"
                                     required={true}
                                     description="주인공"
                                 />
                                 <ColumnSettingCard
-                                    className="col-span-7"
+                                    className="md:col-span-7 col-span-10"
                                     variant="default"
                                     tooltip="컬럼 설명 툴팁입니다"
                                     description="설정 안함"
@@ -391,7 +391,7 @@ function ByNarraitveFlow() {
                             </div>
                             <div className="grid grid-cols-10 gap-5">
                                 <ColumnSettingCard
-                                    className="col-span-5"
+                                    className="md:col-span-5 col-span-10"
                                     variant="default"
                                     tooltip="컬럼 설명 툴팁입니다"
                                     description="설정 안함"
@@ -399,7 +399,7 @@ function ByNarraitveFlow() {
                                 />
 
                                 <ColumnSettingCard
-                                    className="col-span-5"
+                                    className="md:col-span-5 col-span-10"
                                     variant="default"
                                     tooltip="컬럼 설명 툴팁입니다"
                                     description="설정 안함"
@@ -420,14 +420,14 @@ function ByNarraitveFlow() {
                         <div className="flex flex-col gap-[10px]">
                             <div className="grid grid-cols-10 gap-5">
                                 <ColumnSettingCard
-                                    className="col-span-3"
+                                    className="md:col-span-3 col-span-10"
                                     variant="default"
                                     columnName="상태"
                                     tooltip="상태 설명 툴팁입니다"
                                     description="설정 안함"
                                 />
                                 <ColumnSettingCard
-                                    className="col-span-7"
+                                    className="md:col-span-7 col-span-10"
                                     variant="point"
                                     columnName="사망일시"
                                     tooltip="컬럼 설명 툴팁입니다"
@@ -437,14 +437,14 @@ function ByNarraitveFlow() {
                             </div>
                             <div className="grid grid-cols-10 gap-5">
                                 <ColumnSettingCard
-                                    className="col-span-3"
+                                    className="md:col-span-3 col-span-10"
                                     variant="default"
                                     columnName="직업"
                                     tooltip="직업 설명 툴팁입니다"
                                     description="설정 안함"
                                 />
                                 <ColumnSettingCard
-                                    className="col-span-7"
+                                    className="md:col-span-7 col-span-10"
                                     variant="default"
                                     columnName="생년월일"
                                     description="설정 안함"
@@ -452,12 +452,12 @@ function ByNarraitveFlow() {
                             </div>
                             <div className="grid grid-cols-10 gap-5">
                                 <ColumnSettingCard
-                                    className="col-span-3"
+                                    className="md:col-span-3 col-span-10"
                                     variant="default"
                                     columnName="등급"
                                     description="설정 안함"
                                 />
-                                <div className="col-span-7 grid grid-cols-10 gap-5">
+                                <div className="md:col-span-7 col-span-10 grid grid-cols-10 gap-5">
                                     <ColumnSettingCard
                                         className="col-span-5"
                                         variant="default"
@@ -486,14 +486,14 @@ function ByNarraitveFlow() {
                         <div className="flex flex-col gap-[10px]">
                             <div className="grid grid-cols-10 gap-5">
                                 <ColumnSettingCard
-                                    className="col-span-5"
+                                    className="md:col-span-5 col-span-10"
                                     variant="default"
                                     columnName="출신(출생지)"
                                     description="설정 안함"
                                 />
 
                                 <ColumnSettingCard
-                                    className="col-span-5"
+                                    className="md:col-span-5 col-span-10"
                                     variant="default"
                                     columnName="거주지"
                                     description="설정 안함"
@@ -502,7 +502,7 @@ function ByNarraitveFlow() {
 
                             <div className="grid grid-cols-10 gap-5">
                                 <ColumnSettingCard
-                                    className="col-span-5"
+                                    className="md:col-span-5 col-span-10"
                                     variant="default"
                                     columnName="가문"
                                     description="설정 안함"
@@ -510,7 +510,7 @@ function ByNarraitveFlow() {
 
                                 <button
                                     type="button"
-                                    className="col-span-5 flex font-regular cursor-pointer flex-col gap-1 text-center bg-point-2 text-white align-center justify-center rounded-lg py-3 hover:bg-point-2/80 transition-colors"
+                                    className="md:col-span-5 col-span-10 flex font-regular cursor-pointer flex-col gap-1 text-center bg-point-2 text-white align-center justify-center rounded-lg py-3 hover:bg-point-2/80 transition-colors"
                                 >
                                     <span>00 추가</span>
                                     <span>눌러서 신규 추가</span>
@@ -530,7 +530,7 @@ function ByNarraitveFlow() {
                         <div className="flex flex-col gap-[10px]">
                             <div className="grid grid-cols-10 gap-5">
                                 <ColumnSettingCard
-                                    className="col-span-5"
+                                    className="md:col-span-5 col-span-10"
                                     variant="default"
                                     columnName="모티브 대상"
                                     description="설정 안함"
@@ -538,7 +538,7 @@ function ByNarraitveFlow() {
                                 />
 
                                 <ColumnSettingCard
-                                    className="col-span-5"
+                                    className="md:col-span-5 col-span-10"
                                     variant="default"
                                     columnName="모티브 이미지"
                                     description="설정 안함"
@@ -787,7 +787,7 @@ function ByTimelineContent() {
             </div>
 
             {/* 중앙 콘텐츠 */}
-            <div className="w-full lg:w-[630px] shrink-0 space-y-6">
+            <div className="w-full lg:w-[630px] flex-1 space-y-6">
                 <p className="text-sm text-gray-500">Empty</p>
             </div>
 
@@ -813,7 +813,7 @@ function CommonSettingsContent() {
             </div>
 
             {/* 중앙 콘텐츠 */}
-            <div className="w-full lg:w-[630px] shrink-0 space-y-6">
+            <div className="w-full lg:w-[630px] flex-1 space-y-6">
                 <p className="text-sm text-gray-500">Empty</p>
             </div>
 

@@ -11,7 +11,7 @@ function SectionToggleIcon({ expanded }) {
             <span className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-[2px] bg-foreground"></span>
             <span
                 className={[
-                    "absolute left-0 top-1/2 -translate-y-1/2 w-[10px] h-[10px] border-2 z-1 rotate-45 bg-white transition-transform duration-150 ease-out",
+                    "absolute left-[2px] top-1/2 -translate-y-1/2 w-[10px] h-[10px] border-2 z-1 rotate-45 bg-white transition-transform duration-150 ease-out",
                     expanded ? "translate-x-[10px]" : "translate-x-0",
                 ].join(" ")}
             ></span>

@@ -266,7 +266,11 @@
     /* 커스텀 스크롤바 스타일 - 세련된 모던 디자인 */
     .custom-scrollbar {
         scrollbar-width: thin;
-        scrollbar-color: rgba(var(--gray-scale-3), 0.4) transparent;
+        scrollbar-color: transparent transparent;
+    }
+
+    .custom-scrollbar:hover {
+        scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
     }
 
     .custom-scrollbar::-webkit-scrollbar {
@@ -280,20 +284,25 @@
     }
 
     .custom-scrollbar::-webkit-scrollbar-thumb {
-        background: rgba(var(--gray-scale-3), 0.4);
+        background: transparent;
         border-radius: 100px;
         border: 2px solid transparent;
         background-clip: padding-box;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
 
+    .custom-scrollbar:hover::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.1);
+        background-clip: padding-box;
+    }
+
     .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-        background: rgba(var(--gray-scale-5), 0.6);
+        background: rgba(0, 0, 0, 0.2);
         background-clip: padding-box;
     }
 
     .custom-scrollbar::-webkit-scrollbar-thumb:active {
-        background: rgba(var(--gray-scale-5), 0.8);
+        background: rgba(0, 0, 0, 0.3);
         background-clip: padding-box;
     }
 

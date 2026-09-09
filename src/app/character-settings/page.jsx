@@ -247,7 +247,7 @@ function CharacterSettingsContent() {
     const [hexagonExpanded, setHexagonExpanded] = React.useState(false);
 
     return (
-        <div className="flex gap-[18px] w-full max-w-none h-full md:pt-[30px]">
+        <div className="flex gap-[18px] w-full max-w-none md:h-full md:pt-[30px]">
             {/* 좌측 영역 */}
             <div className="w-[300px] shrink-0 hidden xl:flex flex-col h-full">
                 <span
@@ -336,7 +336,7 @@ function CharacterSettingsContent() {
             </div>
 
             {/* 중앙 콘텐츠 */}
-            <div className="w-full mx-auto lg:w-[630px] shrink-0 space-y-6 overflow-y-auto custom-scrollbar">
+            <div className="w-full mx-auto md:max-w-[640px] flex-1 space-y-6 overflow-y-auto custom-scrollbar md:px-0 px-[5px]">
                 <div className="justify-between items-center hidden md:flex">
                     <div className="flex gap-2 w-full justify-between items-center">
                         <Button
@@ -387,13 +387,13 @@ function CharacterSettingsContent() {
                     </div>
                 </div>
 
-                <div className="relative px-0 md:px-5">
-                    <div className="relative">
+                <div className="relative px-0 md:mb-0 mb-10">
+                    <div className="relative px-5 mb-3">
                         <i
-                            className="h-10 bg-[#DFD7D5] absolute -right-5 -left-5 rounded-full z-1 -bottom-[24px] hidden md:flex"
+                            className="h-10 bg-[#DFD7D5] absolute right-0 left-0 rounded-full z-1 -bottom-[24px] hidden md:flex"
                             aria-hidden="true"
                         ></i>
-                        <div className="hidden relative md:flex align-center gap-[6px] fz-12 mb-0 z-2">
+                        <div className="hidden relative md:flex align-center gap-[12px] fz-12 mb-0 z-2">
                             {currentCharacter.metaLines.map((line, index) => (
                                 <React.Fragment key={index}>
                                     {index > 0 && (
@@ -410,7 +410,7 @@ function CharacterSettingsContent() {
                         </div>
                         {/* pc에서만 보임 */}
                         <div className="flex align-center gap-[6px] justify-between fz-12 hidden md:flex relative z-2">
-                            <h4 className="font-semibold text-[18px]">
+                            <h4 className="font-semibold text-[18px] leading-[1.2]">
                                 {currentCharacter.title}
                             </h4>
                             <button className="fz-16 font-semibold shrink-0 cursor-pointer hidden md:flex">
@@ -422,7 +422,7 @@ function CharacterSettingsContent() {
 
                     <Tabs
                         defaultValue="basic"
-                        className="w-full relative z-2 "
+                        className="w-full relative z-2 md:mt-0 mt-[34px]"
                         variant="underline"
                     >
                         <TabsList className="w-full !bg-[#FFFFFF99] !grid grid-cols-7 !gap-0 overflow-x-visible px-0 max-md:!flex max-md:overflow-x-auto max-md:justify-start max-md:px-3">
@@ -478,7 +478,7 @@ function CharacterSettingsContent() {
                         </TabsList>
                         <TabsContent value="basic">
                             <SectionTitleToggle
-                                className="mt-[32px]"
+                                className="mt-[32px] "
                                 requiredLabel="설정 필수"
                                 title="기본 정보"
                                 expanded={basicInfoExpanded}
@@ -486,16 +486,16 @@ function CharacterSettingsContent() {
                             />
                             {basicInfoExpanded && (
                                 <div className="flex flex-col gap-[10px]">
-                                    <div className="grid grid-cols-10 gap-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
                                         <ColumnSettingCard
-                                            className="col-span-3"
+                                            className="col-span-1 md:col-span-3"
                                             variant="default"
                                             columnName="구분"
                                             required={true}
                                             description="주인공"
                                         />
                                         <ColumnSettingCard
-                                            className="col-span-7"
+                                            className="col-span-1 md:col-span-7"
                                             variant="default"
                                             tooltip="컬럼 설명 툴팁입니다"
                                             description="설정 안함"
@@ -510,9 +510,9 @@ function CharacterSettingsContent() {
                                             description="비 오는 항구 도시에서 자란 그는 늘 떠나는 배들을 보며 살았다. 돌아오지 않은 아버지를 대신해 지도와 별을 읽는 법을 배웠고, 언젠가 길을 잃은 사람들을 집으로 데려오는 항해사가 되겠다고 마음먹었다. 그에게 바다는 두려움이자 약속이었다."
                                         />
                                     </div>
-                                    <div className="grid grid-cols-10 gap-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
                                         <ColumnSettingCard
-                                            className="col-span-5"
+                                            className="col-span-1 md:col-span-5"
                                             variant="default"
                                             tooltip="컬럼 설명 툴팁입니다"
                                             description="설정 안함"
@@ -520,7 +520,7 @@ function CharacterSettingsContent() {
                                         />
 
                                         <ColumnSettingCard
-                                            className="col-span-5"
+                                            className="col-span-1 md:col-span-5"
                                             variant="default"
                                             tooltip="컬럼 설명 툴팁입니다"
                                             description="설정 안함"
@@ -539,16 +539,16 @@ function CharacterSettingsContent() {
                             />
                             {additionalInfoExpanded && (
                                 <div className="flex flex-col gap-[10px]">
-                                    <div className="grid grid-cols-10 gap-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
                                         <ColumnSettingCard
-                                            className="col-span-3"
+                                            className="col-span-1 md:col-span-3"
                                             variant="default"
                                             columnName="상태"
                                             tooltip="상태 설명 툴팁입니다"
                                             description="설정 안함"
                                         />
                                         <ColumnSettingCard
-                                            className="col-span-7"
+                                            className="col-span-1 md:col-span-7"
                                             variant="point"
                                             columnName="사망일시"
                                             tooltip="컬럼 설명 툴팁입니다"
@@ -556,37 +556,37 @@ function CharacterSettingsContent() {
                                             disabled={true}
                                         />
                                     </div>
-                                    <div className="grid grid-cols-10 gap-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
                                         <ColumnSettingCard
-                                            className="col-span-3"
+                                            className="col-span-1 md:col-span-3"
                                             variant="default"
                                             columnName="직업"
                                             tooltip="직업 설명 툴팁입니다"
                                             description="설정 안함"
                                         />
                                         <ColumnSettingCard
-                                            className="col-span-7"
+                                            className="col-span-1 md:col-span-7"
                                             variant="default"
                                             columnName="생년월일"
                                             description="설정 안함"
                                         />
                                     </div>
-                                    <div className="grid grid-cols-10 gap-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
                                         <ColumnSettingCard
-                                            className="col-span-3"
+                                            className="col-span-1 md:col-span-3"
                                             variant="default"
                                             columnName="등급"
                                             description="설정 안함"
                                         />
-                                        <div className="col-span-7 grid grid-cols-10 gap-5">
+                                        <div className="col-span-1 md:col-span-7 grid grid-cols-1 md:grid-cols-10 gap-5">
                                             <ColumnSettingCard
-                                                className="col-span-5"
+                                                className="col-span-1 md:col-span-5"
                                                 variant="default"
                                                 columnName="레벨"
                                                 description="설정 안함"
                                             />
                                             <ColumnSettingCard
-                                                className="col-span-5"
+                                                className="col-span-1 md:col-span-5"
                                                 variant="default"
                                                 columnName="경험치"
                                                 description="설정 안함"
@@ -605,25 +605,25 @@ function CharacterSettingsContent() {
                             />
                             {affiliationExpanded && (
                                 <div className="flex flex-col gap-[10px]">
-                                    <div className="grid grid-cols-10 gap-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
                                         <ColumnSettingCard
-                                            className="col-span-5"
+                                            className="col-span-1 md:col-span-5"
                                             variant="default"
                                             columnName="출신(출생지)"
                                             description="설정 안함"
                                         />
 
                                         <ColumnSettingCard
-                                            className="col-span-5"
+                                            className="col-span-1 md:col-span-5"
                                             variant="default"
                                             columnName="거주지"
                                             description="설정 안함"
                                         />
                                     </div>
 
-                                    <div className="grid grid-cols-10 gap-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
                                         <ColumnSettingCard
-                                            className="col-span-5"
+                                            className="col-span-1 md:col-span-5"
                                             variant="default"
                                             columnName="가문"
                                             description="설정 안함"
@@ -631,7 +631,7 @@ function CharacterSettingsContent() {
 
                                         <button
                                             type="button"
-                                            className="col-span-5 flex font-regular cursor-pointer flex-col gap-1 text-center bg-point-2 text-white align-center justify-center rounded-lg py-3 hover:bg-point-2/80 transition-colors"
+                                            className="col-span-1 md:col-span-5 flex font-regular cursor-pointer flex-col gap-1 text-center bg-point-2 text-white align-center justify-center rounded-lg py-3 hover:bg-point-2/80 transition-colors"
                                         >
                                             <span>00 추가</span>
                                             <span>눌러서 신규 추가</span>
@@ -649,9 +649,9 @@ function CharacterSettingsContent() {
                             />
                             {motiveExpanded && (
                                 <div className="flex flex-col gap-[10px]">
-                                    <div className="grid grid-cols-10 gap-5">
+                                    <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
                                         <ColumnSettingCard
-                                            className="col-span-5"
+                                            className="col-span-1 md:col-span-5"
                                             variant="default"
                                             columnName="모티브 대상"
                                             description="설정 안함"
@@ -659,7 +659,7 @@ function CharacterSettingsContent() {
                                         />
 
                                         <ColumnSettingCard
-                                            className="col-span-5"
+                                            className="col-span-1 md:col-span-5"
                                             variant="default"
                                             columnName="모티브 이미지"
                                             description="설정 안함"
@@ -978,7 +978,7 @@ function CharacterSettingsContent() {
 // 캐릭터 비교 탭 콘텐츠
 function CharacterComparisonContent() {
     return (
-        <div className="flex gap-[18px] w-full max-w-none h-full">
+        <div className="flex gap-[18px] w-full max-w-none md:h-full">
             {/* 좌측 영역 */}
             <div className="w-[305px] shrink-0 hidden lg:block">
                 <div className="h-full bg-gray-100 rounded-lg p-4">
@@ -987,7 +987,7 @@ function CharacterComparisonContent() {
             </div>
 
             {/* 중앙 콘텐츠 */}
-            <div className="w-full lg:w-[630px] shrink-0 space-y-6">
+            <div className="w-full lg:w-[630px] flex-1 space-y-6">
                 <p className="text-sm text-gray-500">Empty</p>
             </div>
 
@@ -1004,7 +1004,7 @@ function CharacterComparisonContent() {
 // 공통 설정 관리 탭 콘텐츠
 function CommonSettingsContent() {
     return (
-        <div className="flex gap-[18px] w-full max-w-none h-full">
+        <div className="flex gap-[18px] w-full max-w-none md:h-full">
             {/* 좌측 영역 */}
             <div className="w-[305px] shrink-0 hidden lg:block">
                 <div className="h-full bg-gray-100 rounded-lg p-4">
@@ -1013,7 +1013,7 @@ function CommonSettingsContent() {
             </div>
 
             {/* 중앙 콘텐츠 */}
-            <div className="w-full lg:w-[630px] shrink-0 space-y-6">
+            <div className="w-full lg:w-[630px] flex-1 space-y-6">
                 <p className="text-sm text-gray-500">Empty</p>
             </div>
 

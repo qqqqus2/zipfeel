@@ -88,7 +88,7 @@ export function MainLayout({
                             "flex flex-1 flex-col md:px-[90px] w-full max-w-[1540px] mx-auto",
                             isFooterExpanded
                                 ? "lg:pb-[168px] pb-[390px] footer-expand"
-                                : "lg:pb-20 pb-[200px]",
+                                : "lg:pb-20 pb-10",
                         )}
                     >
                         {showTabs && tabs.length > 0 ? (

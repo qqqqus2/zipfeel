@@ -60,7 +60,7 @@ export function CommonLayout({
         <>
             <div
                 className={cn(
-                    "relative flex h-dvh max-h-dvh flex-col overflow-hidden text-gray-6",
+                    "relative flex h-dvh max-h-dvh flex-col  text-gray-6",
                     className,
                 )}
             >
@@ -84,16 +84,16 @@ export function CommonLayout({
                 />
 
                 {/* 본문: 사이드바 + 메인 — 헤더와 겹치도록 위로 당김 */}
-                <div className="relative z-10 flex min-h-0 flex-col flex-1 -mt-6 md:-mt-0">
+                <div className="relative z-10 flex min-h-0 flex-col flex-1 -mt-6 md:-mt-0 md:overflow-hidden">
                     <CommonLnb />
-                    {/* 타이틀 영역 */}
-                    <div className="w-full py-6 md:pb-15 md:pt-[90px] ">
+                    {/* 타이틀 영역 - 모바일에서 고정 */}
+                    <div className="w-full py-6 md:pb-15 md:pt-[90px] shrink-0">
                         {reverseTitleOrder ? (
                             <>
                                 {/* PC용 - 일반 순서 */}
                                 <div className="hidden md:block">
                                     <h2
-                                        className="text-[24px] text-center leading-[1]  text-gray-6 font-semibold px-5"
+                                        className="text-[24px] text-center leading-[1.2] text-gray-6 font-semibold px-5"
                                         data-eng={titleEng}
                                     >
                                         {title || "페이지 타이틀"}
@@ -113,7 +113,7 @@ export function CommonLayout({
                                     {(mobileDescription || description) && (
                                         <p
                                             className={cn(
-                                                "text-[14px] text-center w-[calc(100%-20px)] md:max-w-full overflow-hidden md:leading-[1] [&_strong]:font-semibold m-auto",
+                                                "text-[14px] text-center w-[calc(100%-20px)] md:max-w-full overflow-hidden md:leading-[1.2] [&_strong]:font-semibold m-auto",
                                             )}
                                             data-eng={
                                                 mobileDescriptionEng ||
@@ -125,7 +125,7 @@ export function CommonLayout({
                                     )}
                                     <h2
                                         className={cn(
-                                            "text-[20px] text-center leading-[1] text-gray-6 font-semibold line-clamp-2 px-5",
+                                            "text-[20px] text-center leading-[1.2] text-gray-6 font-semibold line-clamp-2 px-5",
                                             removeTitleSpacing ||
                                                 !(
                                                     mobileDescription ||
@@ -183,10 +183,10 @@ export function CommonLayout({
                     <main
                         className={cn(
                             "flex min-h-0 flex-1 flex-col 2xl:px-[90px] xl:px-[40px] w-full max-w-[1540px] mx-auto",
-                            showFooter ? "pb-24 lg:pb-[188px]" : "!pb-0",
+                            showFooter ? "md:pb-24 lg:pb-[188px]" : "!pb-0",
                             isFooterExpanded
-                                ? "lg:pb-[168px] pb-[390px] footer-expand"
-                                : "lg:pb-20 pb-[200px]",
+                                ? "lg:pb-[168px] md:pb-[390px] footer-expand"
+                                : "lg:pb-20 md:pb-10",
                         )}
                     >
                         {showTabs && tabs.length > 0 ? (
@@ -224,7 +224,7 @@ export function CommonLayout({
                                         >
                                             <div
                                                 className={cn(
-                                                    "flex min-h-0 flex-1 flex-col rounded-[40px] bg-white",
+                                                    "flex min-h-0 flex-1 flex-col rounded-t-[40px] md:rounded-[40px] bg-white",
                                                 )}
                                             >
                                                 <div className="px-4 md:px-10 m-auto py-[58px] md:pt-[30px] min-h-0 flex-1 w-full overflow-y-auto">
@@ -238,14 +238,25 @@ export function CommonLayout({
                                 {/* 모바일: showMobileTabs가 false일 때만 첫 번째 탭 콘텐츠만 표시 */}
                                 {!showMobileTabs && (
                                     <div
-                                        className="md:hidden flex min-h-0 flex-1 flex-col overflow-y-auto rounded-[40px] bg-white"
+                                        className="md:hidden flex min-h-0 flex-1 flex-col overflow-hidden rounded-t-[40px] md:rounded-[40px] bg-white"
                                         style={{
                                             boxShadow:
                                                 "0px -8px 16px 0px #00000033",
                                         }}
                                     >
-                                        <div className="px-[30px] m-auto py-[58px] md:pt-[30px] pt-[6px]  min-h-0 flex-1 w-full">
+                                        <div className="px-[25px] md:px-[30px] m-auto md:py-[58px] md:pt-[30px] pt-[6px]  min-h-0 flex-1 w-full overflow-y-auto custom-scrollbar">
                                             {tabs[0]?.content}
+                                            {/* 모바일 Footer */}
+                                            {showFooter && (
+                                                <div className="md:hidden -mx-[30px]">
+                                                    <Footer
+                                                        className="pt-2"
+                                                        onExpandChange={
+                                                            handleFooterExpandChange
+                                                        }
+                                                    />
+                                                </div>
+                                            )}
                                         </div>
                                     </div>
                                 )}
@@ -261,15 +272,30 @@ export function CommonLayout({
                                         : "none",
                                 }}
                             >
-                                <div className="md:px-4 px-[30px] max-w-[678px] m-auto py-[58px] md:pt-[30px] pt-[6px] min-h-0 flex-1 overflow-y-auto custom-scrollbar">
+                                <div className="md:px-4 px-[25px] md:px-[30px] max-w-[678px] m-auto md:py-[58px] md:pt-[30px] pt-[6px] min-h-0 flex-1 overflow-y-auto custom-scrollbar">
                                     {children}
+                                    {/* 모바일 Footer */}
+                                    {showFooter && (
+                                        <div className="md:hidden -mx-[30px]">
+                                            <Footer
+                                                onExpandChange={
+                                                    handleFooterExpandChange
+                                                }
+                                            />
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         )}
                     </main>
+                    {/* 데스크탑 Footer */}
+                    {showFooter && (
+                        <div className="hidden md:block">
+                            <Footer onExpandChange={handleFooterExpandChange} />
+                        </div>
+                    )}
                 </div>
             </div>
-            {showFooter && <Footer onExpandChange={handleFooterExpandChange} />}
         </>
     );
 }
