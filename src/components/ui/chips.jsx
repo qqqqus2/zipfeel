@@ -5,6 +5,7 @@ const chipsVariants = {
     point: "border-point-2 text-point-2",
     white: "border-white text-white",
     orange: "border-sub-8 text-sub-8",
+    orangeFilled: "border-sub-8 text-point-1 bg-sub-8 ",
 };
 
 const Chips = React.forwardRef(

@@ -97,6 +97,7 @@ export const AllVariants = {
                 <Chips variant="white">화이트</Chips>
             </div>
             <Chips variant="orange">오렌지</Chips>
+            <Chips variant="orangeFilled">연중</Chips>
         </div>
     ),
     parameters: {

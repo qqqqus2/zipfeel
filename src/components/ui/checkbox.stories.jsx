@@ -84,13 +84,6 @@ export const Disabled = {
     },
 };
 
-export const DisabledChecked = {
-    args: {
-        disabled: true,
-        defaultChecked: true,
-    },
-};
-
 export const Fixed = {
     args: {
         checked: true,
