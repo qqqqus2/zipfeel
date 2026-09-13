@@ -345,8 +345,18 @@ function CharacterListContent() {
             <ContentsDetailPop
                 open={isPopupOpen}
                 onOpenChange={setIsPopupOpen}
-                characterData={selectedCharacter}
-            />
+                type="type2"
+                date={
+                    selectedCharacter?.createdAt ||
+                    new Date().toISOString().split("T")[0]
+                }
+                heading={selectedCharacter?.title || ""}
+            >
+                <div>
+                    Contents Area Admin Written with Tiptap Editor Full
+                    Scroll!!!!!!
+                </div>
+            </ContentsDetailPop>
         </>
     );
 }

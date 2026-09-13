@@ -61,7 +61,7 @@ const LayerPopupContent = React.forwardRef(
                     ref={ref}
                     className={cn(
                         "fixed left-[50%] top-[50%] z-50 translate-x-[-50%] translate-y-[-50%]",
-                        "w-full max-w-[390px]",
+                        "w-[90%] max-w-[390px]",
                         "h-[calc(100vh-100px)]",
                         maxHeightClass,
                         "bg-white rounded-[40px]",
