@@ -34,8 +34,8 @@ export function CommonLnb() {
                                 size="default"
                                 className={`flex items-center h-[34px] p-0 overflow-hidden w-[34px] rounded-full active:bg-point-2 ${
                                     isActive
-                                        ? "bg-point-1 text-white rounded-full group-hover:w-auto"
-                                        : "text-gray-6 group-hover:bg-point-1 group-hover:text-white group-hover:w-auto"
+                                        ? "bg-point-1 text-white rounded-full group-hover:w-auto group-hover:h-10"
+                                        : "text-gray-6 group-hover:bg-point-1 group-hover:text-white group-hover:w-auto group-hover:h-10"
                                 }`}
                                 aria-label={item.label}
                                 asChild
@@ -58,7 +58,7 @@ export function CommonLnb() {
                                         />
                                     </div>
                                     {/* 호버 시 나타나는 타이틀 */}
-                                    <span className="whitespace-nowrap pr-4 text-[18px] text-white font-semibold hidden max-w-0 group-hover:opacity-100 group-hover:max-w-[200px] group-hover:inline-block">
+                                    <span className="whitespace-nowrap pr-4 text-[16px] text-white font-regular hidden max-w-0 group-hover:opacity-100 group-hover:max-w-[200px] group-hover:inline-block">
                                         {item.label}
                                     </span>
                                 </Link>
