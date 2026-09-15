@@ -410,7 +410,7 @@ function CharacterSettingsContent() {
                         </div>
                         {/* pc에서만 보임 */}
                         <div className="flex align-center gap-[6px] justify-between fz-12 hidden md:flex relative z-2">
-                            <h4 className="font-semibold text-[18px] leading-[1.2]">
+                            <h4 className="font-semibold text-[18px] leading-[1.2] truncate">
                                 {currentCharacter.title}
                             </h4>
                             <button className="fz-16 font-semibold shrink-0 cursor-pointer hidden md:flex">
