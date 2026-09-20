@@ -20,7 +20,7 @@ import {
     verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-import { Check, GripVertical, Pencil } from "lucide-react";
+import { Check } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 
@@ -161,58 +161,56 @@ function SortableCardItem({
                 className,
             )}
         >
-            {leading ? <div className="mt-0.5 shrink-0">{leading}</div> : null}
+            <div className="flex flex-col flex-1 min-w-0">
+                <div className="flex justify-between">
+                    {leading ? (
+                        <div className="mt-0.5 shrink-0">{leading}</div>
+                    ) : null}
 
-            {showHandle && handlePlacement === "start" ? (
-                <button
-                    type="button"
-                    className={cn(
-                        "mt-0.5 inline-flex size-7 items-center justify-center rounded-sm",
-                        "text-muted-foreground hover:text-gray-6",
-                        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
-                        disabled && "cursor-not-allowed opacity-50",
-                    )}
-                    aria-label="드래그 핸들"
-                    {...attributes}
-                    {...listeners}
-                >
-                    <GripVertical className="size-4" aria-hidden />
-                </button>
-            ) : null}
+                    <div className="flex flex-row gap-2.5">
+                        {trailing ? (
+                            <div className="mt-0.5 flex shrink-0 items-center gap-1 text-muted-foreground">
+                                {trailing}
+                            </div>
+                        ) : null}
 
-            <div className="min-w-0 flex-1">
-                <div className="truncate text-sm font-medium text-gray-6">
-                    {title}
-                </div>
-                {meta ? (
-                    <div className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
-                        {meta}
+                        {showHandle ? (
+                            <button
+                                type="button"
+                                className={cn(
+                                    "mt-0.5 inline-flex size-7 items-center justify-center rounded-sm",
+                                    "text-muted-foreground hover:text-gray-6",
+                                    "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
+                                    disabled && "cursor-not-allowed opacity-50",
+                                )}
+                                aria-label="드래그 핸들"
+                                {...attributes}
+                                {...listeners}
+                            >
+                                <img
+                                    src="/icon/ico_drag_and_drop.svg"
+                                    alt=""
+                                    width={20}
+                                    height={20}
+                                    className="size-5"
+                                    aria-hidden
+                                />
+                            </button>
+                        ) : null}
                     </div>
-                ) : null}
-            </div>
-
-            {trailing ? (
-                <div className="mt-0.5 flex shrink-0 items-center gap-1 text-muted-foreground">
-                    {trailing}
                 </div>
-            ) : null}
-
-            {showHandle && handlePlacement === "end" ? (
-                <button
-                    type="button"
-                    className={cn(
-                        "mt-0.5 inline-flex size-7 items-center justify-center rounded-sm",
-                        "text-muted-foreground hover:text-gray-6",
-                        "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
-                        disabled && "cursor-not-allowed opacity-50",
-                    )}
-                    aria-label="드래그 핸들"
-                    {...attributes}
-                    {...listeners}
-                >
-                    <GripVertical className="size-4" aria-hidden />
-                </button>
-            ) : null}
+                {/* 내용 */}
+                <div className="min-w-0 flex-1">
+                    <div className="truncate text-sm font-medium text-gray-6">
+                        {title}
+                    </div>
+                    {meta ? (
+                        <div className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">
+                            {meta}
+                        </div>
+                    ) : null}
+                </div>
+            </div>
         </div>
     );
 }
@@ -225,9 +223,6 @@ function DragOverlayCard({ title, meta }) {
                 "shadow-md",
             )}
         >
-            <div className="mt-0.5 inline-flex size-7 items-center justify-center rounded-sm text-muted-foreground">
-                <GripVertical className="size-4" aria-hidden />
-            </div>
             <div className="min-w-0 flex-1">
                 <div className="truncate text-sm font-medium text-gray-6">
                     {title}
@@ -237,6 +232,16 @@ function DragOverlayCard({ title, meta }) {
                         {meta}
                     </div>
                 ) : null}
+            </div>
+            <div className="mt-0.5 inline-flex size-7 items-center justify-center rounded-sm text-muted-foreground">
+                <img
+                    src="/icon/ico_drag_and_drop.svg"
+                    alt=""
+                    width={20}
+                    height={20}
+                    className="size-5"
+                    aria-hidden
+                />
             </div>
         </div>
     );
@@ -259,12 +264,28 @@ function DropIndicator({ className }) {
  * shadcn/ui 톤의 Drag & Drop 보드.
  *
  * @param {{
- *  containers: Array<{ id: string; title: React.ReactNode; description?: React.ReactNode; items: Array<{ id: string; title: React.ReactNode; meta?: React.ReactNode; disabled?: boolean }> }>;
+ *  containers: Array<{ id: string; title: React.ReactNode; description?: React.ReactNode; items: Array<{ id: string; title: React.ReactNode; meta?: React.ReactNode; disabled?: boolean; checked?: boolean }> }>;
  *  onContainersChange?: (next: any) => void;
  *  className?: string;
  * }} props
  */
 export function DragDropBoard({ containers, onContainersChange, className }) {
+    const handleToggleCheck = (containerId, itemId) => {
+        const next = containers.map((container) => {
+            if (container.id === containerId) {
+                return {
+                    ...container,
+                    items: container.items.map((item) =>
+                        item.id === itemId
+                            ? { ...item, checked: !item.checked }
+                            : item,
+                    ),
+                };
+            }
+            return container;
+        });
+        onContainersChange?.(next);
+    };
     const [activeId, setActiveId] = React.useState(null);
     const [indicator, setIndicator] = React.useState(null);
 
@@ -392,12 +413,7 @@ export function DragDropBoard({ containers, onContainersChange, className }) {
             onDragOver={onDragOver}
             onDragEnd={onDragEnd}
         >
-            <div
-                className={cn(
-                    "grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3",
-                    className,
-                )}
-            >
+            <div className={cn(className)}>
                 {containers.map((container) => (
                     <DropContainer
                         key={container.id}
@@ -438,10 +454,27 @@ export function DragDropBoard({ containers, onContainersChange, className }) {
                                                     container.variant ===
                                                     "list" ? (
                                                         <div className="flex items-center gap-2 text-muted-foreground">
-                                                            <Check
-                                                                className="size-4 opacity-70"
-                                                                aria-hidden
-                                                            />
+                                                            <button
+                                                                type="button"
+                                                                onClick={() =>
+                                                                    handleToggleCheck(
+                                                                        container.id,
+                                                                        it.id,
+                                                                    )
+                                                                }
+                                                                className="inline-flex items-center justify-center focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                                                                aria-label="체크"
+                                                            >
+                                                                <Check
+                                                                    className={cn(
+                                                                        "size-4 transition-colors",
+                                                                        it.checked
+                                                                            ? "text-[#8557FF] opacity-100"
+                                                                            : "opacity-70",
+                                                                    )}
+                                                                    aria-hidden
+                                                                />
+                                                            </button>
                                                             <div className="w-4 text-xs tabular-nums">
                                                                 {index + 1}
                                                             </div>
@@ -457,8 +490,12 @@ export function DragDropBoard({ containers, onContainersChange, className }) {
                                                                 className="inline-flex size-7 items-center justify-center rounded-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                                                                 aria-label="수정"
                                                             >
-                                                                <Pencil
-                                                                    className="size-4"
+                                                                <img
+                                                                    src="/icon/ico_modify.svg"
+                                                                    alt=""
+                                                                    width={24}
+                                                                    height={24}
+                                                                    className="size-6"
                                                                     aria-hidden
                                                                 />
                                                             </button>

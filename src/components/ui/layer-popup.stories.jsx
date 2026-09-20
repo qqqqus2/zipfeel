@@ -128,7 +128,7 @@ export const Default = {
             </LayerPopupTrigger>
             <LayerPopupContent>
                 <LayerPopupHeader>
-                    <LayerPopupTitle>팝업 타이틀</LayerPopupTitle>
+                    <LayerPopupTitle>AI 진단</LayerPopupTitle>
                     <LayerPopupCloseButton />
                 </LayerPopupHeader>
 

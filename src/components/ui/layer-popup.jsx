@@ -104,7 +104,7 @@ const LayerPopupHeader = ({ className, children, variant, ...props }) => {
         <div
             className={cn(
                 "shrink-0", // 헤더 영역이 축소되지 않도록
-                "px-[30px] py-5",
+                "px-[30px] pt-[30px] pb-5",
                 "border-b border-gray-2",
                 "rounded-t-[40px]",
                 isDark
@@ -148,7 +148,7 @@ const LayerPopupTitle = React.forwardRef(({ className, ...props }, ref) => (
     <DialogPrimitive.Title
         ref={ref}
         className={cn(
-            "text-[20px] font-semibold leading-none tracking-tight",
+            "text-[20px] font-regular leading-none tracking-tight",
             className,
         )}
         {...props}
@@ -169,7 +169,7 @@ const LayerPopupCloseButton = React.forwardRef(
                     ? "text-white hover:text-gray-3"
                     : "text-gray-6 hover:text-point-2",
                 "transition-colors",
-                "focus:outline-none focus:ring-2 focus:ring-point-2 focus:ring-offset-2",
+                "focus:outline-none",
                 "disabled:pointer-events-none disabled:opacity-50",
                 className,
             )}
