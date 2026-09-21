@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Icon } from "@/components/ui/icon";
+import { CharacterPopup } from "@/components/ui/character-popup";
 
 import { characterData, statusIconMap } from "@/data/characterData";
 
@@ -98,6 +99,7 @@ function CharacterDetailCell({ row, onSelect, isLast }) {
 export const CharacterInfoType2 = () => {
     const [characters] = useState(characterData);
     const [selectedCharacter, setSelectedCharacter] = useState(null);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
 
     const handleSearch = () => {
         console.log("검색 실행");
@@ -105,11 +107,12 @@ export const CharacterInfoType2 = () => {
 
     const handleSelectCharacter = (character) => {
         setSelectedCharacter(character);
+        setIsPopupOpen(true);
         console.log("선택된 캐릭터:", character);
     };
 
     return (
-        <div className="w-full h-full overflow-hidden flex flex-col">
+        <div className="w-full h-full overflow-hidden flex flex-col relative">
             {/* 헤더 영역 */}
             <div className="mt-[15px] mb-2.5 px-4 flex justify-between items-center flex-shrink-0">
                 <span className="text-sm font-medium">
@@ -139,6 +142,13 @@ export const CharacterInfoType2 = () => {
                     인물 관리 화면에서 캐릭터를 등록해주세요.
                 </div>
             </div> */}
+
+            {/* CharacterPopup */}
+            <CharacterPopup
+                open={isPopupOpen}
+                onOpenChange={setIsPopupOpen}
+                variant="absolute"
+            />
         </div>
     );
 };

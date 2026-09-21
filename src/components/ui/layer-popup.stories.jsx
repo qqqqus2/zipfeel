@@ -11,7 +11,6 @@ import {
 } from "./field";
 import { Input } from "./input";
 import { TextareaBox } from "./textarea";
-import { Combobox } from "./combobox";
 import { Checkbox } from "./checkbox";
 import {
     Select,
@@ -810,7 +809,7 @@ export const Form = {
                                             </span>
                                         </div>
                                         <FieldContent>
-                                            <Combobox
+                                            {/* <Select
                                                 id="char-input-search-open"
                                                 value={inputSearchOpen}
                                                 onChange={(e) =>
@@ -826,7 +825,7 @@ export const Form = {
                                                         opt.label,
                                                     )
                                                 }
-                                            />
+                                            /> */}
                                             <FieldHelp />
                                         </FieldContent>
                                     </Field>
