@@ -90,10 +90,10 @@ export const WithInfoAndActions = {
                             <Button
                                 variant="ghost"
                                 size="icon"
-                                className="size-6"
+                                className="size-5"
                                 aria-label="설명"
                             >
-                                <Info className="size-[14px]" />
+                                <Info className="!size-[14px]" />
                             </Button>
                         </ItemTitle>
                         <ItemActions>
