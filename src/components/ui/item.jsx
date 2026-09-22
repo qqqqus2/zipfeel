@@ -31,13 +31,14 @@ function ItemSeparator({
 }
 
 const itemVariants = cva(
-  "group/item [a]:hover:bg-accent/50 focus-visible:border-ring focus-visible:ring-ring/50 [a]:transition-colors flex flex-wrap items-center rounded-md border border-transparent text-sm outline-none transition-colors duration-100 focus-visible:ring-[3px]",
+  "group/item [a]:hover:bg-accent/50 focus-visible:border-ring focus-visible:ring-ring/50 [a]:transition-colors flex flex-wrap items-center rounded-md border-2 border-transparent text-sm outline-none transition-colors duration-100 focus-visible:ring-[3px]",
   {
     variants: {
       variant: {
-        default: "bg-transparent",
-        outline: "border-border",
-        muted: "bg-muted/50",
+        default: "bg-transparent hover:border-point-2 hover:bg-gray-1",
+        outline: "border-border hover:border-point-2 hover:bg-gray-1",
+        muted: "bg-muted/50 hover:border-point-2 hover:bg-gray-1",
+        disabled: "pointer-events-none bg-white opacity-45",
       },
       size: {
         default: "gap-4 p-4 ",

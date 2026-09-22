@@ -90,7 +90,7 @@ export function SectionTitleToggle({
                     checked={isRequired}
                     defaultChecked={defaultRequiredChecked}
                     onCheckedChange={(v) => setRequired(v === true)}
-                    disabled={disabled || !isExpanded}
+                    disabled={disabled}
                     aria-label={`${title} ${requiredLabel}`}
                 />
             </div>

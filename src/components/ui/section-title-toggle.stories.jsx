@@ -74,21 +74,40 @@ function ListExampleStory() {
     const [bRequired, setBRequired] = React.useState(false);
 
     return (
-        <div className="w-full max-w-2xl space-y-1">
-            <SectionTitleToggle
-                title="Section명"
-                expanded={aExpanded}
-                onExpandedChange={setAExpanded}
-                requiredChecked={aRequired}
-                onRequiredCheckedChange={setARequired}
-            />
-            <SectionTitleToggle
-                title="Section명"
-                expanded={bExpanded}
-                onExpandedChange={setBExpanded}
-                requiredChecked={bRequired}
-                onRequiredCheckedChange={setBRequired}
-            />
+        <div className="w-full max-w-2xl space-y-4">
+            <div className="space-y-2">
+                <SectionTitleToggle
+                    title="첫 번째 섹션"
+                    expanded={aExpanded}
+                    onExpandedChange={setAExpanded}
+                    requiredChecked={aRequired}
+                    onRequiredCheckedChange={setARequired}
+                />
+                {aExpanded && (
+                    <div className="w-full bg-gray-1 rounded-lg p-6">
+                        <p className="text-sm text-gray-6">
+                            첫 번째 섹션의 콘텐츠
+                        </p>
+                    </div>
+                )}
+            </div>
+
+            <div className="space-y-2">
+                <SectionTitleToggle
+                    title="두 번째 섹션"
+                    expanded={bExpanded}
+                    onExpandedChange={setBExpanded}
+                    requiredChecked={bRequired}
+                    onRequiredCheckedChange={setBRequired}
+                />
+                {bExpanded && (
+                    <div className="w-full bg-gray-1 rounded-lg p-6">
+                        <p className="text-sm text-gray-6">
+                            두 번째 섹션의 콘텐츠
+                        </p>
+                    </div>
+                )}
+            </div>
         </div>
     );
 }

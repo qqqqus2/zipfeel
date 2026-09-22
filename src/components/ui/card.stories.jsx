@@ -1,8 +1,9 @@
 import * as React from "react";
-import { Glasses, Info, Tag } from "lucide-react";
+import { Info } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
+import { Icon } from "./icon";
 import {
     Card,
     CardContent,
@@ -80,75 +81,42 @@ function ColumnSettingCard({
                     </CardDescription>
                 </div>
                 <div className="shrink-0 pt-0.5 flex gap-2">
-                    {variant === "hover" ? (
-                        <button
-                            type="button"
+                    {variant === "hover" || variant === "both" ? (
+                        <Button
+                            variant="ghost"
+                            size="icon"
                             onClick={onGlassesClick}
-                            className="inline-flex size-9 items-center justify-center rounded-full bg-point-2 text-white shadow-sm cursor-pointer hover:bg-point-2/80 transition-colors"
+                            className="w-6 h-6 rounded-full"
                             aria-label="미리보기"
                         >
-                            <Glasses className="size-4" strokeWidth={2} />
-                        </button>
+                            <Icon name="eyeglasses" size={18} />
+                        </Button>
                     ) : null}
                     {variant === "active" ? (
-                        <button
-                            type="button"
+                        <Button
+                            variant="ghost"
+                            size="icon"
                             onClick={onGlassesClick}
-                            className="inline-flex size-9 items-center justify-center rounded-full bg-black/25 text-white shadow-inner cursor-pointer hover:bg-black/30 transition-colors"
+                            className="w-6 h-6 rounded-full"
                             aria-label="미리보기"
                         >
-                            <Glasses className="size-4" strokeWidth={2} />
-                        </button>
+                            <Icon name="eyeglasses" size={18} />
+                        </Button>
                     ) : null}
                     {variant === "default" ||
                     variant === "filled" ||
-                    variant === "disabled" ? (
-                        <button
-                            type="button"
+                    variant === "disabled" ||
+                    variant === "both" ? (
+                        <Button
+                            variant="ghost"
+                            size="icon"
                             onClick={onTagClick}
                             disabled={variant === "disabled"}
-                            className={cn(
-                                "cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed hover:opacity-80",
-                            )}
+                            className="w-6 h-6 rounded-full"
                             aria-label="태그"
                         >
-                            <Tag
-                                className={cn(
-                                    "size-9",
-                                    variant === "filled"
-                                        ? "text-gray-6"
-                                        : "text-gray-4",
-                                )}
-                                strokeWidth={1.75}
-                                aria-hidden
-                            />
-                        </button>
-                    ) : null}
-                    {variant === "both" ? (
-                        <>
-                            <button
-                                type="button"
-                                onClick={onGlassesClick}
-                                className="inline-flex size-9 items-center justify-center rounded-full bg-point-2 text-white shadow-sm cursor-pointer hover:bg-point-2/80 transition-colors"
-                                aria-label="미리보기"
-                            >
-                                <Glasses className="size-4" strokeWidth={2} />
-                            </button>
-                            <button
-                                type="button"
-                                onClick={onTagClick}
-                                className={cn(
-                                    "cursor-pointer transition-colors hover:opacity-80",
-                                )}
-                                aria-label="태그"
-                            >
-                                <Tag
-                                    className="size-9 text-gray-4"
-                                    strokeWidth={1.75}
-                                    aria-hidden
-                                />
-                            </button>
-                        </>
+                            <Icon name="eyeglasses" size={18} />
+                        </Button>
                     ) : null}
                 </div>
             </div>
